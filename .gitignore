@@ -104,11 +104,18 @@ dist
 .temp
 .cache
 
+# Vite
+dist/
+.vite/
+
 # vitepress build output
 **/.vitepress/dist
 
 # vitepress cache directory
 **/.vitepress/cache
+
+# React testing
+coverage/
 
 # Docusaurus cache and generated files
 .docusaurus
@@ -127,6 +134,12 @@ dist
 
 # Stores VSCode versions used for testing VSCode extensions
 .vscode-test
+.vscode
+.VSCode
+
+# OS files
+.DS_Store
+Thumbs.db
 
 # yarn v2
 .yarn/cache
@@ -134,3 +147,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+#prettier
+.prettiercache
