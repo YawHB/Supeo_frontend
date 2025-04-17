@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 export default function Navbar() {
     return (
-        <div className="navBar">
+        <div>
             <NavLink className="NavLink" to="/employee">
                 Employee Homepage
             </NavLink>

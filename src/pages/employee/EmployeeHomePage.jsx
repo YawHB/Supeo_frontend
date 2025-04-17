@@ -13,6 +13,7 @@ const GET_TIME_ENTRIES = gql`
 `;
 
 export function EmployeeHomePage() {
+    console.log('enployee');
     const { loading, error, data } = useQuery(GET_TIME_ENTRIES);
 
     if (loading) return <p>Loading...</p>;
