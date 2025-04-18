@@ -2,7 +2,8 @@ import Navbar from './components/Navbar';
 import { PageLayout } from '../PageLayout';
 import { Routes, Route } from 'react-router-dom';
 import { EmployeeHomePage } from './pages/employee/EmployeeHomePage.jsx';
-import { EmployeeListPage } from './pages/admin/EmployeeListPage.jsx';
+import EmployeesPage from "./pages/admin/EmployeesPage.jsx";
+
 function App() {
     return (
         <>
@@ -10,7 +11,7 @@ function App() {
             <PageLayout>
                 <Routes>
                     <Route path="/employee" element={<EmployeeHomePage />} />
-                    <Route path="/admin" element={<EmployeeListPage />} />
+                    <Route path="/admin" element={<EmployeesPage />} />
                 </Routes>
             </PageLayout>
         </>
