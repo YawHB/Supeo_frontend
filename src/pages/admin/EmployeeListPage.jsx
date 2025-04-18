@@ -7,6 +7,7 @@ const GET_TIME_ENTRIES = gql`
             startTime
             endTime
             duration
+            date
             comment
         }
     }
@@ -24,9 +25,11 @@ export function EmployeeListPage() {
 
             {data.timeEntries.map((entry) => (
                 <div key={entry.id}>
+                    {console.log(entry)}
                     <p>Starttime: {entry.startTime}</p>
                     <p>Endtime: {entry.endTime}</p>
                     <p>Durantion: {entry.duration}</p>
+                    <p>date: {entry.date}</p>
                     <p>Comment: {entry.comment}</p>
                     <hr />
                 </div>
