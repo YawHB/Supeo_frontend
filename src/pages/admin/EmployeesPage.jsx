@@ -1,20 +1,8 @@
 import { Row, Col, Modal } from "reactstrap";
 import { useTranslation } from "react-i18next";
-import useEmployeesPageState from "./EmployeesPageState";
-
 import { gql } from "@apollo/client";
 
-const GET_TIME_ENTRIES = gql`
-  query {
-    timeEntries {
-      id
-      startTime
-      endTime
-      duration
-      comment
-    }
-  }
-`;
+import useEmployeesPageState from "./EmployeesPageState";
 
 const EmployeesPage = () => {
   const [translate] = useTranslation(`global`);
@@ -41,6 +29,22 @@ const EmployeesPage = () => {
 };
 
 export default EmployeesPage;
+
+
+
+
+
+const GET_TIME_ENTRIES = gql`
+  query {
+    timeEntries {
+      id
+      startTime
+      endTime
+      duration
+      comment
+    }
+  }
+`;
 
 // export function EmployeeListPage() {
 //     console.log('enployee');
