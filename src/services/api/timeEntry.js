@@ -12,3 +12,15 @@ export const GET_TIME_ENTRIES = gql`
         }
     }
 `;
+
+export const GET_TIME_ENTRY = gql`
+  query ($id: ID!) {
+    timeEntry(id: $id) {
+      id
+      startTime
+      endTime
+      duration
+      comment
+    }
+  }
+`;
