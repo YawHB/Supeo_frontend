@@ -1,0 +1,11 @@
+{
+  "id": "ID",
+  "first_name": "Fornavn",
+  "middle_name": "Mellemnavn",
+  "last_name": "Efternavn",
+  "email": "Email",
+  "phone_number": "Telefonnummer",
+  "employees": "Medarbejdere",
+  "company_id": "Virksomheds ID"
+
+}
