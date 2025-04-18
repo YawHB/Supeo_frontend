@@ -12,7 +12,7 @@ const useEmployeesPageState = () => {
         {
             key: 'id',
             label: translate('id'),
-            type: 'next',
+            type: 'text',
             sort: true,
         },
         {
