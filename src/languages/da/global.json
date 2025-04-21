@@ -3,9 +3,38 @@
   "first_name": "Fornavn",
   "middle_name": "Mellemnavn",
   "last_name": "Efternavn",
+  "role": "Rolle",
   "email": "Email",
-  "phone_number": "Telefonnummer",
+  "phone": "Telefon",
   "employees": "Medarbejdere",
-  "company_id": "Virksomheds ID"
-
+  "company_id": "Firma ID",
+  "company": "Firma",
+  "date": "Dato",
+  "start_time": "Starttid",
+  "end_time": "Sluttid",
+  "total_time": "Total tid",
+  "comment": "Kommentar",
+  "status": "Status",
+  "nav_bar": {
+    "admin_label": "Admin",
+    "employees_label": "Medarbejdere"
+  },
+  "errors": {
+    "error": "Fejl",
+    "error_message": "Fejlmeddelelse",
+    "no_response_from_server": "Ingen svar fra server"
+  },
+  "not_logged_in": "Du er ikke logget ind",
+  "page_not_found": "Siden blev ikke fundet",
+  "logging_out": "Logger ud",
+  "admin": {
+    "admin_employees": "Admin - Medarbejdere",
+    "create_employee": "Opret medarbejder",
+    "update_employee": "Opdater medarbejder",
+    "delete_employee": "Slet medarbejder",
+    "search_employee": "Søg efter medarbejder",
+    "export": "Eksporter"
+  },
+  "no_data": "Ingen data",
+  "minimize": "Minimer"
 }

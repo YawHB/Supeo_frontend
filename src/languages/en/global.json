@@ -3,8 +3,38 @@
   "first_name": "First Name",
   "middle_name": "Middle Name",
   "last_name": "Last Name",
+  "role": "Role",
   "email": "Email",
-  "phone_number": "Phone Number",
+  "phone": "Phone",
   "employees": "Employees",
-  "company_id": "Company ID"
+  "company_id": "Company ID",
+  "company": "Company",
+  "date": "Date",
+  "start_time": "Start Time",
+  "end_time": "End Time",
+  "total_time": "Total Time",
+  "comment": "Comment",
+  "status": "Status",
+  "nav_bar": {
+    "employees_label": "Employees",
+    "admin_label": "Admin"
+  },
+  "errors": {
+    "error": "Error",
+    "error_message": "Error message",
+    "no_response_from_server": "No response from server"
+  },
+  "not_logged_in": "You are not logged in",
+  "page_not_found": "Page not found",
+  "logging_out": "Logging out",
+  "admin": {
+    "admin_employees": "Admin - Employees",
+    "create_employee": "Create employee",
+    "update_employee": "Update employee",
+    "delete_employee": "Delete employee",
+    "search_employee": "Search for employee",
+    "export": "Export"
+  },
+  "no_data": "No data",
+  "minimize": "Minimize"
 }
