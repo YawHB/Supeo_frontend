@@ -16,8 +16,9 @@
   "comment": "Kommentar",
   "status": "Status",
   "nav_bar": {
-    "admin_label": "Admin",
-    "employees_label": "Medarbejdere"
+    "admin_home": "Admin",
+    "employee_home": "Medarbejder",
+    "admin_employees": "Admin - Medarbejdere"
   },
   "errors": {
     "error": "Fejl",

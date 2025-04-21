@@ -16,8 +16,9 @@
   "comment": "Comment",
   "status": "Status",
   "nav_bar": {
-    "employees_label": "Employees",
-    "admin_label": "Admin"
+    "admin_home": "Admin",
+    "employee_home": "Employee",
+    "admin_employees": "Admin - Employees"
   },
   "errors": {
     "error": "Error",

@@ -7,7 +7,7 @@ const EmployeesPage = () => {
   const [translate] = useTranslation("global");
   const state = useEmployeesPageState();
 
-  document.title = translate("admin.admin_employees");
+  document.title = translate("nav_bar.admin_employees");
 
   return (
     <>
