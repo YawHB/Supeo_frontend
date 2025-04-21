@@ -2,6 +2,9 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import useEmployeesPageState from "./EmployeesPageState";
 import { Row, Col, Table } from "reactstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "reactstrap";
 
 const EmployeesPage = () => {
   const [translate] = useTranslation("global");
@@ -16,7 +19,16 @@ const EmployeesPage = () => {
           <Col xs={12} className="d-flex justify-content-between gap-4">
             <h1>{translate("employees")}</h1>
             <div className="d-flex align-items-center gap-4">
-              
+              <Button
+                color="primary"
+                outline
+                onClick={() => state.setEmployeeBeingEdited({})}
+                className="no-wrap"
+                style={{ minWidth: "200px" }}
+              >
+                <FontAwesomeIcon icon={faUserPlus} className="me-2" />
+                <span>{translate(`admin.create_employee`)}</span>
+              </Button>
             </div>
           </Col>
 
