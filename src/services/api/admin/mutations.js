@@ -7,7 +7,6 @@ export const CREATE_EMPLOYEE = gql`
     $role: String!
     $email: String!
     $phoneNumber: String!
-    $companyId: Int!
   ) {
     createEmployee(
       firstName: $firstName
@@ -15,7 +14,6 @@ export const CREATE_EMPLOYEE = gql`
       role: $role
       email: $email
       phoneNumber: $phoneNumber
-      companyId: $companyId
     ) {
       id
     }
@@ -23,7 +21,7 @@ export const CREATE_EMPLOYEE = gql`
 `;
 
 export const UPDATE_EMPLOYEE = gql`
-  mutation UpdateUser(
+  mutation UpdateEmployee(
     $id: Int!
     $firstName: String
     $lastName: String

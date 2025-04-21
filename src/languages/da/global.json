@@ -1,11 +1,16 @@
 {
   "id": "ID",
   "first_name": "Fornavn",
+  "first_name_placeholder": "Fornavn",
   "middle_name": "Mellemnavn",
   "last_name": "Efternavn",
+  "last_name_placeholder": "Efternavn",
   "role": "Rolle",
+  "role_placeholder": "Rolle",
   "email": "Email",
+  "email_placeholder": "email@example.com",
   "phone": "Telefon",
+  "phone_placeholder": "45 86 82 00",
   "employees": "Medarbejdere",
   "company_id": "Firma ID",
   "company": "Firma",
@@ -34,8 +39,13 @@
     "update_employee": "Opdater medarbejder",
     "delete_employee": "Slet medarbejder",
     "search_employee": "Søg efter medarbejder",
+    "create_new_employee": "Opret ny medarbejder",
     "export": "Eksporter"
   },
   "no_data": "Ingen data",
-  "minimize": "Minimer"
+  "minimize": "Minimer",
+  "create": "Opret",
+  "cancel": "Annuller",
+  "submit": "Indsend",
+  "loading": "Indlæser"
 }

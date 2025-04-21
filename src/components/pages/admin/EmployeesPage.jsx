@@ -1,10 +1,11 @@
+import CreateEmployeeForm from "../../forms/CreateEmployeeForm";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useEmployeesPageState from "./EmployeesPageState";
-import { Row, Col, Table } from "reactstrap";
+import { Row, Col, Table, Form } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "reactstrap";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
 const EmployeesPage = () => {
   const [translate] = useTranslation("global");
@@ -22,7 +23,7 @@ const EmployeesPage = () => {
               <Button
                 color="primary"
                 outline
-                onClick={() => state.setEmployeeBeingEdited({})}
+                onClick={() => state.newEmployeeFormModalState.openModal({})}
                 className="no-wrap"
                 style={{ minWidth: "200px" }}
               >
@@ -72,6 +73,64 @@ const EmployeesPage = () => {
           )}
         </Col>
       </Row>
+
+      {/* New Employee Modal */}
+      <Modal
+        isOpen={state.newEmployeeFormModalState.isOpen}
+        toggle={state.newEmployeeFormModalState.closeModal}
+        size="lg"
+      >
+        <ModalHeader toggle={state.newEmployeeFormModalState.closeModal}>
+          {translate(`admin.create_new_employee`)}
+        </ModalHeader>
+
+        <ModalBody>
+          <CreateEmployeeForm
+            employee={state.newEmployee}
+            onSubmit={state.handleSubmitNewEmployee}
+          />
+        </ModalBody>
+
+        <ModalFooter>
+          <Button
+            type="submit"
+            color="primary"
+            form="newEmployeeForm"
+            disabled={state.isLoadingEmployeesForm}
+          >
+            {state.isLoadingEmployeesForm ? "Loading..." : translate("create")}
+          </Button>
+          <Button
+            color="secondary"
+            onClick={state.newEmployeeFormModalState.closeModal}
+          >
+            {translate("cancel")}
+          </Button>
+        </ModalFooter>
+      </Modal>
+
+      {/* Edit Modal */}
+      <Modal
+        isOpen={state.employeeFormModalState.isOpen}
+        toggle={state.employeeFormModalState.closeModal}
+        size="lg"
+      >
+        <div className="modal-header">
+          <h5 className="modal-title">{translate(`update_employee`)}</h5>
+          <button
+            type="button"
+            className="btn-close"
+            onClick={state.employeeFormModalState.closeModal}
+          />
+        </div>
+        <div className="modal-body">
+          <Form
+            onSubmit={state.handleSubmitEditedEmployee}
+            isSubmitting={state.isLoadingEmployeesForm}
+            employee={state.employeeFormModalState.data}
+          />
+        </div>
+      </Modal>
     </>
   );
 };
