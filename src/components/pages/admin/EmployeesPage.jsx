@@ -84,7 +84,12 @@ const EmployeesPage = () => {
         </ModalHeader>
 
         <ModalBody>
-          <CreateEmployeeForm onSubmit={state.handleSubmitNewEmployee} />
+          <CreateEmployeeForm
+           onSubmit={state.employeeBeingEdited?.id
+            ? state.handleSubmitEditedEmployee
+            : state.handleSubmitNewEmployee}
+            isSubmitting={state.isLoadingEmployeesForm}
+            employee={state.employeeBeingEdited} />
         </ModalBody>
 
         <ModalFooter>
@@ -92,7 +97,7 @@ const EmployeesPage = () => {
             type="submit"
             color="primary"
             form="newEmployeeForm"
-            disabled={state.isLoadingEmployeesForm}
+            disabled={state.isSubmittingNewEmployee || state.isUpdatingEmployee}
           >
             {state.isLoadingEmployeesForm ? "Loading..." : translate("create")}
           </Button>
@@ -111,7 +116,7 @@ const EmployeesPage = () => {
         size="lg"
       >
         <ModalHeader toggle={state.employeeFormModalState.closeModal}>
-          {translate("update_employee")}
+          {translate("admin.update_employee")}
         </ModalHeader>
 
         <ModalBody>

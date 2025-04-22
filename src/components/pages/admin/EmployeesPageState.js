@@ -19,10 +19,7 @@ const useEmployeesPageState = () => {
   const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false);
   const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null);
 
-  const employeeFormModalState = useModalState([
-    employeeBeingEdited,
-    () => setEmployeeBeingEdited(null),
-  ]);
+  const employeeFormModalState = useModalState();
   const newEmployeeFormModalState = useModalState();
 
   const employeesTableColumns = [
@@ -52,8 +49,8 @@ const useEmployeesPageState = () => {
           color="primary"
           outline
           onClick={() => {
-            console.log("Editing employee", employee);
-            setEmployeeBeingEdited(employee);
+            setEmployeeBeingEdited(employee); // Set the employee to edit
+            employeeFormModalState.openModal(); // Open edit modal
           }}
         >
           <FontAwesomeIcon icon={faPencil} />
@@ -61,10 +58,6 @@ const useEmployeesPageState = () => {
       ),
     },
   ];
-
-  const tableActions = {
-    edit: (employee) => setEmployeeBeingEdited(employee),
-  };
 
   const { loading: isLoadingEmployees } = useQuery(GET_ALL_EMPLOYEES, {
     fetchPolicy: "cache-and-network",
@@ -82,15 +75,15 @@ const useEmployeesPageState = () => {
   const [updateEmployee, { loading: isUpdatingEmployee }] =
     useMutation(UPDATE_EMPLOYEE);
 
+  // Function to handle employee creation
   const handleSubmitNewEmployee = (employee) => {
     setIsLoadingEmployeesForm(true);
-
     createEmployee({
       variables: { newEmployee: employee },
       onCompleted: (data) => {
         setEmployees((prev) => [...prev, data.createEmployee]);
         setIsLoadingEmployeesForm(false);
-        newEmployeeFormModalState.closeModal();
+        newEmployeeFormModalState.closeModal(); // Close modal after successful creation
       },
       onError: (error) => {
         console.error("Error creating employee:", error);
@@ -100,34 +93,47 @@ const useEmployeesPageState = () => {
   };
 
   const handleSubmitEditedEmployee = (updatedEmployee) => {
-    setIsLoadingEmployeesForm(true);
-    updateEmployee({
-      variables: {
-        updateEmployeeId: employeeBeingEdited.id,
-        updatedEmployee: updatedEmployee,
-      },
-      onCompleted: () => {
-        setIsLoadingEmployeesForm(false);
-        setEmployeeBeingEdited(null);
-        employeeFormModalState.closeModal();
-      },
-      onError: (error) => {
-        console.error("Error updating employee:", error);
-        setIsLoadingEmployeesForm(false);
-      },
-    });
-  };
+  // const isUnchanged =
+  //   updatedEmployee.firstName === employeeBeingEdited.firstName &&
+  //   updatedEmployee.lastName === employeeBeingEdited.lastName &&
+  //   updatedEmployee.email === employeeBeingEdited.email &&
+  //   updatedEmployee.phoneNumber === employeeBeingEdited.phoneNumber &&
+  //   updatedEmployee.role === employeeBeingEdited.role;
+
+  // if (isUnchanged) {
+  //   console.log("Ingen ændringer – opdatering springes over.");
+  //   employeeFormModalState.closeModal();
+  //   return;
+  // }
+
+  setIsLoadingEmployeesForm(true);
+
+  updateEmployee({
+    variables: {
+      updateEmployeeId: employeeBeingEdited.id,
+      updatedEmployee,
+    },
+    onCompleted: () => {
+      setIsLoadingEmployeesForm(false);
+      setEmployeeBeingEdited(null);
+      employeeFormModalState.closeModal();
+    },
+    onError: (error) => {
+      console.error("Error updating employee:", error);
+      setIsLoadingEmployeesForm(false);
+    },
+  });
+};
 
   return {
     translate,
     apolloClient,
-    tableActions,
     isLoadingEmployees,
     employeesTableColumns,
     employeeFormModalState,
+    newEmployeeFormModalState,
     handleSubmitNewEmployee,
     employees,
-    setEmployees,
     handleSubmitEditedEmployee,
     createEmployee,
     isSubmittingNewEmployee,
@@ -137,7 +143,6 @@ const useEmployeesPageState = () => {
     setEmployeeBeingEdited,
     isLoadingEmployeesForm,
     setIsLoadingEmployeesForm,
-    newEmployeeFormModalState,
   };
 };
 
