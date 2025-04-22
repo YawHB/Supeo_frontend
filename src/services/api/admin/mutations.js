@@ -1,21 +1,14 @@
 import { gql } from "@apollo/client";
 
 export const CREATE_EMPLOYEE = gql`
-  mutation CreateEmployee(
-    $firstName: String!
-    $lastName: String!
-    $role: String!
-    $email: String!
-    $phoneNumber: String!
-  ) {
-    createEmployee(
-      firstName: $firstName
-      lastName: $lastName
-      role: $role
-      email: $email
-      phoneNumber: $phoneNumber
-    ) {
+  mutation CreateEmployee($newEmployee: CreateEmployeeInput) {
+    createEmployee(newEmployee: $newEmployee) {
       id
+      firstName
+      lastName
+      role
+      email
+      phoneNumber
     }
   }
 `;
