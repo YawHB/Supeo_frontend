@@ -2,8 +2,11 @@ import { useTranslation } from "react-i18next";
 import { Form, Row, Col, Input, Label, FormGroup, Button } from "reactstrap";
 import useEmployeeFormState from "./CreateEmployeeFormState";
 
-const CreateEmployeeForm = ({ onSubmit, employee = null }) => {
-  const [ translate ] = useTranslation("global");
+const CreateEmployeeForm = ({
+  onSubmit,
+  employee = null,
+}) => {
+  const [translate] = useTranslation("global");
   const { input } = useEmployeeFormState(employee);
 
   const handleSubmit = (e) => {

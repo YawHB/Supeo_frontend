@@ -2,6 +2,9 @@ import { useState } from "react";
 import { useQuery, useMutation, useApolloClient } from "@apollo/client";
 import { useTranslation } from "react-i18next";
 import { GET_ALL_EMPLOYEES } from "../../../services/api/admin/queries.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { Button } from "reactstrap";
 import {
   CREATE_EMPLOYEE,
   UPDATE_EMPLOYEE,
@@ -39,7 +42,24 @@ const useEmployeesPageState = () => {
     { key: "role", label: translate("role"), type: "text", sort: true },
     { key: "email", label: translate("email"), type: "text", sort: true },
     { key: "phoneNumber", label: translate("phone"), type: "text", sort: true },
-    { key: " ", label: " ", alwaysEnabled: true },
+    {
+      key: " ",
+      label: " ",
+      type: `view`,
+      alwaysEnabled: true,
+      view: (employee) => (
+        <Button
+          color="primary"
+          outline
+          onClick={() => {
+            console.log("Editing employee", employee);
+            setEmployeeBeingEdited(employee);
+          }}
+        >
+          <FontAwesomeIcon icon={faPencil} />
+        </Button>
+      ),
+    },
   ];
 
   const tableActions = {
@@ -79,18 +99,22 @@ const useEmployeesPageState = () => {
     });
   };
 
-  const handleSubmitEditedEmployee = () => {
+  const handleSubmitEditedEmployee = (updatedEmployee) => {
+    setIsLoadingEmployeesForm(true);
     updateEmployee({
       variables: {
-        id: employeeBeingEdited.id,
-        firstName: employeeBeingEdited.firstName,
-        lastName: employeeBeingEdited.lastName,
-        role: employeeBeingEdited.role,
-        email: employeeBeingEdited.email,
-        phoneNumber: employeeBeingEdited.phoneNumber,
+        updateEmployeeId: employeeBeingEdited.id,
+        updatedEmployee: updatedEmployee,
       },
-      onCompleted: () => setEmployeeBeingEdited(null),
-      onError: (error) => console.error("Error updating employee:", error),
+      onCompleted: () => {
+        setIsLoadingEmployeesForm(false);
+        setEmployeeBeingEdited(null);
+        employeeFormModalState.closeModal();
+      },
+      onError: (error) => {
+        console.error("Error updating employee:", error);
+        setIsLoadingEmployeesForm(false);
+      },
     });
   };
 

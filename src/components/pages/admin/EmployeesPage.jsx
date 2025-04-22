@@ -105,27 +105,38 @@ const EmployeesPage = () => {
         </ModalFooter>
       </Modal>
 
-      {/* Edit Modal */}
       <Modal
         isOpen={state.employeeFormModalState.isOpen}
         toggle={state.employeeFormModalState.closeModal}
         size="lg"
       >
-        <div className="modal-header">
-          <h5 className="modal-title">{translate(`update_employee`)}</h5>
-          <button
-            type="button"
-            className="btn-close"
-            onClick={state.employeeFormModalState.closeModal}
-          />
-        </div>
-        <div className="modal-body">
-          <Form
+        <ModalHeader toggle={state.employeeFormModalState.closeModal}>
+          {translate("update_employee")}
+        </ModalHeader>
+
+        <ModalBody>
+          <CreateEmployeeForm
             onSubmit={state.handleSubmitEditedEmployee}
-            isSubmitting={state.isLoadingEmployeesForm}
-            employee={state.employeeFormModalState.data}
+            employee={state.employeeBeingEdited}
           />
-        </div>
+        </ModalBody>
+
+        <ModalFooter>
+          <Button
+            type="submit"
+            color="primary"
+            form="newEmployeeForm"
+            disabled={state.isLoadingEmployeesForm}
+          >
+            {state.isLoadingEmployeesForm ? "Loading..." : translate("update")}
+          </Button>
+          <Button
+            color="secondary"
+            onClick={state.employeeFormModalState.closeModal}
+          >
+            {translate("cancel")}
+          </Button>
+        </ModalFooter>
       </Modal>
     </>
   );
