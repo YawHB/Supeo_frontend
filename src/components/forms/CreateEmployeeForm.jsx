@@ -3,7 +3,7 @@ import { Form, Row, Col, Input, Label, FormGroup, Button } from "reactstrap";
 import useEmployeeFormState from "./CreateEmployeeFormState";
 
 const CreateEmployeeForm = ({ onSubmit, employee = null }) => {
-  const [translate] = useTranslation("global");
+  const [ translate ] = useTranslation("global");
   const { input } = useEmployeeFormState(employee);
 
   const handleSubmit = (e) => {
@@ -18,7 +18,7 @@ const CreateEmployeeForm = ({ onSubmit, employee = null }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form id="newEmployeeForm" onSubmit={handleSubmit}>
       <Row>
         <Col md={6}>
           <FormGroup>
