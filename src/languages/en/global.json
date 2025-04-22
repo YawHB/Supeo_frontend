@@ -1,11 +1,16 @@
 {
   "id": "ID",
   "first_name": "First Name",
+  "first_name_placeholder": "First name",
   "middle_name": "Middle Name",
   "last_name": "Last Name",
+  "last_name_placeholder": "Last name",
   "role": "Role",
+  "role_placeholder": "Role",
   "email": "Email",
+  "email_placeholder": "email@example.com",
   "phone": "Phone",
+  "phone_placeholder": "45 86 82 00",
   "employees": "Employees",
   "company_id": "Company ID",
   "company": "Company",
@@ -34,8 +39,13 @@
     "update_employee": "Update employee",
     "delete_employee": "Delete employee",
     "search_employee": "Search for employee",
+    "create_new_employee": "Create new employee",
     "export": "Export"
   },
   "no_data": "No data",
-  "minimize": "Minimize"
+  "minimize": "Minimize",
+  "create": "Create",
+  "cancel": "Cancel",
+  "submit": "Submit",
+  "loading": "Loading"
 }

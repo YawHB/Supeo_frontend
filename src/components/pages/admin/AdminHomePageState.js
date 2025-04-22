@@ -1,5 +1,3 @@
-const useAdminHomePageState = () => {
-
-};
+const useAdminHomePageState = () => {};
 
 export default useAdminHomePageState;
