@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation, useApolloClient } from "@apollo/client";
 import { useTranslation } from "react-i18next";
-import { useMutation } from "@apollo/client";
-import { useApolloClient } from "@apollo/client";
 import { GET_ALL_EMPLOYEES } from "../../../services/api/admin/queries.js";
 import {
   CREATE_EMPLOYEE,
@@ -12,32 +10,20 @@ import { useModalState } from "../../../hooks/useModalState.js";
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient();
+  const [translate] = useTranslation("global");
 
-  const [translate] = useTranslation(`global`);
   const [employees, setEmployees] = useState([]);
   const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false);
-  const [isShowingCreateEmployeeModal, setIsShowingCreateEmployeeModal] =
-    useState(false);
-
-  const [newEmployee, setNewEmployee] = useState(null);
   const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null);
 
   const employeeFormModalState = useModalState([
     employeeBeingEdited,
     () => setEmployeeBeingEdited(null),
   ]);
-  const newEmployeeFormModalState = useModalState([
-    newEmployee,
-    () => setNewEmployee(null),
-  ]);
+  const newEmployeeFormModalState = useModalState();
 
   const employeesTableColumns = [
-    {
-      key: "id",
-      label: translate("id"),
-      type: "text",
-      sort: true,
-    },
+    { key: "id", label: translate("id"), type: "text", sort: true },
     {
       key: "firstName",
       label: translate("first_name"),
@@ -50,29 +36,10 @@ const useEmployeesPageState = () => {
       type: "text",
       sort: true,
     },
-    {
-      key: "role",
-      label: translate("role"),
-      type: "text",
-      sort: true,
-    },
-    {
-      key: "email",
-      label: translate("email"),
-      type: "text",
-      sort: true,
-    },
-    {
-      key: "phoneNumber",
-      label: translate("phone"),
-      type: "text",
-      sort: true,
-    },
-    {
-      key: ``,
-      label: ``,
-      alwaysEnabled: true,
-    },
+    { key: "role", label: translate("role"), type: "text", sort: true },
+    { key: "email", label: translate("email"), type: "text", sort: true },
+    { key: "phoneNumber", label: translate("phone"), type: "text", sort: true },
+    { key: " ", label: " ", alwaysEnabled: true },
   ];
 
   const tableActions = {
@@ -81,12 +48,8 @@ const useEmployeesPageState = () => {
 
   const { loading: isLoadingEmployees } = useQuery(GET_ALL_EMPLOYEES, {
     fetchPolicy: "cache-and-network",
-    onCompleted: (data) => {
-      setEmployees(data.employees);
-    },
-    onError: (error) => {
-      console.error("Error fetching employees:", error);
-    },
+    onCompleted: (data) => setEmployees(data.employees),
+    onError: (error) => console.error("Error fetching employees:", error),
   });
 
   const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(
@@ -99,23 +62,15 @@ const useEmployeesPageState = () => {
   const [updateEmployee, { loading: isUpdatingEmployee }] =
     useMutation(UPDATE_EMPLOYEE);
 
-  const toggleCreateEmployeeModal = () => {
-    setIsShowingCreateEmployeeModal(!isShowingCreateEmployeeModal);
-  };
-
-  const handleSubmitNewEmployee = () => {
+  const handleSubmitNewEmployee = (employee) => {
     setIsLoadingEmployeesForm(true);
+
     createEmployee({
-      variables: {
-        firstName: newEmployee.firstName,
-        lastName: newEmployee.lastName,
-        role: newEmployee.role,
-        email: newEmployee.email,
-        phoneNumber: newEmployee.phoneNumber,
-      },
-      onCompleted: () => {
+      variables: { newEmployee: employee },
+      onCompleted: (data) => {
+        setEmployees((prev) => [...prev, data.createEmployee]);
         setIsLoadingEmployeesForm(false);
-        setNewEmployee(null);
+        newEmployeeFormModalState.closeModal();
       },
       onError: (error) => {
         console.error("Error creating employee:", error);
@@ -134,12 +89,8 @@ const useEmployeesPageState = () => {
         email: employeeBeingEdited.email,
         phoneNumber: employeeBeingEdited.phoneNumber,
       },
-      onCompleted: () => {
-        setEmployeeBeingEdited(null);
-      },
-      onError: (error) => {
-        console.error("Error updating employee:", error);
-      },
+      onCompleted: () => setEmployeeBeingEdited(null),
+      onError: (error) => console.error("Error updating employee:", error),
     });
   };
 
@@ -153,7 +104,6 @@ const useEmployeesPageState = () => {
     handleSubmitNewEmployee,
     employees,
     setEmployees,
-    toggleCreateEmployeeModal,
     handleSubmitEditedEmployee,
     createEmployee,
     isSubmittingNewEmployee,
@@ -163,11 +113,7 @@ const useEmployeesPageState = () => {
     setEmployeeBeingEdited,
     isLoadingEmployeesForm,
     setIsLoadingEmployeesForm,
-    isShowingCreateEmployeeModal,
-    setIsShowingCreateEmployeeModal,
     newEmployeeFormModalState,
-    newEmployee,
-    setNewEmployee,
   };
 };
 

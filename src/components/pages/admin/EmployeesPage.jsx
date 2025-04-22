@@ -74,21 +74,17 @@ const EmployeesPage = () => {
         </Col>
       </Row>
 
-      {/* New Employee Modal */}
       <Modal
         isOpen={state.newEmployeeFormModalState.isOpen}
         toggle={state.newEmployeeFormModalState.closeModal}
         size="lg"
       >
         <ModalHeader toggle={state.newEmployeeFormModalState.closeModal}>
-          {translate(`admin.create_new_employee`)}
+          {translate("admin.create_new_employee")}
         </ModalHeader>
 
         <ModalBody>
-          <CreateEmployeeForm
-            employee={state.newEmployee}
-            onSubmit={state.handleSubmitNewEmployee}
-          />
+          <CreateEmployeeForm onSubmit={state.handleSubmitNewEmployee} />
         </ModalBody>
 
         <ModalFooter>
