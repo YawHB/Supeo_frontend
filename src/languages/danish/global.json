@@ -1,0 +1,57 @@
+{
+  "id": "ID",
+  "first_name": "Fornavn",
+  "first_name_placeholder": "Fornavn",
+  "middle_name": "Mellemnavn",
+  "last_name": "Efternavn",
+  "last_name_placeholder": "Efternavn",
+  "role": "Rolle",
+  "role_placeholder": "Rolle",
+  "email": "Email",
+  "email_placeholder": "email@example.com",
+  "phone": "Telefon",
+  "phone_placeholder": "45 86 82 00",
+  "employees": "Medarbejdere",
+  "company_id": "Firma ID",
+  "company": "Firma",
+  "date": "Dato",
+  "start_time": "Starttid",
+  "end_time": "Sluttid",
+  "duration": "Varighed",
+  "comment": "Kommentar",
+  "status": "Status",
+  "page_title": {
+    "administration_time_entries": "Administration - Tidsregistreringer",
+    "administration_employees": "Administration - Medarbejdere",
+    "employee_home": "Medarbejder - Hjem",
+    "admin_home": "Admin - Hjem"
+  },
+  "nav_bar": {
+    "employee_home": "Medarbejder - Hjem",
+    "admin_time_entries": "Tidsregistreringer"
+  },
+  "errors": {
+    "error": "Fejl",
+    "error_message": "Fejlmeddelelse",
+    "no_response_from_server": "Ingen svar fra server"
+  },
+  "not_logged_in": "Du er ikke logget ind",
+  "page_not_found": "Siden blev ikke fundet",
+  "logging_out": "Logger ud",
+  "admin": {
+    "admin_employees": "Admin - Medarbejdere",
+    "create_employee": "Opret medarbejder",
+    "update_employee": "Opdater medarbejder",
+    "delete_employee": "Slet medarbejder",
+    "search_employee": "Søg efter medarbejder",
+    "create_new_employee": "Opret ny medarbejder",
+    "export": "Eksporter"
+  },
+  "no_data": "Ingen data",
+  "minimize": "Minimer",
+  "create": "Opret",
+  "update": "Opdater",
+  "cancel": "Annuller",
+  "submit": "Indsend",
+  "loading": "Indlæser"
+}
