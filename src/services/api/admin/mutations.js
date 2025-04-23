@@ -25,4 +25,3 @@ export const UPDATE_EMPLOYEE = gql`
   }
 }
 `;
-

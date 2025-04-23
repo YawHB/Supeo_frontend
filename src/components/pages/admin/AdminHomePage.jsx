@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next";
 
 const AdminHomePage = () => {
   const [translate] = useTranslation("global");
-  document.title = translate("nav_bar.admin_home");
+  document.title = translate("page_title.admin_home");
 
   return (
     <>

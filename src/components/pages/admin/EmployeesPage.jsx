@@ -1,78 +1,91 @@
-import CreateEmployeeForm from "../../forms/CreateEmployeeForm";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useEmployeesPageState from "./EmployeesPageState";
-import { Row, Col, Table, Form } from "reactstrap";
+import CreateEmployeeForm from "../../forms/CreateEmployeeForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { faUserPlus, faFileExcel } from "@fortawesome/free-solid-svg-icons";
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, Table } from "reactstrap";
 
 const EmployeesPage = () => {
-  const [translate] = useTranslation("global");
+  const [ translate ] = useTranslation("global");
   const state = useEmployeesPageState();
 
-  document.title = translate("nav_bar.admin_employees");
+  document.title = translate("page_title.administration_employees");
 
   return (
     <>
       <Row>
+        <Col xs={12} className="d-flex justify-content-between gap-4">
+          <h1>{translate("employees")}</h1>
+          <div className="d-flex align-items-center gap-4">
+            <Button
+              color="primary"
+              outline
+              onClick={() => state.newEmployeeFormModalState.openModal({})}
+              className="no-wrap"
+              style={{ minWidth: "200px" }}
+            >
+              <FontAwesomeIcon icon={faUserPlus} className="me-2" />
+              <span>{translate(`admin.create_employee`)}</span>
+            </Button>
+          </div>
+        </Col>
+      </Row>
+
+      <Row>
         <Col>
-          <Col xs={12} className="d-flex justify-content-between gap-4">
-            <h1>{translate("employees")}</h1>
-            <div className="d-flex align-items-center gap-4">
-              <Button
-                color="primary"
-                outline
-                onClick={() => state.newEmployeeFormModalState.openModal({})}
-                className="no-wrap"
-                style={{ minWidth: "200px" }}
-              >
-                <FontAwesomeIcon icon={faUserPlus} className="me-2" />
-                <span>{translate(`admin.create_employee`)}</span>
-              </Button>
-            </div>
-          </Col>
-
           {!state.isLoadingEmployees && (
-            <div className="mt-4">
-              <Table striped bordered hover responsive>
-                <thead className="table-light">
-                  <tr>
-                    {state.employeesTableColumns.map((column) => (
-                      <th key={column.key}>{column.label}</th>
-                    ))}
-                  </tr>
-                </thead>
+            <Table striped bordered hover responsive>
+              <thead className="table-light">
+                <tr>
+                  {state.employeesTableColumns.map((column) => (
+                    <th key={column.key}>{column.label}</th>
+                  ))}
+                </tr>
+              </thead>
 
-                <tbody>
-                  {state.employees.length === 0 ? (
-                    <tr>
-                      <td
-                        colSpan={state.employeesTableColumns.length}
-                        className="text-center"
-                      >
-                        {translate("no_data")}
-                      </td>
+              <tbody>
+                {state.employees.length === 0 ? (
+                  <tr>
+                    <td
+                      colSpan={state.employeesTableColumns.length}
+                      className="text-center"
+                    >
+                      {translate("no_data")}
+                    </td>
+                  </tr>
+                ) : (
+                  state.employees.map((employee) => (
+                    <tr key={employee.id}>
+                      {state.employeesTableColumns.map((column) => (
+                        <td key={column.key}>
+                          {column.type === "view"
+                            ? column.view(employee)
+                            : employee[column.key]}
+                        </td>
+                      ))}
                     </tr>
-                  ) : (
-                    state.employees.map((employee) => (
-                      <tr key={employee.id}>
-                        {state.employeesTableColumns.map((column) => (
-                          <td key={column.key}>
-                            {column.type === "view"
-                              ? column.view(employee)
-                              : employee[column.key]}
-                          </td>
-                        ))}
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </Table>
-            </div>
+                  ))
+                )}
+              </tbody>
+            </Table>
           )}
         </Col>
       </Row>
+
+      <div className="d-flex justify-content-between">
+        <div>
+          <Button
+            color="info"
+            outline
+            onClick={state.handleExportTable}
+            className="no-wrap me-3 mb-4"
+          >
+            <FontAwesomeIcon icon={faFileExcel} className="me-2" />
+            <span>{translate(`admin.export`)}</span>
+          </Button>
+        </div>
+      </div>
 
       <Modal
         isOpen={state.newEmployeeFormModalState.isOpen}
@@ -85,11 +98,14 @@ const EmployeesPage = () => {
 
         <ModalBody>
           <CreateEmployeeForm
-           onSubmit={state.employeeBeingEdited?.id
-            ? state.handleSubmitEditedEmployee
-            : state.handleSubmitNewEmployee}
+            onSubmit={
+              state.employeeBeingEdited?.id
+                ? state.handleSubmitEditedEmployee
+                : state.handleSubmitNewEmployee
+            }
             isSubmitting={state.isLoadingEmployeesForm}
-            employee={state.employeeBeingEdited} />
+            employee={state.employeeBeingEdited}
+          />
         </ModalBody>
 
         <ModalFooter>
@@ -99,8 +115,9 @@ const EmployeesPage = () => {
             form="newEmployeeForm"
             disabled={state.isSubmittingNewEmployee || state.isUpdatingEmployee}
           >
-            {state.isLoadingEmployeesForm ? "Loading..." : translate("create")}
+            {translate("create")}
           </Button>
+
           <Button
             color="secondary"
             onClick={state.newEmployeeFormModalState.closeModal}
@@ -133,8 +150,9 @@ const EmployeesPage = () => {
             form="newEmployeeForm"
             disabled={state.isLoadingEmployeesForm}
           >
-            {state.isLoadingEmployeesForm ? "Loading..." : translate("update")}
+            {translate("update")}
           </Button>
+
           <Button
             color="secondary"
             onClick={state.employeeFormModalState.closeModal}

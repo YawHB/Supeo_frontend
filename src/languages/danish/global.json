@@ -17,13 +17,18 @@
   "date": "Dato",
   "start_time": "Starttid",
   "end_time": "Sluttid",
-  "total_time": "Total tid",
+  "duration": "Varighed",
   "comment": "Kommentar",
   "status": "Status",
+  "page_title": {
+    "administration_time_entries": "Administration - Tidsregistreringer",
+    "administration_employees": "Administration - Medarbejdere",
+    "employee_home": "Medarbejder - Hjem",
+    "admin_home": "Admin - Hjem"
+  },
   "nav_bar": {
-    "admin_home": "Admin",
-    "employee_home": "Medarbejder",
-    "admin_employees": "Admin - Medarbejdere"
+    "employee_home": "Medarbejder - Hjem",
+    "admin_time_entries": "Tidsregistreringer"
   },
   "errors": {
     "error": "Fejl",

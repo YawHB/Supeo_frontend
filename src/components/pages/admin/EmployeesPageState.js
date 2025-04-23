@@ -49,8 +49,8 @@ const useEmployeesPageState = () => {
           color="primary"
           outline
           onClick={() => {
-            setEmployeeBeingEdited(employee); // Set the employee to edit
-            employeeFormModalState.openModal(); // Open edit modal
+            setEmployeeBeingEdited(employee);
+            employeeFormModalState.openModal();
           }}
         >
           <FontAwesomeIcon icon={faPencil} />
@@ -62,7 +62,6 @@ const useEmployeesPageState = () => {
   const { loading: isLoadingEmployees } = useQuery(GET_ALL_EMPLOYEES, {
     fetchPolicy: "cache-and-network",
     onCompleted: (data) => setEmployees(data.employees),
-    onError: (error) => console.error("Error fetching employees:", error),
   });
 
   const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(
@@ -75,7 +74,6 @@ const useEmployeesPageState = () => {
   const [updateEmployee, { loading: isUpdatingEmployee }] =
     useMutation(UPDATE_EMPLOYEE);
 
-  // Function to handle employee creation
   const handleSubmitNewEmployee = (employee) => {
     setIsLoadingEmployeesForm(true);
     createEmployee({
@@ -83,10 +81,9 @@ const useEmployeesPageState = () => {
       onCompleted: (data) => {
         setEmployees((prev) => [...prev, data.createEmployee]);
         setIsLoadingEmployeesForm(false);
-        newEmployeeFormModalState.closeModal(); // Close modal after successful creation
+        newEmployeeFormModalState.closeModal();
       },
-      onError: (error) => {
-        console.error("Error creating employee:", error);
+      onError: () => {
         setIsLoadingEmployeesForm(false);
       },
     });
@@ -101,7 +98,6 @@ const useEmployeesPageState = () => {
   //   updatedEmployee.role === employeeBeingEdited.role;
 
   // if (isUnchanged) {
-  //   console.log("Ingen ændringer – opdatering springes over.");
   //   employeeFormModalState.closeModal();
   //   return;
   // }
@@ -118,8 +114,7 @@ const useEmployeesPageState = () => {
       setEmployeeBeingEdited(null);
       employeeFormModalState.closeModal();
     },
-    onError: (error) => {
-      console.error("Error updating employee:", error);
+    onError: () => {
       setIsLoadingEmployeesForm(false);
     },
   });

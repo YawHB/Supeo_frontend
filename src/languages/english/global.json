@@ -17,13 +17,18 @@
   "date": "Date",
   "start_time": "Start Time",
   "end_time": "End Time",
-  "total_time": "Total Time",
+  "total_time": "Duration",
   "comment": "Comment",
   "status": "Status",
+  "page_title": {
+    "administration_time_entries": "Administration - Time Entries",
+    "administration_employees": "Administration - Employees",
+    "employee_home": "Employee - Home",
+    "admin_home": "Admin - Home"
+  },
   "nav_bar": {
-    "admin_home": "Admin",
-    "employee_home": "Employee",
-    "admin_employees": "Admin - Employees"
+    "employee_home": "Employee - Home",
+    "admin_time_entries": "Time Entries"
   },
   "errors": {
     "error": "Error",
