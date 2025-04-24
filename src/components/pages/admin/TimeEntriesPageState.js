@@ -32,7 +32,6 @@ const useTimeEntriesPageState = () => {
     },
     { key: "endTime", label: translate("end_time"), type: "text", sort: true },
     { key: "duration", label: translate("duration"), type: "text", sort: true },
-    { key: "break", label: translate("break"), type: "text", sort: true },
     { key: "comment", label: translate("comment"), type: "text", sort: true },
     { key: "date", label: translate("date"), type: "date", sort: true },
     {
@@ -40,9 +39,9 @@ const useTimeEntriesPageState = () => {
       label: translate("status"),
       type: "select",
       options: [
-        { label: translate("pending"), value: "Pending" },
-        { label: translate("approve"), value: "Accepted" },
-        { label: translate("reject"), value: "Declined" },
+        { label: translate("pending"), value: "PENDING" },
+        { label: translate("approve"), value: "GODKENDT" },
+        { label: translate("reject"), value: "AFVIST" },
       ],
       alwaysEnabled: true,
     },
