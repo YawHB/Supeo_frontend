@@ -17,9 +17,13 @@
   "date": "Date",
   "start_time": "Start Time",
   "end_time": "End Time",
-  "total_time": "Duration",
+  "duration": "Duration",
+  "break": "Break",
   "comment": "Comment",
   "status": "Status",
+  "pending": "Pending",
+  "approve": "Approve",
+  "reject": "Reject",
   "page_title": {
     "administration_time_entries": "Administration - Time Entries",
     "administration_employees": "Administration - Employees",
@@ -29,6 +33,13 @@
   "nav_bar": {
     "employee_home": "Employee - Home",
     "admin_time_entries": "Time Entries"
+  },
+  "side_bar": {
+    "admin_home": "Admin - Home",
+    "employee_home": "Employee - Home",
+    "employees": "Employees",
+    "time_entries": "Time Entries",
+    "breaks": "Breaks"
   },
   "errors": {
     "error": "Error",

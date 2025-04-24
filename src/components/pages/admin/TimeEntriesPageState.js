@@ -1,15 +1,29 @@
 import { useTranslation } from "react-i18next";
-import { useQuery, useApolloClient } from "@apollo/client";
+import { useQuery, useApolloClient, useMutation } from "@apollo/client";
 import { useState } from "react";
 import { GET_ALL_TIME_ENTRIES } from "../../../services/api/time-entry/queries.js";
+import { UPDATE_TIME_ENTRY_STATUS } from "../../../services/api/admin/mutations.js";
 
 const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient();
   const [translate] = useTranslation("global");
   const [timeEntries, setTimeEntries] = useState([]);
+  const [updateTimeEntryStatus] = useMutation(UPDATE_TIME_ENTRY_STATUS);
 
   const timeEntriesTableColumns = [
     { key: "id", label: translate("id"), type: "text", sort: true },
+    {
+      key: "firstName",
+      label: translate("first_name"),
+      type: "text",
+      sort: true,
+    },
+    {
+      key: "lastName",
+      label: translate("last_name"),
+      type: "text",
+      sort: true,
+    },
     {
       key: "startTime",
       label: translate("start_time"),
@@ -18,12 +32,18 @@ const useTimeEntriesPageState = () => {
     },
     { key: "endTime", label: translate("end_time"), type: "text", sort: true },
     { key: "duration", label: translate("duration"), type: "text", sort: true },
+    { key: "break", label: translate("break"), type: "text", sort: true },
     { key: "comment", label: translate("comment"), type: "text", sort: true },
     { key: "date", label: translate("date"), type: "date", sort: true },
     {
       key: "status",
-      label: "status",
-      type: `text`,
+      label: translate("status"),
+      type: "select",
+      options: [
+        { label: translate("pending"), value: "Pending" },
+        { label: translate("approve"), value: "Accepted" },
+        { label: translate("reject"), value: "Declined" },
+      ],
       alwaysEnabled: true,
     },
   ];
@@ -33,11 +53,27 @@ const useTimeEntriesPageState = () => {
     onCompleted: (data) => setTimeEntries(data.timeEntries),
   });
 
+  const handleStatusChange = async (entryId, newStatus) => {
+    const updatedEntries = timeEntries.map((entry) =>
+      entry.id === entryId ? { ...entry, status: newStatus } : entry
+    );
+    setTimeEntries(updatedEntries);
+
+    try {
+      await updateTimeEntryStatus({
+        variables: { id: entryId, status: newStatus },
+      });
+    } catch (error) {
+      console.error("Failed to update status:", error);
+    }
+  };
+
   return {
     translate,
     apolloClient,
     isLoadingTimeEntries,
     timeEntriesTableColumns,
+    handleStatusChange,
     timeEntries,
   };
 };

@@ -25,3 +25,12 @@ export const UPDATE_EMPLOYEE = gql`
   }
 }
 `;
+
+export const UPDATE_TIME_ENTRY_STATUS = gql`
+  mutation UpdateTimeEntryStatus($id: ID!, $status: String!) {
+    updateTimeEntryStatus(id: $id, status: $status) {
+      id
+      status
+    }
+  }
+`;

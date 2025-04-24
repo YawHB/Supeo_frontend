@@ -18,8 +18,12 @@
   "start_time": "Starttid",
   "end_time": "Sluttid",
   "duration": "Varighed",
+  "break": "Pause",
   "comment": "Kommentar",
   "status": "Status",
+  "pending": "Afventer",
+  "approve": "Godkend",
+  "reject": "Afvis",
   "page_title": {
     "administration_time_entries": "Administration - Tidsregistreringer",
     "administration_employees": "Administration - Medarbejdere",
@@ -27,8 +31,18 @@
     "admin_home": "Admin - Hjem"
   },
   "nav_bar": {
+    "admin_time_entries": "Tidsregistreringer",
+    "admin_employees": "Medarbejdere",
     "employee_home": "Medarbejder - Hjem",
-    "admin_time_entries": "Tidsregistreringer"
+    "admin_home": "Admin - Hjem"
+    
+  },
+  "side_bar": {
+    "admin_home": "Admin - Hjem",
+    "employee_home": "Medarbejder - Hjem",
+    "employees": "Medarbejdere",
+    "time_entries": "Tidsregistreringer",
+    "breaks": "Pauser"
   },
   "errors": {
     "error": "Fejl",
