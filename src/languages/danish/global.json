@@ -8,9 +8,9 @@
   "role": "Rolle",
   "role_placeholder": "Rolle",
   "email": "Email",
-  "email_placeholder": "email@example.com",
+  "email_placeholder": "email@eksempel.com",
   "phone": "Telefon",
-  "phone_placeholder": "45 86 82 00",
+  "phone_placeholder": "11223344",
   "employees": "Medarbejdere",
   "company_id": "Firma ID",
   "company": "Firma",
@@ -18,8 +18,12 @@
   "start_time": "Starttid",
   "end_time": "Sluttid",
   "duration": "Varighed",
+  "break": "Pause",
   "comment": "Kommentar",
   "status": "Status",
+  "pending": "Afventer",
+  "approve": "Godkend",
+  "reject": "Afvis",
   "page_title": {
     "administration_time_entries": "Administration - Tidsregistreringer",
     "administration_employees": "Administration - Medarbejdere",
@@ -27,8 +31,17 @@
     "admin_home": "Admin - Hjem"
   },
   "nav_bar": {
+    "admin_time_entries": "Tidsregistreringer",
+    "admin_employees": "Medarbejdere",
     "employee_home": "Medarbejder - Hjem",
-    "admin_time_entries": "Tidsregistreringer"
+    "admin_home": "Admin - Hjem"
+  },
+  "side_bar": {
+    "admin_home": "Admin - Hjem",
+    "employee_home": "Medarbejder - Hjem",
+    "employees": "Medarbejdere",
+    "time_entries": "Tidsregistreringer",
+    "breaks": "Pauser"
   },
   "errors": {
     "error": "Fejl",
@@ -53,5 +66,17 @@
   "update": "Opdater",
   "cancel": "Annuller",
   "submit": "Indsend",
-  "loading": "Indlæser"
+  "loading": "Indlæser",
+  "notification": {
+    "employee": {
+      "create": {
+        "success": "Medarbejder oprettet",
+        "error": "Fejl ved oprettelse af medarbejder"
+      },
+      "update": {
+        "success": "Medarbejder opdateret",
+        "error": "Fejl ved opdatering af medarbejder"
+      }
+    }
+  }
 }
