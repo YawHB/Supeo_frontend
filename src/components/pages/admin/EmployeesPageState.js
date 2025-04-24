@@ -10,6 +10,7 @@ import {
   UPDATE_EMPLOYEE,
 } from "../../../services/api/admin/mutations.js";
 import { useModalState } from "../../../hooks/useModalState.js";
+import showToast from "../../lib/toast.js";
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient();
@@ -79,12 +80,20 @@ const useEmployeesPageState = () => {
     createEmployee({
       variables: { newEmployee: employee },
       onCompleted: (data) => {
+        showToast(translate("notification.employee.create.success"), {
+          name: employee.firstName,
+        }),
+          {
+            type: "success",
+          };
         setEmployees((prev) => [...prev, data.createEmployee]);
         setIsLoadingEmployeesForm(false);
         newEmployeeFormModalState.closeModal();
       },
       onError: () => {
-        setIsLoadingEmployeesForm(false);
+        showToast(translate("notification.employee.create.error"), {
+          type: "error",
+        });
       },
     });
   };
