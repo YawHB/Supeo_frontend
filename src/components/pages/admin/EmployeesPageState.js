@@ -10,6 +10,7 @@ import {
   UPDATE_EMPLOYEE,
 } from "../../../services/api/admin/mutations.js";
 import { useModalState } from "../../../hooks/useModalState.js";
+import showToast from "../../lib/toast/toast.js";
 
 
 const useEmployeesPageState = () => {
@@ -75,20 +76,27 @@ const useEmployeesPageState = () => {
   const [updateEmployee, { loading: isUpdatingEmployee }] =
     useMutation(UPDATE_EMPLOYEE);
 
-  const handleSubmitNewEmployee = (employee) => {
-    setIsLoadingEmployeesForm(true);
-    createEmployee({
-      variables: { newEmployee: employee },
-      onCompleted: (data) => {
-        setEmployees((prev) => [...prev, data.createEmployee]);
-        setIsLoadingEmployeesForm(false);
-        newEmployeeFormModalState.closeModal();
-      },
-      onError: () => {
-        setIsLoadingEmployeesForm(false);
-      },
-    });
-  };
+const handleSubmitNewEmployee = (employee) => {
+  setIsLoadingEmployeesForm(true);
+  createEmployee({
+    variables: { newEmployee: employee },
+    onCompleted: (data) => {
+      showToast(translate("notification.employee.create.success"), {
+        name: employee.firstName,
+      }), {
+        type: "success",
+      };
+      setEmployees((prev) => [...prev, data.createEmployee]);
+      setIsLoadingEmployeesForm(false);
+      newEmployeeFormModalState.closeModal();
+    },
+    onError: () => {
+      showToast(translate("notification.employee.create.error"), {
+        type: "error",
+      });
+    },
+  });
+};
 
   const handleSubmitEditedEmployee = (updatedEmployee) => {
   // const isUnchanged =

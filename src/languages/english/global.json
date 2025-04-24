@@ -64,5 +64,17 @@
   "update": "Update",
   "cancel": "Cancel",
   "submit": "Submit",
-  "loading": "Loading"
+  "loading": "Loading",
+  "notification": {
+    "employee": {
+      "create": {
+        "success": "Employee created",
+        "error": "Error creating employee"
+      },
+      "update": {
+        "success": "Employee updated",
+        "error": "Error updating employee"
+      }
+    }
+  }
 }

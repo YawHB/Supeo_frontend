@@ -67,5 +67,17 @@
   "update": "Opdater",
   "cancel": "Annuller",
   "submit": "Indsend",
-  "loading": "Indlæser"
+  "loading": "Indlæser",
+  "notification": {
+    "employee": {
+      "create": {
+        "success": "Medarbejder oprettet",
+        "error": "Fejl ved oprettelse af medarbejder"
+      },
+      "update": {
+        "success": "Medarbejder opdateret",
+        "error": "Fejl ved opdatering af medarbejder"
+      }
+    }
+  }
 }
