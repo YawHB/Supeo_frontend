@@ -1,39 +1,57 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import useEmployeesPageState from "./EmployeesPageState";
+import useSideBarState from "../../sidebar/SideBarState";
 import CreateEmployeeForm from "../../forms/CreateEmployeeForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faFileExcel } from "@fortawesome/free-solid-svg-icons";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, Table } from "reactstrap";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Row,
+  Col,
+  Table,
+} from "reactstrap";
+import SideBar from "../../sidebar/Sidebar";
 
 const EmployeesPage = () => {
-  const [ translate ] = useTranslation("global");
+  const [translate] = useTranslation("global");
   const state = useEmployeesPageState();
+  const sideBarState = useSideBarState();
 
   document.title = translate("page_title.administration_employees");
 
   return (
     <>
       <Row>
-        <Col xs={12} className="d-flex justify-content-between gap-4">
-          <h1>{translate("employees")}</h1>
-          <div className="d-flex align-items-center gap-4">
-            <Button
-              color="primary"
-              outline
-              onClick={() => state.newEmployeeFormModalState.openModal({})}
-              className="no-wrap"
-              style={{ minWidth: "200px" }}
-            >
-              <FontAwesomeIcon icon={faUserPlus} className="me-2" />
-              <span>{translate(`admin.create_employee`)}</span>
-            </Button>
-          </div>
+        <Col xs="auto" style={{ minWidth: "130px", maxWidth: "270px" }}>
+          <SideBar
+            sideBarItems={sideBarState.sideBarItems}
+            isSideBarCollapsed={sideBarState.isSideBarCollapsed}
+            toggleSideBarCollapse={sideBarState.toggleSideBarCollapse}
+          />
         </Col>
-      </Row>
 
-      <Row>
         <Col>
+          <Col xs={12} className="d-flex justify-content-between gap-4">
+            <h1>{translate("employees")}</h1>
+            <div className="d-flex align-items-center gap-4">
+              <Button
+                color="primary"
+                outline
+                onClick={() => state.newEmployeeFormModalState.openModal({})}
+                className="no-wrap"
+                style={{ minWidth: "200px" }}
+              >
+                <FontAwesomeIcon icon={faUserPlus} className="me-2" />
+                <span>{translate(`admin.create_employee`)}</span>
+              </Button>
+            </div>
+          </Col>
+
           {!state.isLoadingEmployees && (
             <Table striped bordered hover responsive>
               <thead className="table-light">
@@ -70,26 +88,27 @@ const EmployeesPage = () => {
               </tbody>
             </Table>
           )}
+
+          <div className="d-flex justify-content-between">
+            <div>
+              <Button
+                color="info"
+                outline
+                onClick={state.handleExportTable}
+                className="no-wrap me-3 mb-4"
+              >
+                <FontAwesomeIcon icon={faFileExcel} className="me-2" />
+                <span>{translate(`admin.export`)}</span>
+              </Button>
+            </div>
+          </div>
         </Col>
       </Row>
-
-      <div className="d-flex justify-content-between">
-        <div>
-          <Button
-            color="info"
-            outline
-            onClick={state.handleExportTable}
-            className="no-wrap me-3 mb-4"
-          >
-            <FontAwesomeIcon icon={faFileExcel} className="me-2" />
-            <span>{translate(`admin.export`)}</span>
-          </Button>
-        </div>
-      </div>
 
       <Modal
         isOpen={state.newEmployeeFormModalState.isOpen}
         toggle={state.newEmployeeFormModalState.closeModal}
+        returnFocusAfterClose={false}
         size="lg"
       >
         <ModalHeader toggle={state.newEmployeeFormModalState.closeModal}>
@@ -130,6 +149,7 @@ const EmployeesPage = () => {
       <Modal
         isOpen={state.employeeFormModalState.isOpen}
         toggle={state.employeeFormModalState.closeModal}
+        returnFocusAfterClose={false}
         size="lg"
       >
         <ModalHeader toggle={state.employeeFormModalState.closeModal}>
