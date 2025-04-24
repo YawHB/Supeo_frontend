@@ -13,14 +13,10 @@ function App() {
             <Navbar />
             <PageLayout>
                 <Routes>
+                    <Route path="/" element={<AdminHomePage />} />
                     <Route path="/admin" element={<AdminHomePage />} />
                     <Route path="/employee" element={<EmployeeHomePage />} />
-
-                    <Route
-                        path="/employee/time-entries"
-                        element={<EmployeeTimeEntriesPage />}
-                    />
-
+                    <Route path="/employee/time-entries" element={<EmployeeTimeEntriesPage />}/>
                     <Route path="/employees" element={<EmployeesPage />} />
                     <Route path="/timeentries" element={<TimeEntriesPage />} />
                 </Routes>
