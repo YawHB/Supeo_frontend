@@ -29,3 +29,10 @@ sideBarItemsMap.set("timeentries", {
   link: "/timeentries",
   activeLocation: "/timeentries",
 });
+
+sideBarItemsMap.set("employee_time_entries", {
+  icon: faClock,
+  label: "side_bar.employee_time_entries",
+  link: "/employee/time-entries",
+  activeLocation: "/employee/time-entries",
+});

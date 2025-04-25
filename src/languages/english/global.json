@@ -38,6 +38,7 @@
     "admin_home": "Admin - Home",
     "employee_home": "Employee - Home",
     "employees": "Employees",
+    "employee_time_entries": "Employee - Time Entries",
     "time_entries": "Time Entries",
     "breaks": "Breaks"
   },
