@@ -6,7 +6,7 @@ import useSideBarState from "../../sidebar/SideBarState";
 import SideBar from "../../sidebar/Sidebar";
 
 const TimeEntriesPage = () => {
-  const [ translate ] = useTranslation("global");
+  const [translate] = useTranslation("global");
   const state = useTimeEntriesPageState();
   const sideBarState = useSideBarState();
 
@@ -59,7 +59,10 @@ const TimeEntriesPage = () => {
                               className="form-select"
                               value={timeEntry[column.key]}
                               onChange={(e) =>
-                                state.handleStatusChange(timeEntry.id, e.target.value)
+                                state.handleStatusChange(
+                                  timeEntry.id,
+                                  e.target.value
+                                )
                               }
                             >
                               {column.options?.map((option) => (

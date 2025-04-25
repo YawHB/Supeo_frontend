@@ -8,9 +8,9 @@
   "role": "Rolle",
   "role_placeholder": "Rolle",
   "email": "Email",
-  "email_placeholder": "email@example.com",
+  "email_placeholder": "email@eksempel.com",
   "phone": "Telefon",
-  "phone_placeholder": "45 86 82 00",
+  "phone_placeholder": "11223344",
   "employees": "Medarbejdere",
   "company_id": "Firma ID",
   "company": "Firma",
@@ -35,7 +35,6 @@
     "admin_employees": "Medarbejdere",
     "employee_home": "Medarbejder - Hjem",
     "admin_home": "Admin - Hjem"
-    
   },
   "side_bar": {
     "admin_home": "Admin - Hjem",

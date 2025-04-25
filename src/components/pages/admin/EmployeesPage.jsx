@@ -9,7 +9,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, Table } f
 import SideBar from "../../sidebar/Sidebar";
 
 const EmployeesPage = () => {
-  const [ translate ] = useTranslation("global");
+  const [translate] = useTranslation("global");
   const state = useEmployeesPageState();
   const sideBarState = useSideBarState();
 
