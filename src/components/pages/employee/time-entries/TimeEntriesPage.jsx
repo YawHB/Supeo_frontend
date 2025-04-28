@@ -1,18 +1,23 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { useTimeEntriesPageState } from './TimeEntriesPageState.js';
-import { Row, Col, Table } from 'reactstrap';
+import {
+    Row,
+    Col,
+    Table,
+    Button,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+} from 'reactstrap';
+import CreateTimeEntryForm from '../../../forms/time-entry/CreateTimeEntryForm.jsx';
 
 export const EmployeeTimeEntriesPage = () => {
-    console.log('Inside time entries page');
     const [translate] = useTranslation('global');
     const state = useTimeEntriesPageState();
 
-    document.title = translate('nav_bar.admin_employees');
-
-    console.log(state.timeEntriesData);
-    console.log(state.timeEntriesData.firstName);
-    console.log(state.timeEntriesData.timeEntries);
     const { firstName, lastName, role } = state.timeEntriesData;
 
     return (
@@ -26,7 +31,23 @@ export const EmployeeTimeEntriesPage = () => {
                         <h1>
                             {firstName} {lastName} - {role}
                         </h1>
-                        <div className="d-flex align-items-center gap-4"></div>
+                        <div className="d-flex align-items-center gap-4">
+                            <Button
+                                color="primary"
+                                outline
+                                onClick={() =>
+                                    state.newTimeEntryFormModalState.openModal(
+                                        {}
+                                    )
+                                }
+                                className="no-wrap"
+                                style={{ minWidth: '200px' }}
+                            >
+                                <span>
+                                    {translate('time_entry.create_time_entry')}
+                                </span>{' '}
+                            </Button>
+                        </div>
                     </Col>
 
                     {!state.isLoadingTimeEntries && (
@@ -88,6 +109,44 @@ export const EmployeeTimeEntriesPage = () => {
                     )}
                 </Col>
             </Row>
+
+            <Modal
+                isOpen={state.newTimeEntryFormModalState.isOpen}
+                toggle={state.newTimeEntryFormModalState.closeModal}
+                returnFocusAfterClose={false}
+                size="lg"
+            >
+                <ModalHeader
+                    toggle={state.newTimeEntryFormModalState.closeModal}
+                >
+                    {translate('time_entry.create_time_entry')}
+                </ModalHeader>
+
+                <ModalBody>
+                    <CreateTimeEntryForm
+                        onSubmit={state.handleSubmitNewTimeEntry}
+                        isSubmitting={state.isSubmittingNewTimeEntry}
+                    />
+                </ModalBody>
+
+                <ModalFooter>
+                    <Button
+                        type="submit"
+                        color="primary"
+                        form="newTimeEntryForm"
+                        disabled={state.isSubmittingNewTimeEntry}
+                    >
+                        {translate('create')}
+                    </Button>
+
+                    <Button
+                        color="secondary"
+                        onClick={state.newTimeEntryFormModalState.closeModal}
+                    >
+                        {translate('cancel')}
+                    </Button>
+                </ModalFooter>
+            </Modal>
         </>
     );
 };

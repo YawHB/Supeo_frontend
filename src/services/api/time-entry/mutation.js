@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const CREATE_TIME_ENTRY = gql`
-    mutation CreateTimeEntry($newTimeEntry: createTimeEntryInput!) {
+    mutation CreateTimeEntry($newTimeEntry: CreateTimeEntryInput!) {
         createTimeEntry(newTimeEntry: $newTimeEntry) {
             startTime
             endTime

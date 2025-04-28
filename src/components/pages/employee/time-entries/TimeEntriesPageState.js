@@ -1,13 +1,21 @@
 import { useState } from 'react';
-import { useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { useApolloClient } from '@apollo/client';
+import { useModalState } from '../../../../hooks/useModalState.js';
 import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from '../../../../services/api/employee/queries.js';
+import { CREATE_TIME_ENTRY } from '../../../../services/api/time-entry/mutation.js';
 export const useTimeEntriesPageState = () => {
     const apolloClient = useApolloClient();
 
     const [translate] = useTranslation(`global`);
     const [timeEntriesData, setTimeEntriesData] = useState([]);
+
+    const [isLoadingTimeEntriesForm, setIsLoadingTimeEntriesForm] =
+        useState(false);
+
+    const timeEntryFormModalState = useModalState();
+    const newTimeEntryFormModalState = useModalState();
 
     const timeEntriesColumns = [
         {
@@ -61,12 +69,34 @@ export const useTimeEntriesPageState = () => {
         }
     );
 
+    const [createTimeEntry, { loading: isSubmittingNewTimeEntry }] =
+        useMutation(CREATE_TIME_ENTRY, {
+            refetchQueries: [GET_TIME_ENTRIES_FOR_EMPLOYEE],
+        });
+
+    const handleSubmitNewTimeEntry = (timeEntry) => {
+        setIsLoadingTimeEntriesForm(true); // fix typo and add ;
+
+        createTimeEntry({
+            variables: { newTimeEntry: timeEntry },
+            onCompleted: () => {
+                setIsLoadingTimeEntriesForm(false); // moved inside onCompleted
+                newTimeEntryFormModalState.closeModal(); // moved inside onCompleted
+            },
+        });
+    };
+
     return {
+        newTimeEntryFormModalState,
+        isLoadingTimeEntries,
+        isLoadingTimeEntriesForm,
+        isSubmittingNewTimeEntry,
         translate,
         timeEntriesData,
         setTimeEntriesData,
+        handleSubmitNewTimeEntry,
         apolloClient,
-        isLoadingTimeEntries,
+        timeEntryFormModalState,
         timeEntriesColumns,
     };
 };
