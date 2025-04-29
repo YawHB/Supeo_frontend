@@ -1,10 +1,10 @@
 import { toast } from "react-toastify";
 
 /**
- * Show a toast with custom settings
- * @param {string} message - The message to show in the toast
- * @param {('info'|'success'|'error'|'warn')} type - Type of toast ('info', 'success', 'error', 'warn')
- * @param {object} [options={}] - Optional configuration for the toast
+ * 
+ * @param {string} message
+ * @param {('info'|'success'|'error'|'warn')} type
+ * @param {object} [options={}]
  */
 const showToast = (message, type = "info", options = {}) => {
   switch (type) {
@@ -12,6 +12,8 @@ const showToast = (message, type = "info", options = {}) => {
       toast.success(message, {
         position: "top-right",
         autoClose: 5000,
+        closeOnClick: true,
+        pauseOnHover: false,
         ...options,
       });
       break;
@@ -19,6 +21,8 @@ const showToast = (message, type = "info", options = {}) => {
       toast.error(message, {
         position: "top-right",
         autoClose: 5000,
+        closeOnClick: true,
+        pauseOnHover: false,
         ...options,
       });
       break;
@@ -26,6 +30,8 @@ const showToast = (message, type = "info", options = {}) => {
       toast.warn(message, {
         position: "top-right",
         autoClose: 5000,
+        closeOnClick: true,
+        pauseOnHover: false,
         ...options,
       });
       break;
@@ -34,6 +40,8 @@ const showToast = (message, type = "info", options = {}) => {
       toast.info(message, {
         position: "top-right",
         autoClose: 5000,
+        closeOnClick: true,
+        pauseOnHover: false,
         ...options,
       });
       break;

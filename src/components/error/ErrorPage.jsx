@@ -1,6 +1,3 @@
-const ErrorPage = () => {
-
- 
-};
+const ErrorPage = () => {};
 
 export default ErrorPage;

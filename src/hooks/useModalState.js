@@ -21,6 +21,5 @@ export const useModalState = (initialData = null) => {
     closeModal,
     setData,
     setIsOpen,
-    
   };
 };

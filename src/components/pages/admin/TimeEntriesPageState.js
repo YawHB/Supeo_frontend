@@ -1,6 +1,8 @@
-import { useTranslation } from "react-i18next";
-import { useQuery, useApolloClient, useMutation } from "@apollo/client";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import showToast from "../../lib/toast/toast.js";
+import exportTableData from "../../lib/export/exportTableData.js";
+import { useQuery, useApolloClient, useMutation } from "@apollo/client";
 import { GET_ALL_TIME_ENTRIES } from "../../../services/api/time-entry/queries.js";
 import { UPDATE_TIME_ENTRY_STATUS } from "../../../services/api/admin/mutations.js";
 
@@ -67,13 +69,43 @@ const useTimeEntriesPageState = () => {
     }
   };
 
+  const handleExportTable = () => {
+    const startMsg = translate("export_table.start");
+    showToast(startMsg, "info");
+
+    apolloClient
+      .query({ query: GET_ALL_TIME_ENTRIES, fetchPolicy: "network-only" })
+      .then((result) => {
+        const data = result.data?.timeEntries ?? [];
+        const today = new Date().toISOString().split("T")[0];
+        return exportTableData({
+          data,
+          filename: `${translate(`export_table.time_entries_overview`)} ${today}`,
+          columns: timeEntriesTableColumns.filter((col) => col.key !== "id"),
+          //columns: timeEntriesTableColumns,
+          strategy: "xlsx",
+        });
+      })
+      .then(
+        () => {
+          const successMsg = translate("export_table.success");
+          showToast(successMsg, "success");
+        },
+        () => {
+          const errorMsg = translate("export_table.error");
+          showToast(errorMsg, "error");
+        }
+      );
+  };
+
   return {
     translate,
+    timeEntries,
     apolloClient,
+    handleExportTable,
+    handleStatusChange,
     isLoadingTimeEntries,
     timeEntriesTableColumns,
-    handleStatusChange,
-    timeEntries,
   };
 };
 

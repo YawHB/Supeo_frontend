@@ -1,15 +1,15 @@
 import React from "react";
+import SideBar from "../../sidebar/SideBar";
 import { useTranslation } from "react-i18next";
-import useEmployeesPageState from "./EmployeesPageState";
+import EmployeeForm from "../../forms/EmployeeForm";
 import useSideBarState from "../../sidebar/SideBarState";
-import CreateEmployeeForm from "../../forms/CreateEmployeeForm";
+import useEmployeesPageState from "./EmployeesPageState";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faFileExcel } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus, faFileExcel, faSave } from "@fortawesome/free-solid-svg-icons";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, Table } from "reactstrap";
-import SideBar from "../../sidebar/Sidebar";
 
 const EmployeesPage = () => {
-  const [translate] = useTranslation("global");
+  const [translate] = useTranslation(`global`);
   const state = useEmployeesPageState();
   const sideBarState = useSideBarState();
 
@@ -33,7 +33,10 @@ const EmployeesPage = () => {
               <Button
                 color="primary"
                 outline
-                onClick={() => state.newEmployeeFormModalState.openModal({})}
+                onClick={() => {
+                  state.setEmployeeBeingEdited(null);
+                  state.newEmployeeFormModalState.openModal();
+                }}
                 className="no-wrap"
                 style={{ minWidth: "200px" }}
               >
@@ -44,15 +47,14 @@ const EmployeesPage = () => {
           </Col>
 
           {!state.isLoadingEmployees && (
-            <Table striped bordered hover responsive>
-              <thead className="table-light">
+            <Table responsive>
+              <thead>
                 <tr>
                   {state.employeesTableColumns.map((column) => (
                     <th key={column.key}>{column.label}</th>
                   ))}
                 </tr>
               </thead>
-
               <tbody>
                 {state.employees.length === 0 ? (
                   <tr>
@@ -82,33 +84,27 @@ const EmployeesPage = () => {
 
           <div className="d-flex justify-content-between">
             <div>
-              <Button
-                color="info"
-                outline
-                onClick={state.handleExportTable}
-                className="no-wrap me-3 mb-4"
-              >
+              <Button outline color="primary" onClick={state.handleExportTable}>
                 <FontAwesomeIcon icon={faFileExcel} className="me-2" />
-                <span>{translate(`admin.export`)}</span>
+                <span>{translate("export")}</span>
               </Button>
             </div>
           </div>
         </Col>
-        
       </Row>
 
       <Modal
+        size="lg"
+        returnFocusAfterClose={false}
         isOpen={state.newEmployeeFormModalState.isOpen}
         toggle={state.newEmployeeFormModalState.closeModal}
-        returnFocusAfterClose={false}
-        size="lg"
       >
         <ModalHeader toggle={state.newEmployeeFormModalState.closeModal}>
           {translate("admin.create_new_employee")}
         </ModalHeader>
 
         <ModalBody>
-          <CreateEmployeeForm
+          <EmployeeForm
             onSubmit={
               state.employeeBeingEdited?.id
                 ? state.handleSubmitEditedEmployee
@@ -126,6 +122,7 @@ const EmployeesPage = () => {
             form="newEmployeeForm"
             disabled={state.isSubmittingNewEmployee || state.isUpdatingEmployee}
           >
+            <FontAwesomeIcon icon={faSave} className="me-2" />
             {translate("create")}
           </Button>
 
@@ -139,19 +136,22 @@ const EmployeesPage = () => {
       </Modal>
 
       <Modal
+        size="lg"
+        returnFocusAfterClose={false}
         isOpen={state.employeeFormModalState.isOpen}
         toggle={state.employeeFormModalState.closeModal}
-        returnFocusAfterClose={false}
-        size="lg"
       >
         <ModalHeader toggle={state.employeeFormModalState.closeModal}>
-          {translate("admin.update_employee")}
+          {translate("admin.edit_employee", {
+            firstName: state.employeeBeingEdited?.firstName ?? "",
+            lastName: state.employeeBeingEdited?.lastName ?? "",
+          })}
         </ModalHeader>
 
         <ModalBody>
-          <CreateEmployeeForm
-            onSubmit={state.handleSubmitEditedEmployee}
+          <EmployeeForm
             employee={state.employeeBeingEdited}
+            onSubmit={state.handleSubmitEditedEmployee}
           />
         </ModalBody>
 
@@ -162,7 +162,8 @@ const EmployeesPage = () => {
             form="newEmployeeForm"
             disabled={state.isLoadingEmployeesForm}
           >
-            {translate("update")}
+            <FontAwesomeIcon icon={faSave} className="me-2" />
+            {translate("save")}
           </Button>
 
           <Button

@@ -1,6 +1,6 @@
 import { useInput } from "../../hooks/useInput";
 
-const useCreateEmployeeFormState = (employee) => {
+const useEmployeeFormState = (employee) => {
   const input = {
     id: useInput(employee?.id ?? null),
     firstName: useInput(employee?.firstName ?? ""),
@@ -15,4 +15,4 @@ const useCreateEmployeeFormState = (employee) => {
   };
 };
 
-export default useCreateEmployeeFormState;
+export default useEmployeeFormState;

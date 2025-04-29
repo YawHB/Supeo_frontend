@@ -1,24 +1,25 @@
 import { useState } from "react";
-import { useQuery, useMutation, useApolloClient } from "@apollo/client";
-import { useTranslation } from "react-i18next";
-import { GET_ALL_EMPLOYEES } from "../../../services/api/admin/queries.js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "reactstrap";
+import { useTranslation } from "react-i18next";
+import showToast from "../../lib/toast/toast.js";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { useModalState } from "../../../hooks/useModalState.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import exportTableData from "../../lib/export/exportTableData.js";
+import { useQuery, useMutation, useApolloClient } from "@apollo/client";
+import { GET_ALL_EMPLOYEES } from "../../../services/api/admin/queries.js";
 import {
   CREATE_EMPLOYEE,
   UPDATE_EMPLOYEE,
 } from "../../../services/api/admin/mutations.js";
-import { useModalState } from "../../../hooks/useModalState.js";
-import showToast from "../../lib/toast.js";
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient();
   const [translate] = useTranslation("global");
 
   const [employees, setEmployees] = useState([]);
-  const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false);
   const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null);
+  const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false);
 
   const employeeFormModalState = useModalState();
   const newEmployeeFormModalState = useModalState();
@@ -41,8 +42,8 @@ const useEmployeesPageState = () => {
     { key: "email", label: translate("email"), type: "text", sort: true },
     { key: "phoneNumber", label: translate("phone"), type: "text", sort: true },
     {
-      key: " ",
-      label: " ",
+      key: "",
+      label: "",
       type: `view`,
       alwaysEnabled: true,
       view: (employee) => (
@@ -60,7 +61,7 @@ const useEmployeesPageState = () => {
     },
   ];
 
-  const { loading: isLoadingEmployees } = useQuery(GET_ALL_EMPLOYEES, {
+  const { loading: isLoadingEmployees, refetch } = useQuery(GET_ALL_EMPLOYEES, {
     fetchPolicy: "cache-and-network",
     onCompleted: (data) => setEmployees(data.employees),
   });
@@ -80,73 +81,105 @@ const useEmployeesPageState = () => {
     createEmployee({
       variables: { newEmployee: employee },
       onCompleted: (data) => {
-        showToast(translate("notification.employee.create.success"), {
-          name: employee.firstName,
-        }),
-          {
-            type: "success",
-          };
+        const successMsg = translate("notification.employee.create.success", {
+          firstName: employee.firstName,
+          lastName: employee.lastName,
+        });
+        showToast(successMsg, "success");
         setEmployees((prev) => [...prev, data.createEmployee]);
         setIsLoadingEmployeesForm(false);
         newEmployeeFormModalState.closeModal();
       },
       onError: () => {
-        showToast(translate("notification.employee.create.error"), {
-          type: "error",
+        const errorMsg = translate("notification.employee.create.error", {
+          firstName: employee.firstName,
+          lastName: employee.lastName,
         });
+        showToast(translate(errorMsg), "error");
+        setIsLoadingEmployeesForm(false);
       },
     });
   };
 
   const handleSubmitEditedEmployee = (updatedEmployee) => {
-  // const isUnchanged =
-  //   updatedEmployee.firstName === employeeBeingEdited.firstName &&
-  //   updatedEmployee.lastName === employeeBeingEdited.lastName &&
-  //   updatedEmployee.email === employeeBeingEdited.email &&
-  //   updatedEmployee.phoneNumber === employeeBeingEdited.phoneNumber &&
-  //   updatedEmployee.role === employeeBeingEdited.role;
+    setIsLoadingEmployeesForm(true);
+    updateEmployee({
+      variables: {
+        updateEmployeeId: employeeBeingEdited.id,
+        updatedEmployee,
+      },
+      onCompleted: () => {
+        const successMsg = translate("notification.employee.update.success", {
+          firstName: updatedEmployee.firstName,
+          lastName: updatedEmployee.lastName,
+        });
 
-  // if (isUnchanged) {
-  //   employeeFormModalState.closeModal();
-  //   return;
-  // }
+        refetch().then((result) => {
+          setEmployees(result.data.employees);
+        });
 
-  setIsLoadingEmployeesForm(true);
+        showToast(successMsg, "success");
+        setIsLoadingEmployeesForm(false);
+        setEmployeeBeingEdited(null);
+        employeeFormModalState.closeModal();
+      },
+      onError: () => {
+        const errorMsg = translate("notification.employee.update.error", {
+          firstName: updatedEmployee.firstName,
+          lastName: updatedEmployee.lastName,
+        });
+        showToast(errorMsg, "error");
+        setIsLoadingEmployeesForm(false);
+      },
+    });
+  };
 
-  updateEmployee({
-    variables: {
-      updateEmployeeId: employeeBeingEdited.id,
-      updatedEmployee,
-    },
-    onCompleted: () => {
-      setIsLoadingEmployeesForm(false);
-      setEmployeeBeingEdited(null);
-      employeeFormModalState.closeModal();
-    },
-    onError: () => {
-      setIsLoadingEmployeesForm(false);
-    },
-  });
-};
+  const handleExportTable = () => {
+    const startMsg = translate("export_table.start");
+    showToast(startMsg, "info");
+    apolloClient.query({ query: GET_ALL_EMPLOYEES, fetchPolicy: "network-only" })
+      .then((result) => {
+        const data = result.data?.employees ?? [];
+        const today = new Date().toISOString().split("T")[0];
+        return exportTableData({
+          data,
+          filename: `${translate(`export_table.employees_overview`)} ${today}`,
+          columns: employeesTableColumns.filter((col) => col.key !== "id" && col.key !== ""),
+          //columns: employeesTableColumns,
+          strategy: "xlsx",
+        });
+      })
+      .then(
+        () => {
+          const successMsg = translate("export_table.success");
+          showToast(successMsg, "success");
+        },
+        () => {
+          const errorMsg = translate("export_table.error");
+          showToast(errorMsg, "error");
+        }
+      );
+  };
 
   return {
+    employees,
     translate,
     apolloClient,
-    isLoadingEmployees,
-    employeesTableColumns,
-    employeeFormModalState,
-    newEmployeeFormModalState,
-    handleSubmitNewEmployee,
-    employees,
-    handleSubmitEditedEmployee,
     createEmployee,
-    isSubmittingNewEmployee,
     updateEmployee,
+    handleExportTable,
+    isLoadingEmployees,
     isUpdatingEmployee,
     employeeBeingEdited,
-    setEmployeeBeingEdited,
+    employeesTableColumns,
+    employeeFormModalState,
     isLoadingEmployeesForm,
+    setEmployeeBeingEdited,
+    handleSubmitNewEmployee,
+    isSubmittingNewEmployee,
     setIsLoadingEmployeesForm,
+    newEmployeeFormModalState,
+    handleSubmitEditedEmployee,
   };
 };
 

@@ -24,15 +24,22 @@
   "pending": "Pending",
   "approve": "Approve",
   "reject": "Reject",
+  "export": "Export",
+  "edit": "Edit",
+  "save": "Save",
   "page_title": {
     "administration_time_entries": "Administration - Time Entries",
     "administration_employees": "Administration - Employees",
     "employee_home": "Employee - Home",
-    "admin_home": "Admin - Home"
+    "admin_home": "Admin - Home",
+    "admin_label": "Admin"
   },
   "nav_bar": {
+    "admin_time_entries": "Time Entries",
+    "admin_employees": "Employees",
     "employee_home": "Employee - Home",
-    "admin_time_entries": "Time Entries"
+    "admin_home": "Admin - Home",
+    "admin_label": "Admin"
   },
   "side_bar": {
     "admin_home": "Admin - Home",
@@ -54,10 +61,10 @@
     "admin_employees": "Admin - Employees",
     "create_employee": "Create employee",
     "update_employee": "Update employee",
+    "edit_employee": "Edit '{{firstName}} {{lastName}}'",
     "delete_employee": "Delete employee",
     "search_employee": "Search for employee",
-    "create_new_employee": "Create new employee",
-    "export": "Export"
+    "create_new_employee": "Create new employee"
   },
   "no_data": "No data",
   "minimize": "Minimize",
@@ -69,13 +76,20 @@
   "notification": {
     "employee": {
       "create": {
-        "success": "Employee created",
-        "error": "Error creating employee"
+        "success": "Employee '{{firstName}} {{lastName}}' was created",
+        "error": "Error creating employee '{{firstName}} {{lastName}}'"
       },
       "update": {
-        "success": "Employee updated",
-        "error": "Error updating employee"
+        "success": "Employee '{{firstName}} {{lastName}}' was updated",
+        "error": "Error updating employee '{{firstName}} {{lastName}}'"
       }
     }
+  },
+  "export_table": {
+    "start": "Export started",
+    "success": "Export successful",
+    "error": "Error exporting",
+    "employees_overview": "Employees Overview",
+    "time_entries_overview": "Time Entries Overview"
   }
 }

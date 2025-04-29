@@ -1,18 +1,20 @@
-import ErrorBoundary from "./components/error/ErrorBoundary.jsx";
 import PageLayout from "../PageLayout.jsx";
 import { Routes, Route } from "react-router-dom";
+import ErrorBoundary from "./components/error/ErrorBoundary.jsx";
 import AdminHomePage from "./components/pages/admin/AdminHomePage.jsx";
 import EmployeesPage from "./components/pages/admin/EmployeesPage.jsx";
-import EmployeeHomePage from "./components/pages/employee/home/EmployeeHomePage.jsx";
 import TimeEntriesPage from "./components/pages/admin/TimeEntriesPage.jsx";
+import EmployeeHomePage from "./components/pages/employee/home/EmployeeHomePage.jsx";
 import { EmployeeTimeEntriesPage } from "./components/pages/employee/time-entries/TimeEntriesPage.jsx";
 
 function App() {
   return (
     <ErrorBoundary>
       <Routes>
-        <Route path="/" element={<PageLayout />}>
-          <Route index element={<TimeEntriesPage />} />
+        <Route element={<PageLayout />}>
+          <Route index element={<EmployeesPage />} />
+          <Route path="*" element={<EmployeesPage />} />
+          <Route path="/" element={<EmployeesPage />} />
           <Route path="admin" element={<AdminHomePage />} />
           <Route path="employee" element={<EmployeeHomePage />} />
           <Route path="employee/time-entries" element={<EmployeeTimeEntriesPage />} />

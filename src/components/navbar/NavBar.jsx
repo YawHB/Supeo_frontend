@@ -13,63 +13,62 @@ import { Link } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 import useNavBarState from "./NavBarState";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowsLeftRightToLine } from "@fortawesome/free-solid-svg-icons";
+import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
   const {
-    isBurgerCollapsed,
-    toggleBurgerCollapsed,
+    logOff,
     navItems,
     userFullName,
-    logOff,
+    isBurgerCollapsed,
+    toggleBurgerCollapsed,
   } = useNavBarState();
 
   return (
     <>
-      <Navbar dark expand="md" className="bg-dark">
+      <Navbar dark expand="md" className="bg-sidebar">
         <NavbarBrand tag={Link} to="/">
           <Logo
+            text="Timeregistrering"
             className="px-3"
-            text="flex"
-            logoColor="#E0FDAD"
-            textColor="#FCFFFF"
+            logoColor="#E6FBB5"
+            textColor="#F8F9FA"
             imgStyle={{ height: `1.75rem` }}
             textStyle={{ fontSize: `2rem`, fontWeight: `600` }}
           />
         </NavbarBrand>
-      </Navbar>
-      <NavbarToggler onClick={toggleBurgerCollapsed} className="me-3" />
-      <Collapse isOpen={!isBurgerCollapsed} navbar>
-        <div className="w-100 d-flex justify-content-md-end justify-content-center">
-          <Nav
-            navbar
-            className="flex-column align-items-center flex-md-row gap-3"
-          >
-            {navItems.map((item) => (
-              <Fragment key={item.label}>
-                <NavItem>
-                  <NavLink tag={Link} to={item.link} className="text-light">
-                    <FontAwesomeIcon icon={item.icon} size="xl" />
-                  </NavLink>
-                </NavItem>
-              </Fragment>
-            ))}
-            <NavItem
-              className="d-none d-md-block mx-2 bg -light"
-              style={{ width: "1px", height: "24px" }}
-            />
-
-            <Button onClick={logOff} color="default" className="text-light">
-              <FontAwesomeIcon
-                icon={faArrowsLeftRightToLine}
-                className="icon pe-2"
-                size="xl"
+        <NavbarToggler onClick={toggleBurgerCollapsed} className="me-3" />
+        <Collapse isOpen={!isBurgerCollapsed} navbar>
+          <div className="w-100 d-flex justify-content-md-end justify-content-center">
+            <Nav
+              navbar
+              className="flex-column align-items-center flex-md-row gap-3"
+            >
+              {navItems.map((item) => (
+                <Fragment key={item.label}>
+                  <NavItem>
+                    <NavLink tag={Link} to={item.link} className="text-light">
+                      <FontAwesomeIcon icon={item.icon} size="xl" />
+                    </NavLink>
+                  </NavItem>
+                </Fragment>
+              ))}
+              <NavItem
+                className="d-none d-md-block mx-2 bg-light"
+                style={{ width: "1px", height: "24px" }}
               />
-              <span>{userFullName}</span>
-            </Button>
-          </Nav>
-        </div>
-      </Collapse>
+              <Button onClick={logOff} color="default" className="text-light">
+                <FontAwesomeIcon
+                  size="xl"
+                  className="icon pe-2"
+                  icon={faSignOut}
+                />
+                <span>{userFullName}</span>
+              </Button>
+            </Nav>
+          </div>
+        </Collapse>
+      </Navbar>
     </>
   );
 };

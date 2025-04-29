@@ -1,5 +1,5 @@
+import SideBar from "../../sidebar/SideBar";
 import { useTranslation } from "react-i18next";
-import SideBar from "../../sidebar/Sidebar";
 import useSideBarState from "../../sidebar/SideBarState";
 
 const AdminHomePage = () => {

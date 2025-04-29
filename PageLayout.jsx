@@ -1,12 +1,8 @@
-import NavBar from "./src/components/navbar/NavBar.jsx";
-import SideBar from "./src/components/sidebar/Sidebar.jsx";
-import { Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useState } from "react";
-
-// export function PageLayout({ children }) {
-//     return <main>{children}</main>;
-// }
+import { useSelector } from "react-redux";
+import { Outlet } from "react-router-dom";
+import NavBar from "./src/components/navbar/NavBar.jsx";
+import SideBar from "./src/components/sidebar/SideBar.jsx";
 
 const PageLayout = () => {
   const navItems = useSelector((state) => state.user.topNavItems);

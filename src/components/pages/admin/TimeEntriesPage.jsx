@@ -1,9 +1,17 @@
 import React from "react";
-import { Row, Col, Table } from "reactstrap";
+import SideBar from "../../sidebar/SideBar";
+import { Row, Col, Table, Button } from "reactstrap";
 import { useTranslation } from "react-i18next";
-import useTimeEntriesPageState from "./TimeEntriesPageState";
 import useSideBarState from "../../sidebar/SideBarState";
-import SideBar from "../../sidebar/Sidebar";
+import useTimeEntriesPageState from "./TimeEntriesPageState";
+import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const statusClassMap = {
+  PENDING: "status-select--pending",
+  GODKENDT: "status-select--godkendt",
+  AFVIST: "status-select--afvist",
+};
 
 const TimeEntriesPage = () => {
   const [translate] = useTranslation("global");
@@ -30,8 +38,8 @@ const TimeEntriesPage = () => {
           </Col>
 
           {!state.isLoadingTimeEntries && (
-            <Table striped bordered hover responsive>
-              <thead className="table-light">
+            <Table responsive>
+              <thead>
                 <tr>
                   {state.timeEntriesTableColumns.map((column) => (
                     <th key={column.key}>{column.label}</th>
@@ -56,8 +64,10 @@ const TimeEntriesPage = () => {
                         <td key={column.key}>
                           {column.key === "status" ? (
                             <select
-                              className="form-select"
-                              value={timeEntry[column.key]}
+                              className={`form-select ${
+                                statusClassMap[timeEntry.status] || ""
+                              }`}
+                              value={timeEntry.status}
                               onChange={(e) =>
                                 state.handleStatusChange(
                                   timeEntry.id,
@@ -82,6 +92,18 @@ const TimeEntriesPage = () => {
               </tbody>
             </Table>
           )}
+          <div className="d-flex justify-content-between">
+            <div>
+              <Button
+                outline
+                color="primary"
+                onClick={state.handleExportTable}
+              >
+                <FontAwesomeIcon icon={faFileExcel} className="me-2" />
+                <span>{translate("export")}</span>
+              </Button>
+            </div>
+          </div>
         </Col>
       </Row>
     </>

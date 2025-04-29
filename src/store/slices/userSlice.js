@@ -8,14 +8,14 @@ const initialState = {
     {
       icon: faUser,
       link: "/",
-      label: `nav_bar.users_label`,
+      label: "nav_bar.admin_home",
       description: "user_description",
     },
   ],
 };
 
 const userSlice = createSlice({
-  name: `user`,
+  name: "user",
   initialState,
   reducers: {
     setTopNavItems: (state, action) => {

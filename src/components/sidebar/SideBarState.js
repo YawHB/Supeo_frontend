@@ -2,11 +2,10 @@ import { useQuery } from "@apollo/client";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { sideBarItemsMap } from "./SideBarItems";
 import { useCallback, useEffect, useState } from "react";
 import { USER_MENU_LINKS } from "../../services/api/queries";
 import { standardApolloError } from "../lib/error-handling/errorHandling";
-
-import { sideBarItemsMap } from "./SideBarItems";
 
 const useSideBarState = () => {
   const location = useLocation();
@@ -29,7 +28,7 @@ const useSideBarState = () => {
         setUserMenuLinks([]);
       }
 
-      const menuItems = response.userMenuLinks.map((link) => link.menuItem);
+      const menuItems = response.userMenuLinks.map(link => link.menuItem);
       setUserMenuLinks(menuItems);
     },
     onError: (error) =>
@@ -40,9 +39,8 @@ const useSideBarState = () => {
     setIsSideBarCollapsed(!isSideBarCollapsed);
   };
 
-  const isActiveFunction = useCallback(
-    (item) => {
-      return item.isActiveFunction === location.pathname;
+  const isActiveFunction = useCallback((item) => {
+      return item.activeLocation === location.pathname;
     },
     [sideBarItems, location]
   );
@@ -53,11 +51,18 @@ const useSideBarState = () => {
     } else {
       setShowUserMenuLinks(false);
     }
-    setSystemMenuLinks(["admin", "timeentries", "employees", "employee", "employee_time_entries"]);
+    setSystemMenuLinks([
+      "admin",
+      "timeentries",
+      "employees",
+      "employee",
+      "employee_time_entries",
+    ]);
   }, [location]);
-
+  
   useEffect(() => {
     const newSideBarItems = [];
+
     for (const systemMenuLink of systemMenuLinks) {
       const sideBarItem = sideBarItemsMap.get(systemMenuLink);
 

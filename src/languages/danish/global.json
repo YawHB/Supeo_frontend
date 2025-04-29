@@ -22,19 +22,24 @@
   "comment": "Kommentar",
   "status": "Status",
   "pending": "Afventer",
-  "approve": "Godkend",
-  "reject": "Afvis",
+  "approve": "Godkendt",
+  "reject": "Afvist",
+  "export": "Eksporter",
+  "edit": "Rediger",
+  "save": "Gem",
   "page_title": {
     "administration_time_entries": "Administration - Tidsregistreringer",
     "administration_employees": "Administration - Medarbejdere",
     "employee_home": "Medarbejder - Hjem",
-    "admin_home": "Admin - Hjem"
+    "admin_home": "Admin - Hjem",
+    "admin_label": "Admin"
   },
   "nav_bar": {
     "admin_time_entries": "Tidsregistreringer",
     "admin_employees": "Medarbejdere",
     "employee_home": "Medarbejder - Hjem",
-    "admin_home": "Admin - Hjem"
+    "admin_home": "Admin - Hjem",
+    "admin_label": "Admin"
   },
   "side_bar": {
     "admin_home": "Admin - Hjem",
@@ -56,10 +61,10 @@
     "admin_employees": "Admin - Medarbejdere",
     "create_employee": "Opret medarbejder",
     "update_employee": "Opdater medarbejder",
+    "edit_employee": "Rediger '{{firstName}} {{lastName}}'",
     "delete_employee": "Slet medarbejder",
     "search_employee": "Søg efter medarbejder",
-    "create_new_employee": "Opret ny medarbejder",
-    "export": "Eksporter"
+    "create_new_employee": "Opret ny medarbejder"
   },
   "no_data": "Ingen data",
   "minimize": "Minimer",
@@ -71,13 +76,20 @@
   "notification": {
     "employee": {
       "create": {
-        "success": "Medarbejder oprettet",
-        "error": "Fejl ved oprettelse af medarbejder"
+        "success": "Medarbejder '{{firstName}} {{lastName}}' blev oprettet",
+        "error": "Fejl ved oprettelse af medarbejder '{{firstName}} {{lastName}}'"
       },
       "update": {
-        "success": "Medarbejder opdateret",
-        "error": "Fejl ved opdatering af medarbejder"
+        "success": "Medarbejder '{{firstName}} {{lastName}}' blev opdateret",
+        "error": "Fejl ved opdatering af medarbejder '{{firstName}} {{lastName}}'"
       }
     }
+  },
+  "export_table": {
+    "start": "Eksportering påbegyndt",
+    "success": "Eksportering gennemført",
+    "error": "Eksportering mislykkedes",
+    "employees_overview": "Medarbejderoversigt",
+    "time_entries_overview": "Tidsregistreringsoversigt"
   }
 }

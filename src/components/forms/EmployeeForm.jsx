@@ -1,11 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { Form, Row, Col, Input, Label, FormGroup, Button } from "reactstrap";
-import useEmployeeFormState from "./CreateEmployeeFormState";
+import useEmployeeFormState from "./EmployeeFormState";
+import { Form, Row, Col, Input, Label, FormGroup } from "reactstrap";
 
-const CreateEmployeeForm = ({
-  onSubmit,
-  employee = null,
-}) => {
+const EmployeeForm = ({ onSubmit, employee = null }) => {
   const [translate] = useTranslation("global");
   const { input } = useEmployeeFormState(employee);
 
@@ -25,7 +22,10 @@ const CreateEmployeeForm = ({
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label for="firstName">{translate("first_name")}</Label>
+            <Label for="firstName">
+              {translate("first_name")}
+              <span className="text-danger">*</span>
+            </Label>
             <Input
               id="firstName"
               name="firstName"
@@ -40,7 +40,10 @@ const CreateEmployeeForm = ({
 
         <Col md={6}>
           <FormGroup>
-            <Label for="lastName">{translate("last_name")}</Label>
+            <Label for="lastName">
+              {translate("last_name")}
+              <span className="text-danger">*</span>
+            </Label>
             <Input
               id="lastName"
               name="lastName"
@@ -57,22 +60,27 @@ const CreateEmployeeForm = ({
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label for="email">{translate("email")}</Label>
+            <Label for="role">
+              {translate("role")}
+              <span className="text-danger">*</span>
+            </Label>
             <Input
-              id="email"
-              name="email"
-              placeholder={translate("email_placeholder")}
-              type="email"
-              value={input.email.value}
-              onChange={input.email.onChange}
+              id="role"
+              name="role"
+              placeholder={translate("role_placeholder")}
+              type="text"
+              value={input.role.value}
+              onChange={input.role.onChange}
               required
             />
           </FormGroup>
         </Col>
-
         <Col md={6}>
           <FormGroup>
-            <Label for="phoneNumber">{translate("phone")}</Label>
+            <Label for="phoneNumber">
+              {translate("phone")}
+              <span className="text-danger">*</span>
+            </Label>
             <Input
               id="phoneNumber"
               name="phoneNumber"
@@ -89,14 +97,17 @@ const CreateEmployeeForm = ({
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label for="role">{translate("role")}</Label>
+            <Label for="email">
+              {translate("email")}
+              <span className="text-danger">*</span>
+            </Label>
             <Input
-              id="role"
-              name="role"
-              placeholder={translate("role_placeholder")}
-              type="text"
-              value={input.role.value}
-              onChange={input.role.onChange}
+              id="email"
+              name="email"
+              placeholder={translate("email_placeholder")}
+              type="email"
+              value={input.email.value}
+              onChange={input.email.onChange}
               required
             />
           </FormGroup>
@@ -106,4 +117,4 @@ const CreateEmployeeForm = ({
   );
 };
 
-export default CreateEmployeeForm;
+export default EmployeeForm;
