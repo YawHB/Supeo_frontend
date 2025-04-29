@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { useCallback, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-
 const useNavBarState = () => {
   const navigate = useNavigate();
   const location = useLocation();
