@@ -6,7 +6,18 @@ import useSideBarState from "../../sidebar/SideBarState";
 import useEmployeesPageState from "./EmployeesPageState";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faFileExcel, faSave } from "@fortawesome/free-solid-svg-icons";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, Table } from "reactstrap";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Row,
+  Col,
+  Table,
+  Input,
+} from "reactstrap";
+import Select from "react-select";
 
 const EmployeesPage = () => {
   const [translate] = useTranslation(`global`);
@@ -30,6 +41,19 @@ const EmployeesPage = () => {
           <Col xs={12} className="d-flex justify-content-between gap-4">
             <h1>{translate("employees")}</h1>
             <div className="d-flex align-items-center gap-4">
+              <Select
+                isinline="true"
+                styles={{ minWidth: "200px" }}
+                state={state.employeeRolesFilterInput}
+                options={state.employeeRoleOptions ?? []}
+                placeholder={translate("admin.select_employee_role")}
+              />
+              <Input
+                isinline="true"
+                styles={{ minWidth: "200px" }}
+                state={state.searchInput}
+                placeholder={translate("admin.search_employee")}
+              />
               <Button
                 color="primary"
                 outline
@@ -58,10 +82,7 @@ const EmployeesPage = () => {
               <tbody>
                 {state.employees.length === 0 ? (
                   <tr>
-                    <td
-                      colSpan={state.employeesTableColumns.length}
-                      className="text-center"
-                    >
+                    <td colSpan={state.employeesTableColumns.length} className="text-center">
                       {translate("no_data")}
                     </td>
                   </tr>
@@ -70,9 +91,7 @@ const EmployeesPage = () => {
                     <tr key={employee.id}>
                       {state.employeesTableColumns.map((column) => (
                         <td key={column.key}>
-                          {column.type === "view"
-                            ? column.view(employee)
-                            : employee[column.key]}
+                          {column.type === "view" ? column.view(employee) : employee[column.key]}
                         </td>
                       ))}
                     </tr>
@@ -126,10 +145,7 @@ const EmployeesPage = () => {
             {translate("create")}
           </Button>
 
-          <Button
-            color="secondary"
-            onClick={state.newEmployeeFormModalState.closeModal}
-          >
+          <Button color="secondary" onClick={state.newEmployeeFormModalState.closeModal}>
             {translate("cancel")}
           </Button>
         </ModalFooter>
@@ -166,10 +182,7 @@ const EmployeesPage = () => {
             {translate("save")}
           </Button>
 
-          <Button
-            color="secondary"
-            onClick={state.employeeFormModalState.closeModal}
-          >
+          <Button color="secondary" onClick={state.employeeFormModalState.closeModal}>
             {translate("cancel")}
           </Button>
         </ModalFooter>

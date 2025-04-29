@@ -64,6 +64,7 @@
     "edit_employee": "Rediger '{{firstName}} {{lastName}}'",
     "delete_employee": "Slet medarbejder",
     "search_employee": "Søg efter medarbejder",
+    "select_employee_role": "Vælg medarbejderrolle",
     "create_new_employee": "Opret ny medarbejder"
   },
   "no_data": "Ingen data",

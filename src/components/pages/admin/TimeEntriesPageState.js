@@ -14,28 +14,13 @@ const useTimeEntriesPageState = () => {
 
   const timeEntriesTableColumns = [
     { key: "id", label: translate("id"), type: "text", sort: true },
-    {
-      key: "firstName",
-      label: translate("first_name"),
-      type: "text",
-      sort: true,
-    },
-    {
-      key: "lastName",
-      label: translate("last_name"),
-      type: "text",
-      sort: true,
-    },
-    {
-      key: "startTime",
-      label: translate("start_time"),
-      type: "text",
-      sort: true,
-    },
+    { key: "firstName", label: translate("first_name"), type: "text", sort: true },
+    { key: "lastName", label: translate("last_name"), type: "text", sort: true },
+    { key: "date", label: translate("date"), type: "date", sort: true },
+    { key: "startTime", label: translate("start_time"), type: "text", sort: true },
     { key: "endTime", label: translate("end_time"), type: "text", sort: true },
     { key: "duration", label: translate("duration"), type: "text", sort: true },
     { key: "comment", label: translate("comment"), type: "text", sort: true },
-    { key: "date", label: translate("date"), type: "date", sort: true },
     {
       key: "status",
       label: translate("status"),

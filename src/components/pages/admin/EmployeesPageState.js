@@ -8,39 +8,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import exportTableData from "../../lib/export/exportTableData.js";
 import { useQuery, useMutation, useApolloClient } from "@apollo/client";
 import { GET_ALL_EMPLOYEES } from "../../../services/api/admin/queries.js";
-import {
-  CREATE_EMPLOYEE,
-  UPDATE_EMPLOYEE,
-} from "../../../services/api/admin/mutations.js";
+import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from "../../../services/api/admin/mutations.js";
+import { useInput } from "../../../hooks/useInput.js";
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient();
   const [translate] = useTranslation("global");
+  //const searchInput = useDebouncedInput(" ");
+
+  const employeeRolesFilterInput = useInput([]);
 
   const [employees, setEmployees] = useState([]);
   const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null);
   const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false);
+
+  const [orderBy, setOrderBy] = useState("id");
+  const [orderDirection, setOrderDirection] = useState("ASC");
 
   const employeeFormModalState = useModalState();
   const newEmployeeFormModalState = useModalState();
 
   const employeesTableColumns = [
     { key: "id", label: translate("id"), type: "text", sort: true },
-    {
-      key: "firstName",
-      label: translate("first_name"),
-      type: "text",
-      sort: true,
-    },
-    {
-      key: "lastName",
-      label: translate("last_name"),
-      type: "text",
-      sort: true,
-    },
+    { key: "firstName", label: translate("first_name"), type: "text", sort: true },
+    { key: "lastName", label: translate("last_name"), type: "text", sort: true },
     { key: "role", label: translate("role"), type: "text", sort: true },
-    { key: "email", label: translate("email"), type: "text", sort: true },
     { key: "phoneNumber", label: translate("phone"), type: "text", sort: true },
+    { key: "email", label: translate("email"), type: "text", sort: true },
     {
       key: "",
       label: "",
@@ -66,15 +60,29 @@ const useEmployeesPageState = () => {
     onCompleted: (data) => setEmployees(data.employees),
   });
 
-  const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(
-    CREATE_EMPLOYEE,
-    {
-      refetchQueries: [GET_ALL_EMPLOYEES],
-    }
-  );
+  const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(CREATE_EMPLOYEE, {
+    refetchQueries: [GET_ALL_EMPLOYEES],
+  });
+  
+  const [updateEmployee, { loading: isUpdatingEmployee }] = useMutation(UPDATE_EMPLOYEE);
 
-  const [updateEmployee, { loading: isUpdatingEmployee }] =
-    useMutation(UPDATE_EMPLOYEE);
+  // const { loading: isLoadingEmployees, data: employeesData, variables: employeesVariables} = useQuery(GET_ALL_EMPLOYEES, {
+  //   variables: {
+  //     orderBy,
+  //     order: orderDirection,
+  //     pagination: pagination.requestArgs,
+  //     searchString: searchInput?.debouncedValue ?? null,
+  //     employeeRole: employeeRolesFilterInput.value?.map((option) => option.value),
+  //   },
+  // });
+
+  // const { loading: isLoadingEmployeeRoleOptions, data: employeeRolesData } = useQuery(EMPLOYEE_ROLES);
+  // const employeeRoleOptions = useQueryData(employeeRolesData, data => {
+  //   return data?.employeeRoles.map(
+  //     employeeRoles => ({label: employeeRoles.name, value: employeeRoles.id}),
+  //   );
+  // });
+
 
   const handleSubmitNewEmployee = (employee) => {
     setIsLoadingEmployeesForm(true);
@@ -137,7 +145,8 @@ const useEmployeesPageState = () => {
   const handleExportTable = () => {
     const startMsg = translate("export_table.start");
     showToast(startMsg, "info");
-    apolloClient.query({ query: GET_ALL_EMPLOYEES, fetchPolicy: "network-only" })
+    apolloClient
+      .query({ query: GET_ALL_EMPLOYEES, fetchPolicy: "network-only" })
       .then((result) => {
         const data = result.data?.employees ?? [];
         const today = new Date().toISOString().split("T")[0];
@@ -162,6 +171,9 @@ const useEmployeesPageState = () => {
   };
 
   return {
+    employeeRolesFilterInput,
+    // employeeRoleOptions,
+    // isLoadingEmployeeRoleOptions,
     employees,
     translate,
     apolloClient,
@@ -180,6 +192,11 @@ const useEmployeesPageState = () => {
     setIsLoadingEmployeesForm,
     newEmployeeFormModalState,
     handleSubmitEditedEmployee,
+    setEmployees,
+    setOrderBy,
+    setOrderDirection,
+    orderBy,
+    orderDirection,
   };
 };
 
