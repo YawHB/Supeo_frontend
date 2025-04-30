@@ -13,6 +13,26 @@ export const GET_ALL_EMPLOYEES = gql`
   }
 `;
 
+// export const GET_EMPLOYEES = gql`
+//   query GetEmployees($pagination: PaginationInput!) {
+//     employees(pagination: $pagination) {
+//       pagination {
+//         page
+//         perPage
+//         totalCount
+//       }
+//       items {
+//         id
+//         firstName
+//         lastName
+//         role
+//         email
+//         phoneNumber
+//       }
+//     }
+//   }
+// `;
+
 export const GET_EMPLOYEE = gql`
   query Employee($employeeId: ID!) {
     employee(id: $employeeId) {

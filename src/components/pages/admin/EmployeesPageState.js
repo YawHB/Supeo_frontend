@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import showToast from "../../lib/toast/toast.js";
-import { useInput } from "../../../hooks/useInput.js";
+//import { useInput } from "../../../hooks/useInput.js";
 import usePagination from "../../../hooks/usePagination.js";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { useModalState } from "../../../hooks/useModalState.js";
@@ -16,8 +16,8 @@ const useEmployeesPageState = () => {
   const apolloClient = useApolloClient();
   const [translate] = useTranslation("global");
   //const searchInput = useDebouncedInput(" ");
-  const [orderBy, setOrderBy] = useState("id");
-  const employeeRolesFilterInput = useInput([]);
+  //const [orderBy, setOrderBy] = useState("id");
+  //const employeeRolesFilterInput = useInput([]);
   const [employees, setEmployees] = useState([]);
   const employeeFormModalState = useModalState();
   const newEmployeeFormModalState = useModalState();
@@ -66,11 +66,7 @@ const useEmployeesPageState = () => {
 
   // const { loading: isLoadingEmployees, data: employeesData, variables: employeesVariables} = useQuery(GET_ALL_EMPLOYEES, {
   //   variables: {
-  //     orderBy,
-  //     order: orderDirection,
   //     pagination: pagination.requestArgs,
-  //     searchString: searchInput?.debouncedValue ?? null,
-  //     employeeRole: employeeRolesFilterInput.value?.map((option) => option.value),
   //   },
   // });
 
@@ -168,11 +164,11 @@ const useEmployeesPageState = () => {
   };
 
   return {
-    orderBy,
+    //orderBy,
     employees,
     translate,
     pagination,
-    setOrderBy,
+    //setOrderBy,
     setEmployees,
     apolloClient,
     orderDirection,
@@ -190,7 +186,7 @@ const useEmployeesPageState = () => {
     setEmployeeBeingEdited,
     handleSubmitNewEmployee,
     isSubmittingNewEmployee,
-    employeeRolesFilterInput,
+    //employeeRolesFilterInput,
     setIsLoadingEmployeesForm,
     newEmployeeFormModalState,
     handleSubmitEditedEmployee,
