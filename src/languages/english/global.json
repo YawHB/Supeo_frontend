@@ -20,6 +20,8 @@
   "duration": "Duration",
   "break": "Break",
   "comment": "Comment",
+  "admin_comment": "Admin Comment",
+  "timestamp": "Timestamp",
   "status": "Status",
   "pending": "Pending",
   "approve": "Approve",

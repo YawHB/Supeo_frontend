@@ -102,6 +102,23 @@ const CreateEmployeeForm = ({
           </FormGroup>
         </Col>
       </Row>
+
+      <Row>
+        <Col md={6}>
+          <FormGroup>
+            <Label for="role">{translate("role")}</Label>
+            <Input
+              id="status"
+              name="status"
+              placeholder={translate("role_placeholder")}
+              type="text"
+              value={input.notification.status.value}
+              onChange={input.notification.status.onChange}
+              required
+            />
+          </FormGroup>
+        </Col>
+      </Row>
     </Form>
   );
 };

@@ -20,6 +20,8 @@
     "duration": "Varighed",
     "break": "Pause",
     "comment": "Kommentar",
+    "admin_comment": "Admin kommentar",
+    "timestamp": "Tidspunkt",
     "status": "Status",
     "pending": "Afventer",
     "approve": "Godkend",
@@ -62,7 +64,7 @@
         "export": "Eksporter"
     },
     "time_entry": {
-        "create_time_entry": "Opret Tidsregistrering",
+        "create_time_entry": "Opret tidsregistrering",
         "update_time_entry": "Opdater medarbejder"
     },
     "no_data": "Ingen data",

@@ -2,20 +2,23 @@ import { useInput } from '../../../hooks/useInput';
 
 const useTimeEntryFormState = (timeEntry) => {
     return {
-        //timeEntryId,
-        startTime: useInput(timeEntry?.startTime ?? ''),
-        endTime: useInput(timeEntry?.endTime ?? ''),
-        date: useInput(timeEntry?.date ?? ''),
-        duration: useInput(timeEntry?.duration ?? ''),
-        comment: useInput(timeEntry?.comment ?? ''),
-        employeeID: useInput(timeEntry?.employeeID ?? '20'),
-        notification: {
-            comment: useInput(timeEntry?.notification?.comment ?? ''),
-            timestamp: useInput(timeEntry?.notification?.timestamp ?? ''),
-            status: useInput(timeEntry?.notification?.status ?? 'PENDING'),
-        },
+      //timeEntryId,
+      date: useInput(timeEntry?.date ?? ""),
+      startTime: useInput(timeEntry?.startTime ?? ""),
+      endTime: useInput(timeEntry?.endTime ?? ""),
+      duration: useInput(timeEntry?.duration ?? ""),
+      break: useInput(timeEntry?.break ?? ""),
+      comment: useInput(timeEntry?.comment ?? ""),
+      adminComment: useInput(timeEntry?.adminComment ?? ""),
+      employeeID: useInput(timeEntry?.employeeID ?? "20"),
+      notification: {
+        comment: useInput(timeEntry?.notification?.comment ?? ""),
+        timestamp: useInput(timeEntry?.notification?.timestamp ?? ""),
+        status: useInput(timeEntry?.notification?.status ?? "PENDING"),
+      },
     };
 };
+
 export default useTimeEntryFormState;
 
 //const timeEntryId = useInput(timeEntry?.id ?? null);
