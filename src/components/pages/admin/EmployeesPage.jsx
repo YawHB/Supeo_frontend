@@ -68,6 +68,11 @@ const EmployeesPage = () => {
                 <span>{translate(`admin.create_employee`)}</span>
               </Button>
             </div>
+            {/* <div>
+              <Paginator
+                paginationState={state.pagination.state}
+              />
+            </div> */}
           </Col>
 
           {!state.isLoadingEmployees && (

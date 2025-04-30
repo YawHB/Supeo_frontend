@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import showToast from "../../lib/toast/toast.js";
+import { useInput } from "../../../hooks/useInput.js";
+import usePagination from "../../../hooks/usePagination.js";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { useModalState } from "../../../hooks/useModalState.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,24 +11,20 @@ import exportTableData from "../../lib/export/exportTableData.js";
 import { useQuery, useMutation, useApolloClient } from "@apollo/client";
 import { GET_ALL_EMPLOYEES } from "../../../services/api/admin/queries.js";
 import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from "../../../services/api/admin/mutations.js";
-import { useInput } from "../../../hooks/useInput.js";
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient();
   const [translate] = useTranslation("global");
   //const searchInput = useDebouncedInput(" ");
-
-  const employeeRolesFilterInput = useInput([]);
-
-  const [employees, setEmployees] = useState([]);
-  const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null);
-  const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false);
-
   const [orderBy, setOrderBy] = useState("id");
-  const [orderDirection, setOrderDirection] = useState("ASC");
-
+  const employeeRolesFilterInput = useInput([]);
+  const [employees, setEmployees] = useState([]);
   const employeeFormModalState = useModalState();
   const newEmployeeFormModalState = useModalState();
+  const [orderDirection, setOrderDirection] = useState("ASC");
+  const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null);
+  const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false);
+  const pagination = usePagination({ page: 1, perPage: 25 }, [10, 25, 50, 100, 250, 500]);
 
   const employeesTableColumns = [
     { key: "id", label: translate("id"), type: "text", sort: true },
@@ -63,7 +61,7 @@ const useEmployeesPageState = () => {
   const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(CREATE_EMPLOYEE, {
     refetchQueries: [GET_ALL_EMPLOYEES],
   });
-  
+
   const [updateEmployee, { loading: isUpdatingEmployee }] = useMutation(UPDATE_EMPLOYEE);
 
   // const { loading: isLoadingEmployees, data: employeesData, variables: employeesVariables} = useQuery(GET_ALL_EMPLOYEES, {
@@ -82,7 +80,6 @@ const useEmployeesPageState = () => {
   //     employeeRoles => ({label: employeeRoles.name, value: employeeRoles.id}),
   //   );
   // });
-
 
   const handleSubmitNewEmployee = (employee) => {
     setIsLoadingEmployeesForm(true);
@@ -171,17 +168,21 @@ const useEmployeesPageState = () => {
   };
 
   return {
-    employeeRolesFilterInput,
-    // employeeRoleOptions,
-    // isLoadingEmployeeRoleOptions,
+    orderBy,
     employees,
     translate,
+    pagination,
+    setOrderBy,
+    setEmployees,
     apolloClient,
+    orderDirection,
     createEmployee,
     updateEmployee,
+    setOrderDirection,
     handleExportTable,
     isLoadingEmployees,
     isUpdatingEmployee,
+    //employeeRoleOptions,
     employeeBeingEdited,
     employeesTableColumns,
     employeeFormModalState,
@@ -189,14 +190,11 @@ const useEmployeesPageState = () => {
     setEmployeeBeingEdited,
     handleSubmitNewEmployee,
     isSubmittingNewEmployee,
+    employeeRolesFilterInput,
     setIsLoadingEmployeesForm,
     newEmployeeFormModalState,
     handleSubmitEditedEmployee,
-    setEmployees,
-    setOrderBy,
-    setOrderDirection,
-    orderBy,
-    orderDirection,
+    //isLoadingEmployeeRoleOptions,
   };
 };
 

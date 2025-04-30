@@ -28,3 +28,33 @@ export const GET_EMPLOYEE = gql`
     }
   }
 `;
+
+// export const GET_ALL_EMPLOYEES = gql`
+//   query GetEmployees(
+//     $searchString: String
+//     $order: String
+//     $orderBy: String
+//     $pagination: PaginationInput!
+//   ) {
+//     employees(
+//       searchString: $searchString
+//       order: $order
+//       orderBy: $orderBy
+//       pagination: $pagination
+//     ) {
+//       pagination {
+//         page
+//         perPage
+//         totalCount
+//       }
+//       items {
+//         id
+//         firstName
+//         lastName
+//         role
+//         email
+//         phoneNumber
+//       }
+//     }
+//   }
+// `;
