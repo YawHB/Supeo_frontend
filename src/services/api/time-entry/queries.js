@@ -8,7 +8,8 @@ export const GET_ALL_TIME_ENTRIES = gql`
       endTime
       duration
       comment
-      date
+      startDate
+      endDate
       status
       firstName
       lastName

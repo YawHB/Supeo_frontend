@@ -9,6 +9,7 @@ import { useModalState } from "../../../../hooks/useModalState.js";
 import { CREATE_TIME_ENTRY } from "../../../../services/api/time-entry/mutation.js";
 import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from "../../../../services/api/employee/queries.js";
 
+
 export const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient();
 
@@ -22,14 +23,20 @@ export const useTimeEntriesPageState = () => {
 
   const timeEntriesColumns = [
     {
-      key: "date",
-      label: translate("date"),
+      key: "startDate",
+      label: translate("start_date"),
       type: "number",
       sort: true,
     },
     {
       key: "startTime",
       label: translate("start_time"),
+      type: "number",
+      sort: true,
+    },
+    {
+      key: "endDate",
+      label: translate("end_date"),
       type: "number",
       sort: true,
     },
@@ -60,33 +67,22 @@ export const useTimeEntriesPageState = () => {
     {
       key: "status",
       label: translate("status"),
-      type: "select",
+      type: "view",
       options: [
         { label: translate("pending"), value: "PENDING" },
         { label: translate("approve"), value: "GODKENDT" },
         { label: translate("reject"), value: "AFVIST" },
       ],
       alwaysEnabled: true,
-    },
-    {
-      key: "adminComment",
-      label: translate("admin_comment"),
-      type: "text",
-      sort: true,
-    },
-    {
-      key: "timeStamp",
-      label: translate("timestamp"),
-      type: "text",
-      sort: true,
-    },
-    {
-      key: " ",
-      label: " ",
-      type: `view`,
-      alwaysEnabled: true,
       view: () => (
-        <Button color="primary" outline onClick={() => {}}>
+        <Button
+          color="primary"
+          outline
+          onClick={() => {
+            //setEmployeeBeingEdited(employee);
+            //employeeFormModalState.openModal();
+          }}
+        >
           <FontAwesomeIcon icon={faCircleInfo} />
         </Button>
       ),
@@ -116,12 +112,15 @@ export const useTimeEntriesPageState = () => {
 
   const handleSubmitNewTimeEntry = (timeEntry) => {
     setIsLoadingTimeEntriesForm(true); // fix typo and add ;
+    console.log("Submitting new time entry:", timeEntry);
 
     createTimeEntry({
       variables: { newTimeEntry: timeEntry },
       onCompleted: () => {
         setIsLoadingTimeEntriesForm(false); // moved inside onCompleted
         newTimeEntryFormModalState.closeModal(); // moved inside onCompleted
+            console.log("Submitting new time entry:", timeEntry);
+
       },
     });
   };

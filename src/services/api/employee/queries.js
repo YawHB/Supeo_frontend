@@ -19,8 +19,9 @@ export const GET_TIME_ENTRIES_FOR_EMPLOYEE = gql`
             lastName
             role
             timeEntries {
-                date
+                startDate
                 startTime
+                endDate
                 endTime
                 duration
                 comment

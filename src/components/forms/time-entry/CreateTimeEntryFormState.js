@@ -3,8 +3,9 @@ import { useInput } from '../../../hooks/useInput';
 const useTimeEntryFormState = (timeEntry) => {
     return {
       //timeEntryId,
-      date: useInput(timeEntry?.date ?? ""),
+      startDate: useInput(timeEntry?.startDate ?? ""),
       startTime: useInput(timeEntry?.startTime ?? ""),
+      endDate: useInput(timeEntry?.endDate ?? ""),
       endTime: useInput(timeEntry?.endTime ?? ""),
       duration: useInput(timeEntry?.duration ?? ""),
       break: useInput(timeEntry?.break ?? ""),

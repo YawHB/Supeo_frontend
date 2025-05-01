@@ -7,12 +7,14 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
   const input = useTimeEntryFormState(timeEntry);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+      console.log("event", e),
+      e.preventDefault();
     onSubmit({
-      date: input.date.value,
+      startDate: input.startDate.value,
       startTime: input.startTime.value,
       endTime: input.endTime.value,
       duration: input.duration.value,
+      endDate: input.endDate.value,
       //break: input.break.value,
       comment: input.comment.value,
       employeeID: input.employeeID.value,
@@ -21,7 +23,9 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
         status: input.notification.status.value,
         timestamp: input.notification.timestamp.value,
       },
+      
     });
+    
   };
 
   return (
@@ -30,18 +34,17 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label for="date">{translate("date")}</Label>
+            <Label for="startDate">{translate("startDate")}</Label>
             <Input
-              id="date"
-              name="date"
+              id="startDate"
+              name="startDate"
               type="date"
-              value={input.date.value}
-              onChange={input.date.onChange}
+              value={input.startDate.value}
+              onChange={input.startDate.onChange}
               required
             />
           </FormGroup>
         </Col>
-
         <Col md={6}>
           <FormGroup>
             <Label for="startTime">{translate("start_time")}</Label>
@@ -57,6 +60,19 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
         </Col>
       </Row>
       <Row>
+        <Col md={6}>
+          <FormGroup>
+            <Label for="endDate">{translate("end_date")}</Label>
+            <Input
+              id="endDate"
+              name="endDate"
+              type="date"
+              value={input.endDate.value}
+              onChange={input.endDate.onChange}
+              required
+            />
+          </FormGroup>
+        </Col>
         <Col md={6}>
           <FormGroup>
             <Label for="endTime">{translate("end_time")}</Label>
@@ -85,8 +101,6 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
             />
           </FormGroup>
         </Col>
-      </Row>
-      <Row>
         <Col md={6}>
           <FormGroup>
             <Label for="break">{translate("break")}</Label>
@@ -100,11 +114,14 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
               required
             >
               <option value="30">{translate("30")}</option>
-              <option value="GODKENDT">{translate("approve")}</option>
-              <option value="AFVIST">{translate("reject")}</option>
+              <option value="35">{translate("35")}</option>
+              <option value="40">{translate("40")}</option>
+              <option value="45">{translate("45")}</option>
             </Input>
           </FormGroup>
         </Col>
+      </Row>
+      <Row>
         {/* //// Jeg tænker måske at formgruppen status her nedenunder skal fjernes, da det nok ikke giver helt mening...
         // ... at en medarbejder kan se status når han er i gang med at oprette en ny time entry
         <Col md={6}>

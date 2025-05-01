@@ -7,7 +7,8 @@ export const CREATE_TIME_ENTRY = gql`
             endTime
             duration
             comment
-            date
+            startDate
+            endDate
             employeeID
             notification {
                 comment
