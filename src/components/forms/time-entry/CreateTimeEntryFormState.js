@@ -1,13 +1,28 @@
+import { useEffect } from 'react';
 import { useInput } from '../../../hooks/useInput';
+import { calculateWorkHours } from '../../../utils/CalculateWorkHours.js';
 
 const useTimeEntryFormState = (timeEntry) => {
+
+  const startDate = useInput(timeEntry?.startDate ?? "");
+  const startTime = useInput(timeEntry?.startTime ?? "");
+  const endDate = useInput(timeEntry?.endDate ?? "");
+  const endTime = useInput(timeEntry?.endTime ?? "");
+  const duration = useInput("")
+
+  useEffect(() => {
+    if (checkIfTrue(startDate.value, startTime.value, endDate.value, endTime.value)) {
+      const result = calculateWorkHours(startDate.value, startTime.value, endDate.value, endTime.value);
+      duration.onChange({target: {value: result}})
+    }
+  }, [startDate.value, startTime.value, endDate.value, endTime.value]);
+  
     return {
-      //timeEntryId,
-      startDate: useInput(timeEntry?.startDate ?? ""),
-      startTime: useInput(timeEntry?.startTime ?? ""),
-      endDate: useInput(timeEntry?.endDate ?? ""),
-      endTime: useInput(timeEntry?.endTime ?? ""),
-      duration: useInput(timeEntry?.duration ?? ""),
+      startDate,
+      startTime,
+      endDate,
+      endTime,
+      duration,
       break: useInput(timeEntry?.break ?? ""),
       comment: useInput(timeEntry?.comment ?? ""),
       adminComment: useInput(timeEntry?.adminComment ?? ""),
@@ -20,6 +35,12 @@ const useTimeEntryFormState = (timeEntry) => {
     };
 };
 
+
+function checkIfTrue(startDate, startTime, endDate, endTime) {
+  if (startDate && startTime && endDate && endTime) return true 
+  return false
+
+}
 export default useTimeEntryFormState;
 
 //const timeEntryId = useInput(timeEntry?.id ?? null);

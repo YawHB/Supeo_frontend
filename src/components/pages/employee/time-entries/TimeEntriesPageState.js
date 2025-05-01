@@ -9,15 +9,11 @@ import { useModalState } from "../../../../hooks/useModalState.js";
 import { CREATE_TIME_ENTRY } from "../../../../services/api/time-entry/mutation.js";
 import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from "../../../../services/api/employee/queries.js";
 
-
 export const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient();
-
   const [translate] = useTranslation(`global`);
   const [timeEntriesData, setTimeEntriesData] = useState([]);
-
   const [isLoadingTimeEntriesForm, setIsLoadingTimeEntriesForm] = useState(false);
-
   const timeEntryFormModalState = useModalState();
   const newTimeEntryFormModalState = useModalState();
 
@@ -79,8 +75,8 @@ export const useTimeEntriesPageState = () => {
           color="primary"
           outline
           onClick={() => {
-            //setEmployeeBeingEdited(employee);
-            //employeeFormModalState.openModal();
+            //setOpenNotification(notification);
+            //notificationInfoModalState.openModal();
           }}
         >
           <FontAwesomeIcon icon={faCircleInfo} />
@@ -119,8 +115,7 @@ export const useTimeEntriesPageState = () => {
       onCompleted: () => {
         setIsLoadingTimeEntriesForm(false); // moved inside onCompleted
         newTimeEntryFormModalState.closeModal(); // moved inside onCompleted
-            console.log("Submitting new time entry:", timeEntry);
-
+        console.log("Submitting new time entry:", timeEntry);
       },
     });
   };

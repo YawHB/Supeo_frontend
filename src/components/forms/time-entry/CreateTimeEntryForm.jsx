@@ -93,7 +93,7 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
             <Input
               id="duration"
               name="duration"
-              type="number"
+              type="text"
               placeholder={translate("duration")}
               value={input.duration.value}
               onChange={input.duration.onChange}
