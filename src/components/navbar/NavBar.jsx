@@ -30,7 +30,7 @@ const NavBar = () => {
         <NavbarBrand tag={Link} to="/">
           <Logo
             className="px-3"
-            text="flex"
+            text=""
             logoColor="#E0FDAD"
             textColor="#FCFFFF"
             imgStyle={{ height: `1.75rem` }}
