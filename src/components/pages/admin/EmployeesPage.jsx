@@ -4,9 +4,9 @@ import useEmployeesPageState from "./EmployeesPageState";
 import useSideBarState from "../../sidebar/SideBarState";
 import CreateEmployeeForm from "../../forms/CreateEmployeeForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, Table } from "reactstrap";
 import SideBar from "../../sidebar/Sidebar";
+import { faUserPlus, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 
 const EmployeesPage = () => {
   const [translate] = useTranslation("global");

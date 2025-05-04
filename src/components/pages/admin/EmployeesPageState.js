@@ -1,28 +1,29 @@
-import { useState } from "react";
-import { useQuery, useMutation, useApolloClient } from "@apollo/client";
-import { useTranslation } from "react-i18next";
-import { GET_ALL_EMPLOYEES } from "../../../services/api/admin/queries.js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "reactstrap";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import showToast from "../../lib/toast/toast.js";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { useModalState } from "../../../hooks/useModalState.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useQuery, useMutation, useApolloClient } from "@apollo/client";
+import { GET_ALL_EMPLOYEES } from "../../../services/api/admin/queries.js";
 import {
   CREATE_EMPLOYEE,
   UPDATE_EMPLOYEE,
 } from "../../../services/api/admin/mutations.js";
-import { useModalState } from "../../../hooks/useModalState.js";
-import showToast from "../../lib/toast.js";
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient();
   const [translate] = useTranslation("global");
 
   const [employees, setEmployees] = useState([]);
-  const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false);
-  const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null);
 
   const employeeFormModalState = useModalState();
   const newEmployeeFormModalState = useModalState();
 
+  const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null);
+  const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false);
+  
   const employeesTableColumns = [
     { key: "id", label: translate("id"), type: "text", sort: true },
     {
@@ -62,18 +63,16 @@ const useEmployeesPageState = () => {
 
   const { loading: isLoadingEmployees } = useQuery(GET_ALL_EMPLOYEES, {
     fetchPolicy: "cache-and-network",
-    onCompleted: (data) => setEmployees(data.employees),
+    onCompleted: (data) => {
+      setEmployees(data.employees);
+    },
   });
 
-  const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(
-    CREATE_EMPLOYEE,
-    {
-      refetchQueries: [GET_ALL_EMPLOYEES],
-    }
-  );
+  const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(CREATE_EMPLOYEE, {
+    refetchQueries: [GET_ALL_EMPLOYEES],
+  });
 
-  const [updateEmployee, { loading: isUpdatingEmployee }] =
-    useMutation(UPDATE_EMPLOYEE);
+  const [updateEmployee, { loading: isUpdatingEmployee }] = useMutation(UPDATE_EMPLOYEE);
 
   const handleSubmitNewEmployee = (employee) => {
     setIsLoadingEmployeesForm(true);
@@ -87,6 +86,12 @@ const useEmployeesPageState = () => {
             type: "success",
           };
         setEmployees((prev) => [...prev, data.createEmployee]);
+        const successMsg = translate("notification.employee.create.success", {
+          firstName: employee.firstName,
+          lastName: employee.lastName,
+        });
+        showToast(successMsg, "success");
+        //setEmployees((prev) => [...prev, data.createEmployee]);
         setIsLoadingEmployeesForm(false);
         newEmployeeFormModalState.closeModal();
       },
@@ -99,20 +104,7 @@ const useEmployeesPageState = () => {
   };
 
   const handleSubmitEditedEmployee = (updatedEmployee) => {
-  // const isUnchanged =
-  //   updatedEmployee.firstName === employeeBeingEdited.firstName &&
-  //   updatedEmployee.lastName === employeeBeingEdited.lastName &&
-  //   updatedEmployee.email === employeeBeingEdited.email &&
-  //   updatedEmployee.phoneNumber === employeeBeingEdited.phoneNumber &&
-  //   updatedEmployee.role === employeeBeingEdited.role;
-
-  // if (isUnchanged) {
-  //   employeeFormModalState.closeModal();
-  //   return;
-  // }
-
   setIsLoadingEmployeesForm(true);
-
   updateEmployee({
     variables: {
       updateEmployeeId: employeeBeingEdited.id,
