@@ -63,9 +63,7 @@ const useEmployeesPageState = () => {
 
   const { loading: isLoadingEmployees } = useQuery(GET_ALL_EMPLOYEES, {
     fetchPolicy: "cache-and-network",
-    onCompleted: (data) => {
-      setEmployees(data.employees);
-    },
+    onCompleted: (data) => setEmployees(data.employees),
   });
 
   const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(CREATE_EMPLOYEE, {
