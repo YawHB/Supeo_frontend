@@ -15,6 +15,8 @@
     "company_id": "Firma ID",
     "company": "Firma",
     "date": "Dato",
+    "start_date": "Startdato",
+    "end_date": "Slutdato",
     "start_time": "Starttid",
     "end_time": "Sluttid",
     "duration": "Varighed",

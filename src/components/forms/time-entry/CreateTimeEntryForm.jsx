@@ -34,7 +34,7 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label for="startDate">{translate("startDate")}</Label>
+            <Label for="startDate">{translate("start_date")}</Label>
             <Input
               id="startDate"
               name="startDate"
@@ -112,6 +112,7 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
               value={input.break.value}
               onChange={input.break.onChange}
               required
+              disabled
             >
               <option value="30">{translate("30")}</option>
               <option value="35">{translate("35")}</option>
