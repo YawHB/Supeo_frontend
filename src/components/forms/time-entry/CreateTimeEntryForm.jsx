@@ -7,6 +7,7 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
     const input = useTimeEntryFormState(timeEntry);
 
     const handleSubmit = (e) => {
+        e.preventDefault();
         onSubmit({
             startDate: input.startDate.value,
             startTime: input.startTime.value,
