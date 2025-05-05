@@ -5,13 +5,14 @@ import { Form, Row, Col, Input, Label, FormGroup } from 'reactstrap';
 const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
     const [translate] = useTranslation('global');
     const input = useTimeEntryFormState(timeEntry);
-
     const handleSubmit = (e) => {
+        let startDateTime = `${input.startDate.value}T${input.startTime.value}`;
+        let endDateTime = `${input.endDate.value}T${input.endTime.value}`;
         e.preventDefault();
         onSubmit({
             startDate: input.startDate.value,
-            startTime: input.startTime.value,
-            endTime: input.endTime.value,
+            startTime: startDateTime,
+            endTime: endDateTime,
             duration: input.duration.value,
             endDate: input.endDate.value,
             //break: input.break.value,
