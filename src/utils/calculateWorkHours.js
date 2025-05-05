@@ -1,24 +1,18 @@
-
+//i utils
 export function calculateWorkHours(startDate, startTime, endDate, endTime) {
-    
-    console.log("startDate: ", startDate)
+    const msTimeStart = getMsTimeFromDate(startDate, startTime);
+    const msTimeEnd = getMsTimeFromDate(endDate, endTime);
 
-const [yearStart, monthStart, dayStart ] = startDate.split("-")
-const [hourStart, minStart] = startTime.split(":")
-const msTimeStart = Date.UTC(yearStart, monthStart-1, dayStart, hourStart, minStart)
-console.log(msTimeStart)
+    //find arbejdstid
+    const timeDif = msTimeEnd - msTimeStart;
+    if (timeDif <= 0) {
+        return 'ugyldigt indput. start tid skal være før slut tid';
+    }
+    return (timeDif / 60 / 60 / 1000).toString();
+}
 
-const [yearEnd, monthEnd, dayEnd ] = endDate.split("-")
-const [hourEnd, minEnd] = endTime.split(":")
-const msTimeEnd = Date.UTC(yearEnd, monthEnd-1, dayEnd, hourEnd, minEnd)
-console.log(msTimeEnd)  
-
-//find arbejdstid
-const timeDif = msTimeEnd - msTimeStart
-//Udregn antal timer arbejdet
-    const hoursWorked = timeDif / 60 / 60 / 1000
-    console.log(timeDif, hoursWorked)
-    return hoursWorked.toString()
-
-
-};
+function getMsTimeFromDate(date, time) {
+    const [year, month, day] = date.split('-').map(Number);
+    const [hour, min] = time.split(':').map(Number);
+    return Date.UTC(year, month - 1, day, hour, min);
+}
