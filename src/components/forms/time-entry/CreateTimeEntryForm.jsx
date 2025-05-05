@@ -6,22 +6,37 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
     const [translate] = useTranslation('global');
     const input = useTimeEntryFormState(timeEntry);
     const handleSubmit = (e) => {
-        let startDateTime = `${input.startDate.value}T${input.startTime.value}`;
-        let endDateTime = `${input.endDate.value}T${input.endTime.value}`;
+        const {
+            startDate,
+            startTime,
+            endDate,
+            endTime,
+            duration,
+            comment,
+            employeeID,
+            notification,
+        } = input;
+
+        const hasEndDate = endDate.value !== '';
+        const hasEndTime = endTime.value !== '';
+
+        const startDateTime = `${startDate.value} ${startTime.value}`;
+        const endDateTime = hasEndTime
+            ? `${hasEndDate ? endDate.value : startDate.value} ${endTime.value}`
+            : null;
         e.preventDefault();
         onSubmit({
-            startDate: input.startDate.value,
+            startDate: startDate.value,
             startTime: startDateTime,
+            endDate: hasEndDate ? endDate.value : null,
             endTime: endDateTime,
-            duration: input.duration.value,
-            endDate: input.endDate.value,
-            //break: input.break.value,
-            comment: input.comment.value,
-            employeeID: input.employeeID.value,
+            duration: duration.value,
+            comment: comment.value,
+            employeeID: employeeID.value,
             notification: {
-                comment: input.notification.comment.value,
-                status: input.notification.status.value,
-                timestamp: input.notification.timestamp.value,
+                comment: notification.comment.value,
+                status: notification.status.value,
+                timestamp: notification.timestamp.value,
             },
         });
     };
@@ -67,7 +82,6 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
                             type="date"
                             value={input.endDate.value}
                             onChange={input.endDate.onChange}
-                            required
                         />
                     </FormGroup>
                 </Col>
@@ -80,7 +94,6 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
                             type="time"
                             value={input.endTime.value}
                             onChange={input.endTime.onChange}
-                            required
                         />
                     </FormGroup>
                 </Col>
@@ -92,6 +105,7 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
                             id="duration"
                             name="duration"
                             type="text"
+                            readOnly
                             placeholder={translate('duration')}
                             value={input.duration.value}
                             onChange={input.duration.onChange}
