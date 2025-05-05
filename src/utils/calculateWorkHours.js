@@ -28,24 +28,14 @@ export function calculateWorkHours(startDate, startTime, endDate, endTime) {
         return `${hours + 24} timer, ${
             minutes === 0 ? minutes : minutes + 60
         } minutter`;
-
-        // return `${hours + 24} timer, ${
-        //         minutes === 0 ? minutes : minutes + 60
-        //     } minutter`;
-
-        //console.log(`${hours + 24} timer, ${minutes + 60} minutter`);
     } else if (timeDif > 0 && dayDiffInMs > 0) {
         console.log('Flere dages arbejde');
         const [hours, minutes] = hoursToMin(startTime, endTime);
-        return `${dayDiffInMs} dage, ${hours} timer, ${
-            minutes === 0 ? minutes : minutes + 60
-        } minutter`;
+        return `${dayDiffInMs} dage, ${hours} timer, ${minutes} minutter`;
     }
 
-    const result = hoursToMin(startTime, endTime);
-
-    return result;
-    // return timeDif / 1000 / 60 / (60).toString();
+    const [hours, minutes] = hoursToMin(startTime, endTime);
+    return ` ${hours} timer, ${minutes} minutter`;
 }
 
 function calculateDaysWorked(year, month, day) {
@@ -72,19 +62,9 @@ function hoursToMin(startTime, endTime) {
     const endTimeInMinutes = Math.floor(endHour * 60) + endMin;
     console.log(startTimeInMinutes);
     console.log(endTimeInMinutes);
-    const diff = endTimeInMinutes - startTimeInMinutes;
-    const hours = Math.floor(diff / 60);
-    const minutes = diff % 60;
+    const diffInMinutes = endTimeInMinutes - startTimeInMinutes; //udregner arbejdstid i minutter
+    const hours = Math.floor(diffInMinutes / 60); //omregner det til timer
+    const minutes = diffInMinutes % 60; //Finder antal minutter remaining efter timer (fx  510 minuter = 8,5 timer = 30 min )
 
-    // if (endtime  større end starttime ) {
-    //     return (`${hours + 24} timer, ${minutes + 60} minutter`);
-    // }
-
-    // return `${hours} timer, ${minutes} minutter`;
     return [hours, minutes];
-    //return `${hours + 24} timer, ${  minutes === 0 ? minutes  : minutes + 60 } minutter`;
-    // console.log(20 % 5);
-    // console.log(20 % 6);
-
-    //const timeInMinutes = Math.floor(hour * 60) + min;
 }
