@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useInput } from '../../../hooks/useInput';
-import { calculateWorkHours } from '../../../utils/CalculateWorkHours.js';
+import { calculateWorkHours } from '../../../utils/calculateWorkHours.js';
 
 const useTimeEntryFormState = (timeEntry) => {
     const startDate = useInput(timeEntry?.startDate ?? '');
