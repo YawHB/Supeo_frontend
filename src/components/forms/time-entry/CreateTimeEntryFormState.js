@@ -8,7 +8,9 @@ const useTimeEntryFormState = (timeEntry) => {
     const endDate = useInput(timeEntry?.endDate ?? '');
     const endTime = useInput(timeEntry?.endTime ?? '');
     const duration = useInput('');
-
+    const notificationStatus = useInput(
+        timeEntry?.notification?.status ?? 'PENDING'
+    );
     useEffect(() => {
         if (
             isTimeRangeComplete(
@@ -28,25 +30,40 @@ const useTimeEntryFormState = (timeEntry) => {
         }
     }, [startDate.value, startTime.value, endDate.value, endTime.value]);
 
+    useEffect(() => {
+        if (isEndDateTimeComplete(endDate.value, endTime.value)) {
+            notificationStatus.onChange({ target: { value: 'PENDING' } });
+        } else {
+            notificationStatus.onChange({ target: { value: 'IGANG' } });
+        }
+    }, [startDate.value, startTime.value, endDate.value, endTime.value]);
+
     return {
         startDate,
         startTime,
         endDate,
         endTime,
         duration,
+
         break: useInput(timeEntry?.break ?? ''),
         comment: useInput(timeEntry?.comment ?? ''),
         adminComment: useInput(timeEntry?.adminComment ?? ''),
         employeeID: useInput(timeEntry?.employeeID ?? '20'),
         notification: {
             comment: useInput(timeEntry?.notification?.comment ?? ''),
-            timestamp: useInput(timeEntry?.notification?.timestamp ?? ''),
-            status: useInput(timeEntry?.notification?.status ?? 'PENDING'),
+            timestamp: useInput(
+                timeEntry?.notification?.timestamp ?? Date.now()
+            ),
+            status: notificationStatus,
         },
     };
 };
 
 function isTimeRangeComplete(startDate, startTime, endDate, endTime) {
     return startDate && startTime && endDate && endTime;
+}
+
+function isEndDateTimeComplete(endDate, endTime) {
+    return endDate && endTime ? true : false;
 }
 export default useTimeEntryFormState;
