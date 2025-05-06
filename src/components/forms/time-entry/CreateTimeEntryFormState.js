@@ -9,7 +9,7 @@ const useTimeEntryFormState = (timeEntry) => {
     const endTime = useInput(timeEntry?.endTime ?? '');
     const duration = useInput('');
     const notificationStatus = useInput(
-        timeEntry?.notification?.status ?? 'PENDING'
+        timeEntry?.notification?.status ?? 'AFVENTER'
     );
     useEffect(() => {
         if (
@@ -32,7 +32,7 @@ const useTimeEntryFormState = (timeEntry) => {
 
     useEffect(() => {
         if (isEndDateTimeComplete(endDate.value, endTime.value)) {
-            notificationStatus.onChange({ target: { value: 'PENDING' } });
+            notificationStatus.onChange({ target: { value: 'AFVENTER' } });
         } else {
             notificationStatus.onChange({ target: { value: 'IGANG' } });
         }

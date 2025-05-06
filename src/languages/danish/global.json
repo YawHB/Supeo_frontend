@@ -28,6 +28,7 @@
     "status": "Status",
     "pending": "Afventer",
     "approve": "Godkend",
+    "underway": "I gang",
     "reject": "Afvis",
     "page_title": {
         "administration_time_entries": "Administration - Tidsregistreringer",
