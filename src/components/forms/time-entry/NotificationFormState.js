@@ -1,14 +1,9 @@
-const useNotificationFormState = (notification) => {
-  const input = {
-    id: notification.id,
-    comment: notification.id,
-    status: notification.id,
-    timestamp: notification.id,
-  };
+import { useInput } from '../../../hooks/useInput';
 
-  return {
-    input,
-  };
-};
+const useNotificationFormState = (notification = {}) => ({
+  comment: useInput(notification.comment ?? ''),
+  status: useInput(notification.status ?? ''),
+  timestamp: useInput(notification.timestamp ?? ''),
+});
 
 export default useNotificationFormState;

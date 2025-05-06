@@ -35,9 +35,9 @@ export const EmployeeTimeEntriesPage = () => {
                 outline
                 onClick={() => state.newTimeEntryFormModalState.openModal({})}
                 className="no-wrap"
-                style={{ minWidth: "200px" }}
+                style={{ minWidth: '200px' }}
               >
-                <span>{translate("time_entry.create_time_entry")}</span>{" "}
+                <span>{translate('time_entry.create_time_entry')}</span>{' '}
               </Button>
             </div>
           </Col>
@@ -60,7 +60,7 @@ export const EmployeeTimeEntriesPage = () => {
                         colSpan={state.timeEntriesColumns.length}
                         className="text-center"
                       >
-                        {translate("no_data")}
+                        {translate('no_data')}
                       </td>
                     </tr>
                   ) : (
@@ -68,7 +68,7 @@ export const EmployeeTimeEntriesPage = () => {
                       <tr key={timeEntry.id}>
                         {state.timeEntriesColumns.map((column) => (
                           <td key={column.key}>
-                            {column.type === "view"
+                            {column.type === 'view'
                               ? column.view(timeEntry)
                               : timeEntry[column.key]}
                           </td>
@@ -90,7 +90,7 @@ export const EmployeeTimeEntriesPage = () => {
         size="lg"
       >
         <ModalHeader toggle={state.newTimeEntryFormModalState.closeModal}>
-          {translate("time_entry.create_time_entry")}
+          {translate('time_entry.create_time_entry')}
         </ModalHeader>
 
         <ModalBody>
@@ -107,35 +107,45 @@ export const EmployeeTimeEntriesPage = () => {
             form="newTimeEntryForm"
             disabled={state.isSubmittingNewTimeEntry}
           >
-            {translate("create")}
+            {translate('create')}
           </Button>
 
           <Button
             color="secondary"
             onClick={state.newTimeEntryFormModalState.closeModal}
           >
-            {translate("cancel")}
+            {translate('cancel')}
           </Button>
         </ModalFooter>
       </Modal>
 
       <Modal
-        
+        isOpen={state.notificationInfoModalState.isOpen}
+        toggle={state.notificationInfoModalState.closeModal}
         returnFocusAfterClose={false}
         size="lg"
       >
-        <ModalHeader>
-          
+        <ModalHeader toggle={state.notificationInfoModalState.closeModal}>
+          {translate('notification_status', {
+            startDate: state.openNotification?.startDate ?? '',
+            endDate: state.openNotification?.endDate ?? '',
+          })}
         </ModalHeader>
 
         <ModalBody>
           <NotificationForm
-          
+            notification={state.openNotification?.notification}
+            //readOnly={true}
           />
         </ModalBody>
 
         <ModalFooter>
-        
+          <Button
+            color="secondary"
+            onClick={state.notificationInfoModalState.closeModal}
+          >
+            {translate('close')}
+          </Button>
         </ModalFooter>
       </Modal>
     </>

@@ -1,13 +1,15 @@
 import useNotificationFormState from "./NotificationFormState.js";
-import { Modal, Row, Col, FormGroup, Label, Input } from "reactstrap";
+import { Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
 import { useTranslation } from "react-i18next";
 
-const NotificationForm = (notification) => {
+const NotificationForm = ({notification = {} }) => {
   const [translate] = useTranslation("global");
   const { comment, status, timestamp } = useNotificationFormState(notification);
 
+  console.log(notification);
+
   return (
-    <Modal id="notificationForm">
+    <Form id="notificationForm">
       <Row>
         <Col md={6}>
           <FormGroup>
@@ -17,8 +19,9 @@ const NotificationForm = (notification) => {
               name="comment"
               type="text"
               value={comment.value}
-              onChange={comment.onChange}
-              required
+              //onChange={comment.onChange}
+              //required
+              disabled
             />
           </FormGroup>
         </Col>
@@ -30,8 +33,9 @@ const NotificationForm = (notification) => {
               name="status"
               type="text"
               value={status.value}
-              onChange={status.onChange}
-              required
+              //onChange={status.onChange}
+              //required
+              disabled
             />
           </FormGroup>
         </Col>
@@ -45,13 +49,14 @@ const NotificationForm = (notification) => {
               name="timestamp"
               type="datetime-local"
               value={timestamp.value}
-              onChange={timestamp.onChange}
-              required
+              //onChange={timestamp.onChange}
+              //required
+              disabled
             />
           </FormGroup>
         </Col>
       </Row>
-    </Modal>
+    </Form>
   );
 };
 

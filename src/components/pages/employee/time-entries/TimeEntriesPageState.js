@@ -17,66 +17,70 @@ export const useTimeEntriesPageState = () => {
   const timeEntryFormModalState = useModalState();
   const newTimeEntryFormModalState = useModalState();
 
+  const notificationInfoModalState = useModalState();
+  const [openNotification, setOpenNotification] = useState(null);
+
   const timeEntriesColumns = [
     {
-      key: "startDate",
-      label: translate("start_date"),
-      type: "number",
+      key: 'startDate',
+      label: translate('start_date'),
+      type: 'number',
       sort: true,
     },
     {
-      key: "startTime",
-      label: translate("start_time"),
-      type: "number",
+      key: 'startTime',
+      label: translate('start_time'),
+      type: 'number',
       sort: true,
     },
     {
-      key: "endDate",
-      label: translate("end_date"),
-      type: "number",
+      key: 'endDate',
+      label: translate('end_date'),
+      type: 'number',
       sort: true,
     },
     {
-      key: "endTime",
-      label: translate("end_time"),
-      type: "number",
+      key: 'endTime',
+      label: translate('end_time'),
+      type: 'number',
       sort: true,
     },
     {
-      key: "duration",
-      label: translate("duration"),
-      type: "number",
+      key: 'duration',
+      label: translate('duration'),
+      type: 'number',
       sort: true,
     },
     {
-      key: "break",
-      label: translate("break"),
-      type: "text",
+      key: 'break',
+      label: translate('break'),
+      type: 'text',
       sort: true,
     },
     {
-      key: "comment",
-      label: translate("comment"),
-      type: "text",
+      key: 'comment',
+      label: translate('comment'),
+      type: 'text',
       sort: true,
     },
     {
-      key: "status",
-      label: translate("status"),
-      type: "view",
+      key: 'status',
+      label: translate('status'),
+      type: 'view',
       options: [
-        { label: translate("pending"), value: "PENDING" },
-        { label: translate("approve"), value: "GODKENDT" },
-        { label: translate("reject"), value: "AFVIST" },
+        { label: translate('pending'), value: 'PENDING' },
+        { label: translate('approve'), value: 'GODKENDT' },
+        { label: translate('reject'), value: 'AFVIST' },
       ],
       alwaysEnabled: true,
-      view: () => (
+      view: (timeEntry) => (
         <Button
           color="primary"
           outline
           onClick={() => {
-            //setOpenNotification(notification);
-            //notificationInfoModalState.openModal();
+            setOpenNotification(timeEntry);
+            //setOpenNotification(timeEntry.notification);
+            notificationInfoModalState.openModal();
           }}
         >
           <FontAwesomeIcon icon={faCircleInfo} />
@@ -90,7 +94,6 @@ export const useTimeEntriesPageState = () => {
     {
       fetchPolicy: "cache-and-network",
       onCompleted: (data) => {
-        console.log(data);
         setTimeEntriesData(data.employee);
       },
       onError: (error) => {
@@ -107,14 +110,14 @@ export const useTimeEntriesPageState = () => {
   );
 
   const handleSubmitNewTimeEntry = (timeEntry) => {
-    setIsLoadingTimeEntriesForm(true); // fix typo and add ;
+    setIsLoadingTimeEntriesForm(true);
     console.log("Submitting new time entry:", timeEntry);
 
     createTimeEntry({
       variables: { newTimeEntry: timeEntry },
       onCompleted: () => {
-        setIsLoadingTimeEntriesForm(false); // moved inside onCompleted
-        newTimeEntryFormModalState.closeModal(); // moved inside onCompleted
+        setIsLoadingTimeEntriesForm(false);
+        newTimeEntryFormModalState.closeModal();
         console.log("Submitting new time entry:", timeEntry);
       },
     });
@@ -132,5 +135,9 @@ export const useTimeEntriesPageState = () => {
     isSubmittingNewTimeEntry,
     handleSubmitNewTimeEntry,
     newTimeEntryFormModalState,
+    notificationInfoModalState,
+    openNotification,
+    setOpenNotification,
+    setIsLoadingTimeEntriesForm,
   };
 };
