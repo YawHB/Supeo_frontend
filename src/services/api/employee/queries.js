@@ -6,18 +6,16 @@ export const GET_EMPLOYEES = gql`
             id
             firstName
             lastName
-            role
         }
     }
 `;
 
 export const GET_TIME_ENTRIES_FOR_EMPLOYEE = gql`
     query {
-        employee(id: "20") {
+        employee(id: "10") {
             id
             firstName
             lastName
-            role
             timeEntries {
                 startDate
                 startTime

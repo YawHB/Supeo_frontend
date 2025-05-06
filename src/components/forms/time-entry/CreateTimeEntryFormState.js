@@ -48,7 +48,7 @@ const useTimeEntryFormState = (timeEntry) => {
         break: useInput(timeEntry?.break ?? ''),
         comment: useInput(timeEntry?.comment ?? ''),
         adminComment: useInput(timeEntry?.adminComment ?? ''),
-        employeeID: useInput(timeEntry?.employeeID ?? '20'),
+        employeeID: useInput(timeEntry?.employeeID ?? '10'),
         notification: {
             comment: useInput(timeEntry?.notification?.comment ?? ''),
             timestamp: useInput(
