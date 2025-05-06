@@ -11,7 +11,6 @@ export const CREATE_TIME_ENTRY = gql`
             endDate
             employeeID
             notification {
-                id
                 comment
                 status
                 timestamp
