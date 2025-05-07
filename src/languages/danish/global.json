@@ -67,7 +67,8 @@
     "delete_employee": "Slet medarbejder",
     "search_employee": "Søg efter medarbejder",
     "select_employee_role": "Vælg medarbejderrolle",
-    "create_new_employee": "Opret ny medarbejder"
+    "create_new_employee": "Opret ny medarbejder",
+    "export": "Eksporter"
   },
   "time_entry": {
     "create_time_entry": "Opret tidsregistrering",
