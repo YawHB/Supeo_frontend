@@ -24,7 +24,7 @@ const TimeEntriesPage = () => {
   return (
     <>
       <Row>
-        <Col xs="auto" style={{ minWidth: "130px", maxWidth: "270px" }}>
+        <Col xs='auto' style={{ minWidth: '130px', maxWidth: '270px' }}>
           <SideBar
             sideBarItems={sideBarState.sideBarItems}
             isSideBarCollapsed={sideBarState.isSideBarCollapsed}
@@ -33,9 +33,14 @@ const TimeEntriesPage = () => {
         </Col>
 
         <Col>
-          <Col xs={12} className="d-flex justify-content-between gap-4">
-            <h1>{translate("nav_bar.admin_time_entries")}</h1>
-            <div className="d-flex align-items-center gap-4"></div>
+          <Col xs={12} className='d-flex justify-content-between gap-4'>
+            <h1>{translate('nav_bar.admin_time_entries')}</h1>
+            <div className='d-flex align-items-center gap-4'>
+              <Button outline color='primary' onClick={state.handleExportTable}>
+                <FontAwesomeIcon icon={faFileExcel} className='me-2' />
+                <span>{translate('export')}</span>
+              </Button>
+            </div>
           </Col>
 
           {!state.isLoadingTimeEntries && (
@@ -51,11 +56,8 @@ const TimeEntriesPage = () => {
               <tbody>
                 {state.timeEntries.length === 0 ? (
                   <tr>
-                    <td
-                      colSpan={state.timeEntriesTableColumns.length}
-                      className="text-center"
-                    >
-                      {translate("no_data")}
+                    <td colSpan={state.timeEntriesTableColumns.length} className='text-center'>
+                      {translate('no_data')}
                     </td>
                   </tr>
                 ) : (
@@ -63,17 +65,12 @@ const TimeEntriesPage = () => {
                     <tr key={timeEntry.id}>
                       {state.timeEntriesTableColumns.map((column) => (
                         <td key={column.key}>
-                          {column.key === "status" ? (
+                          {column.key === 'status' ? (
                             <select
-                              className={`form-select ${
-                                statusClassMap[timeEntry.status] || ""
-                              }`}
+                              className={`form-select ${statusClassMap[timeEntry.status] || ''}`}
                               value={timeEntry.status}
                               onChange={(e) =>
-                                state.handleStatusChange(
-                                  timeEntry.id,
-                                  e.target.value
-                                )
+                                state.handleStatusChange(timeEntry.id, e.target.value)
                               }
                             >
                               {column.options?.map((option) => (
@@ -93,22 +90,10 @@ const TimeEntriesPage = () => {
               </tbody>
             </Table>
           )}
-          <div className="d-flex justify-content-between">
-            <div>
-              <Button
-                outline
-                color="primary"
-                onClick={state.handleExportTable}
-              >
-                <FontAwesomeIcon icon={faFileExcel} className="me-2" />
-                <span>{translate("export")}</span>
-              </Button>
-            </div>
-          </div>
         </Col>
       </Row>
     </>
-  );
+  )
 };
 
 export default TimeEntriesPage;
