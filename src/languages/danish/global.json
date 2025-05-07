@@ -69,6 +69,10 @@
     "select_employee_role": "Vælg medarbejderrolle",
     "create_new_employee": "Opret ny medarbejder"
   },
+  "time_entry": {
+    "create_time_entry": "Opret tidsregistrering",
+    "update_time_entry": "Opdater medarbejder"
+  },
   "no_data": "Ingen data",
   "minimize": "Minimer",
   "create": "Opret",
