@@ -39,7 +39,10 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label for="startDate">{translate("start_date")}</Label>
+            <Label for="startDate">
+              {translate("start_date")}
+              <span className="text-danger">*</span>
+            </Label>
             <Input
               id="startDate"
               name="startDate"
@@ -52,7 +55,9 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
         </Col>
         <Col md={6}>
           <FormGroup>
-            <Label for="startTime">{translate("start_time")}</Label>
+            <Label for="startTime">{translate("start_time")}
+              <span className="text-danger">*</span>
+            </Label>
             <Input
               id="startTime"
               name="startTime"
