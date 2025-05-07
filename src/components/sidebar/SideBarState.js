@@ -58,7 +58,6 @@ const useSideBarState = () => {
   
   useEffect(() => {
     const newSideBarItems = [];
-
     for (const systemMenuLink of systemMenuLinks) {
       const sideBarItem = sideBarItemsMap.get(systemMenuLink);
 
