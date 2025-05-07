@@ -1,5 +1,5 @@
 import React from "react";
-import SideBar from "../../../sidebar/SideBar";
+import SideBar from "../../../sidebar/Sidebar";
 import { Row, Col, Table, Button } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import useSideBarState from "../../../sidebar/SideBarState";
