@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Table, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
+import { Row, Col, Table, Modal, ModalBody, ModalHeader, ModalFooter, Button } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useTimeEntriesPageState } from "./TimeEntriesPageState.js";
 
