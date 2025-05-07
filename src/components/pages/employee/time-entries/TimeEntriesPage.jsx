@@ -45,9 +45,8 @@ export const EmployeeTimeEntriesPage = () => {
           </Col>
 
           {!state.isLoadingTimeEntries && (
-            <div className="mt-4">
-              <Table striped bordered hover responsive>
-                <thead className="table-light">
+              <Table responsive>
+                <thead>
                   <tr>
                     {state.timeEntriesColumns.map((column) => (
                       <th key={column.key}>{column.label}</th>
@@ -77,7 +76,6 @@ export const EmployeeTimeEntriesPage = () => {
                   )}
                 </tbody>
               </Table>
-            </div>
           )}
         </Col>
       </Row>
