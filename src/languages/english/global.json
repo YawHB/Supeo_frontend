@@ -20,6 +20,9 @@
   "duration": "Duration",
   "break": "Break",
   "comment": "Comment",
+  "admin_comment": "Administrators Comment",
+  "timestamp": "Timestamp",
+  "notification_status": "Status for {{startDate}} - {{endDate}}",
   "status": "Status",
   "pending": "Pending",
   "approve": "Approve",
@@ -64,7 +67,7 @@
     "edit_employee": "Edit '{{firstName}} {{lastName}}'",
     "delete_employee": "Delete employee",
     "search_employee": "Search for employee",
-    "select_employee_role" : "Select employee role",
+    "select_employee_role": "Select employee role",
     "create_new_employee": "Create new employee"
   },
   "no_data": "No data",
