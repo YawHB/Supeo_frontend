@@ -22,7 +22,17 @@ export const EmployeeTimeEntriesPage = () => {
             <h1>
               {firstName} {lastName} - {role}
             </h1>
-            <div className="d-flex align-items-center gap-4"></div>
+            <div className="d-flex align-items-center gap-4">
+              <Button
+                color="primary"
+                outline
+                onClick={() => state.newTimeEntryFormModalState.openModal({})}
+                className="no-wrap"
+                style={{ minWidth: "200px" }}
+              >
+                <span>{translate("time_entry.create_time_entry")}</span>{" "}
+              </Button>
+            </div>
           </Col>
 
           {!state.isLoadingTimeEntries && (
