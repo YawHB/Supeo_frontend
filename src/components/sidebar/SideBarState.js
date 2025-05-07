@@ -40,7 +40,8 @@ const useSideBarState = () => {
     setIsSideBarCollapsed(!isSideBarCollapsed);
   };
 
-  const isActiveFunction = useCallback((item) => {
+  const isActiveFunction = useCallback(
+    (item) => {
       return item.activeLocation === location.pathname;
     },
     [sideBarItems, location]
