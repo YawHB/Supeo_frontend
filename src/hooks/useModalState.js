@@ -3,7 +3,7 @@ import { useState, useCallback } from "react";
 export const useModalState = (initialData = null) => {
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState(initialData);
-  
+
   const openModal = useCallback((newData = null) => {
     setData(newData);
     setIsOpen(true);
@@ -15,11 +15,12 @@ export const useModalState = (initialData = null) => {
   }, []);
 
   return {
-    data,
     isOpen,
-    setData,
+    data,
     openModal,
-    setIsOpen,
     closeModal,
+    setData,
+    setIsOpen,
+    
   };
 };
