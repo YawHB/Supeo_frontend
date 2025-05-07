@@ -41,8 +41,7 @@
     "admin_time_entries": "Tidsregistreringer",
     "admin_employees": "Medarbejdere",
     "employee_home": "Medarbejder - Hjem",
-    "admin_home": "Admin - Hjem",
-    "admin_label": "Admin"
+    "admin_home": "Admin - Hjem"
   },
   "side_bar": {
     "admin_home": "Admin - Hjem",
