@@ -29,7 +29,7 @@ const EmployeesPage = () => {
   return (
     <>
       <Row>
-        <Col xs="auto" style={{ minWidth: "130px", maxWidth: "270px" }}>
+        <Col xs='auto' style={{ minWidth: '130px', maxWidth: '270px' }}>
           <SideBar
             sideBarItems={sideBarState.sideBarItems}
             isSideBarCollapsed={sideBarState.isSideBarCollapsed}
@@ -38,10 +38,10 @@ const EmployeesPage = () => {
         </Col>
 
         <Col>
-          <Col xs={12} className="d-flex justify-content-between gap-4">
-            <h1>{translate("employees")}</h1>
-            <div className="d-flex align-items-center gap-4">
-              <Select
+          <Col xs={12} className='d-flex justify-content-between gap-4'>
+            <h1>{translate('employees')}</h1>
+            <div className='d-flex align-items-center gap-4'>
+              {/* <Select
                 isinline="true"
                 styles={{ minWidth: "200px" }}
                 state={state.employeeRolesFilterInput}
@@ -53,18 +53,22 @@ const EmployeesPage = () => {
                 styles={{ minWidth: "200px" }}
                 state={state.searchInput}
                 placeholder={translate("admin.search_employee")}
-              />
+              /> */}
+              <Button outline color='primary' onClick={state.handleExportTable}>
+                <FontAwesomeIcon icon={faFileExcel} className='me-2' />
+                <span>{translate('export')}</span>
+              </Button>
               <Button
-                color="primary"
+                color='primary'
                 outline
                 onClick={() => {
-                  state.setEmployeeBeingEdited(null);
-                  state.newEmployeeFormModalState.openModal();
+                  state.setEmployeeBeingEdited(null)
+                  state.newEmployeeFormModalState.openModal()
                 }}
-                className="no-wrap"
-                style={{ minWidth: "200px" }}
+                className='no-wrap'
+                style={{ minWidth: '200px' }}
               >
-                <FontAwesomeIcon icon={faUserPlus} className="me-2" />
+                <FontAwesomeIcon icon={faUserPlus} className='me-2' />
                 <span>{translate(`admin.create_employee`)}</span>
               </Button>
             </div>
@@ -87,8 +91,8 @@ const EmployeesPage = () => {
               <tbody>
                 {state.employees.length === 0 ? (
                   <tr>
-                    <td colSpan={state.employeesTableColumns.length} className="text-center">
-                      {translate("no_data")}
+                    <td colSpan={state.employeesTableColumns.length} className='text-center'>
+                      {translate('no_data')}
                     </td>
                   </tr>
                 ) : (
@@ -96,7 +100,7 @@ const EmployeesPage = () => {
                     <tr key={employee.id}>
                       {state.employeesTableColumns.map((column) => (
                         <td key={column.key}>
-                          {column.type === "view" ? column.view(employee) : employee[column.key]}
+                          {column.type === 'view' ? column.view(employee) : employee[column.key]}
                         </td>
                       ))}
                     </tr>
@@ -106,25 +110,17 @@ const EmployeesPage = () => {
             </Table>
           )}
 
-          <div className="d-flex justify-content-between">
-            <div>
-              <Button outline color="primary" onClick={state.handleExportTable}>
-                <FontAwesomeIcon icon={faFileExcel} className="me-2" />
-                <span>{translate("export")}</span>
-              </Button>
-            </div>
-          </div>
         </Col>
       </Row>
 
       <Modal
-        size="lg"
+        size='lg'
         returnFocusAfterClose={false}
         isOpen={state.newEmployeeFormModalState.isOpen}
         toggle={state.newEmployeeFormModalState.closeModal}
       >
         <ModalHeader toggle={state.newEmployeeFormModalState.closeModal}>
-          {translate("admin.create_new_employee")}
+          {translate('admin.create_new_employee')}
         </ModalHeader>
 
         <ModalBody>
@@ -141,31 +137,31 @@ const EmployeesPage = () => {
 
         <ModalFooter>
           <Button
-            type="submit"
-            color="primary"
-            form="newEmployeeForm"
+            type='submit'
+            color='primary'
+            form='newEmployeeForm'
             disabled={state.isSubmittingNewEmployee || state.isUpdatingEmployee}
           >
-            <FontAwesomeIcon icon={faSave} className="me-2" />
-            {translate("create")}
+            <FontAwesomeIcon icon={faSave} className='me-2' />
+            {translate('create')}
           </Button>
 
-          <Button color="secondary" onClick={state.newEmployeeFormModalState.closeModal}>
-            {translate("cancel")}
+          <Button color='secondary' onClick={state.newEmployeeFormModalState.closeModal}>
+            {translate('cancel')}
           </Button>
         </ModalFooter>
       </Modal>
 
       <Modal
-        size="lg"
+        size='lg'
         returnFocusAfterClose={false}
         isOpen={state.employeeFormModalState.isOpen}
         toggle={state.employeeFormModalState.closeModal}
       >
         <ModalHeader toggle={state.employeeFormModalState.closeModal}>
-          {translate("admin.edit_employee", {
-            firstName: state.employeeBeingEdited?.firstName ?? "",
-            lastName: state.employeeBeingEdited?.lastName ?? "",
+          {translate('admin.edit_employee', {
+            firstName: state.employeeBeingEdited?.firstName ?? '',
+            lastName: state.employeeBeingEdited?.lastName ?? '',
           })}
         </ModalHeader>
 
@@ -178,22 +174,22 @@ const EmployeesPage = () => {
 
         <ModalFooter>
           <Button
-            type="submit"
-            color="primary"
-            form="newEmployeeForm"
+            type='submit'
+            color='primary'
+            form='newEmployeeForm'
             disabled={state.isLoadingEmployeesForm}
           >
-            <FontAwesomeIcon icon={faSave} className="me-2" />
-            {translate("save")}
+            <FontAwesomeIcon icon={faSave} className='me-2' />
+            {translate('save')}
           </Button>
 
-          <Button color="secondary" onClick={state.employeeFormModalState.closeModal}>
-            {translate("cancel")}
+          <Button color='secondary' onClick={state.employeeFormModalState.closeModal}>
+            {translate('cancel')}
           </Button>
         </ModalFooter>
       </Modal>
     </>
-  );
+  )
 };
 
 export default EmployeesPage;
