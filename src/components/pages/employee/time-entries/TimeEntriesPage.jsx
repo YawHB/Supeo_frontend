@@ -62,6 +62,66 @@ export const EmployeeTimeEntriesPage = () => {
           )}
         </Col>
       </Row>
+
+      <Modal
+        isOpen={state.newTimeEntryFormModalState.isOpen}
+        toggle={state.newTimeEntryFormModalState.closeModal}
+        returnFocusAfterClose={false}
+        size="lg"
+      >
+        <ModalHeader toggle={state.newTimeEntryFormModalState.closeModal}>
+          {translate("time_entry.create_time_entry")}
+        </ModalHeader>
+
+        <ModalBody>
+          <CreateTimeEntryForm
+            onSubmit={state.handleSubmitNewTimeEntry}
+            isSubmitting={state.isSubmittingNewTimeEntry}
+          />
+        </ModalBody>
+
+        <ModalFooter>
+          <Button
+            type="submit"
+            color="primary"
+            form="newTimeEntryForm"
+            disabled={state.isSubmittingNewTimeEntry}
+          >
+            {translate("create")}
+          </Button>
+
+          <Button color="secondary" onClick={state.newTimeEntryFormModalState.closeModal}>
+            {translate("cancel")}
+          </Button>
+        </ModalFooter>
+      </Modal>
+
+      <Modal
+        isOpen={state.notificationInfoModalState.isOpen}
+        toggle={state.notificationInfoModalState.closeModal}
+        returnFocusAfterClose={false}
+        size="lg"
+      >
+        <ModalHeader toggle={state.notificationInfoModalState.closeModal}>
+          {translate("notification_status", {
+            startDate: state.openNotification?.startDate ?? "",
+            endDate: state.openNotification?.endDate ?? "",
+          })}
+        </ModalHeader>
+
+        <ModalBody>
+          <NotificationForm
+            notification={state.openNotification?.notification}
+            //readOnly={true}
+          />
+        </ModalBody>
+
+        <ModalFooter>
+          <Button color="secondary" onClick={state.notificationInfoModalState.closeModal}>
+            {translate("close")}
+          </Button>
+        </ModalFooter>
+      </Modal>
     </>
   );
 };
