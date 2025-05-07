@@ -12,13 +12,14 @@ export const GET_EMPLOYEES = gql`
 
 export const GET_TIME_ENTRIES_FOR_EMPLOYEE = gql`
   query {
-    employee(id: "20") {
+    employee(id: "10") {
       id
       firstName
       lastName
       timeEntries {
-        date
+        startDate
         startTime
+        endDate
         endTime
         duration
         comment
