@@ -26,9 +26,10 @@ const useTimeEntriesPageState = () => {
       label: translate("status"),
       type: "select",
       options: [
-        { label: translate("pending"), value: "PENDING" },
+        { label: translate("pending"), value: "AFVENTER" },
         { label: translate("approve"), value: "GODKENDT" },
         { label: translate("reject"), value: "AFVIST" },
+        { label: translate("underway"), value: "IGANG" },
       ],
       alwaysEnabled: true,
     },
