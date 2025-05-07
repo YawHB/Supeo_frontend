@@ -1,9 +1,9 @@
 import PageLayout from "../PageLayout.jsx";
 import { Routes, Route } from "react-router-dom";
 import ErrorBoundary from "./components/error/ErrorBoundary.jsx";
-import AdminHomePage from "./components/pages/admin/AdminHomePage.jsx";
+import AdminHomePage from "./components/pages/admin/home/AdminHomePage.jsx";
 import EmployeesPage from "./components/pages/admin/EmployeesPage.jsx";
-import TimeEntriesPage from "./components/pages/admin/TimeEntriesPage.jsx";
+import TimeEntriesPage from "./components/pages/admin/time-entries/TimeEntriesPage.jsx";
 import EmployeeHomePage from "./components/pages/employee/home/EmployeeHomePage.jsx";
 import { EmployeeTimeEntriesPage } from "./components/pages/employee/time-entries/TimeEntriesPage.jsx";
 

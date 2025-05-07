@@ -1,8 +1,8 @@
 import React from "react";
-import SideBar from "../../sidebar/SideBar";
+import SideBar from "../../../sidebar/SideBar";
 import { Row, Col, Table, Button } from "reactstrap";
 import { useTranslation } from "react-i18next";
-import useSideBarState from "../../sidebar/SideBarState";
+import useSideBarState from "../../../sidebar/SideBarState";
 import useTimeEntriesPageState from "./TimeEntriesPageState";
 import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
