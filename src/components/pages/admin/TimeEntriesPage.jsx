@@ -8,10 +8,10 @@ import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const statusClassMap = {
-  PENDING: "status-select--pending",
-  GODKENDT: "status-select--godkendt",
-  AFVIST: "status-select--afvist",
-  IGANG: "status-select--igang",
+  AFVENTER: "status-select--pending",
+  GODKENDT: "status-select--approve",
+  AFVIST: "status-select--reject",
+  IGANG: "status-select--underway",
 };
 
 const TimeEntriesPage = () => {

@@ -139,9 +139,10 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
               value={input.notification.status.value}
               onChange={input.notification.status.onChange}
             >
-              <option value="PENDING">{translate("pending")}</option>
+              <option value="AFVENTER">{translate("pending")}</option>
               <option value="GODKENDT">{translate("approve")}</option>
               <option value="AFVIST">{translate("reject")}</option>
+              <option value="IGANG">{translate("underway")}</option>
             </Input>
           </FormGroup>
         </Col> */}

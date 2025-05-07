@@ -47,19 +47,24 @@ h1 {
   font-weight: 600 !important;
 }
 
-.status-select--godkendt {
+.status-select--pending {
+  background-color: #F0A500 !important;
+  color: #34363C !important;
+}
+
+.status-select--approve {
   background-color: #4C9A4C !important;
   color: #FFFFFF !important;
 }
 
-.status-select--afvist {
+.status-select--reject {
   background-color: #C0392B !important;
   color: #FFFFFF !important;
 }
 
-.status-select--pending {
-  background-color: #F0A500 !important;
-  color: #34363C !important;
+.status-select--underway {
+  background-color: #7F8C8D !important;
+  color: #FFFFFF !important;
 }
 
 select.form-select {
