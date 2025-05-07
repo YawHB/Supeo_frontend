@@ -22,7 +22,7 @@
   "duration": "Duration",
   "break": "Break",
   "comment": "Comment",
-  "admin_comment": "Administrators Comment",
+  "admin_comment": "Administrators comment",
   "timestamp": "Timestamp",
   "notification_status": "Status for date {{startDate}} - {{endDate}}",
   "status": "Status",

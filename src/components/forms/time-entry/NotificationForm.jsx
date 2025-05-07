@@ -13,7 +13,7 @@ const NotificationForm = ({notification = {} }) => {
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label for="comment">{translate("comment")}</Label>
+            <Label for="comment">{translate("admin_comment")}</Label>
             <Input
               id="comment"
               name="comment"

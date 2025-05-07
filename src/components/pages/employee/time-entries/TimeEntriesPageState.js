@@ -1,127 +1,138 @@
-import { useState } from "react";
-import { Button } from "reactstrap";
-import { useTranslation } from "react-i18next";
-import { useApolloClient } from "@apollo/client";
-import { useMutation, useQuery } from "@apollo/client";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import { useModalState } from "../../../../hooks/useModalState.js";
-import { CREATE_TIME_ENTRY } from "../../../../services/api/time-entry/mutation.js";
-import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from "../../../../services/api/employee/queries.js";
+import { useState } from 'react'
+import { Button } from 'reactstrap'
+import { useTranslation } from 'react-i18next'
+import { useApolloClient, useMutation, useQuery } from '@apollo/client'
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+//import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
+import { useModalState } from '../../../../hooks/useModalState.js'
+import { CREATE_TIME_ENTRY } from '../../../../services/api/time-entry/mutation.js'
+import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from '../../../../services/api/employee/queries.js'
 
 export const useTimeEntriesPageState = () => {
-  const apolloClient = useApolloClient();
-  const [translate] = useTranslation(`global`);
-  const [timeEntriesData, setTimeEntriesData] = useState([]);
-  const [isLoadingTimeEntriesForm, setIsLoadingTimeEntriesForm] = useState(false);
-  const timeEntryFormModalState = useModalState();
-  const newTimeEntryFormModalState = useModalState();
+  const apolloClient = useApolloClient()
+  const [translate] = useTranslation('global')
+  const [timeEntriesData, setTimeEntriesData] = useState([])
+  const [isLoadingTimeEntriesForm, setIsLoadingTimeEntriesForm] = useState(false)
+  const timeEntryFormModalState = useModalState()
+  const newTimeEntryFormModalState = useModalState()
 
-  const notificationInfoModalState = useModalState();
-  const [openNotification, setOpenNotification] = useState(null);
+  const notificationInfoModalState = useModalState()
+  const [openNotification, setOpenNotification] = useState(null)
+
+  const statusClassMap = {
+    AFVENTER: 'status-select--pending',
+    GODKENDT: 'status-select--approve',
+    AFVIST: 'status-select--reject',
+    IGANG: 'status-select--underway',
+  }
+
+  const statusTranslationKeyMap = {
+    AFVENTER: 'pending',
+    GODKENDT: 'approve',
+    AFVIST: 'reject',
+    IGANG: 'underway',
+  }
 
   const timeEntriesColumns = [
     {
-      key: "startDate",
-      label: translate("start_date"),
-      type: "number",
+      key: 'startDate',
+      label: translate('start_date'),
+      type: 'number',
       sort: true,
     },
     {
-      key: "startTime",
-      label: translate("start_time"),
-      type: "number",
+      key: 'startTime',
+      label: translate('start_time'),
+      type: 'number',
       sort: true,
     },
     {
-      key: "endDate",
-      label: translate("end_date"),
-      type: "number",
+      key: 'endDate',
+      label: translate('end_date'),
+      type: 'number',
       sort: true,
     },
     {
-      key: "endTime",
-      label: translate("end_time"),
-      type: "number",
+      key: 'endTime',
+      label: translate('end_time'),
+      type: 'number',
       sort: true,
     },
     {
-      key: "duration",
-      label: translate("duration"),
-      type: "number",
+      key: 'duration',
+      label: translate('duration'),
+      type: 'number',
       sort: true,
     },
     {
-      key: "break",
-      label: translate("break"),
-      type: "text",
+      key: 'break',
+      label: translate('break'),
+      type: 'text',
       sort: true,
     },
     {
-      key: "comment",
-      label: translate("comment"),
-      type: "text",
+      key: 'comment',
+      label: translate('comment'),
+      type: 'text',
       sort: true,
     },
     {
-      key: "status",
-      label: translate("status"),
-      type: "view",
-      options: [
-        { label: translate("pending"), value: "AFVENTER" },
-        { label: translate("approve"), value: "GODKENDT" },
-        { label: translate("reject"), value: "AFVIST" },
-        { label: translate("underway"), value: "IGANG" },
-      ],
+      key: 'status',
+      label: translate('status'),
+      type: 'view',
+
       alwaysEnabled: true,
-      view: (timeEntry) => (
-        <Button
-          color="primary"
-          outline
-          onClick={() => {
-            setOpenNotification(timeEntry);
-            //setOpenNotification(timeEntry.notification);
-            notificationInfoModalState.openModal();
-          }}
-        >
-          <FontAwesomeIcon icon={faCircleInfo} />
-        </Button>
-      ),
+      view: (timeEntry) => {
+        const status = timeEntry.notification?.status || timeEntry.status
+        const translationKey = statusTranslationKeyMap[status] || 'underway'
+
+  return (
+    <Button
+      className={`status-button ${statusClassMap[status] || ''}`}
+      onClick={() => {
+        setOpenNotification(timeEntry)
+        notificationInfoModalState.openModal()
+      }}
+    >
+      {translate(translationKey)}
+    </Button>
+  )
+},
     },
     {
-      key: "",
+      key: '',
       label: ``,
       alwaysEnabled: true,
     },
-  ];
+  ]
 
   const { loading: isLoadingTimeEntries } = useQuery(GET_TIME_ENTRIES_FOR_EMPLOYEE, {
-    fetchPolicy: "cache-and-network",
+    fetchPolicy: 'cache-and-network',
     onCompleted: (data) => {
-      setTimeEntriesData(data.employee);
+      setTimeEntriesData(data.employee)
     },
     onError: (error) => {
-      console.error("Error fetching timeEntries:", error);
+      console.error('Error fetching timeEntries:', error)
     },
-  });
+  })
 
   const [createTimeEntry, { loading: isSubmittingNewTimeEntry }] = useMutation(CREATE_TIME_ENTRY, {
     refetchQueries: [GET_TIME_ENTRIES_FOR_EMPLOYEE],
-  });
+  })
 
   const handleSubmitNewTimeEntry = (timeEntry) => {
-    setIsLoadingTimeEntriesForm(true);
-    console.log("Submitting new time entry:", timeEntry);
+    setIsLoadingTimeEntriesForm(true)
+    console.log('Submitting new time entry:', timeEntry)
 
     createTimeEntry({
       variables: { newTimeEntry: timeEntry },
       onCompleted: () => {
-        setIsLoadingTimeEntriesForm(false);
-        newTimeEntryFormModalState.closeModal();
-        console.log("Submitting new time entry:", timeEntry);
+        setIsLoadingTimeEntriesForm(false)
+        newTimeEntryFormModalState.closeModal()
+        console.log('Submitting new time entry:', timeEntry)
       },
-    });
-  };
+    })
+  }
 
   return {
     translate,
@@ -139,5 +150,5 @@ export const useTimeEntriesPageState = () => {
     openNotification,
     setOpenNotification,
     setIsLoadingTimeEntriesForm,
-  };
-};
+  }
+}

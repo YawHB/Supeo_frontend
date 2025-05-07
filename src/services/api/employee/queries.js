@@ -24,7 +24,13 @@ export const GET_TIME_ENTRIES_FOR_EMPLOYEE = gql`
         duration
         comment
         id
+        notification {
+          id
+          status
+          comment
+          timestamp
+        }
       }
     }
   }
-`;
+`

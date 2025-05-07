@@ -22,7 +22,7 @@
   "duration": "Varighed",
   "break": "Pause",
   "comment": "Kommentar",
-  "admin_comment": "Administrators kommentar",
+  "admin_comment": "Administratorens kommentar",
   "timestamp": "Tidspunkt",
   "notification_status": "Status for dato {{startDate}} - {{endDate}}",
   "status": "Status",

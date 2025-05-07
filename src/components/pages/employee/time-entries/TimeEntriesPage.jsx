@@ -137,7 +137,7 @@ export const EmployeeTimeEntriesPage = () => {
 
         <ModalFooter>
           <Button color="secondary" onClick={state.notificationInfoModalState.closeModal}>
-            {translate("close")}
+            {translate("cancel")}
           </Button>
         </ModalFooter>
       </Modal>
