@@ -1,36 +1,44 @@
-import { useState } from "react";
 import { Button } from "reactstrap";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import showToast from "../../../lib/toast/toast.js";
-//import { useInput } from "../../../hooks/useInput.js";
-import usePagination from "../../../../hooks/usePagination.js";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { useModalState } from "../../../../hooks/useModalState.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import exportTableData from "../../../lib/export/exportTableData.js";
 import { useQuery, useMutation, useApolloClient } from "@apollo/client";
 import { GET_ALL_EMPLOYEES } from "../../../../services/api/admin/queries.js";
-import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from "../../../../services/api/admin/mutations.js";
+import {
+    CREATE_EMPLOYEE,
+    UPDATE_EMPLOYEE
+} from "../../../../services/api/admin/mutations.js";
+
+import exportTableData from "../../../lib/export/exportTableData.js";
+//import { useInput } from "../../../hooks/useInput.js";
+//import usePagination from "../../../../hooks/usePagination.js";
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
+
+  const [employees, setEmployees] = useState([])
+
+  const employeeFormModalState = useModalState()
+  const newEmployeeFormModalState = useModalState()
+
+  const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null)
+  const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false)
+
   //const searchInput = useDebouncedInput(" ");
   //const [orderBy, setOrderBy] = useState("id");
   //const employeeRolesFilterInput = useInput([]);
-  const [employees, setEmployees] = useState([])
-  const employeeFormModalState = useModalState()
-  const newEmployeeFormModalState = useModalState()
-  const [orderDirection, setOrderDirection] = useState('ASC')
-  const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null)
-  const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false)
-  const pagination = usePagination({ page: 1, perPage: 25 }, [10, 25, 50, 100, 250, 500])
+  //const [orderDirection, setOrderDirection] = useState('ASC')
+  //const pagination = usePagination({ page: 1, perPage: 25 }, [10, 25, 50, 100, 250, 500])
 
   const employeesTableColumns = [
     { key: 'id', label: translate('id'), type: 'text', sort: true },
     { key: 'firstName', label: translate('first_name'), type: 'text', sort: true },
     { key: 'lastName', label: translate('last_name'), type: 'text', sort: true },
-    { key: 'role', label: translate('role'), type: 'text', sort: true },
+    //{ key: 'role', label: translate('role'), type: 'text', sort: true },
     { key: 'phoneNumber', label: translate('phone'), type: 'text', sort: true },
     { key: 'email', label: translate('email'), type: 'text', sort: true },
     {
@@ -167,14 +175,14 @@ const useEmployeesPageState = () => {
     //orderBy,
     employees,
     translate,
-    pagination,
+    //pagination,
     //setOrderBy,
     setEmployees,
     apolloClient,
-    orderDirection,
+    //orderDirection,
     createEmployee,
     updateEmployee,
-    setOrderDirection,
+    //setOrderDirection,
     handleExportTable,
     isLoadingEmployees,
     isUpdatingEmployee,
