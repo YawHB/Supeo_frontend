@@ -2,7 +2,7 @@ import useNotificationFormState from "./NotificationFormState.js";
 import { Row, Col, FormGroup, Label, Input, Form } from "reactstrap";
 import { useTranslation } from "react-i18next";
 
-const NotificationForm = ({ notification = {} }) => {
+const NotificationForm = ({notification = {} }) => {
   const [translate] = useTranslation("global");
   const { comment, status, timestamp } = useNotificationFormState(notification);
 
