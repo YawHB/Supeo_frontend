@@ -1,11 +1,11 @@
-import PageLayout from "../PageLayout.jsx";
-import { Routes, Route } from "react-router-dom";
-import ErrorBoundary from "./components/error/ErrorBoundary.jsx";
-import AdminHomePage from "./components/pages/admin/home/AdminHomePage.jsx";
-import EmployeesPage from "./components/pages/admin/EmployeesPage.jsx";
-import TimeEntriesPage from "./components/pages/admin/time-entries/TimeEntriesPage.jsx";
-import EmployeeHomePage from "./components/pages/employee/home/EmployeeHomePage.jsx";
-import { EmployeeTimeEntriesPage } from "./components/pages/employee/time-entries/TimeEntriesPage.jsx";
+import PageLayout from '../PageLayout.jsx'
+import { Routes, Route } from 'react-router-dom'
+import ErrorBoundary from './components/error/ErrorBoundary.jsx'
+import AdminHomePage from './components/pages/admin/home/AdminHomePage.jsx'
+import EmployeesPage from './components/pages/admin/employees/EmployeesPage.jsx'
+import TimeEntriesPage from './components/pages/admin/time-entries/TimeEntriesPage.jsx'
+import EmployeeHomePage from './components/pages/employee/home/EmployeeHomePage.jsx'
+import { EmployeeTimeEntriesPage } from './components/pages/employee/time-entries/TimeEntriesPage.jsx'
 
 function App() {
   return (
@@ -13,17 +13,17 @@ function App() {
       <Routes>
         <Route element={<PageLayout />}>
           <Route index element={<EmployeesPage />} />
-          <Route path="*" element={<EmployeesPage />} />
-          <Route path="/" element={<EmployeesPage />} />
-          <Route path="admin" element={<AdminHomePage />} />
-          <Route path="employee" element={<EmployeeHomePage />} />
-          <Route path="employee/time-entries" element={<EmployeeTimeEntriesPage />} />
-          <Route path="employees" element={<EmployeesPage />} />
-          <Route path="timeentries" element={<TimeEntriesPage />} />
+          <Route path='*' element={<EmployeesPage />} />
+          <Route path='/' element={<EmployeesPage />} />
+          <Route path='admin' element={<AdminHomePage />} />
+          <Route path='employee' element={<EmployeeHomePage />} />
+          <Route path='employee/time-entries' element={<EmployeeTimeEntriesPage />} />
+          <Route path='employees' element={<EmployeesPage />} />
+          <Route path='timeentries' element={<TimeEntriesPage />} />
         </Route>
       </Routes>
     </ErrorBoundary>
-  );
+  )
 }
 
-export default App;
+export default App

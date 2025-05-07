@@ -1,11 +1,11 @@
-import React from "react";
-import SideBar from "../../sidebar/SideBar";
-import { useTranslation } from "react-i18next";
-import EmployeeForm from "../../forms/employee/EmployeeForm";
-import useSideBarState from "../../sidebar/SideBarState";
-import useEmployeesPageState from "./EmployeesPageState";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faFileExcel, faSave } from "@fortawesome/free-solid-svg-icons";
+import React from 'react'
+import SideBar from '../../../sidebar/SideBar'
+import { useTranslation } from 'react-i18next'
+import EmployeeForm from '../../../forms/employee/EmployeeForm'
+import useSideBarState from '../../../sidebar/SideBarState'
+import useEmployeesPageState from '../employees/EmployeesPageState'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserPlus, faFileExcel, faSave } from '@fortawesome/free-solid-svg-icons'
 import {
   Button,
   Modal,
@@ -16,15 +16,15 @@ import {
   Col,
   Table,
   Input,
-} from "reactstrap";
-import Select from "react-select";
+} from 'reactstrap'
+import Select from 'react-select'
 
 const EmployeesPage = () => {
-  const [translate] = useTranslation(`global`);
-  const state = useEmployeesPageState();
-  const sideBarState = useSideBarState();
+  const [translate] = useTranslation(`global`)
+  const state = useEmployeesPageState()
+  const sideBarState = useSideBarState()
 
-  document.title = translate("page_title.administration_employees");
+  document.title = translate('page_title.administration_employees')
 
   return (
     <>
@@ -109,7 +109,6 @@ const EmployeesPage = () => {
               </tbody>
             </Table>
           )}
-
         </Col>
       </Row>
 
@@ -190,6 +189,6 @@ const EmployeesPage = () => {
       </Modal>
     </>
   )
-};
+}
 
-export default EmployeesPage;
+export default EmployeesPage

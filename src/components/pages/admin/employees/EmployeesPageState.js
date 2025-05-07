@@ -1,16 +1,16 @@
 import { useState } from "react";
 import { Button } from "reactstrap";
 import { useTranslation } from "react-i18next";
-import showToast from "../../lib/toast/toast.js";
+import showToast from "../../../lib/toast/toast.js";
 //import { useInput } from "../../../hooks/useInput.js";
-import usePagination from "../../../hooks/usePagination.js";
+import usePagination from "../../../../hooks/usePagination.js";
 import { faPencil } from "@fortawesome/free-solid-svg-icons";
-import { useModalState } from "../../../hooks/useModalState.js";
+import { useModalState } from "../../../../hooks/useModalState.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import exportTableData from "../../lib/export/exportTableData.js";
+import exportTableData from "../../../lib/export/exportTableData.js";
 import { useQuery, useMutation, useApolloClient } from "@apollo/client";
-import { GET_ALL_EMPLOYEES } from "../../../services/api/admin/queries.js";
-import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from "../../../services/api/admin/mutations.js";
+import { GET_ALL_EMPLOYEES } from "../../../../services/api/admin/queries.js";
+import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from "../../../../services/api/admin/mutations.js";
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient();
