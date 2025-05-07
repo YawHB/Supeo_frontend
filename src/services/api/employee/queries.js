@@ -6,7 +6,6 @@ export const GET_EMPLOYEES = gql`
       id
       firstName
       lastName
-      role
     }
   }
 `;
@@ -17,7 +16,6 @@ export const GET_TIME_ENTRIES_FOR_EMPLOYEE = gql`
       id
       firstName
       lastName
-      role
       timeEntries {
         date
         startTime
