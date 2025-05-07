@@ -28,6 +28,7 @@
   "status": "Status",
   "pending": "Pending",
   "approve": "Approve",
+  "underway": "Underway",
   "reject": "Reject",
   "export": "Export",
   "edit": "Edit",
