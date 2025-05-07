@@ -66,7 +66,6 @@
     "create_employee": "Create employee",
     "update_employee": "Update employee",
     "edit_employee": "Edit '{{firstName}} {{lastName}}'",
-    "delete_employee": "Delete employee",
     "search_employee": "Search for employee",
     "select_employee_role": "Select employee role",
     "create_new_employee": "Create new employee"
