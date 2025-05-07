@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Table } from "reactstrap";
+import { Row, Col, Table, Modal, ModalBody, ModalHeader, ModalFooter } from "reactstrap";
 import { useTranslation } from "react-i18next";
 import { useTimeEntriesPageState } from "./TimeEntriesPageState.js";
 
@@ -36,10 +36,7 @@ export const EmployeeTimeEntriesPage = () => {
                 <tbody>
                   {state.timeEntriesData.length === 0 ? (
                     <tr>
-                      <td
-                        colSpan={state.timeEntriesColumns.length}
-                        className="text-center"
-                      >
+                      <td colSpan={state.timeEntriesColumns.length} className="text-center">
                         {translate("no_data")}
                       </td>
                     </tr>
