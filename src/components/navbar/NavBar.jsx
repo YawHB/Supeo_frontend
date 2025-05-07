@@ -29,7 +29,7 @@ const NavBar = () => {
       <Navbar dark expand="md" className="bg-sidebar">
         <NavbarBrand tag={Link} to="/">
           <Logo
-            text="Timeregistrering"
+            text=""
             className="px-3"
             logoColor="#E6FBB5"
             textColor="#F8F9FA"

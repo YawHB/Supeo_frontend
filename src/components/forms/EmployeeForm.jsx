@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import useEmployeeFormState from "./EmployeeFormState";
 import { Form, Row, Col, Input, Label, FormGroup } from "reactstrap";
+import useEmployeeFormState from "./EmployeeFormState";
 
 const EmployeeForm = ({ onSubmit, employee = null }) => {
   const [translate] = useTranslation("global");
@@ -60,21 +60,22 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label for="role">
-              {translate("role")}
+            <Label for="email">
+              {translate("email")}
               <span className="text-danger">*</span>
             </Label>
             <Input
-              id="role"
-              name="role"
-              placeholder={translate("role_placeholder")}
-              type="text"
-              value={input.role.value}
-              onChange={input.role.onChange}
+              id="email"
+              name="email"
+              placeholder={translate("email_placeholder")}
+              type="email"
+              value={input.email.value}
+              onChange={input.email.onChange}
               required
             />
           </FormGroup>
         </Col>
+
         <Col md={6}>
           <FormGroup>
             <Label for="phoneNumber">
@@ -95,23 +96,22 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
       </Row>
 
       <Row>
-        <Col md={6}>
+        {/* <Col md={6}>
           <FormGroup>
-            <Label for="email">
-              {translate("email")}
-              <span className="text-danger">*</span>
+            <Label for="role">{translate("role")}
+            <span className="text-danger">*</span>
             </Label>
             <Input
-              id="email"
-              name="email"
-              placeholder={translate("email_placeholder")}
-              type="email"
-              value={input.email.value}
-              onChange={input.email.onChange}
+              id="role"
+              name="role"
+              placeholder={translate("role_placeholder")}
+              type="text"
+              value={input.role.value}
+              onChange={input.role.onChange}
               required
             />
           </FormGroup>
-        </Col>
+        </Col> */}
       </Row>
     </Form>
   );
