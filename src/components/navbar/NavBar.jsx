@@ -29,8 +29,8 @@ const NavBar = () => {
       <Navbar dark expand="md" className="bg-sidebar">
         <NavbarBrand tag={Link} to="/">
           <Logo
-            text=""
             className="px-3"
+            text=""
             logoColor="#E6FBB5"
             textColor="#F8F9FA"
             imgStyle={{ height: `1.75rem` }}
