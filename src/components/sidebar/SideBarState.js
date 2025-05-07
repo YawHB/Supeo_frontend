@@ -2,10 +2,11 @@ import { useQuery } from "@apollo/client";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { sideBarItemsMap } from "./SideBarItems";
 import { useCallback, useEffect, useState } from "react";
 import { USER_MENU_LINKS } from "../../services/api/queries";
 import { standardApolloError } from "../lib/error-handling/errorHandling";
+
+import { sideBarItemsMap } from "./SideBarItems";
 
 const useSideBarState = () => {
   const location = useLocation();
