@@ -3,6 +3,9 @@ import { Row, Col, Table, Modal, ModalBody, ModalHeader, ModalFooter } from "rea
 import { useTranslation } from "react-i18next";
 import { useTimeEntriesPageState } from "./TimeEntriesPageState.js";
 
+import CreateTimeEntryForm from "../../../forms/time-entry/CreateTimeEntryForm.jsx";
+import NotificationForm from "../../../forms/time-entry/NotificationForm.jsx";
+
 export const EmployeeTimeEntriesPage = () => {
   const [translate] = useTranslation("global");
   const state = useTimeEntriesPageState();
