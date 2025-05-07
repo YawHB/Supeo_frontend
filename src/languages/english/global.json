@@ -24,6 +24,7 @@
   "comment": "Comment",
   "admin_comment": "Administrators comment",
   "timestamp": "Timestamp",
+  "created_at": "Created",
   "notification_status": "Status for date {{startDate}} - {{endDate}}",
   "status": "Status",
   "pending": "Pending",

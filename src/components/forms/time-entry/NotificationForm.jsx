@@ -19,8 +19,6 @@ const NotificationForm = ({notification = {} }) => {
               name="comment"
               type="text"
               value={comment.value}
-              //onChange={comment.onChange}
-              //required
               disabled
             />
           </FormGroup>
@@ -33,8 +31,6 @@ const NotificationForm = ({notification = {} }) => {
               name="status"
               type="text"
               value={status.value}
-              //onChange={status.onChange}
-              //required
               disabled
             />
           </FormGroup>
@@ -43,14 +39,12 @@ const NotificationForm = ({notification = {} }) => {
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label for="timestamp">{translate("timestamp")}</Label>
+            <Label for="timestamp">{translate("created")}</Label>
             <Input
               id="timestamp"
               name="timestamp"
-              type="datetime-local"
+              //type="datetime-local"
               value={timestamp.value}
-              //onChange={timestamp.onChange}
-              //required
               disabled
             />
           </FormGroup>
