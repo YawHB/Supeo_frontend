@@ -37,15 +37,13 @@
     "administration_time_entries": "Administration - Time Entries",
     "administration_employees": "Administration - Employees",
     "employee_home": "Employee - Home",
-    "admin_home": "Admin - Home",
-    "admin_label": "Admin"
+    "admin_home": "Admin - Home"
   },
   "nav_bar": {
     "admin_time_entries": "Time Entries",
     "admin_employees": "Employees",
     "employee_home": "Employee - Home",
-    "admin_home": "Admin - Home",
-    "admin_label": "Admin"
+    "admin_home": "Admin - Home"
   },
   "side_bar": {
     "admin_home": "Admin - Home",
