@@ -1,7 +1,7 @@
 import React from "react";
 import SideBar from "../../sidebar/SideBar";
 import { useTranslation } from "react-i18next";
-import EmployeeForm from "../../forms/EmployeeForm";
+import EmployeeForm from "../../forms/employee/EmployeeForm";
 import useSideBarState from "../../sidebar/SideBarState";
 import useEmployeesPageState from "./EmployeesPageState";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
