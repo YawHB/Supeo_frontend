@@ -1,20 +1,13 @@
 import { gql } from "@apollo/client";
 
 export const GET_ALL_EMPLOYEES = gql`
-  query GET_ALL_EMPLOYEES($page: Int!, $perPage: Int!) {
-    employees(pagination: { page: $page, perPage: $perPage }) {
-      pagination {
-        page
-        perPage
-        totalCount
-      }
-      employees {
-        id
-        firstName
-        lastName
-        phoneNumber
-        email
-      }
+  query Employees {
+    employees {
+      id
+      firstName
+      lastName
+      phoneNumber
+      email
     }
   }
 `;
