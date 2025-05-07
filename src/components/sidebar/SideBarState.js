@@ -52,13 +52,7 @@ const useSideBarState = () => {
     } else {
       setShowUserMenuLinks(false);
     }
-    setSystemMenuLinks([
-      "admin",
-      "timeentries",
-      "employees",
-      "employee",
-      "employee_time_entries",
-    ]);
+    setSystemMenuLinks(["admin", "timeentries", "employees", "employee", "employee_time_entries"]);
   }, [location]);
   
   useEffect(() => {
