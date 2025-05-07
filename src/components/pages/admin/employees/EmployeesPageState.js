@@ -58,11 +58,15 @@ const useEmployeesPageState = () => {
     onCompleted: (data) => setEmployees(data.employees),
   });
 
-  const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(CREATE_EMPLOYEE, {
-    refetchQueries: [GET_ALL_EMPLOYEES],
-  });
+  const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(
+      CREATE_EMPLOYEE,
+      {
+          refetchQueries: [GET_ALL_EMPLOYEES],
+      }
+  );
 
-  const [updateEmployee, { loading: isUpdatingEmployee }] = useMutation(UPDATE_EMPLOYEE);
+  const [updateEmployee, { loading: isUpdatingEmployee }] = 
+        useMutation(UPDATE_EMPLOYEE);
 
   // const { loading: isLoadingEmployees, data: employeesData, variables: employeesVariables} = useQuery(GET_ALL_EMPLOYEES, {
   //   variables: {
