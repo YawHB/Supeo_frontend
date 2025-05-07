@@ -2,8 +2,8 @@ import Logo from "../Logo.jsx";
 import {
   Nav,
   Navbar,
-  Button,
-  NavLink,
+  //Button,
+  //NavLink,
   NavItem,
   Collapse,
   NavbarBrand,
@@ -12,16 +12,16 @@ import {
 import { Link } from "react-router-dom";
 import { Fragment } from "react/jsx-runtime";
 import useNavBarState from "./NavBarState";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOut } from "@fortawesome/free-solid-svg-icons";
+//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+//import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
   const {
     isBurgerCollapsed,
     toggleBurgerCollapsed,
     navItems,
-    userFullName,
-    logOff,
+    //userFullName,
+    //logOff,
   } = useNavBarState();
 
   return (
@@ -47,13 +47,13 @@ const NavBar = () => {
               {navItems.map((item) => (
                 <Fragment key={item.label}>
                   <NavItem>
-                    <NavLink tag={Link} to={item.link} className="text-light">
+                    {/* <NavLink tag={Link} to={item.link} className="text-light">
                       <FontAwesomeIcon icon={item.icon} size="xl" />
-                    </NavLink>
+                    </NavLink> */}
                   </NavItem>
                 </Fragment>
               ))}
-              <NavItem
+              {/* <NavItem
                 className="d-none d-md-block mx-2 bg-light"
                 style={{ width: "1px", height: "24px" }}
               />
@@ -64,7 +64,7 @@ const NavBar = () => {
                   icon={faSignOut}
                 />
                 <span>{userFullName}</span>
-              </Button>
+              </Button> */}
             </Nav>
           </div>
         </Collapse>
