@@ -17,11 +17,11 @@ import { faSignOut } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
   const {
-    logOff,
-    navItems,
-    userFullName,
     isBurgerCollapsed,
     toggleBurgerCollapsed,
+    navItems,
+    userFullName,
+    logOff,
   } = useNavBarState();
 
   return (
