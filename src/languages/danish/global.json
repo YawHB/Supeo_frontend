@@ -35,8 +35,7 @@
     "administration_time_entries": "Administration - Tidsregistreringer",
     "administration_employees": "Administration - Medarbejdere",
     "employee_home": "Medarbejder - Hjem",
-    "admin_home": "Admin - Hjem",
-    "admin_label": "Admin"
+    "admin_home": "Admin - Hjem"
   },
   "nav_bar": {
     "admin_time_entries": "Tidsregistreringer",
