@@ -13,7 +13,6 @@ export const GET_ALL_EMPLOYEES = gql`
         firstName
         lastName
         phoneNumber
-        role
         email
       }
     }
@@ -29,7 +28,6 @@ export const GET_EMPLOYEE = gql`
       firstName
       email
       phoneNumber
-      role
       timeEntries {
         id
       }
