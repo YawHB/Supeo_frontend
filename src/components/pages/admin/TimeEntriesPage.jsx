@@ -11,6 +11,7 @@ const statusClassMap = {
   PENDING: "status-select--pending",
   GODKENDT: "status-select--godkendt",
   AFVIST: "status-select--afvist",
+  IGANG: "status-select--igang",
 };
 
 const TimeEntriesPage = () => {
