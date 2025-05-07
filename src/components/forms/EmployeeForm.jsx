@@ -11,7 +11,7 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
     onSubmit({
       firstName: input.firstName.value,
       lastName: input.lastName.value,
-      role: input.role.value,
+      //role: input.role.value,
       email: input.email.value,
       phoneNumber: input.phoneNumber.value,
     });
