@@ -4,15 +4,11 @@ import { useTranslation } from "react-i18next";
 import { useTimeEntriesPageState } from "./TimeEntriesPageState.js";
 
 export const EmployeeTimeEntriesPage = () => {
-  console.log("Inside time entries page");
   const [translate] = useTranslation("global");
   const state = useTimeEntriesPageState();
 
   document.title = translate("nav_bar.admin_employees");
 
-  console.log(state.timeEntriesData);
-  console.log(state.timeEntriesData.firstName);
-  console.log(state.timeEntriesData.timeEntries);
   const { firstName, lastName, role } = state.timeEntriesData;
 
   return (
