@@ -33,3 +33,22 @@ export const GET_EMPLOYEE = gql`
     }
   }
 `;
+
+// export const GET_ALL_EMPLOYEES = gql`
+//   query GET_ALL_EMPLOYEES($page: Int!, $perPage: Int!) {
+//     employees(pagination: { page: $page, perPage: $perPage }) {
+//       pagination {
+//         page
+//         perPage
+//         totalCount
+//       }
+//       employees {
+//         id
+//         firstName
+//         lastName
+//         phoneNumber
+//         email
+//       }
+//     }
+//   }
+// `;
