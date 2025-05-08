@@ -1,25 +1,25 @@
-import React from "react";
-import SideBar from "../../../sidebar/Sidebar";
-import { Row, Col, Table, Button } from "reactstrap";
-import { useTranslation } from "react-i18next";
-import useSideBarState from "../../../sidebar/SideBarState";
-import useTimeEntriesPageState from "./TimeEntriesPageState";
-import { faFileExcel } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react'
+import SideBar from '../../../sidebar/Sidebar'
+import { Row, Col, Table, Button } from 'reactstrap'
+import { useTranslation } from 'react-i18next'
+import useSideBarState from '../../../sidebar/SideBarState'
+import useTimeEntriesPageState from './TimeEntriesPageState'
+import { faFileExcel } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const statusClassMap = {
-  AFVENTER: "status-select--pending",
-  GODKENDT: "status-select--approve",
-  AFVIST: "status-select--reject",
-  IGANG: "status-select--underway",
-};
+  AFVENTER: 'status-select--pending',
+  GODKENDT: 'status-select--approve',
+  AFVIST: 'status-select--reject',
+  IGANG: 'status-select--underway',
+}
 
 const TimeEntriesPage = () => {
-  const [translate] = useTranslation("global");
-  const state = useTimeEntriesPageState();
-  const sideBarState = useSideBarState();
+  const [translate] = useTranslation('global')
+  const state = useTimeEntriesPageState()
+  const sideBarState = useSideBarState()
 
-  document.title = translate("page_title.administration_time_entries");
+  document.title = translate('page_title.administration_time_entries')
 
   return (
     <>
@@ -61,31 +61,38 @@ const TimeEntriesPage = () => {
                     </td>
                   </tr>
                 ) : (
-                  state.timeEntries.map((timeEntry) => (
+                  state.timeEntries.map((timeEntry) => {
+                    console.log('TimeEntry', timeEntry)
+
+                    return (
+
                     <tr key={timeEntry.id}>
-                      {state.timeEntriesTableColumns.map((column) => (
-                        <td key={column.key}>
-                          {column.key === 'status' ? (
-                            <select
-                              className={`form-select ${statusClassMap[timeEntry.status] || ''}`}
-                              value={timeEntry.status}
-                              onChange={(e) =>
-                                state.handleStatusChange(timeEntry.id, e.target.value)
-                              }
-                            >
-                              {column.options?.map((option) => (
-                                <option key={option.value} value={option.value}>
-                                  {option.label}
-                                </option>
-                              ))}
-                            </select>
-                          ) : (
-                            timeEntry[column.key]
-                          )}
-                        </td>
-                      ))}
+                      {state.timeEntriesTableColumns.map((column) => {
+                        return (
+                          <td key={column.key}>
+                            {column.key === 'status' ? (
+                              <select
+                                className={`form-select ${statusClassMap[timeEntry.status] || ''}`}
+                                value={timeEntry.status}
+                                onChange={(e) =>
+                                  state.handleStatusChange(timeEntry.id, e.target.value)
+                                }
+                              >
+                                {column.options?.map((option) => (
+                                  <option key={option.value} value={option.value}>
+                                    {option.label}
+                                  </option>
+                                ))}
+                              </select>
+                            ) : (
+                              timeEntry[column.key]
+                            )}
+                          </td>
+                        )
+                      })}
                     </tr>
-                  ))
+                  )
+                })
                 )}
               </tbody>
             </Table>
@@ -94,6 +101,6 @@ const TimeEntriesPage = () => {
       </Row>
     </>
   )
-};
+}
 
-export default TimeEntriesPage;
+export default TimeEntriesPage

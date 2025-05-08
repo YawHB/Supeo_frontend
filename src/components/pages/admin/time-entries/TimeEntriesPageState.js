@@ -5,35 +5,52 @@ import { GET_ALL_TIME_ENTRIES } from "../../../../services/api/time-entry/querie
 import { UPDATE_TIME_ENTRY_STATUS } from "../../../../services/api/admin/mutations.js";
 import exportTableData from "../../../lib/export/exportTableData.js";
 import showToast from "../../../lib/toast/toast.js";
+import { Input } from "reactstrap";
 
 const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient();
   const [translate] = useTranslation("global");
   const [timeEntries, setTimeEntries] = useState([]);
   const [updateTimeEntryStatus] = useMutation(UPDATE_TIME_ENTRY_STATUS);
+  
 
   const timeEntriesTableColumns = [
-    { key: "id", label: translate("id"), type: "text", sort: true },
-    { key: "firstName", label: translate("first_name"), type: "text", sort: true },
-    { key: "lastName", label: translate("last_name"), type: "text", sort: true },
-    { key: "date", label: translate("date"), type: "date", sort: true },
-    { key: "startTime", label: translate("start_time"), type: "text", sort: true },
-    { key: "endTime", label: translate("end_time"), type: "text", sort: true },
-    { key: "duration", label: translate("duration"), type: "text", sort: true },
-    { key: "comment", label: translate("comment"), type: "text", sort: true },
+    { key: 'id', label: translate('id'), type: 'text', sort: true },
+    { key: 'firstName', label: translate('first_name'), type: 'text', sort: true },
+    { key: 'lastName', label: translate('last_name'), type: 'text', sort: true },
+    { key: 'date', label: translate('date'), type: 'date', sort: true },
+    { key: 'startTime', label: translate('start_time'), type: 'text', sort: true },
+    { key: 'endTime', label: translate('end_time'), type: 'text', sort: true },
+    { key: 'duration', label: translate('duration'), type: 'text', sort: true },
+    { key: 'comment', label: translate('comment'), type: 'text', sort: true },
     {
-      key: "status",
-      label: translate("status"),
-      type: "select",
+      key: 'status',
+      label: translate('status'),
+      type: 'select',
       options: [
-        { label: translate("pending"), value: "AFVENTER" },
-        { label: translate("approve"), value: "GODKENDT" },
-        { label: translate("reject"), value: "AFVIST" },
-        { label: translate("underway"), value: "IGANG" },
+        { label: translate('pending'), value: 'AFVENTER' },
+        { label: translate('approve'), value: 'GODKENDT' },
+        { label: translate('reject'), value: 'AFVIST' },
+        { label: translate('underway'), value: 'IGANG' },
       ],
       alwaysEnabled: true,
     },
-  ];
+    {
+      key: 'admin_comment',
+      label: 'admin_comment',
+      type: `textarea`,
+      alwaysEnabled: true,
+      view: (input) => (
+        <Input
+          id='comment'
+          name='comment'
+          type='text'
+          value={input.comment.value}
+          onChange={input.comment.onChange}
+        />
+      ),
+    },
+  ]
 
   const { loading: isLoadingTimeEntries } = useQuery(GET_ALL_TIME_ENTRIES, {
     fetchPolicy: "cache-and-network",
@@ -41,8 +58,9 @@ const useTimeEntriesPageState = () => {
   });
 
   const handleStatusChange = async (entryId, newStatus) => {
+    console.log("entryId, and newStatus", entryId, newStatus);
     const updatedEntries = timeEntries.map((entry) =>
-      entry.id === entryId ? { ...entry, status: newStatus } : entry
+    entry.id === entryId ? { ...entry, status: newStatus } : entry
     );
     setTimeEntries(updatedEntries);
 
