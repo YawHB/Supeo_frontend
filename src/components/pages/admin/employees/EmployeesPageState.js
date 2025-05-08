@@ -11,6 +11,7 @@ import {
     CREATE_EMPLOYEE,
     UPDATE_EMPLOYEE
 } from "../../../../services/api/admin/mutations.js";
+import { GET_ROLES } from "../../../../services/api/employee/queries.js";
 
 import exportTableData from "../../../lib/export/exportTableData.js";
 //import { useInput } from "../../../hooks/useInput.js";
@@ -19,6 +20,7 @@ import exportTableData from "../../../lib/export/exportTableData.js";
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
+  const [roles, setRoles] = useState([])
 
   const [employees, setEmployees] = useState([])
 
@@ -60,6 +62,15 @@ const useEmployeesPageState = () => {
       ),
     },
   ]
+
+  
+  const { loading: isLoadingRoles } = useQuery(GET_ROLES, {
+    fetchPolicy: 'cache-and-network',
+    onCompleted: (data) => setRoles(data.roles)    
+  })
+
+  console.log('roles', roles)
+
 
   const { loading: isLoadingEmployees, refetch } = useQuery(GET_ALL_EMPLOYEES, {
     fetchPolicy: 'cache-and-network',
@@ -180,6 +191,8 @@ const useEmployeesPageState = () => {
     newEmployeeFormModalState,
     handleSubmitNewEmployee,
     employees,
+    roles,
+    isLoadingRoles,
     handleSubmitEditedEmployee,
     createEmployee,
     isSubmittingNewEmployee,
