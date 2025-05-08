@@ -34,3 +34,12 @@ export const GET_TIME_ENTRIES_FOR_EMPLOYEE = gql`
     }
   }
 `
+
+export const GET_ROLES = gql`
+  query Roles {
+    roles {
+      id
+      roleName
+    }
+  }
+`

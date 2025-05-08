@@ -6,6 +6,8 @@ export const CREATE_EMPLOYEE = gql`
       id
       firstName
       lastName
+      permissionID
+      roleID
       email
       phoneNumber
     }
