@@ -5,7 +5,7 @@ import { useApolloClient, useMutation, useQuery } from '@apollo/client'
 //import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 //import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
 import { useModalState } from '../../../../hooks/useModalState.js'
-import { CREATE_TIME_ENTRY } from '../../../../services/api/time-entry/mutation.js'
+import { CREATE_TIME_ENTRY } from '../../../../services/api/time-entry/mutations.js'
 import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from '../../../../services/api/employee/queries.js'
 
 export const useTimeEntriesPageState = () => {
