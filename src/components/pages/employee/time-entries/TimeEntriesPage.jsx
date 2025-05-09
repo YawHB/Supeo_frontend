@@ -7,7 +7,6 @@ import CreateTimeEntryForm from '../../../forms/time-entry/CreateTimeEntryForm.j
 import NotificationForm from '../../../forms/time-entry/NotificationForm.jsx'
 
 export const EmployeeTimeEntriesPage = () => {
-  console.log('Inside time entries page')
   const [translate] = useTranslation('global')
   const state = useTimeEntriesPageState()
 
@@ -23,46 +22,112 @@ export const EmployeeTimeEntriesPage = () => {
             <h1>
               {firstName} {lastName} - {role}
             </h1>
-            <div className='d-flex align-items-center gap-4'></div>
+            <div className='d-flex align-items-center gap-4'>
+              <Button
+                color='primary'
+                outline
+                onClick={() => state.newTimeEntryFormModalState.openModal({})}
+                className='no-wrap'
+                style={{ minWidth: '200px' }}
+              >
+                <span>{translate('time_entry.create_time_entry')}</span>{' '}
+              </Button>
+            </div>
           </Col>
 
           {!state.isLoadingTimeEntries && (
-            <div className='mt-4'>
-              <Table striped bordered hover responsive>
-                <thead className='table-light'>
-                  <tr>
-                    {state.timeEntriesColumns.map((column) => (
-                      <th key={column.key}>{column.label}</th>
-                    ))}
-                  </tr>
-                </thead>
+            <Table responsive>
+              <thead>
+                <tr>
+                  {state.timeEntriesColumns.map((column) => (
+                    <th key={column.key}>{column.label}</th>
+                  ))}
+                </tr>
+              </thead>
 
-                <tbody>
-                  {state.timeEntriesData.length === 0 ? (
-                    <tr>
-                      <td colSpan={state.timeEntriesColumns.length} className='text-center'>
-                        {translate('no_data')}
-                      </td>
+              <tbody>
+                {state.timeEntriesData.length === 0 ? (
+                  <tr>
+                    <td colSpan={state.timeEntriesColumns.length} className='text-center'>
+                      {translate('no_data')}
+                    </td>
+                  </tr>
+                ) : (
+                  state.timeEntriesData.timeEntries.map((timeEntry) => (
+                    <tr key={timeEntry.id}>
+                      {state.timeEntriesColumns.map((column) => (
+                        <td key={column.key}>
+                          {column.type === 'view' ? column.view(timeEntry) : timeEntry[column.key]}
+                        </td>
+                      ))}
                     </tr>
-                  ) : (
-                    state.timeEntriesData.timeEntries.map((timeEntry) => (
-                      <tr key={timeEntry.id}>
-                        {state.timeEntriesColumns.map((column) => (
-                          <td key={column.key}>
-                            {column.type === 'view'
-                              ? column.view(timeEntry)
-                              : timeEntry[column.key]}
-                          </td>
-                        ))}
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </Table>
-            </div>
+                  ))
+                )}
+              </tbody>
+            </Table>
           )}
         </Col>
       </Row>
+
+      <Modal
+        isOpen={state.newTimeEntryFormModalState.isOpen}
+        toggle={state.newTimeEntryFormModalState.closeModal}
+        returnFocusAfterClose={false}
+        size='lg'
+      >
+        <ModalHeader toggle={state.newTimeEntryFormModalState.closeModal}>
+          {translate('time_entry.create_time_entry')}
+        </ModalHeader>
+
+        <ModalBody>
+          <CreateTimeEntryForm
+            onSubmit={state.handleSubmitNewTimeEntry}
+            isSubmitting={state.isSubmittingNewTimeEntry}
+          />
+        </ModalBody>
+
+        <ModalFooter>
+          <Button
+            type='submit'
+            color='primary'
+            form='newTimeEntryForm'
+            disabled={state.isSubmittingNewTimeEntry}
+          >
+            {translate('create')}
+          </Button>
+
+          <Button color='secondary' onClick={state.newTimeEntryFormModalState.closeModal}>
+            {translate('cancel')}
+          </Button>
+        </ModalFooter>
+      </Modal>
+
+      <Modal
+        isOpen={state.notificationInfoModalState.isOpen}
+        toggle={state.notificationInfoModalState.closeModal}
+        returnFocusAfterClose={false}
+        size='lg'
+      >
+        <ModalHeader toggle={state.notificationInfoModalState.closeModal}>
+          {translate('notification_status', {
+            startDate: state.openNotification?.startDate ?? '',
+            endDate: state.openNotification?.endDate ?? '',
+          })}
+        </ModalHeader>
+
+        <ModalBody>
+          <NotificationForm
+            notification={state.openNotification?.notification}
+            //readOnly={true}
+          />
+        </ModalBody>
+
+        <ModalFooter>
+          <Button color='secondary' onClick={state.notificationInfoModalState.closeModal}>
+            {translate('cancel')}
+          </Button>
+        </ModalFooter>
+      </Modal>
     </>
   )
 }
