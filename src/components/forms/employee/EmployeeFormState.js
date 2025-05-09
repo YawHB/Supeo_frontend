@@ -5,14 +5,15 @@ const useEmployeeFormState = (employee) => {
     id: useInput(employee?.id ?? null),
     firstName: useInput(employee?.firstName ?? ""),
     lastName: useInput(employee?.lastName ?? ""),
-    role: useInput(employee?.role ?? ""),
+    employeeRoleName: useInput(employee?.employeeRoleName?.id ?? ""),
+    employeePermissionLevel: useInput(employee?.employeePermissionLevel?.id ?? ""),
     email: useInput(employee?.email ?? ""),
     phoneNumber: useInput(employee?.phoneNumber ?? ""),
   };
 
-  return {
-    input,
-  };
+   return {
+     input,
+   }
 };
 
 export default useEmployeeFormState;
