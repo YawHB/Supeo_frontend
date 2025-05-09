@@ -7,7 +7,8 @@ export const GET_ALL_EMPLOYEES = gql`
       firstName
       lastName
       phoneNumber
-      role
+      roleName
+      permissionLevel
       email
     }
   }
