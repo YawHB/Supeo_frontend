@@ -10,4 +10,3 @@ const ErrorBoundary = ({ children }) => {
 };
 
 export default ErrorBoundary;
-    

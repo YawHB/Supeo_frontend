@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import SideBar from "../../sidebar/Sidebar";
-import useSideBarState from "../../sidebar/SideBarState";
+import SideBar from "../../../sidebar/SideBar";
+import useSideBarState from "../../../sidebar/SideBarState";
 
 const AdminHomePage = () => {
   const [translate] = useTranslation("global");

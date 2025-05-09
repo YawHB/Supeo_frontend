@@ -2,12 +2,12 @@ import React from "react";
 import SupeoLogo from "../assets/SupeoLogo.jsx";
 
 const Logo = ({
-  className,
   text,
   imgStyle,
+  className,
   textStyle,
-  logoColor = "#E0FDAD",
-  textColor = "#FCFFFF",
+  logoColor = "#E6FBB5",
+  textColor = "#F8F9FA",
 }) => {
   return (
     <div className={`d-flex align-items-center ${className || ""}`}>

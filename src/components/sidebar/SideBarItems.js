@@ -10,14 +10,14 @@ sideBarItemsMap.set("admin", {
 });
 
 sideBarItemsMap.set("employee", {
-  icon: faUsers,
+  icon: faUser,
   label: "side_bar.employee_home",
   link: "/employee",
   activeLocation: "/employee",
 });
 
 sideBarItemsMap.set("employees", {
-  icon: faUser,
+  icon: faUsers,
   label: "side_bar.employees",
   link: "/employees",
   activeLocation: "/employees",

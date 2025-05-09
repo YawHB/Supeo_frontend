@@ -29,7 +29,7 @@ const useSideBarState = () => {
         setUserMenuLinks([]);
       }
 
-      const menuItems = response.userMenuLinks.map((link) => link.menuItem);
+      const menuItems = response.userMenuLinks.map(link => link.menuItem);
       setUserMenuLinks(menuItems);
     },
     onError: (error) =>
@@ -42,7 +42,7 @@ const useSideBarState = () => {
 
   const isActiveFunction = useCallback(
     (item) => {
-      return item.isActiveFunction === location.pathname;
+      return item.activeLocation === location.pathname;
     },
     [sideBarItems, location]
   );
@@ -55,7 +55,7 @@ const useSideBarState = () => {
     }
     setSystemMenuLinks(["admin", "timeentries", "employees", "employee", "employee_time_entries"]);
   }, [location]);
-
+  
   useEffect(() => {
     const newSideBarItems = [];
     for (const systemMenuLink of systemMenuLinks) {

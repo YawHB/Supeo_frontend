@@ -15,14 +15,14 @@ const SideBar = ({
   const [translate] = useTranslation("global");
 
   return (
-    <div className="d-flex flex-column bg-dark justify-content-between px-4 sticky-top vh-100 top-0">
+    <div className="d-flex flex-column bg-sidebar justify-content-between px-4 sticky-top vh-100 top-0">
       <Nav vertical className="d-flex flex-column">
         {sideBarItems.map((item, index) => (
           <NavItem key={index}>
             <NavLink
               to={item.link}
-              className="d-flex gap-2 align-items-center p-1 text-decoration-none"
               style={{ color: "inherit" }}
+              className="d-flex gap-2 align-items-center p-1"
             >
               <div
                 style={{ width: "2rem", height: "2rem" }}
@@ -38,12 +38,12 @@ const SideBar = ({
         ))}
       </Nav>
 
-      <div className="mt-auto py-3">
+      <div className="sticky-bottom bottom-0 py-3">
         <Button
-          onClick={toggleSideBarCollapse}
           color="primary"
-          className="d-flex gap-2 justify-content-center align-items-center w-100"
-          style={{ width: "2.5rem" }}
+          style={{ height: "2.5rem" }}
+          onClick={toggleSideBarCollapse}
+          className="d-flex gap-2 justify-content-center align-items-center justify-self-end w-100"
         >
           <FontAwesomeIcon
             icon={isSideBarCollapsed ? faAngleDoubleRight : faAngleDoubleLeft}

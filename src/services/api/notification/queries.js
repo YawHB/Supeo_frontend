@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client';
+import { gql } from '@apollo/client'
 
 export const GET_NOTIFICATION_BY_ID = gql`
   query Notification($notificationId: ID!) {
@@ -9,4 +9,4 @@ export const GET_NOTIFICATION_BY_ID = gql`
       timestamp
     }
   }
-`;
+`
