@@ -39,7 +39,7 @@ const NotificationForm = ({notification = {} }) => {
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label for="timestamp">{translate("created")}</Label>
+            <Label for="timestamp">{translate("last_updated")}</Label>
             <Input
               id="timestamp"
               name="timestamp"
