@@ -7,11 +7,8 @@ import { useModalState } from "../../../../hooks/useModalState.js";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useQuery, useMutation, useApolloClient } from "@apollo/client";
 import { GET_ALL_EMPLOYEES } from "../../../../services/api/admin/queries.js";
-import {
-    CREATE_EMPLOYEE,
-    UPDATE_EMPLOYEE
-} from "../../../../services/api/admin/mutations.js";
-import { GET_ROLES } from "../../../../services/api/employee/queries.js";
+import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from "../../../../services/api/admin/mutations.js";
+import { GET_ROLES, GET_PERMISSIONS } from "../../../../services/api/employee/queries.js";
 
 import exportTableData from "../../../lib/export/exportTableData.js";
 //import { useInput } from "../../../hooks/useInput.js";
@@ -20,7 +17,9 @@ import exportTableData from "../../../lib/export/exportTableData.js";
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
+  
   const [roles, setRoles] = useState([])
+  const [permissions, setPermissions] = useState([])
 
   const [employees, setEmployees] = useState([])
 
@@ -40,7 +39,8 @@ const useEmployeesPageState = () => {
     { key: 'id', label: translate('id'), type: 'text', sort: true },
     { key: 'firstName', label: translate('first_name'), type: 'text', sort: true },
     { key: 'lastName', label: translate('last_name'), type: 'text', sort: true },
-    //{ key: 'role', label: translate('role'), type: 'text', sort: true },
+    { key: 'role', label: translate('role'), type: 'text', sort: true },
+    { key: 'permission', label: translate('permission'), type: 'text', sort: true },
     { key: 'phoneNumber', label: translate('phone'), type: 'text', sort: true },
     { key: 'email', label: translate('email'), type: 'text', sort: true },
     {
@@ -67,6 +67,11 @@ const useEmployeesPageState = () => {
   const { loading: isLoadingRoles } = useQuery(GET_ROLES, {
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => setRoles(data.roles)    
+  })
+
+  const { loading: isLoadingPermissions } = useQuery(GET_PERMISSIONS, {
+    fetchPolicy: 'cache-and-network',
+    onCompleted: (data) => setPermissions(data.permissions)
   })
 
   console.log('roles', roles)
@@ -192,7 +197,9 @@ const useEmployeesPageState = () => {
     handleSubmitNewEmployee,
     employees,
     roles,
+    permissions,
     isLoadingRoles,
+    isLoadingPermissions,
     handleSubmitEditedEmployee,
     createEmployee,
     isSubmittingNewEmployee,

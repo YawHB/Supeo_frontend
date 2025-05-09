@@ -43,3 +43,12 @@ export const GET_ROLES = gql`
     }
   }
 `
+
+export const GET_PERMISSIONS = gql`
+  query Permissions {
+    permissions {
+      id
+      permissionLevel
+    }
+  }
+`
