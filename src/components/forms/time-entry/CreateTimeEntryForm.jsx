@@ -100,6 +100,7 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
           <FormGroup>
             <Label for='duration'>{translate('duration')}</Label>
             <Input
+              className='disabled-field'
               id='duration'
               name='duration'
               type='text'
@@ -115,20 +116,16 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
           <FormGroup>
             <Label for='break'>{translate('break')}</Label>
             <Input
+              className='disabled-field'
               id='break'
               name='break'
-              type='select'
-              placeholder={translate('break')}
+              type='text'
+              placeholder={30}
               value={input.break.value}
               onChange={input.break.onChange}
               required
               disabled
-            >
-              <option value='30'>{translate('30')}</option>
-              <option value='35'>{translate('35')}</option>
-              <option value='40'>{translate('40')}</option>
-              <option value='45'>{translate('45')}</option>
-            </Input>
+            ></Input>
           </FormGroup>
         </Col>
       </Row>
