@@ -1,27 +1,28 @@
-import { Button } from "reactstrap";
-import { useState } from "react";
-import { useTranslation } from "react-i18next";
-import showToast from "../../../lib/toast/toast.js";
-import { faPencil } from "@fortawesome/free-solid-svg-icons";
-import { useModalState } from "../../../../hooks/useModalState.js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useQuery, useMutation, useApolloClient } from "@apollo/client";
-import { GET_ALL_EMPLOYEES } from "../../../../services/api/admin/queries.js";
-import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from "../../../../services/api/admin/mutations.js";
-import { GET_ROLES, GET_PERMISSIONS } from "../../../../services/api/employee/queries.js";
+import { Button } from 'reactstrap'
+import { useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import showToast from '../../../lib/toast/toast.js'
+import { faPencil } from '@fortawesome/free-solid-svg-icons'
+import { useModalState } from '../../../../hooks/useModalState.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useQuery, useMutation, useApolloClient } from '@apollo/client'
+import { GET_ALL_EMPLOYEES } from '../../../../services/api/admin/queries.js'
+import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../../services/api/admin/mutations.js'
+import { GET_ROLES, GET_PERMISSIONS } from '../../../../services/api/employee/queries.js'
 
-import exportTableData from "../../../lib/export/exportTableData.js";
+import exportTableData from '../../../lib/export/exportTableData.js'
 //import { useInput } from "../../../hooks/useInput.js";
 //import usePagination from "../../../../hooks/usePagination.js";
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
-  
+
   const [roles, setRoles] = useState([])
   const [permissions, setPermissions] = useState([])
 
   const [employees, setEmployees] = useState([])
+  console.log('employees: ', employees)
 
   const employeeFormModalState = useModalState()
   const newEmployeeFormModalState = useModalState()
@@ -39,8 +40,8 @@ const useEmployeesPageState = () => {
     { key: 'id', label: translate('id'), type: 'text', sort: true },
     { key: 'firstName', label: translate('first_name'), type: 'text', sort: true },
     { key: 'lastName', label: translate('last_name'), type: 'text', sort: true },
-    { key: 'role', label: translate('role'), type: 'text', sort: true },
-    { key: 'permission', label: translate('permission'), type: 'text', sort: true },
+    { key: 'roleName', label: translate('role'), type: 'text', sort: true },
+    { key: 'permissionLevel', label: translate('permission'), type: 'text', sort: true },
     { key: 'phoneNumber', label: translate('phone'), type: 'text', sort: true },
     { key: 'email', label: translate('email'), type: 'text', sort: true },
     {
@@ -63,19 +64,17 @@ const useEmployeesPageState = () => {
     },
   ]
 
-  
   const { loading: isLoadingRoles } = useQuery(GET_ROLES, {
     fetchPolicy: 'cache-and-network',
-    onCompleted: (data) => setRoles(data.roles)    
+    onCompleted: (data) => setRoles(data.roles),
   })
 
   const { loading: isLoadingPermissions } = useQuery(GET_PERMISSIONS, {
     fetchPolicy: 'cache-and-network',
-    onCompleted: (data) => setPermissions(data.permissions)
+    onCompleted: (data) => setPermissions(data.permissions),
   })
 
   console.log('roles', roles)
-
 
   const { loading: isLoadingEmployees, refetch } = useQuery(GET_ALL_EMPLOYEES, {
     fetchPolicy: 'cache-and-network',
@@ -212,7 +211,7 @@ const useEmployeesPageState = () => {
 
     setEmployees,
     handleExportTable,
-    
+
     //orderBy,
     //pagination,
     //setOrderBy,
@@ -222,6 +221,6 @@ const useEmployeesPageState = () => {
     //employeeRolesFilterInput,
     //isLoadingEmployeeRoleOptions,
   }
-};
+}
 
-export default useEmployeesPageState;
+export default useEmployeesPageState
