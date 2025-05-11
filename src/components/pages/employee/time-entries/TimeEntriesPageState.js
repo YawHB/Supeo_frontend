@@ -11,6 +11,7 @@ export const useTimeEntriesPageState = () => {
   const [translate] = useTranslation('global')
   const [timeEntriesData, setTimeEntriesData] = useState([])
   const [errorMessage, setErrorMessage] = useState(null)
+  const resetErrorMessage = () => setErrorMessage(null)
 
   const [isLoadingTimeEntriesForm, setIsLoadingTimeEntriesForm] = useState(false)
   const timeEntryFormModalState = useModalState()
@@ -148,6 +149,7 @@ export const useTimeEntriesPageState = () => {
     apolloClient,
     timeEntriesData,
     errorMessage,
+    resetErrorMessage,
     timeEntriesColumns,
     setTimeEntriesData,
     isLoadingTimeEntries,

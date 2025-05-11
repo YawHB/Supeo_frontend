@@ -71,11 +71,19 @@ export const EmployeeTimeEntriesPage = () => {
 
       <Modal
         isOpen={state.newTimeEntryFormModalState.isOpen}
-        toggle={state.newTimeEntryFormModalState.closeModal}
+        toggle={() => {
+          state.resetErrorMessage()
+          state.newTimeEntryFormModalState.closeModal()
+        }}
         returnFocusAfterClose={false}
         size='lg'
       >
-        <ModalHeader toggle={state.newTimeEntryFormModalState.closeModal}>
+        <ModalHeader
+          toggle={() => {
+            state.resetErrorMessage()
+            state.newTimeEntryFormModalState.closeModal()
+          }}
+        >
           {translate('time_entry.create_time_entry')}
         </ModalHeader>
 
@@ -97,7 +105,13 @@ export const EmployeeTimeEntriesPage = () => {
             {translate('create')}
           </Button>
 
-          <Button color='secondary' onClick={state.newTimeEntryFormModalState.closeModal}>
+          <Button
+            color='secondary'
+            onClick={() => {
+              state.resetErrorMessage()
+              state.newTimeEntryFormModalState.closeModal()
+            }}
+          >
             {translate('cancel')}
           </Button>
         </ModalFooter>
