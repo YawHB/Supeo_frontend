@@ -83,6 +83,7 @@ export const EmployeeTimeEntriesPage = () => {
           <CreateTimeEntryForm
             onSubmit={state.handleSubmitNewTimeEntry}
             isSubmitting={state.isSubmittingNewTimeEntry}
+            errorMessage={state.errorMessage}
           />
         </ModalBody>
 
