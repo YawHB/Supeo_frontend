@@ -10,6 +10,9 @@ export const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
   const [timeEntriesData, setTimeEntriesData] = useState([])
+  const [errorMessage, setErrorMessage] = useState(null)
+  const resetErrorMessage = () => setErrorMessage(null)
+
   const [isLoadingTimeEntriesForm, setIsLoadingTimeEntriesForm] = useState(false)
   const timeEntryFormModalState = useModalState()
   const newTimeEntryFormModalState = useModalState()
@@ -120,12 +123,23 @@ export const useTimeEntriesPageState = () => {
 
   const handleSubmitNewTimeEntry = (timeEntry) => {
     setIsLoadingTimeEntriesForm(true)
+    setErrorMessage(null)
 
     createTimeEntry({
       variables: { newTimeEntry: timeEntry },
       onCompleted: () => {
         setIsLoadingTimeEntriesForm(false)
         newTimeEntryFormModalState.closeModal()
+      },
+      onError: (error) => {
+        setIsLoadingTimeEntriesForm(false)
+
+        if (error.graphQLErrors && error.graphQLErrors.length > 0) {
+          const messages = error.graphQLErrors.map((e) => e.message)
+          setErrorMessage(messages.join('\n'))
+        } else {
+          setErrorMessage('Noget gik galt. Prøv igen.')
+        }
       },
     })
   }
@@ -134,6 +148,8 @@ export const useTimeEntriesPageState = () => {
     translate,
     apolloClient,
     timeEntriesData,
+    errorMessage,
+    resetErrorMessage,
     timeEntriesColumns,
     setTimeEntriesData,
     isLoadingTimeEntries,

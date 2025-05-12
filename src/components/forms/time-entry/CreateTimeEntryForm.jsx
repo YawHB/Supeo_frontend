@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import useTimeEntryFormState from './CreateTimeEntryFormState'
-import { Form, Row, Col, Input, Label, FormGroup } from 'reactstrap'
+import { Form, Row, Col, Input, Label, FormGroup, Alert } from 'reactstrap'
 
-const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
+const CreateTimeEntryForm = ({ onSubmit, timeEntry, errorMessage = null }) => {
   const [translate] = useTranslation('global')
   const input = useTimeEntryFormState(timeEntry)
   const handleSubmit = (e) => {
@@ -34,138 +34,149 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry = null }) => {
   }
 
   return (
-    <Form id='newTimeEntryForm' onSubmit={handleSubmit}>
-      {' '}
-      <Row>
-        <Col md={6}>
-          <FormGroup>
-            <Label for='startDate'>
-              {translate('start_date')}
-              <span className='text-danger'>*</span>
-            </Label>
-            <Input
-              id='startDate'
-              name='startDate'
-              type='date'
-              value={input.startDate.value}
-              onChange={input.startDate.onChange}
-              required
-            />
-          </FormGroup>
-        </Col>
-        <Col md={6}>
-          <FormGroup>
-            <Label for='startTime'>
-              {translate('start_time')}
-              <span className='text-danger'>*</span>
-            </Label>
-            <Input
-              id='startTime'
-              name='startTime'
-              type='time'
-              value={input.startTime.value}
-              onChange={input.startTime.onChange}
-              required
-            />
-          </FormGroup>
-        </Col>
-      </Row>
-      <Row>
-        <Col md={6}>
-          <FormGroup>
-            <Label for='endDate'>{translate('end_date')}</Label>
-            <Input
-              id='endDate'
-              name='endDate'
-              type='date'
-              value={input.endDate.value}
-              onChange={input.endDate.onChange}
-            />
-          </FormGroup>
-        </Col>
-        <Col md={6}>
-          <FormGroup>
-            <Label for='endTime'>{translate('end_time')}</Label>
-            <Input
-              id='endTime'
-              name='endTime'
-              type='time'
-              value={input.endTime.value}
-              onChange={input.endTime.onChange}
-            />
-          </FormGroup>
-        </Col>
+    <>
+      {errorMessage && (
+        <Alert color='danger' className='mb-4' timeout={{ enter: 150, exit: 150 }}>
+          <ul className='mb-0 list-unstyled'>
+            {errorMessage.split('\n').map((message, i) => (
+              <li key={i}>{message}</li>
+            ))}
+          </ul>
+        </Alert>
+      )}
+      <Form id='newTimeEntryForm' onSubmit={handleSubmit}>
+        {' '}
+        <Row>
+          <Col md={6}>
+            <FormGroup>
+              <Label for='startDate'>
+                {translate('start_date')}
+                <span className='text-danger'>*</span>
+              </Label>
+              <Input
+                id='startDate'
+                name='startDate'
+                type='date'
+                value={input.startDate.value}
+                onChange={input.startDate.onChange}
+                required
+              />
+            </FormGroup>
+          </Col>
+          <Col md={6}>
+            <FormGroup>
+              <Label for='startTime'>
+                {translate('start_time')}
+                <span className='text-danger'>*</span>
+              </Label>
+              <Input
+                id='startTime'
+                name='startTime'
+                type='time'
+                value={input.startTime.value}
+                onChange={input.startTime.onChange}
+                required
+              />
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={6}>
+            <FormGroup>
+              <Label for='endDate'>{translate('end_date')}</Label>
+              <Input
+                id='endDate'
+                name='endDate'
+                type='date'
+                value={input.endDate.value}
+                onChange={input.endDate.onChange}
+              />
+            </FormGroup>
+          </Col>
+          <Col md={6}>
+            <FormGroup>
+              <Label for='endTime'>{translate('end_time')}</Label>
+              <Input
+                id='endTime'
+                name='endTime'
+                type='time'
+                value={input.endTime.value}
+                onChange={input.endTime.onChange}
+              />
+            </FormGroup>
+          </Col>
 
-        <Col md={6}>
-          <FormGroup>
-            <Label for='duration'>{translate('duration')}</Label>
-            <Input
-              className='disabled-field'
-              id='duration'
-              name='duration'
-              type='text'
-              readOnly
-              placeholder={translate('duration')}
-              value={input.duration.value}
-              onChange={input.duration.onChange}
-              required
-            />
-          </FormGroup>
-        </Col>
-        <Col md={6}>
-          <FormGroup>
-            <Label for='break'>{translate('break')}</Label>
-            <Input
-              className='disabled-field'
-              id='break'
-              name='break'
-              type='text'
-              placeholder={30}
-              value={input.break.value}
-              onChange={input.break.onChange}
-              required
-              disabled
-            ></Input>
-          </FormGroup>
-        </Col>
-      </Row>
-      <Row>
-        {/* //// Jeg tænker måske at formgruppen status her nedenunder skal fjernes, da det nok ikke giver helt mening...
+          <Col md={6}>
+            <FormGroup>
+              <Label for='duration'>{translate('duration')}</Label>
+              <Input
+                className='disabled-field'
+                id='duration'
+                name='duration'
+                type='text'
+                readOnly
+                placeholder={translate('duration')}
+                value={input.duration.value}
+                onChange={input.duration.onChange}
+                required
+              />
+            </FormGroup>
+          </Col>
+          <Col md={6}>
+            <FormGroup>
+              <Label for='break'>{translate('break')}</Label>
+              <Input
+                className='disabled-field'
+                id='break'
+                name='break'
+                type='text'
+                placeholder={30}
+                value={input.break.value}
+                onChange={input.break.onChange}
+                required
+                disabled
+              ></Input>
+            </FormGroup>
+          </Col>
+        </Row>
+        <Row>
+          {/* //// Jeg tænker måske at formgruppen status her nedenunder skal fjernes, da det nok ikke giver helt mening...
         // ... at en medarbejder kan se status når han er i gang med at oprette en ny time entry
         <Col md={6}>
-          <FormGroup>
-            <Label for="status">{translate("status")}</Label>
-            <Input
-              id="status"
-              name="status"
-              type="select"
-              value={input.notification.status.value}
-              onChange={input.notification.status.onChange}
-            >
-              <option value="AFVENTER">{translate("pending")}</option>
-              <option value="GODKENDT">{translate("approve")}</option>
-              <option value="AFVIST">{translate("reject")}</option>
-              <option value="IGANG">{translate("underway")}</option>
-            </Input>
-          </FormGroup>
+        <FormGroup>
+        <Label for="status">{translate("status")}</Label>
+        <Input
+        id="status"
+        name="status"
+        type="select"
+        value={input.notification.status.value}
+        onChange={input.notification.status.onChange}
+        >
+        <option value="AFVENTER">{translate("pending")}</option>
+        <option value="GODKENDT">{translate("approve")}</option>
+        <option value="AFVIST">{translate("reject")}</option>
+        <option value="IGANG">{translate("underway")}</option>
+        </Input>
+        </FormGroup>
         </Col> */}
-      </Row>
-      <Row>
-        <Col md={12}>
-          <FormGroup>
-            <Label for='comment'>{translate('comment')}</Label>
-            <Input
-              id='comment'
-              name='comment'
-              type='textarea'
-              placeholder={translate('comment')}
-              value={input.comment.value}
-              onChange={input.comment.onChange}
-            />
-          </FormGroup>
-        </Col>
-      </Row>
-    </Form>
+        </Row>
+        <Row>
+          <Col md={12}>
+            <FormGroup>
+              <Label for='comment'>{translate('comment')}</Label>
+              <Input
+                id='comment'
+                name='comment'
+                type='textarea'
+                placeholder={translate('comment')}
+                value={input.comment.value}
+                onChange={input.comment.onChange}
+              />
+            </FormGroup>
+          </Col>
+        </Row>
+      </Form>
+    </>
   )
 }
 
