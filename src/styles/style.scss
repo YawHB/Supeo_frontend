@@ -1,14 +1,14 @@
 $table-cell-padding-x: 1rem;
 $table-cell-padding-y: 0.5rem;
 
-@use "sass:color";
-@use "variables" as *;
+@use 'sass:color';
+@use 'variables' as *;
 
 $navbar-sidebar-bg: $color-soft-black;
 $table-bg: $color-sand-beige;
-$table-header-row-bg: #F3F3F1;
-$table-row-bg-1: #F1F1Ef;
-$table-row-bg-2: #F3F3F1;
+$table-header-row-bg: #f3f3f1;
+$table-row-bg-1: #f1f1ef;
+$table-row-bg-2: #f3f3f1;
 
 $table-border-radius: 1rem;
 
@@ -17,58 +17,58 @@ h1 {
 }
 
 .btn-primary {
-  background-color: #374C45 !important;
-  border: 1px solid #374C45 !important;
-  color: #E8E8E3 !important;
+  background-color: #374c45 !important;
+  border: 1px solid #374c45 !important;
+  color: #e8e8e3 !important;
   border-radius: 1rem !important;
   font-weight: 600 !important;
 }
 
 .btn-outline-primary {
   background-color: transparent !important;
-  border: 1px solid #374C45 !important;
-  color: #374C45 !important;
+  border: 1px solid #374c45 !important;
+  color: #374c45 !important;
   border-radius: 2rem !important;
   font-weight: 600 !important;
 
   &:hover,
   &:active,
   &:focus {
-    background-color: #374C45 !important;
-    color: #E8E8E3 !important;
+    background-color: #374c45 !important;
+    color: #e8e8e3 !important;
   }
 }
 
 .btn-secondary {
-  background-color: #6C757D !important;
-  border: 1px solid #6C757D !important;
-  color: #E8E8E3 !important;
+  background-color: #6c757d !important;
+  border: 1px solid #6c757d !important;
+  color: #e8e8e3 !important;
   border-radius: 1rem !important;
   font-weight: 600 !important;
 }
 
 .status-select--pending {
-  background-color: #F0A500 !important;
-  color: #34363C !important;
+  background-color: #f0a500 !important;
+  color: #34363c !important;
 }
 
 .status-select--approve {
-  background-color: #4C9A4C !important;
-  color: #FFFFFF !important;
+  background-color: #4c9a4c !important;
+  color: #ffffff !important;
 }
 
 .status-select--reject {
-  background-color: #C0392B !important;
-  color: #FFFFFF !important;
+  background-color: #c0392b !important;
+  color: #ffffff !important;
 }
 
 .status-select--underway {
-  background-color: #7F8C8D !important;
-  color: #FFFFFF !important;
+  background-color: #7f8c8d !important;
+  color: #ffffff !important;
 }
 
 .status-button {
-  border: 1px solid #374C45 !important;
+  border: 1px solid #374c45 !important;
   font-weight: 400 !important;
   min-width: 95px !important;
 }
@@ -76,7 +76,7 @@ h1 {
 select.form-select {
   border-radius: 1rem !important;
   padding: 0.375rem 0.75rem !important;
-  border: 1px solid #374C45 !important;
+  border: 1px solid #374c45 !important;
   max-width: 115px;
 }
 
@@ -100,7 +100,7 @@ select.form-select {
     background-color: $table-header-row-bg !important;
     th {
       background-color: $table-header-row-bg !important;
-      color: #34363C !important;
+      color: #34363c !important;
       font-weight: 600;
 
       &:first-child {
@@ -122,7 +122,7 @@ select.form-select {
     }
 
     td {
-      color: #34363C !important; 
+      color: #34363c !important;
     }
 
     tr:last-child {
@@ -145,7 +145,7 @@ select.form-select {
 }
 
 body {
-  background-color: #E8E8E3 !important;
+  background-color: #e8e8e3 !important;
 }
 
 .bg-sidebar a,
@@ -154,25 +154,30 @@ body {
 }
 
 .modal-content {
-  background-color: #E8E8E3 !important;
+  background-color: #e8e8e3 !important;
   border-radius: $table-border-radius !important;
-  overflow: hidden;                                // Klip evt. overskydende
-  color: #34363C !important;
+  overflow: hidden; // Klip evt. overskydende
+  color: #34363c !important;
 }
 
 .modal-content .form-control,
 .modal-content .form-select {
-  background-color: #F3F3F1 !important;
+  background-color: #f3f3f1 !important;
   border-radius: 1rem !important;
-  border: 1px solid (#F3F3F1, 10%) !important;
+  border: 1px solid (#f3f3f1, 10%) !important;
 }
 
 .modal-header {
-  border-top-left-radius:  $table-border-radius !important;
+  border-top-left-radius: $table-border-radius !important;
   border-top-right-radius: $table-border-radius !important;
 }
 
 .modal-footer {
-  border-bottom-left-radius:  $table-border-radius !important;
+  border-bottom-left-radius: $table-border-radius !important;
   border-bottom-right-radius: $table-border-radius !important;
+}
+
+input.form-control.disabled-field {
+  background-color: #bfbcbe !important;
+  cursor: not-allowed;
 }
