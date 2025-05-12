@@ -5,7 +5,7 @@
   "middle_name": "Middle Name",
   "last_name": "Last Name",
   "last_name_placeholder": "Last name",
-  "role": "Role",
+  "user_group": "Usergroup",
   "permission": "Permission",
   "role_placeholder": "Role",
   "email": "Email",

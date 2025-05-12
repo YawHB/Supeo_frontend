@@ -40,7 +40,7 @@ const useEmployeesPageState = () => {
     { key: 'id', label: translate('id'), type: 'text', sort: true },
     { key: 'firstName', label: translate('first_name'), type: 'text', sort: true },
     { key: 'lastName', label: translate('last_name'), type: 'text', sort: true },
-    { key: 'roleName', label: translate('role'), type: 'text', sort: true },
+    { key: 'roleName', label: translate('user_group'), type: 'text', sort: true },
     { key: 'permissionLevel', label: translate('permission'), type: 'text', sort: true },
     { key: 'phoneNumber', label: translate('phone'), type: 'text', sort: true },
     { key: 'email', label: translate('email'), type: 'text', sort: true },
