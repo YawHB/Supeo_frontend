@@ -62,37 +62,43 @@ const TimeEntriesPage = () => {
                   </tr>
                 ) : (
                   state.timeEntries.map((timeEntry) => {
-                    console.log('TimeEntry', timeEntry)
+                    //  timeEntry.map((x) => {
+                    //    console.log(x)
+                    //  })
 
                     return (
-
-                    <tr key={timeEntry.id}>
-                      {state.timeEntriesTableColumns.map((column) => {
-                        return (
-                          <td key={column.key}>
-                            {column.key === 'status' ? (
-                              <select
-                                className={`form-select ${statusClassMap[timeEntry.status] || ''}`}
-                                value={timeEntry.status}
-                                onChange={(e) =>
-                                  state.handleStatusChange(timeEntry.id, e.target.value)
-                                }
-                              >
-                                {column.options?.map((option) => (
-                                  <option key={option.value} value={option.value}>
-                                    {option.label}
-                                  </option>
-                                ))}
-                              </select>
-                            ) : (
-                              timeEntry[column.key]
-                            )}
-                          </td>
-                        )
-                      })}
-                    </tr>
-                  )
-                })
+                      <tr key={timeEntry.id}>
+                        {state.timeEntriesTableColumns.map((column) => {
+                          return (
+                            <td key={column.key}>
+                              {column.key === 'status' ? (
+                                <select
+                                  className={`form-select ${
+                                    statusClassMap[timeEntry.status] || ''
+                                  }`}
+                                  value={timeEntry.status}
+                                  onChange={(e) =>
+                                    state.handleStatusChange(
+                                      timeEntry.notification.id,
+                                      e.target.value,
+                                    )
+                                  }
+                                >
+                                  {column.options?.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                      {option.label}
+                                    </option>
+                                  ))}
+                                </select>
+                              ) : (
+                                timeEntry[column.key]
+                              )}
+                            </td>
+                          )
+                        })}
+                      </tr>
+                    )
+                  })
                 )}
               </tbody>
             </Table>
