@@ -36,7 +36,7 @@ const useTimeEntriesPageState = () => {
     },
     {
       key: 'admin_comment',
-      label: 'admin_comment',
+      label: translate('admin_comment'),
       type: `textarea`,
       alwaysEnabled: true,
       view: (input) => (
@@ -51,7 +51,7 @@ const useTimeEntriesPageState = () => {
     },
   ]
 
-  const { loading: isLoadingTimeEntries } = useQuery(GET_ALL_TIME_ENTRIES, {
+  const { loading: isLoadingTimeEntries, refetch } = useQuery(GET_ALL_TIME_ENTRIES, {
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => setTimeEntries(data.timeEntries),
   })
@@ -59,13 +59,52 @@ const useTimeEntriesPageState = () => {
   //1 handleNotificationStatus
   //1.1
 
-  const [updateTimeEntryStatus, { loading }] = useMutation(UPDATE_TIME_ENTRY_STATUS)
+  const [updateTimeEntryStatus] = useMutation(UPDATE_TIME_ENTRY_STATUS)
+
+  // const handleStatusChange = (notificationID, notificationStatus) => {
+  //   updateTimeEntryStatus({
+  //     variables: {
+  //       notification: {
+  //         notificationID,
+  //         status: notificationStatus,
+  //       },
+  //     },
+  //     onCompleted: () => {
+  //       refetch().then((result) => {
+  //         setTimeEntries(result.data.timeEntries)
+  //         // returnerer alle timeEntries
+  //         console.log('Time entries:', result.data.timeEntries)
+  //       })
+  //     },
+  //   })
+  // }
 
   const handleStatusChange = (notificationID, notificationStatus) => {
-    const updatedStatus = { notificationID, notificationStatus }
-    console.log(updatedStatus)
     updateTimeEntryStatus({
-      variables: updatedStatus,
+      variables: {
+        notification: {
+          notificationID,
+          status: notificationStatus,
+        },
+      },
+      onCompleted: (data) => {
+        const updatedEntry = data.updateTimeEntryStatus
+        setTimeEntries((prevEntries) =>
+          prevEntries.map((entry) =>
+            entry.notification.id === updatedEntry.id
+              ? {
+                  ...entry,
+                  notification: {
+                    ...entry.notification,
+                    status: updatedEntry.status,
+                    comment: updatedEntry.comment,
+                  },
+                }
+              : entry,
+          ),
+          console.log('Updated entry:', updatedEntry),
+        )
+      },
     })
   }
 
