@@ -72,7 +72,7 @@ export const EmployeeTimeEntriesPage = () => {
       <Modal
         isOpen={state.newTimeEntryFormModalState.isOpen}
         toggle={() => {
-          state.resetErrorMessage()
+          state.resetErrorMessages()
           state.newTimeEntryFormModalState.closeModal()
         }}
         returnFocusAfterClose={false}
@@ -80,7 +80,7 @@ export const EmployeeTimeEntriesPage = () => {
       >
         <ModalHeader
           toggle={() => {
-            state.resetErrorMessage()
+            state.resetErrorMessages()
             state.newTimeEntryFormModalState.closeModal()
           }}
         >
@@ -91,7 +91,7 @@ export const EmployeeTimeEntriesPage = () => {
           <CreateTimeEntryForm
             onSubmit={state.handleSubmitNewTimeEntry}
             isSubmitting={state.isSubmittingNewTimeEntry}
-            errorMessage={state.errorMessage}
+            errorMessage={state.errorMessages}
           />
         </ModalBody>
 
@@ -108,7 +108,7 @@ export const EmployeeTimeEntriesPage = () => {
           <Button
             color='secondary'
             onClick={() => {
-              state.resetErrorMessage()
+              state.resetErrorMessages()
               state.newTimeEntryFormModalState.closeModal()
             }}
           >

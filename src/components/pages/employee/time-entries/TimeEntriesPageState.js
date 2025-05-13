@@ -10,8 +10,8 @@ export const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
   const [timeEntriesData, setTimeEntriesData] = useState([])
-  const [errorMessage, setErrorMessage] = useState(null)
-  const resetErrorMessage = () => setErrorMessage(null)
+  const [errorMessages, setErrorMessages] = useState(null)
+  const resetErrorMessages = () => setErrorMessages(null)
 
   const [isLoadingTimeEntriesForm, setIsLoadingTimeEntriesForm] = useState(false)
   const timeEntryFormModalState = useModalState()
@@ -123,7 +123,7 @@ export const useTimeEntriesPageState = () => {
 
   const handleSubmitNewTimeEntry = (timeEntry) => {
     setIsLoadingTimeEntriesForm(true)
-    setErrorMessage(null)
+    setErrorMessages(null)
 
     createTimeEntry({
       variables: { newTimeEntry: timeEntry },
@@ -131,14 +131,14 @@ export const useTimeEntriesPageState = () => {
         setIsLoadingTimeEntriesForm(false)
         newTimeEntryFormModalState.closeModal()
       },
-      onError: (error) => {
+      onError: (errors) => {
         setIsLoadingTimeEntriesForm(false)
 
-        if (error.graphQLErrors && error.graphQLErrors.length > 0) {
-          const messages = error.graphQLErrors.map((e) => e.message)
-          setErrorMessage(messages.join('\n'))
+        if (errors.graphQLErrors && errors.graphQLErrors.length > 0) {
+          const messages = errors.graphQLErrors.map((e) => e.message)
+          setErrorMessages(messages)
         } else {
-          setErrorMessage('Noget gik galt. Prøv igen.')
+          setErrorMessages('Noget gik galt. Prøv igen.')
         }
       },
     })
@@ -148,8 +148,8 @@ export const useTimeEntriesPageState = () => {
     translate,
     apolloClient,
     timeEntriesData,
-    errorMessage,
-    resetErrorMessage,
+    errorMessages,
+    resetErrorMessages,
     timeEntriesColumns,
     setTimeEntriesData,
     isLoadingTimeEntries,

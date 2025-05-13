@@ -38,7 +38,7 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry, errorMessage = null }) => {
       {errorMessage && (
         <Alert color='danger' className='mb-4' timeout={{ enter: 150, exit: 150 }}>
           <ul className='mb-0 list-unstyled'>
-            {errorMessage.split('\n').map((message, i) => (
+            {errorMessage.map((message, i) => (
               <li key={i}>{message}</li>
             ))}
           </ul>
