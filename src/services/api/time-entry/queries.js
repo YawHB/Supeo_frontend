@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const GET_ALL_TIME_ENTRIES = gql`
   query {
@@ -10,12 +10,19 @@ export const GET_ALL_TIME_ENTRIES = gql`
       comment
       startDate
       endDate
-      status
-      firstName
-      lastName
+      employee {
+        id
+        firstName
+        lastName
+      }
+      notification {
+        id
+        comment
+        status
+      }
     }
   }
-`;
+`
 
 export const GET_TIME_ENTRY = gql`
   query ($id: ID!) {
@@ -27,4 +34,4 @@ export const GET_TIME_ENTRY = gql`
       comment
     }
   }
-`;
+`
