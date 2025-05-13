@@ -94,6 +94,10 @@ const TimeEntriesPage = () => {
                                 </select>
                               ) : column.key === 'admin_comment' ? (
                                 timeEntry.notification.comment
+                              ) : column.key === 'firstName' ? (
+                                timeEntry.employee?.firstName
+                              ) : column.key === 'lastName' ? (
+                                timeEntry.employee?.lastName
                               ) : (
                                 timeEntry[column.key]
                               )}
