@@ -73,10 +73,12 @@ const TimeEntriesPage = () => {
                             <td key={column.key}>
                               {column.key === 'status' ? (
                                 <select
+                                  //className={`form-select ${statusClassMap[timeEntry.status] || ''}`}
                                   className={`form-select ${
-                                    statusClassMap[timeEntry.status] || ''
+                                    statusClassMap[timeEntry.notification.status] || ''
                                   }`}
-                                  value={timeEntry.status}
+                                  //value={timeEntry.status}
+                                  value={timeEntry.notification.status}
                                   onChange={(e) =>
                                     state.handleStatusChange(
                                       timeEntry.notification.id,
@@ -90,6 +92,8 @@ const TimeEntriesPage = () => {
                                     </option>
                                   ))}
                                 </select>
+                              ) : column.key === 'admin_comment' ? (
+                                timeEntry.notification.comment
                               ) : (
                                 timeEntry[column.key]
                               )}
