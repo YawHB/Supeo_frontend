@@ -18,20 +18,25 @@ export function calculateWorkHours(startDate, startTime, endDate, endTime) {
 
   //find arbejdstid
   const timeDif = msTimeB - msTimeA
-  if (timeDif <= 0) {
-    return 'ugyldigt input. start tid skal være før slut tid'
-  } else if (B > A && minutes2 < minutes1) {
+
+  const [hours, minutes] = hoursToMin(startTime, endTime)
+
+  if (B > A && minutes2 < minutes1) {
     console.log('NatteArbejde')
-    const [hours, minutes] = hoursToMin(startTime, endTime)
     return `${hours + 24} timer, ${minutes === 0 ? minutes : minutes + 60} minutter`
-  } else if (timeDif > 0 && dayDiffInMs > 0) {
+  }
+
+  if (timeDif > 0 && dayDiffInMs > 0) {
     console.log('Flere dages arbejde')
-    const [hours, minutes] = hoursToMin(startTime, endTime)
     return `${dayDiffInMs} dage, ${hours} timer, ${minutes} minutter`
   }
 
-  const [hours, minutes] = hoursToMin(startTime, endTime)
-  return ` ${hours} timer, ${minutes} minutter`
+  if (timeDif < 0 && Math.abs(timeDif) > dayInMs) {
+    console.log('Negativt flerdages arbejde (brugerfejl)')
+    return `-${Math.abs(dayDiffInMs)} dage, ${hours} timer, ${minutes} minutter`
+  }
+
+  return `${hours} timer, ${minutes} minutter`
 }
 
 function calculateDaysWorked(year, month, day) {
