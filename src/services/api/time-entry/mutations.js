@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const CREATE_TIME_ENTRY = gql`
   mutation CreateTimeEntry($newTimeEntry: CreateTimeEntryInput!) {
@@ -9,7 +9,9 @@ export const CREATE_TIME_ENTRY = gql`
       comment
       startDate
       endDate
-      employeeID
+      employee {
+        id
+      }
       notification {
         comment
         status
@@ -17,4 +19,4 @@ export const CREATE_TIME_ENTRY = gql`
       }
     }
   }
-`;
+`
