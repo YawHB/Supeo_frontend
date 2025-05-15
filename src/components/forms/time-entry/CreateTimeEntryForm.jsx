@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import useTimeEntryFormState from './CreateTimeEntryFormState'
 import { Form, Row, Col, Input, Label, FormGroup, Alert } from 'reactstrap'
 
-const CreateTimeEntryForm = ({ onSubmit, timeEntry, errorMessage = null }) => {
+const CreateTimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
   const [translate] = useTranslation('global')
   const input = useTimeEntryFormState(timeEntry)
   const handleSubmit = (e) => {
@@ -35,10 +35,10 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry, errorMessage = null }) => {
 
   return (
     <>
-      {errorMessage && (
+      {errorMessages && (
         <Alert color='danger' className='mb-4' timeout={{ enter: 150, exit: 150 }}>
           <ul className='mb-0 list-unstyled'>
-            {errorMessage.map((message, i) => (
+            {errorMessages.map((message, i) => (
               <li key={i}>{message}</li>
             ))}
           </ul>
