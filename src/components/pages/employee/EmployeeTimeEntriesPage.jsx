@@ -1,10 +1,10 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { useTimeEntriesPageState } from './EmployeeTimeEntriesPageState.js'
+import { useTimeEntriesPageState } from './employeeTimeEntriesPageState.js'
 import { Row, Col, Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
-import CreateTimeEntryForm from '../../../forms/time-entry/TimeEntryForm.jsx'
-import NotificationForm from '../../../forms/notification/NotificationForm.jsx'
+import CreateTimeEntryForm from '../../forms/time-entry/TimeEntryForm.jsx'
+import NotificationForm from '../../forms/notification/NotificationForm.jsx'
 
 export const EmployeeTimeEntriesPage = () => {
   const [translate] = useTranslation('global')

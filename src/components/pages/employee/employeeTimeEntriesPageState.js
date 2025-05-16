@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { Button } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
 import { useApolloClient, useMutation, useQuery } from '@apollo/client'
-import { useModalState } from '../../../../hooks/useModalState.js'
-import { CREATE_TIME_ENTRY } from '../../../../services/time-entry/mutations.js'
-import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from '../../../../services/employee/queries.js'
+import { useModalState } from '../../../hooks/useModalState.js'
+import { CREATE_TIME_ENTRY } from '../../../services/time-entry/mutations.js'
+import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from '../../../services/employee/queries.js'
 
 export const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
