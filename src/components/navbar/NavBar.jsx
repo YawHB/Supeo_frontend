@@ -1,4 +1,4 @@
-import Logo from '../Logo.jsx'
+import Logo from '../../assets/Logo.jsx'
 import {
   Nav,
   Navbar,

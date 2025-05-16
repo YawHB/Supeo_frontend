@@ -1,21 +1,21 @@
-import React from "react";
-import SupeoLogo from "../assets/SupeoLogo.jsx";
+import React from 'react'
+import SupeoLogo from './SupeoLogo.jsx'
 
 const Logo = ({
   text,
   imgStyle,
   className,
   textStyle,
-  logoColor = "#E6FBB5",
-  textColor = "#F8F9FA",
+  logoColor = '#E6FBB5',
+  textColor = '#F8F9FA',
 }) => {
   return (
-    <div className={`d-flex align-items-center ${className || ""}`}>
+    <div className={`d-flex align-items-center ${className || ''}`}>
       <SupeoLogo style={{ ...imgStyle, color: logoColor }} />
       {text && (
         <span
           style={{
-            marginLeft: "0.5rem",
+            marginLeft: '0.5rem',
             color: textColor,
             ...textStyle,
           }}
@@ -24,7 +24,7 @@ const Logo = ({
         </span>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Logo;
+export default Logo
