@@ -1,24 +1,25 @@
 import { useState } from 'react'
 import { Button } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
-import { useApolloClient, useMutation, useQuery } from '@apollo/client'
 import { useModalState } from '../../../hooks/useModalState.js'
+import { useApolloClient, useMutation, useQuery } from '@apollo/client'
 import { CREATE_TIME_ENTRY } from '../../../services/time-entry/mutations.js'
 import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from '../../../services/employee/queries.js'
 
 export const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
-  const [timeEntriesData, setTimeEntriesData] = useState([])
-  const [errorMessages, setErrorMessages] = useState(null)
-  const resetErrorMessages = () => setErrorMessages(null)
 
-  const [isLoadingTimeEntriesForm, setIsLoadingTimeEntriesForm] = useState(false)
   const timeEntryFormModalState = useModalState()
   const newTimeEntryFormModalState = useModalState()
-
   const notificationInfoModalState = useModalState()
+
+  const resetErrorMessages = () => setErrorMessages(null)
+
+  const [errorMessages, setErrorMessages] = useState(null)
+  const [timeEntriesData, setTimeEntriesData] = useState([])
   const [openNotification, setOpenNotification] = useState(null)
+  const [isLoadingTimeEntriesForm, setIsLoadingTimeEntriesForm] = useState(false)
 
   const statusClassMap = {
     AFVENTER: 'status-select--pending',
@@ -124,7 +125,6 @@ export const useTimeEntriesPageState = () => {
   const handleSubmitNewTimeEntry = (timeEntry) => {
     setIsLoadingTimeEntriesForm(true)
     setErrorMessages(null)
-
     createTimeEntry({
       variables: { newTimeEntry: timeEntry },
       onCompleted: () => {
@@ -133,7 +133,6 @@ export const useTimeEntriesPageState = () => {
       },
       onError: (errors) => {
         setIsLoadingTimeEntriesForm(false)
-
         if (errors.graphQLErrors && errors.graphQLErrors.length > 0) {
           const messages = errors.graphQLErrors.map((e) => e.message)
           setErrorMessages(messages)
@@ -147,11 +146,13 @@ export const useTimeEntriesPageState = () => {
   return {
     translate,
     apolloClient,
-    timeEntriesData,
     errorMessages,
+    timeEntriesData,
+    openNotification,
     resetErrorMessages,
     timeEntriesColumns,
     setTimeEntriesData,
+    setOpenNotification,
     isLoadingTimeEntries,
     timeEntryFormModalState,
     isLoadingTimeEntriesForm,
@@ -159,8 +160,6 @@ export const useTimeEntriesPageState = () => {
     handleSubmitNewTimeEntry,
     newTimeEntryFormModalState,
     notificationInfoModalState,
-    openNotification,
-    setOpenNotification,
     setIsLoadingTimeEntriesForm,
   }
 }

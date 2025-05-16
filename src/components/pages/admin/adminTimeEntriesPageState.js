@@ -1,11 +1,11 @@
-import { useTranslation } from 'react-i18next'
-import { useQuery, useApolloClient, useMutation } from '@apollo/client'
 import { useState } from 'react'
+import { Input } from 'reactstrap'
+import { useTranslation } from 'react-i18next'
+import showToast from '../../../utils/toast.js'
+import exportTableData from '../../../utils/exportTableData.js'
+import { useQuery, useApolloClient, useMutation } from '@apollo/client'
 import { GET_ALL_TIME_ENTRIES } from '../../../services/time-entry/queries.js'
 import { UPDATE_TIME_ENTRY_STATUS } from '../../../services/notification/mutations.js'
-import exportTableData from '../../../utils/exportTableData.js'
-import showToast from '../../../utils/toast.js'
-import { Input } from 'reactstrap'
 
 const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
@@ -57,9 +57,6 @@ const useTimeEntriesPageState = () => {
   const [updateTimeEntryStatus] = useMutation(UPDATE_TIME_ENTRY_STATUS)
 
   const handleStatusChange = (newStatus, i, notificationID) => {
-    console.log('Inside new handle status change')
-    console.log(newStatus, i)
-
     updateTimeEntryStatus({
       variables: {
         notification: {
@@ -117,7 +114,6 @@ const useTimeEntriesPageState = () => {
   const handleExportTable = () => {
     const startMsg = translate('export_table.start')
     showToast(startMsg, 'info')
-
     apolloClient
       .query({ query: GET_ALL_TIME_ENTRIES, fetchPolicy: 'network-only' })
       .then((result) => {
@@ -145,14 +141,14 @@ const useTimeEntriesPageState = () => {
 
   return {
     translate,
+    timeEntries,
     apolloClient,
-    isLoadingTimeEntries,
-    timeEntriesTableColumns,
+    handleExportTable,
     handleStatusChange,
     handleCommentChange,
     handleUpdateComment,
-    timeEntries,
-    handleExportTable,
+    isLoadingTimeEntries,
+    timeEntriesTableColumns,
   }
 }
 

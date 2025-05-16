@@ -1,11 +1,10 @@
-import React from 'react'
 import SideBar from '../../sidebar/Sidebar'
-import { Row, Col, Table, Button } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
+import { Row, Col, Table, Button } from 'reactstrap'
 import useSideBarState from '../../sidebar/SideBarState'
-import useTimeEntriesPageState from './adminTimeEntriesPageState'
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import useTimeEntriesPageState from './adminTimeEntriesPageState'
 
 const statusClassMap = {
   AFVENTER: 'status-select--pending',
@@ -15,9 +14,9 @@ const statusClassMap = {
 }
 
 const TimeEntriesPage = () => {
-  const [translate] = useTranslation('global')
   const state = useTimeEntriesPageState()
   const sideBarState = useSideBarState()
+  const [translate] = useTranslation('global')
 
   document.title = translate('page_title.administration_time_entries')
 
