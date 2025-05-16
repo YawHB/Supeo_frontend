@@ -84,6 +84,9 @@ const TimeEntriesPage = () => {
                       </td>
                       <td>
                         <select
+                          className={` form-select ${
+                            statusClassMap[timeEntry.notification.status]
+                          } `}
                           value={timeEntry.notification.status}
                           onChange={(e) =>
                             state.handleStatusChange(e.target.value, i, timeEntry.notification.id)
