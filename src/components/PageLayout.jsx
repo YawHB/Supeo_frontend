@@ -1,16 +1,13 @@
+import { useState } from 'react'
 import NavBar from './navbar/NavBar.jsx'
-import SideBar from './sidebar/Sidebar.jsx'
 import { Outlet } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import { useState } from 'react'
-
-// export function PageLayout({ children }) {
-//     return <main>{children}</main>;
-// }
+import SideBar from './sidebar/SideBar.jsx'
 
 const PageLayout = () => {
-  const navItems = useSelector((state) => state.user.topNavItems)
   const [isCollapsed, setIsCollapsed] = useState(false)
+  const navItems = useSelector((state) => state.user.topNavItems)
+
   return (
     <div className='d-flex'>
       <SideBar

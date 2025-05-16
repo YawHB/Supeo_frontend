@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import SideBar from '../../sidebar/SideBar.jsx'
 import { Row, Col, Table, Button } from 'reactstrap'
-import useSideBarState from '../../sidebar/SideBarState'
+import useSideBarState from '../../sidebar/SideBarState.js'
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import useTimeEntriesPageState from './adminTimeEntriesPageState'
+import useTimeEntriesPageState from './adminTimeEntriesPageState.js'
 
 const statusClassMap = {
   AFVENTER: 'status-select--pending',
@@ -13,7 +13,7 @@ const statusClassMap = {
   IGANG: 'status-select--underway',
 }
 
-const TimeEntriesPage = () => {
+const AdminTimeEntriesPage = () => {
   const state = useTimeEntriesPageState()
   const sideBarState = useSideBarState()
   const [translate] = useTranslation('global')
@@ -141,4 +141,4 @@ const TimeEntriesPage = () => {
   )
 }
 
-export default TimeEntriesPage
+export default AdminTimeEntriesPage

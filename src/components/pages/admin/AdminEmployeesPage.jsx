@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import SideBar from '../../sidebar/SideBar.jsx'
-import useSideBarState from '../../sidebar/SideBarState'
-import EmployeeForm from '../../forms/employee/EmployeeForm'
-import useEmployeesPageState from './adminEmployeesPageState'
+import useSideBarState from '../../sidebar/SideBarState.js'
+import EmployeeForm from '../../forms/employee/EmployeeForm.jsx'
+import useEmployeesPageState from './adminEmployeesPageState.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faFileExcel, faSave } from '@fortawesome/free-solid-svg-icons'
 import {
@@ -18,7 +18,7 @@ import {
 } from 'reactstrap'
 import Select from 'react-select'
 
-const EmployeesPage = () => {
+const AdminEmployeesPage = () => {
   const state = useEmployeesPageState()
   const sideBarState = useSideBarState()
   const [translate] = useTranslation(`global`)
@@ -190,4 +190,4 @@ const EmployeesPage = () => {
   )
 }
 
-export default EmployeesPage
+export default AdminEmployeesPage
