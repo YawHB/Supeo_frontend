@@ -1,10 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import { useQuery, useApolloClient, useMutation } from '@apollo/client'
 import { useState } from 'react'
-import { GET_ALL_TIME_ENTRIES } from '../../../../services/time-entry/queries.js'
-import { UPDATE_TIME_ENTRY_STATUS } from '../../../../services/notification/mutations.js'
-import exportTableData from '../../../../utils/exportTableData.js'
-import showToast from '../../../../utils/toast.js'
+import { GET_ALL_TIME_ENTRIES } from '../../../services/time-entry/queries.js'
+import { UPDATE_TIME_ENTRY_STATUS } from '../../../services/notification/mutations.js'
+import exportTableData from '../../../utils/exportTableData.js'
+import showToast from '../../../utils/toast.js'
 import { Input } from 'reactstrap'
 
 const useTimeEntriesPageState = () => {
