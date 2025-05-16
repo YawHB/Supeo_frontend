@@ -1,4 +1,4 @@
-import "./i18n.js";
+import "./utils/i18n.js";
 import React from "react";
 import App from "./App.jsx";
 import "./styles/style.scss";
