@@ -1,23 +1,22 @@
-import { useTranslation } from "react-i18next";
-import { Form, Row, Col, Input, Label, FormGroup } from "reactstrap";
-import useEmployeeFormState from "./EmployeeFormState";
-import Select from "react-select";
-import useEmployeesPageState from "../../pages/admin/employees/EmployeesPageState";
-
+import { useTranslation } from 'react-i18next'
+import { Form, Row, Col, Input, Label, FormGroup } from 'reactstrap'
+import useEmployeeFormState from './EmployeeFormState'
+import Select from 'react-select'
+import useEmployeesPageState from '../../pages/admin/adminEmployeesPageState'
 
 const EmployeeForm = ({ onSubmit, employee = null }) => {
-  const [translate] = useTranslation("global");
-  const state = useEmployeesPageState();
+  const [translate] = useTranslation('global')
+  const state = useEmployeesPageState()
   const {
     input,
     //employeeRoleOptions,
     employeePermissionOptions,
     //isLoadingRoles,
-    isLoadingPermissions
+    isLoadingPermissions,
   } = useEmployeeFormState(employee)
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     onSubmit({
       firstName: input.firstName.value,
       lastName: input.lastName.value,
@@ -25,8 +24,8 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
       employeePermissionId: input.employeePermissionId.value,
       email: input.email.value,
       phoneNumber: input.phoneNumber.value,
-    });
-  };
+    })
+  }
 
   //const selectedRoleOption = employeeRoleOptions.find((opt) => opt.value === input.employeeRoleId.value) || null
   //const selectedPermissionOption = employeePermissionOptions.find((opt) => opt.value === input.employeePermissionId.value) || null
@@ -130,15 +129,12 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
             />
           </FormGroup> */}
           <FormGroup>
-            <Label for="employeeRole">Brugergruppe</Label>
-            <Input id="employeeRole" name="employeeRole" type="select">
-            {state.roles.map((role) => {
-              return <option key={role.id}>{role.roleName}</option>
-            })}
-            
+            <Label for='employeeRole'>Brugergruppe</Label>
+            <Input id='employeeRole' name='employeeRole' type='select'>
+              {state.roles.map((role) => {
+                return <option key={role.id}>{role.roleName}</option>
+              })}
             </Input>
-
-
           </FormGroup>
         </Col>
 
@@ -165,6 +161,6 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
       </Row>
     </Form>
   )
-};
+}
 
-export default EmployeeForm;
+export default EmployeeForm

@@ -1,16 +1,16 @@
 import { Button } from 'reactstrap'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import showToast from '../../../../utils/toast.js'
+import showToast from '../../../utils/toast.js'
 import { faPencil } from '@fortawesome/free-solid-svg-icons'
-import { useModalState } from '../../../../hooks/useModalState.js'
+import { useModalState } from '../../../hooks/useModalState.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery, useMutation, useApolloClient } from '@apollo/client'
-import { GET_ALL_EMPLOYEES } from '../../../../services/employee/queries.js'
-import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../../services/employee/mutations.js'
-import { GET_ROLES, GET_PERMISSIONS } from '../../../../services/employee/queries.js'
+import { GET_ALL_EMPLOYEES } from '../../../services/employee/queries.js'
+import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mutations.js'
+import { GET_ROLES, GET_PERMISSIONS } from '../../../services/employee/queries.js'
 
-import exportTableData from '../../../../utils/exportTableData.js'
+import exportTableData from '../../../utils/exportTableData.js'
 //import { useInput } from "../../../hooks/useInput.js";
 //import usePagination from "../../../../hooks/usePagination.js";
 

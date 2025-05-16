@@ -1,9 +1,9 @@
 import React from 'react'
-import SideBar from '../../../sidebar/Sidebar'
+import SideBar from '../../sidebar/Sidebar'
 import { useTranslation } from 'react-i18next'
-import EmployeeForm from '../../../forms/employee/EmployeeForm'
-import useSideBarState from '../../../sidebar/SideBarState'
-import useEmployeesPageState from '../employees/EmployeesPageState'
+import EmployeeForm from '../../forms/employee/EmployeeForm'
+import useSideBarState from '../../sidebar/SideBarState'
+import useEmployeesPageState from './adminEmployeesPageState'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faFileExcel, faSave } from '@fortawesome/free-solid-svg-icons'
 import {
