@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useState } from "react";
-import { USER_MENU_LINKS } from "../../services/api/queries";
+import { USER_MENU_LINKS } from "../../services/queries";
 import { standardApolloError } from "../../utils/errorHandling.js";
 
 import { sideBarItemsMap } from "./SideBarItems";
