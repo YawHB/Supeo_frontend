@@ -65,7 +65,7 @@ const useTimeEntriesPageState = () => {
         notification: {
           notificationID,
           status: newStatus,
-          //timestamp: Date.now()
+          timestamp: Date.now(),
         },
       },
       onCompleted: () => {
