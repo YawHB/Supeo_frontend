@@ -1,41 +1,42 @@
-import { useSelector } from "react-redux";
-import { useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux'
+import { useCallback, useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const useNavBarState = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  const user = useSelector(state => state.auth.authenticatedUser);
-  const navItems = useSelector(({ user }) => user.topNavItems);
-  const [isBurgerCollapsed, setIsBurgerCollapsed] = useState(true);
-  const [userFullName, setUserFullName] = useState("");
+  const navigate = useNavigate()
+  const location = useLocation()
+  const [userFullName, setUserFullName] = useState('')
+  const navItems = useSelector(({ user }) => user.topNavItems)
+  const [isBurgerCollapsed, setIsBurgerCollapsed] = useState(true)
+  const user = useSelector((state) => state.auth.authenticatedUser)
 
   const toggleBurgerCollapsed = () => {
-    setIsBurgerCollapsed(!isBurgerCollapsed);
-  };
+    setIsBurgerCollapsed(!isBurgerCollapsed)
+  }
 
   useEffect(() => {
     if (!user) {
-      setUserFullName(``);
+      setUserFullName(``)
     }
-    setUserFullName(`${user?.firstName} ${user?.lastName}`);
-  }, [user]);
+    setUserFullName(`${user?.firstName} ${user?.lastName}`)
+  }, [user])
 
   const isActiveFunction = useCallback(
     (item) => {
-      const getModuleRegex = /^(\/[^/]*)/;
-      const locationModule = getModuleRegex.exec(location.pathname)?.[1] ?? "";
-      return item.link === locationModule;
-    }, [navItems, location]
-  );
+      const getModuleRegex = /^(\/[^/]*)/
+      const locationModule = getModuleRegex.exec(location.pathname)?.[1] ?? ''
+      return item.link === locationModule
+    },
+    [navItems, location],
+  )
 
   const logOff = () => {
-    navigate("logging-out");
-  };
+    navigate('logging-out')
+  }
 
   const outsideClickFunction = () => {
-    setIsBurgerCollapsed(true);
-  };
+    setIsBurgerCollapsed(true)
+  }
 
   return {
     user,
@@ -50,7 +51,7 @@ const useNavBarState = () => {
     setIsBurgerCollapsed,
     outsideClickFunction,
     toggleBurgerCollapsed,
-  };
-};
+  }
+}
 
-export default useNavBarState;
+export default useNavBarState

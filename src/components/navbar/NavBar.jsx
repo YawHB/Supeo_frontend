@@ -2,26 +2,26 @@ import Logo from '../../assets/Logo.jsx'
 import {
   Nav,
   Navbar,
-  //Button,
-  //NavLink,
   NavItem,
   Collapse,
+  //Button,
+  //NavLink,
   NavbarBrand,
   NavbarToggler,
 } from 'reactstrap'
 import { Link } from 'react-router-dom'
-import { Fragment } from 'react/jsx-runtime'
 import useNavBarState from './NavBarState'
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { faSignOut } from "@fortawesome/free-solid-svg-icons";
+import { Fragment } from 'react/jsx-runtime'
+//import { faSignOut } from '@fortawesome/free-solid-svg-icons'
+//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const NavBar = () => {
   const {
+    //logOff,
+    //userFullName,
+    navItems,
     isBurgerCollapsed,
     toggleBurgerCollapsed,
-    navItems,
-    //userFullName,
-    //logOff,
   } = useNavBarState()
 
   return (
@@ -44,22 +44,18 @@ const NavBar = () => {
               {navItems.map((item) => (
                 <Fragment key={item.label}>
                   <NavItem>
-                    {/* <NavLink tag={Link} to={item.link} className="text-light">
-                      <FontAwesomeIcon icon={item.icon} size="xl" />
+                    {/* <NavLink tag={Link} to={item.link} className='text-light'>
+                      <FontAwesomeIcon icon={item.icon} size='xl' />
                     </NavLink> */}
                   </NavItem>
                 </Fragment>
               ))}
               {/* <NavItem
-                className="d-none d-md-block mx-2 bg-light"
-                style={{ width: "1px", height: "24px" }}
+                className='d-none d-md-block mx-2 bg-light'
+                style={{ width: '1px', height: '24px' }}
               />
-              <Button onClick={logOff} color="default" className="text-light">
-                <FontAwesomeIcon
-                  size="xl"
-                  className="icon pe-2"
-                  icon={faSignOut}
-                />
+              <Button onClick={logOff} color='default' className='text-light'>
+                <FontAwesomeIcon size='xl' className='icon pe-2' icon={faSignOut} />
                 <span>{userFullName}</span>
               </Button> */}
             </Nav>
