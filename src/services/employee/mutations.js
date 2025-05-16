@@ -25,13 +25,3 @@ export const UPDATE_EMPLOYEE = gql`
     }
   }
 `
-
-export const UPDATE_TIME_ENTRY_STATUS = gql`
-  mutation Mutation($notification: NotificationStatusInput!) {
-    updateTimeEntryStatus(notification: $notification) {
-      id
-      status
-      comment
-    }
-  }
-`
