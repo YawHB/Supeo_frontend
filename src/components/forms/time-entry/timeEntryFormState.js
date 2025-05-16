@@ -9,6 +9,7 @@ const useTimeEntryFormState = (timeEntry) => {
   const endTime = useInput(timeEntry?.endTime ?? '')
   const duration = useInput('')
   const notificationStatus = useInput(timeEntry?.notification?.status ?? 'AFVENTER')
+
   useEffect(() => {
     if (isTimeRangeComplete(startDate.value, startTime.value, endDate.value, endTime.value)) {
       const result = calculateWorkHours(
@@ -35,7 +36,6 @@ const useTimeEntryFormState = (timeEntry) => {
     endDate,
     endTime,
     duration,
-
     break: useInput(timeEntry?.break ?? ''),
     comment: useInput(timeEntry?.comment ?? ''),
     adminComment: useInput(timeEntry?.adminComment ?? ''),

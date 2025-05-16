@@ -5,6 +5,7 @@ import { Form, Row, Col, Input, Label, FormGroup, Alert } from 'reactstrap'
 const TimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
   const [translate] = useTranslation('global')
   const input = useTimeEntryFormState(timeEntry)
+
   const handleSubmit = (e) => {
     const { startDate, startTime, endDate, endTime, duration, comment, employeeID, notification } =
       input
@@ -63,6 +64,7 @@ const TimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
               />
             </FormGroup>
           </Col>
+
           <Col md={6}>
             <FormGroup>
               <Label for='startTime'>
@@ -93,6 +95,7 @@ const TimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
               />
             </FormGroup>
           </Col>
+
           <Col md={6}>
             <FormGroup>
               <Label for='endTime'>{translate('end_time')}</Label>
@@ -122,6 +125,7 @@ const TimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
               />
             </FormGroup>
           </Col>
+
           <Col md={6}>
             <FormGroup>
               <Label for='break'>{translate('break')}</Label>
@@ -138,27 +142,6 @@ const TimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
               ></Input>
             </FormGroup>
           </Col>
-        </Row>
-        <Row>
-          {/* //// Jeg tænker måske at formgruppen status her nedenunder skal fjernes, da det nok ikke giver helt mening...
-        // ... at en medarbejder kan se status når han er i gang med at oprette en ny time entry
-        <Col md={6}>
-        <FormGroup>
-        <Label for="status">{translate("status")}</Label>
-        <Input
-        id="status"
-        name="status"
-        type="select"
-        value={input.notification.status.value}
-        onChange={input.notification.status.onChange}
-        >
-        <option value="AFVENTER">{translate("pending")}</option>
-        <option value="GODKENDT">{translate("approve")}</option>
-        <option value="AFVIST">{translate("reject")}</option>
-        <option value="IGANG">{translate("underway")}</option>
-        </Input>
-        </FormGroup>
-        </Col> */}
         </Row>
         <Row>
           <Col md={12}>

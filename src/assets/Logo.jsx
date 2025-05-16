@@ -1,4 +1,3 @@
-import React from 'react'
 import SupeoLogo from './SupeoLogo.jsx'
 
 const Logo = ({

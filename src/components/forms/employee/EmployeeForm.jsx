@@ -1,7 +1,7 @@
-import { useTranslation } from 'react-i18next'
-import { Form, Row, Col, Input, Label, FormGroup } from 'reactstrap'
-import useEmployeeFormState from './EmployeeFormState'
 import Select from 'react-select'
+import { useTranslation } from 'react-i18next'
+import useEmployeeFormState from './EmployeeFormState'
+import { Form, Row, Col, Input, Label, FormGroup } from 'reactstrap'
 import useEmployeesPageState from '../../pages/admin/adminEmployeesPageState'
 
 const EmployeeForm = ({ onSubmit, employee = null }) => {
@@ -9,9 +9,7 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
   const state = useEmployeesPageState()
   const {
     input,
-    //employeeRoleOptions,
     employeePermissionOptions,
-    //isLoadingRoles,
     isLoadingPermissions,
   } = useEmployeeFormState(employee)
 
@@ -26,9 +24,6 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
       phoneNumber: input.phoneNumber.value,
     })
   }
-
-  //const selectedRoleOption = employeeRoleOptions.find((opt) => opt.value === input.employeeRoleId.value) || null
-  //const selectedPermissionOption = employeePermissionOptions.find((opt) => opt.value === input.employeePermissionId.value) || null
 
   return (
     <Form id='newEmployeeForm' onSubmit={handleSubmit}>
@@ -110,24 +105,6 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
 
       <Row>
         <Col md={6}>
-          {/* <FormGroup>
-            <Label for='employeeRole'>
-              {translate('role')}
-              <span className='text-danger'>*</span>
-            </Label>
-            <Select
-              id='employeeRole'
-              name='employeeRole'
-              options={employeeRoleOptions}
-              value={selectedRoleOption}
-              isLoading={isLoadingRoles}
-              onChange={(opt) =>
-                input.employeeRoleId.onChange({
-                  target: { value: opt.value },
-                })
-              }
-            />
-          </FormGroup> */}
           <FormGroup>
             <Label for='employeeRole'>Brugergruppe</Label>
             <Input id='employeeRole' name='employeeRole' type='select'>

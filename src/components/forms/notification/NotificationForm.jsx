@@ -6,8 +6,6 @@ const NotificationForm = ({ notification = {} }) => {
   const [translate] = useTranslation('global')
   const { comment, status, timestamp } = useNotificationFormState(notification)
 
-  console.log(notification)
-
   return (
     <Form id='notificationForm'>
       <Row>
