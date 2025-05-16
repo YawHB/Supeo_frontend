@@ -11,8 +11,7 @@ export function calculateWorkHours(startDate, startTime, endDate, endTime) {
   const msTimeB = getMsTimeFromDateTime(yearB, monthB, dayB, hourB, minutesB)
   const B = new Date(yearB, monthB, dayB)
   const minutes2 = hourB * 60 + minutesB
-  const dayDiffInMs =
-    (calculateDaysWorked(yearB, monthB, dayB) - calculateDaysWorked(yearA, monthA, dayA)) / dayInMs
+  const dayDiffInMs = (calculateDaysWorked(yearB, monthB, dayB) - calculateDaysWorked(yearA, monthA, dayA)) / dayInMs
   console.log('dayDiffInMs: ', dayDiffInMs)
 
   //find arbejdstid
