@@ -56,7 +56,7 @@ const useTimeEntriesPageState = () => {
 
   const [updateTimeEntryStatus] = useMutation(UPDATE_TIME_ENTRY_STATUS)
 
-  const newHandleStatusChange = (newStatus, i, notificationID) => {
+  const handleStatusChange = (newStatus, i, notificationID) => {
     console.log('Inside new handle status change')
     console.log(newStatus, i)
 
@@ -65,6 +65,7 @@ const useTimeEntriesPageState = () => {
         notification: {
           notificationID,
           status: newStatus,
+          comment: timeEntries[i].notification.comment,
           timestamp: Date.now(),
         },
       },
@@ -82,6 +83,35 @@ const useTimeEntriesPageState = () => {
         })
       },
     })
+  }
+
+  const handleCommentChange = (newComment, i) => {
+    setTimeEntries((prev) => {
+      const newTimeEntries = [...prev]
+      newTimeEntries[i] = {
+        ...newTimeEntries[i],
+        notification: {
+          ...newTimeEntries[i].notification,
+          comment: newComment,
+        },
+      }
+      return newTimeEntries
+    })
+  }
+
+  const handleUpdateComment = (key, i, notificationID) => {
+    if (key === 'Enter') {
+      updateTimeEntryStatus({
+        variables: {
+          notification: {
+            notificationID,
+            comment: timeEntries[i].notification.comment,
+            status: timeEntries[i].notification.status,
+            timestamp: Date.now(),
+          },
+        },
+      })
+    }
   }
 
   const handleExportTable = () => {
@@ -118,7 +148,9 @@ const useTimeEntriesPageState = () => {
     apolloClient,
     isLoadingTimeEntries,
     timeEntriesTableColumns,
-    newHandleStatusChange,
+    handleStatusChange,
+    handleCommentChange,
+    handleUpdateComment,
     timeEntries,
     handleExportTable,
   }

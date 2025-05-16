@@ -72,16 +72,21 @@ const TimeEntriesPage = () => {
                       <td>{timeEntry.endTime}</td>
                       <td>{timeEntry.duration}</td>
                       <td>{timeEntry.comment}</td>
-                      <td>{timeEntry.notification.comment}</td>
+                      <td>
+                        <input
+                          type='text'
+                          value={timeEntry.notification.comment}
+                          onChange={(e) => state.handleCommentChange(e.target.value, i)}
+                          onKeyUp={(e) =>
+                            state.handleUpdateComment(e.key, i, timeEntry.notification.id)
+                          }
+                        />
+                      </td>
                       <td>
                         <select
                           value={timeEntry.notification.status}
                           onChange={(e) =>
-                            state.newHandleStatusChange(
-                              e.target.value,
-                              i,
-                              timeEntry.notification.id,
-                            )
+                            state.handleStatusChange(e.target.value, i, timeEntry.notification.id)
                           }
                         >
                           {state.timeEntriesTableColumns[10].options.map((option) => (
