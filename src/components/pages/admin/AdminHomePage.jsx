@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next'
-import SideBar from '../../sidebar/Sidebar'
+import SideBar from '../../sidebar/SideBar.jsx'
 import useSideBarState from '../../sidebar/SideBarState'
 
 const AdminHomePage = () => {
   const [translate] = useTranslation('global')
+
   document.title = translate('page_title.admin_home')
 
   const { sideBarItems, isSideBarCollapsed, toggleSideBarCollapse } = useSideBarState()
