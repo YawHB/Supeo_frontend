@@ -1,51 +1,45 @@
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify'
 
-/**
- * 
- * @param {string} message
- * @param {('info'|'success'|'error'|'warn')} type
- * @param {object} [options={}]
- */
-const showToast = (message, type = "info", options = {}) => {
+const showToast = (message, type = 'info', options = {}) => {
   switch (type) {
-    case "success":
+    case 'success':
       toast.success(message, {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         closeOnClick: true,
         pauseOnHover: false,
         ...options,
-      });
-      break;
-    case "error":
+      })
+      break
+    case 'error':
       toast.error(message, {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         closeOnClick: true,
         pauseOnHover: false,
         ...options,
-      });
-      break;
-    case "warn":
+      })
+      break
+    case 'warn':
       toast.warn(message, {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         closeOnClick: true,
         pauseOnHover: false,
         ...options,
-      });
-      break;
-    case "info":
+      })
+      break
+    case 'info':
     default:
       toast.info(message, {
-        position: "top-right",
+        position: 'top-right',
         autoClose: 5000,
         closeOnClick: true,
         pauseOnHover: false,
         ...options,
-      });
-      break;
+      })
+      break
   }
-};
+}
 
-export default showToast;
+export default showToast

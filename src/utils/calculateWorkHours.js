@@ -1,4 +1,3 @@
-//i utils
 export function calculateWorkHours(startDate, startTime, endDate, endTime) {
   const dayInMs = 86400000
   const [yearA, monthA, dayA] = splitDateToNumbers(startDate)
