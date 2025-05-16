@@ -1,4 +1,4 @@
-import ErrorPage from './ErrorPage'
+import ErrorPage from './ErrorPage.jsx'
 import { ErrorBoundary as ReactErrorBoundary } from 'react-error-boundary'
 
 const ErrorBoundary = ({ children }) => {
