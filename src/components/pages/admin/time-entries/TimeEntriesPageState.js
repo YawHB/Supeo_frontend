@@ -11,31 +11,19 @@ const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
   const [timeEntries, setTimeEntries] = useState([])
-  const [notification, setNotification] = useState([])
 
   const timeEntriesTableColumns = [
     { key: 'id', label: translate('id'), type: 'text', sort: true },
     { key: 'firstName', label: translate('first_name'), type: 'text', sort: true },
     { key: 'lastName', label: translate('last_name'), type: 'text', sort: true },
-    { key: 'date', label: translate('date'), type: 'date', sort: true },
+    { key: 'startDate', label: translate('date'), type: 'date', sort: true },
     { key: 'startTime', label: translate('start_time'), type: 'text', sort: true },
+    { key: 'endDate', label: translate('date'), type: 'date', sort: true },
     { key: 'endTime', label: translate('end_time'), type: 'text', sort: true },
     { key: 'duration', label: translate('duration'), type: 'text', sort: true },
     { key: 'comment', label: translate('comment'), type: 'text', sort: true },
     {
-      key: 'status',
-      label: translate('status'),
-      type: 'select',
-      options: [
-        { label: translate('pending'), value: 'AFVENTER' },
-        { label: translate('approve'), value: 'GODKENDT' },
-        { label: translate('reject'), value: 'AFVIST' },
-        { label: translate('underway'), value: 'IGANG' },
-      ],
-      alwaysEnabled: true,
-    },
-    {
-      key: 'admin_comment',
+      key: 'adminComment',
       label: translate('admin_comment'),
       type: `textarea`,
       alwaysEnabled: true,
@@ -49,15 +37,22 @@ const useTimeEntriesPageState = () => {
         />
       ),
     },
+    {
+      key: 'status',
+      label: translate('status'),
+      type: 'select',
+      options: [
+        { label: translate('pending'), value: 'AFVENTER' },
+        { label: translate('approve'), value: 'GODKENDT' },
+        { label: translate('reject'), value: 'AFVIST' },
+      ],
+    },
   ]
 
-  const { loading: isLoadingTimeEntries, refetch } = useQuery(GET_ALL_TIME_ENTRIES, {
+  const { loading: isLoadingTimeEntries } = useQuery(GET_ALL_TIME_ENTRIES, {
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => setTimeEntries(data.timeEntries),
   })
-
-  //1 handleNotificationStatus
-  //1.1
 
   const [updateTimeEntryStatus] = useMutation(UPDATE_TIME_ENTRY_STATUS)
 
@@ -79,6 +74,23 @@ const useTimeEntriesPageState = () => {
   //   })
   // }
 
+  const newHandleStatusChange = (newStatus, i) => {
+    console.log('Inside new handle status change')
+    console.log(newStatus, i)
+
+    setTimeEntries((prev) => {
+      const newTimeEntries = [...prev]
+      newTimeEntries[i] = {
+        ...newTimeEntries[i],
+        notification: {
+          ...newTimeEntries[i].notification,
+          status: newStatus,
+        },
+      }
+      return newTimeEntries
+    })
+  }
+
   const handleStatusChange = (notificationID, notificationStatus) => {
     updateTimeEntryStatus({
       variables: {
@@ -88,21 +100,24 @@ const useTimeEntriesPageState = () => {
         },
       },
       onCompleted: (data) => {
-        const updatedEntry = data.updateTimeEntryStatus
-        setTimeEntries((prevEntries) =>
-          prevEntries.map((entry) =>
-            entry.notification.id === updatedEntry.id
-              ? {
-                  ...entry,
-                  notification: {
-                    ...entry.notification,
-                    status: updatedEntry.status,
-                    comment: updatedEntry.comment,
-                  },
-                }
-              : entry,
-          ),
-          console.log('Updated entry:', updatedEntry),
+        const updatedNotification = data.updateTimeEntryStatus
+        console.log('INSIDE TIME_ENTRIES_PAGE_STATE')
+        console.log('updatedEntry: ', updatedNotification)
+        setTimeEntries(
+          (prevEntries) =>
+            prevEntries.map((entry) =>
+              entry.notification.id === updatedNotification.id
+                ? {
+                    ...entry,
+                    notification: {
+                      ...entry.notification,
+                      status: updatedNotification.status,
+                      comment: updatedNotification.comment,
+                    },
+                  }
+                : entry,
+            ),
+          console.log('Updated entry:', updatedNotification),
         )
       },
     })
@@ -158,7 +173,7 @@ const useTimeEntriesPageState = () => {
     apolloClient,
     isLoadingTimeEntries,
     timeEntriesTableColumns,
-    handleStatusChange,
+    newHandleStatusChange,
     timeEntries,
     handleExportTable,
   }

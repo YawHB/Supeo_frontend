@@ -61,17 +61,32 @@ const TimeEntriesPage = () => {
                     </td>
                   </tr>
                 ) : (
-                  state.timeEntries.map((timeEntry) => {
-                    //  timeEntry.map((x) => {
-                    //    console.log(x)
-                    //  })
+                  state.timeEntries.map((timeEntry, i) => (
+                    <tr key={timeEntry.id}>
+                      <td>{timeEntry.id}</td>
+                      <td>{timeEntry.firstName}</td>
+                      <td>{timeEntry.lastName}</td>
+                      <td>{timeEntry.startDate}</td>
+                      <td>{timeEntry.startTime}</td>
+                      <td>{timeEntry.endDate}</td>
+                      <td>{timeEntry.endTime}</td>
+                      <td>{timeEntry.duration}</td>
+                      <td>{timeEntry.comment}</td>
+                      <td>{timeEntry.notification.comment}</td>
+                      <td>
+                        <select
+                          value={timeEntry.notification.status}
+                          onChange={(e) => state.newHandleStatusChange(e.target.value, i)}
+                        >
+                          {state.timeEntriesTableColumns[10].options.map((option) => (
+                            <option key={option.label} value={option.value}>
+                              {option.label}
+                            </option>
+                          ))}
+                        </select>
+                      </td>
 
-                    return (
-                      <tr key={timeEntry.id}>
-                        {state.timeEntriesTableColumns.map((column) => {
-                          return (
-                            <td key={column.key}>
-                              {column.key === 'status' ? (
+                      {/* {column.key === 'status' ? (
                                 <select
                                   //className={`form-select ${statusClassMap[timeEntry.status] || ''}`}
                                   className={`form-select ${
@@ -94,19 +109,15 @@ const TimeEntriesPage = () => {
                                 </select>
                               ) : column.key === 'admin_comment' ? (
                                 timeEntry.notification.comment
-                              ) : column.key === 'firstName' ? (
-                                timeEntry.employee?.firstName
-                              ) : column.key === 'lastName' ? (
-                                timeEntry.employee?.lastName
-                              ) : (
-                                timeEntry[column.key]
-                              )}
-                            </td>
-                          )
-                        })}
-                      </tr>
-                    )
-                  })
+                                ) : column.key === 'firstName' ? (
+                                  timeEntry.employee?.firstName
+                                  ) : column.key === 'lastName' ? (
+                                    timeEntry.employee?.lastName
+                                    ) : (
+                                      timeEntry[column.key]
+                                      )}  */}
+                    </tr>
+                  ))
                 )}
               </tbody>
             </Table>
