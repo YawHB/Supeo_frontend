@@ -3,8 +3,8 @@ import { useQuery, useApolloClient, useMutation } from '@apollo/client'
 import { useState } from 'react'
 import { GET_ALL_TIME_ENTRIES } from '../../../../services/api/time-entry/queries.js'
 import { UPDATE_TIME_ENTRY_STATUS } from '../../../../services/api/admin/mutations.js'
-import exportTableData from '../../../lib/export/exportTableData.js'
-import showToast from '../../../lib/toast/toast.js'
+import exportTableData from '../../../../utils/exportTableData.js'
+import showToast from '../../../../utils/toast.js'
 import { Input } from 'reactstrap'
 
 const useTimeEntriesPageState = () => {

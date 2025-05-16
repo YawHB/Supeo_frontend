@@ -1,5 +1,5 @@
 import { isDev } from "./config.js";
-import showToast from "../components/lib/toast/toast.js";
+import showToast from "../utils/toast.js";
 
 /**
  *

@@ -1,7 +1,7 @@
 import { Button } from 'reactstrap'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import showToast from '../../../lib/toast/toast.js'
+import showToast from '../../../../utils/toast.js'
 import { faPencil } from '@fortawesome/free-solid-svg-icons'
 import { useModalState } from '../../../../hooks/useModalState.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,7 +10,7 @@ import { GET_ALL_EMPLOYEES } from '../../../../services/api/admin/queries.js'
 import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../../services/api/admin/mutations.js'
 import { GET_ROLES, GET_PERMISSIONS } from '../../../../services/api/employee/queries.js'
 
-import exportTableData from '../../../lib/export/exportTableData.js'
+import exportTableData from '../../../../utils/exportTableData.js'
 //import { useInput } from "../../../hooks/useInput.js";
 //import usePagination from "../../../../hooks/usePagination.js";
 
