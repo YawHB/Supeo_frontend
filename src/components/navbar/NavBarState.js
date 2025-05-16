@@ -10,7 +10,9 @@ const useNavBarState = () => {
   const [isBurgerCollapsed, setIsBurgerCollapsed] = useState(true)
   const user = useSelector((state) => state.auth.authenticatedUser)
 
-  const toggleBurgerCollapsed = () => {setIsBurgerCollapsed(!isBurgerCollapsed)}
+  const toggleBurgerCollapsed = () => {
+    setIsBurgerCollapsed(!isBurgerCollapsed)
+  }
 
   useEffect(() => {
     if (!user) {
@@ -28,9 +30,13 @@ const useNavBarState = () => {
     [navItems, location],
   )
 
-  const logOff = () => {navigate('logging-out')}
+  const logOff = () => {
+    navigate('logging-out')
+  }
 
-  const outsideClickFunction = () => {setIsBurgerCollapsed(true)}
+  const outsideClickFunction = () => {
+    setIsBurgerCollapsed(true)
+  }
 
   return {
     user,
