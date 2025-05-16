@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useInput } from '../../../hooks/useInput'
+import { useInput } from '../../../hooks/useInput.js'
 import { calculateWorkHours } from '../../../utils/calculateWorkHours.js'
 
 const useTimeEntryFormState = (timeEntry) => {

@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next'
-import useTimeEntryFormState from './CreateTimeEntryFormState'
+import useTimeEntryFormState from './timeEntryFormState'
 import { Form, Row, Col, Input, Label, FormGroup, Alert } from 'reactstrap'
 
-const CreateTimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
+const TimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
   const [translate] = useTranslation('global')
   const input = useTimeEntryFormState(timeEntry)
   const handleSubmit = (e) => {
@@ -180,4 +180,4 @@ const CreateTimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
   )
 }
 
-export default CreateTimeEntryForm
+export default TimeEntryForm
