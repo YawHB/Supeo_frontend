@@ -1,4 +1,4 @@
-import { isDev } from "../../../config.js";
+import { isDev } from "../../../utils/config.js";
 import showToast from "../toast/toast.js";
 
 /**
