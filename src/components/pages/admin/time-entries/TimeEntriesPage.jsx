@@ -64,8 +64,8 @@ const TimeEntriesPage = () => {
                   state.timeEntries.map((timeEntry, i) => (
                     <tr key={timeEntry.id}>
                       <td>{timeEntry.id}</td>
-                      <td>{timeEntry.firstName}</td>
-                      <td>{timeEntry.lastName}</td>
+                      <td>{timeEntry.employee.firstName}</td>
+                      <td>{timeEntry.employee.lastName}</td>
                       <td>{timeEntry.startDate}</td>
                       <td>{timeEntry.startTime}</td>
                       <td>{timeEntry.endDate}</td>
@@ -76,7 +76,13 @@ const TimeEntriesPage = () => {
                       <td>
                         <select
                           value={timeEntry.notification.status}
-                          onChange={(e) => state.newHandleStatusChange(e.target.value, i)}
+                          onChange={(e) =>
+                            state.newHandleStatusChange(
+                              e.target.value,
+                              i,
+                              timeEntry.notification.id,
+                            )
+                          }
                         >
                           {state.timeEntriesTableColumns[10].options.map((option) => (
                             <option key={option.label} value={option.value}>

@@ -56,88 +56,33 @@ const useTimeEntriesPageState = () => {
 
   const [updateTimeEntryStatus] = useMutation(UPDATE_TIME_ENTRY_STATUS)
 
-  // const handleStatusChange = (notificationID, notificationStatus) => {
-  //   updateTimeEntryStatus({
-  //     variables: {
-  //       notification: {
-  //         notificationID,
-  //         status: notificationStatus,
-  //       },
-  //     },
-  //     onCompleted: () => {
-  //       refetch().then((result) => {
-  //         setTimeEntries(result.data.timeEntries)
-  //         // returnerer alle timeEntries
-  //         console.log('Time entries:', result.data.timeEntries)
-  //       })
-  //     },
-  //   })
-  // }
-
-  const newHandleStatusChange = (newStatus, i) => {
+  const newHandleStatusChange = (newStatus, i, notificationID) => {
     console.log('Inside new handle status change')
     console.log(newStatus, i)
 
-    setTimeEntries((prev) => {
-      const newTimeEntries = [...prev]
-      newTimeEntries[i] = {
-        ...newTimeEntries[i],
-        notification: {
-          ...newTimeEntries[i].notification,
-          status: newStatus,
-        },
-      }
-      return newTimeEntries
-    })
-  }
-
-  const handleStatusChange = (notificationID, notificationStatus) => {
     updateTimeEntryStatus({
       variables: {
         notification: {
           notificationID,
-          status: notificationStatus,
+          status: newStatus,
+          //timestamp: Date.now()
         },
       },
-      onCompleted: (data) => {
-        const updatedNotification = data.updateTimeEntryStatus
-        console.log('INSIDE TIME_ENTRIES_PAGE_STATE')
-        console.log('updatedEntry: ', updatedNotification)
-        setTimeEntries(
-          (prevEntries) =>
-            prevEntries.map((entry) =>
-              entry.notification.id === updatedNotification.id
-                ? {
-                    ...entry,
-                    notification: {
-                      ...entry.notification,
-                      status: updatedNotification.status,
-                      comment: updatedNotification.comment,
-                    },
-                  }
-                : entry,
-            ),
-          console.log('Updated entry:', updatedNotification),
-        )
+      onCompleted: () => {
+        setTimeEntries((prev) => {
+          const newTimeEntries = [...prev]
+          newTimeEntries[i] = {
+            ...newTimeEntries[i],
+            notification: {
+              ...newTimeEntries[i].notification,
+              status: newStatus,
+            },
+          }
+          return newTimeEntries
+        })
       },
     })
   }
-
-  // const handleStatusChange = async (entryId, newStatus) => {
-  //   //console.log('entryId, and newStatus', entryId, newStatus)
-  //   const updatedEntries = timeEntries.map((entry) =>
-  //     entry.id === entryId ? { ...entry, status: newStatus } : entry,
-  //   )
-  //   setTimeEntries(updatedEntries)
-
-  //   try {
-  //     await updateTimeEntryStatus({
-  //       variables: { id: entryId, status: newStatus },
-  //     })
-  //   } catch (error) {
-  //     console.error('Failed to update status:', error)
-  //   }
-  // }
 
   const handleExportTable = () => {
     const startMsg = translate('export_table.start')
