@@ -1,28 +1,27 @@
-import React from 'react'
 import SideBar from '../../sidebar/Sidebar'
 import { useTranslation } from 'react-i18next'
-import EmployeeForm from '../../forms/employee/EmployeeForm'
 import useSideBarState from '../../sidebar/SideBarState'
+import EmployeeForm from '../../forms/employee/EmployeeForm'
 import useEmployeesPageState from './adminEmployeesPageState'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faFileExcel, faSave } from '@fortawesome/free-solid-svg-icons'
 import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
   Row,
   Col,
-  Table,
   Input,
+  Modal,
+  Table,
+  Button,
+  ModalBody,
+  ModalHeader,
+  ModalFooter,
 } from 'reactstrap'
 import Select from 'react-select'
 
 const EmployeesPage = () => {
-  const [translate] = useTranslation(`global`)
   const state = useEmployeesPageState()
   const sideBarState = useSideBarState()
+  const [translate] = useTranslation(`global`)
 
   document.title = translate('page_title.administration_employees')
 

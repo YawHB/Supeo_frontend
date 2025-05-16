@@ -1,16 +1,15 @@
-import { Button } from 'reactstrap'
 import { useState } from 'react'
+import { Button } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
 import showToast from '../../../utils/toast.js'
 import { faPencil } from '@fortawesome/free-solid-svg-icons'
+import exportTableData from '../../../utils/exportTableData.js'
 import { useModalState } from '../../../hooks/useModalState.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useQuery, useMutation, useApolloClient } from '@apollo/client'
 import { GET_ALL_EMPLOYEES } from '../../../services/employee/queries.js'
-import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mutations.js'
 import { GET_ROLES, GET_PERMISSIONS } from '../../../services/employee/queries.js'
-
-import exportTableData from '../../../utils/exportTableData.js'
+import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mutations.js'
 //import { useInput } from "../../../hooks/useInput.js";
 //import usePagination from "../../../../hooks/usePagination.js";
 
@@ -18,15 +17,12 @@ const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
 
-  const [roles, setRoles] = useState([])
-  const [permissions, setPermissions] = useState([])
-
-  const [employees, setEmployees] = useState([])
-  console.log('employees: ', employees)
-
   const employeeFormModalState = useModalState()
   const newEmployeeFormModalState = useModalState()
 
+  const [roles, setRoles] = useState([])
+  const [employees, setEmployees] = useState([])
+  const [permissions, setPermissions] = useState([])
   const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null)
   const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false)
 
@@ -73,8 +69,6 @@ const useEmployeesPageState = () => {
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => setPermissions(data.permissions),
   })
-
-  console.log('roles', roles)
 
   const { loading: isLoadingEmployees, refetch } = useQuery(GET_ALL_EMPLOYEES, {
     fetchPolicy: 'cache-and-network',
@@ -124,11 +118,9 @@ const useEmployeesPageState = () => {
           firstName: updatedEmployee.firstName,
           lastName: updatedEmployee.lastName,
         })
-
         refetch().then((result) => {
           setEmployees(result.data.employees)
         })
-
         showToast(successMsg, 'success')
         setIsLoadingEmployeesForm(false)
         setEmployeeBeingEdited(null)
@@ -187,30 +179,29 @@ const useEmployeesPageState = () => {
   // });
 
   return {
+    roles,
+    employees,
     translate,
+    permissions,
+    setEmployees,
     apolloClient,
+    createEmployee,
+    updateEmployee,
+    isLoadingRoles,
+    handleExportTable,
+    isUpdatingEmployee,
     isLoadingEmployees,
+    employeeBeingEdited,
+    isLoadingPermissions,
     employeesTableColumns,
     employeeFormModalState,
-    newEmployeeFormModalState,
-    handleSubmitNewEmployee,
-    employees,
-    roles,
-    permissions,
-    isLoadingRoles,
-    isLoadingPermissions,
-    handleSubmitEditedEmployee,
-    createEmployee,
-    isSubmittingNewEmployee,
-    updateEmployee,
-    isUpdatingEmployee,
-    employeeBeingEdited,
     setEmployeeBeingEdited,
     isLoadingEmployeesForm,
+    handleSubmitNewEmployee,
+    isSubmittingNewEmployee,
+    newEmployeeFormModalState,
+    handleSubmitEditedEmployee,
     setIsLoadingEmployeesForm,
-
-    setEmployees,
-    handleExportTable,
 
     //orderBy,
     //pagination,
