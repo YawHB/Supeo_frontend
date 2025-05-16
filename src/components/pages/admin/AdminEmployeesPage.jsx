@@ -1,5 +1,5 @@
-import SideBar from '../../sidebar/Sidebar'
 import { useTranslation } from 'react-i18next'
+import SideBar from '../../sidebar/SideBar.jsx'
 import useSideBarState from '../../sidebar/SideBarState'
 import EmployeeForm from '../../forms/employee/EmployeeForm'
 import useEmployeesPageState from './adminEmployeesPageState'

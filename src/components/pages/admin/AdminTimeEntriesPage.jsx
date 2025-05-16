@@ -1,5 +1,5 @@
-import SideBar from '../../sidebar/Sidebar'
 import { useTranslation } from 'react-i18next'
+import SideBar from '../../sidebar/SideBar.jsx'
 import { Row, Col, Table, Button } from 'reactstrap'
 import useSideBarState from '../../sidebar/SideBarState'
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons'
