@@ -1,4 +1,4 @@
-import PageLayout from '../PageLayout.jsx'
+import PageLayout from './components/PageLayout.jsx'
 import { Routes, Route } from 'react-router-dom'
 import ErrorBoundary from './components/error/ErrorBoundary.jsx'
 import AdminHomePage from './components/pages/admin/home/AdminHomePage.jsx'
