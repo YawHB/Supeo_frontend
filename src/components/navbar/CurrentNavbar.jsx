@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { Row, Col } from "reactstrap";
 
-export default function Navbar() {
+export default function NavBar() {
   return (
     <div>
       <Row>
