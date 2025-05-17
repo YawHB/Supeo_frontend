@@ -78,36 +78,33 @@ const AdminEmployeesPage = () => {
             </div> */}
           </Col>
 
-          {!state.isLoadingEmployees && (
-            <Table responsive>
-              <thead>
-                <tr>
+          <Table responsive>
+            <thead>
+              <tr>
+                {state.employeesTableColumns.map((column) => (
+                  <th key={column.key}>{column.label}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {state.employees.map((row, index) => (
+                <tr key={index}>
                   {state.employeesTableColumns.map((column) => (
-                    <th key={column.key}>{column.label}</th>
+                    <td key={column.key}>
+                      {column.type === 'view' ? column.view(row) : row[column.key]}
+                    </td>
                   ))}
                 </tr>
-              </thead>
-              <tbody>
-                {state.employees.length === 0 ? (
-                  <tr>
-                    <td colSpan={state.employeesTableColumns.length} className='text-center'>
-                      {translate('no_data')}
-                    </td>
-                  </tr>
-                ) : (
-                  state.employees.map((employee) => (
-                    <tr key={employee.id}>
-                      {state.employeesTableColumns.map((column) => (
-                        <td key={column.key}>
-                          {column.type === 'view' ? column.view(employee) : employee[column.key]}
-                        </td>
-                      ))}
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </Table>
-          )}
+              ))}
+              {state.employees.length === 0 && (
+                <tr>
+                  <td colSpan={state.employeesTableColumns.length} className='text-center'>
+                    {translate('no_data')}
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
         </Col>
       </Row>
 
