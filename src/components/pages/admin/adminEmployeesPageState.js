@@ -18,7 +18,6 @@ const useEmployeesPageState = () => {
   const [translate] = useTranslation('global')
 
   const employeeFormModalState = useModalState()
-  const newEmployeeFormModalState = useModalState()
 
   const [roles, setRoles] = useState([])
   const [employees, setEmployees] = useState([])
@@ -51,7 +50,7 @@ const useEmployeesPageState = () => {
           outline
           onClick={() => {
             setEmployeeBeingEdited(employee)
-            employeeFormModalState.openModal()
+            employeeFormModalState.openModal(employee)
           }}
         >
           <FontAwesomeIcon icon={faPencil} />
@@ -93,7 +92,7 @@ const useEmployeesPageState = () => {
         showToast(successMsg, 'success')
         setEmployees((prev) => [...prev, data.createEmployee])
         setIsLoadingEmployeesForm(false)
-        newEmployeeFormModalState.closeModal()
+        employeeFormModalState.closeModal()
       },
       onError: () => {
         const errorMsg = translate('notification.employee.create.error', {
@@ -199,7 +198,6 @@ const useEmployeesPageState = () => {
     isLoadingEmployeesForm,
     handleSubmitNewEmployee,
     isSubmittingNewEmployee,
-    newEmployeeFormModalState,
     handleSubmitEditedEmployee,
     setIsLoadingEmployeesForm,
 

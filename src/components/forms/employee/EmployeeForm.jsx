@@ -21,7 +21,7 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
   }
 
   return (
-    <Form id='newEmployeeForm' onSubmit={handleSubmit}>
+    <Form id='employeeForm' onSubmit={handleSubmit}>
       <Row>
         <Col md={6}>
           <FormGroup>
