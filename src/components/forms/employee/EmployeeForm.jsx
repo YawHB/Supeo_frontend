@@ -110,6 +110,9 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
               onChange={input.employeeRoleName.onChange}
               type='select'
             >
+              <option value='' disabled selected>
+                {translate('user_group_placeholder')}
+              </option>
               {state.roles.map((role) => {
                 return <option key={role.id}>{role.roleName}</option>
               })}
@@ -130,6 +133,9 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
               className='form-control'
               onChange={input.employeePermissionLevel.onChange}
             >
+              <option value='' disabled selected>
+                {translate('permission_placeholder')}
+              </option>
               {state.permissions.map((permission) => {
                 return <option key={permission.id}>{permission.permissionLevel}</option>
               })}
