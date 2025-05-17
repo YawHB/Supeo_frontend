@@ -107,15 +107,19 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
               id='employeeRole'
               name='employeeRole'
               className='form-control'
-              onChange={input.employeeRoleName.onChange}
               type='select'
+              value={input.employeeRoleName.value}
+              onChange={input.employeeRoleName.onChange}
+              required
             >
-              <option value='' disabled selected>
+              <option value='' disabled>
                 {translate('user_group_placeholder')}
               </option>
-              {state.roles.map((role) => {
-                return <option key={role.id}>{role.roleName}</option>
-              })}
+              {state.roles.map((role) => (
+                <option key={role.id} value={role.roleName}>
+                  {role.roleName}
+                </option>
+              ))}
             </Input>
           </FormGroup>
         </Col>
@@ -131,14 +135,18 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
               name='employeePermission'
               type='select'
               className='form-control'
+              value={input.employeePermissionLevel.value}
               onChange={input.employeePermissionLevel.onChange}
+              required
             >
-              <option value='' disabled selected>
+              <option value='' disabled>
                 {translate('permission_placeholder')}
               </option>
-              {state.permissions.map((permission) => {
-                return <option key={permission.id}>{permission.permissionLevel}</option>
-              })}
+              {state.permissions.map((permission) => (
+                <option key={permission.id} value={permission.permissionLevel}>
+                  {permission.permissionLevel}
+                </option>
+              ))}
             </Input>
           </FormGroup>
         </Col>
