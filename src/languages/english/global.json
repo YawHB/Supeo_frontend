@@ -71,8 +71,14 @@
     "update_employee": "Update employee",
     "edit_employee": "Edit '{{firstName}} {{lastName}}'",
     "search_employee": "Search for employee",
-    "select_employee_role": "Select employee role",
-    "create_new_employee": "Create new employee"
+    "select_employee_role": "Select usergroups",
+    "select_employee_permission": "Select permissions",
+    "create_new_employee": "Create new employee",
+    "export": "Export"
+  },
+  "time_entry": {
+    "create_time_entry": "Create time entry",
+    "update_time_entry": "Update time entry"
   },
   "no_data": "No data",
   "minimize": "Minimize",

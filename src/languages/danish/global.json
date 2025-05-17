@@ -27,7 +27,7 @@
   "comment": "Medarb. kommentar",
   "admin_comment": "Admin kommentar",
   "timestamp": "Tidspunkt",
-  "notification_status": "Status for notifikationen",
+  "notification_status": "Status for notifikation",
   "last_updated": "Sidst redigeret",
   "status": "Status",
   "pending": "Afventer",
@@ -71,13 +71,14 @@
     "update_employee": "Opdater medarbejder",
     "edit_employee": "Rediger '{{firstName}} {{lastName}}'",
     "search_employee": "Søg efter medarbejder",
-    "select_employee_role": "Vælg medarbejderrolle",
+    "select_employee_role": "Vælg brugergrupper",
+    "select_employee_permission": "Vælg rettigheder",
     "create_new_employee": "Opret ny medarbejder",
     "export": "Eksporter"
   },
   "time_entry": {
     "create_time_entry": "Opret tidsregistrering",
-    "update_time_entry": "Opdater medarbejder"
+    "update_time_entry": "Opdater tidsregistrering"
   },
   "no_data": "Ingen data",
   "minimize": "Minimer",
