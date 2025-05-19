@@ -139,8 +139,8 @@ const AdminEmployeesPage = () => {
                 ? state.handleSubmitEditedEmployee
                 : state.handleSubmitNewEmployee
             }
-            isSubmitting={state.isLoadingEmployeesForm}
             errorMessages={state.errorMessages}
+            isSubmitting={state.isLoadingEmployeesForm}
           />
         </ModalBody>
 

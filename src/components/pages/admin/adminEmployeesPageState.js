@@ -94,7 +94,7 @@ const useEmployeesPageState = () => {
         showToast(successMsg, 'success')
         setEmployees((prev) => [...prev, data.createEmployee])
         setIsLoadingEmployeesForm(false)
-        employeeFormModalState.closeModal()
+        employeeFormModalState.closeModal(), resetErrorMessages()
       },
       onError: (errors) => {
         setIsLoadingEmployeesForm(false)
