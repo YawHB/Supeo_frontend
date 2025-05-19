@@ -165,6 +165,11 @@ export const useTimeEntriesPageState = () => {
         ...prev,
         timeEntries: prev.timeEntries.filter((timeEntry) => timeEntry.id !== deleteTimeEntry),
       }))
+
+      if (openNotification?.id === deleteTimeEntry) {
+        setOpenNotification(null)
+        notificationInfoModalState.closeModal()
+      }
     },
     onError: (err) => {
       console.error('Failed to delete entry:', err)
