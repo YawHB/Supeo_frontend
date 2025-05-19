@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import CreateTimeEntryForm from '../../forms/time-entry/TimeEntryForm.jsx'
+import TimeEntryForm from '../../forms/time-entry/TimeEntryForm.jsx'
 import { useTimeEntriesPageState } from './employeeTimeEntriesPageState.js'
 import NotificationForm from '../../forms/notification/NotificationForm.jsx'
 import { Row, Col, Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
@@ -86,10 +86,10 @@ export const EmployeeTimeEntriesPage = () => {
         </ModalHeader>
 
         <ModalBody>
-          <CreateTimeEntryForm
+          <TimeEntryForm
             onSubmit={state.handleSubmitNewTimeEntry}
             isSubmitting={state.isSubmittingNewTimeEntry}
-            errorMessage={state.errorMessages}
+            errorMessages={state.errorMessages}
           />
         </ModalBody>
 

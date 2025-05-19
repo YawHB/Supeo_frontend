@@ -3,7 +3,6 @@ import useTimeEntryFormState from './timeEntryFormState'
 import { Form, Row, Col, Input, Label, FormGroup, Alert } from 'reactstrap'
 
 const TimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
-  console.log('fejl i formularen: ', errorMessages)
   const [translate] = useTranslation('global')
   const input = useTimeEntryFormState(timeEntry)
 

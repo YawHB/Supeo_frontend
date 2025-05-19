@@ -11,7 +11,6 @@ export const useTimeEntriesPageState = () => {
   const [translate] = useTranslation('global')
 
   const timeEntryFormModalState = useModalState()
-  //const newTimeEntryFormModalState = useModalState()
   const notificationInfoModalState = useModalState()
 
   const resetErrorMessages = () => setErrorMessages(null)
