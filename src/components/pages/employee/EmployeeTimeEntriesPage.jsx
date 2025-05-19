@@ -24,7 +24,7 @@ export const EmployeeTimeEntriesPage = () => {
               <Button
                 color='primary'
                 outline
-                onClick={() => state.newTimeEntryFormModalState.openModal({})}
+                onClick={() => state.timeEntryFormModalState.openModal({})}
                 className='no-wrap'
                 style={{ minWidth: '200px' }}
               >
@@ -68,10 +68,10 @@ export const EmployeeTimeEntriesPage = () => {
       </Row>
 
       <Modal
-        isOpen={state.newTimeEntryFormModalState.isOpen}
+        isOpen={state.timeEntryFormModalState.isOpen}
         toggle={() => {
           state.resetErrorMessages()
-          state.newTimeEntryFormModalState.closeModal()
+          state.timeEntryFormModalState.closeModal()
         }}
         returnFocusAfterClose={false}
         size='lg'
@@ -79,7 +79,7 @@ export const EmployeeTimeEntriesPage = () => {
         <ModalHeader
           toggle={() => {
             state.resetErrorMessages()
-            state.newTimeEntryFormModalState.closeModal()
+            state.timeEntryFormModalState.closeModal()
           }}
         >
           {translate('time_entry.create_time_entry')}
@@ -107,7 +107,7 @@ export const EmployeeTimeEntriesPage = () => {
             color='secondary'
             onClick={() => {
               state.resetErrorMessages()
-              state.newTimeEntryFormModalState.closeModal()
+              state.timeEntryFormModalState.closeModal()
             }}
           >
             {translate('cancel')}

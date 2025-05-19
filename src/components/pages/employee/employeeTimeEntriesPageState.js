@@ -11,7 +11,7 @@ export const useTimeEntriesPageState = () => {
   const [translate] = useTranslation('global')
 
   const timeEntryFormModalState = useModalState()
-  const newTimeEntryFormModalState = useModalState()
+  //const newTimeEntryFormModalState = useModalState()
   const notificationInfoModalState = useModalState()
 
   const resetErrorMessages = () => setErrorMessages(null)
@@ -129,7 +129,7 @@ export const useTimeEntriesPageState = () => {
       variables: { newTimeEntry: timeEntry },
       onCompleted: () => {
         setIsLoadingTimeEntriesForm(false)
-        newTimeEntryFormModalState.closeModal()
+        timeEntryFormModalState.closeModal()
       },
       onError: (errors) => {
         setIsLoadingTimeEntriesForm(false)
@@ -158,7 +158,6 @@ export const useTimeEntriesPageState = () => {
     isLoadingTimeEntriesForm,
     isSubmittingNewTimeEntry,
     handleSubmitNewTimeEntry,
-    newTimeEntryFormModalState,
     notificationInfoModalState,
     setIsLoadingTimeEntriesForm,
   }
