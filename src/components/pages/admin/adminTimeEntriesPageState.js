@@ -112,30 +112,35 @@ const useTimeEntriesPageState = () => {
   }
 
   const handleExportTable = () => {
-    const startMsg = translate('export_table.start')
-    showToast(startMsg, 'info')
+    showToast(translate('export_table.start'), 'info')
     apolloClient
       .query({ query: GET_ALL_TIME_ENTRIES, fetchPolicy: 'network-only' })
       .then((result) => {
-        const data = result.data?.timeEntries ?? []
+        const columns = result.data?.timeEntries ?? []
+        const data = columns.map((timeEntry) => ({
+          id: timeEntry.id,
+          firstName: timeEntry.employee?.firstName ?? '',
+          lastName: timeEntry.employee?.lastName ?? '',
+          startDate: timeEntry.startDate,
+          startTime: timeEntry.startTime,
+          endDate: timeEntry.endDate,
+          endTime: timeEntry.endTime,
+          duration: timeEntry.duration,
+          comment: timeEntry.comment,
+          adminComment: timeEntry.notification?.comment ?? '',
+          status: timeEntry.notification?.status ?? '',
+        }))
         const today = new Date().toISOString().split('T')[0]
         return exportTableData({
           data,
-          filename: `${translate(`export_table.time_entries_overview`)} ${today}`,
+          filename: `${translate('export_table.time_entries_overview')} ${today}`,
           columns: timeEntriesTableColumns.filter((col) => col.key !== 'id'),
-          //columns: timeEntriesTableColumns,
           strategy: 'xlsx',
         })
       })
       .then(
-        () => {
-          const successMsg = translate('export_table.success')
-          showToast(successMsg, 'success')
-        },
-        () => {
-          const errorMsg = translate('export_table.error')
-          showToast(errorMsg, 'error')
-        },
+        () => showToast(translate('export_table.success'), 'success'),
+        () => showToast(translate('export_table.error'), 'error'),
       )
   }
 

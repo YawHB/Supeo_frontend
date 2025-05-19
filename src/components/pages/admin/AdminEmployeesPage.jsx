@@ -62,7 +62,7 @@ const AdminEmployeesPage = () => {
                 outline
                 onClick={() => {
                   state.setEmployeeBeingEdited(null)
-                  state.newEmployeeFormModalState.openModal()
+                  state.employeeFormModalState.openModal()
                 }}
                 className='no-wrap'
                 style={{ minWidth: '200px' }}
@@ -78,95 +78,60 @@ const AdminEmployeesPage = () => {
             </div> */}
           </Col>
 
-          {!state.isLoadingEmployees && (
-            <Table responsive>
-              <thead>
-                <tr>
+          <Table responsive>
+            <thead>
+              <tr>
+                {state.employeesTableColumns.map((column) => (
+                  <th key={column.key}>{column.label}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {state.employees.map((row, index) => (
+                <tr key={index}>
                   {state.employeesTableColumns.map((column) => (
-                    <th key={column.key}>{column.label}</th>
+                    <td key={column.key}>
+                      {column.type === 'view' ? column.view(row) : row[column.key]}
+                    </td>
                   ))}
                 </tr>
-              </thead>
-              <tbody>
-                {state.employees.length === 0 ? (
-                  <tr>
-                    <td colSpan={state.employeesTableColumns.length} className='text-center'>
-                      {translate('no_data')}
-                    </td>
-                  </tr>
-                ) : (
-                  state.employees.map((employee) => (
-                    <tr key={employee.id}>
-                      {state.employeesTableColumns.map((column) => (
-                        <td key={column.key}>
-                          {column.type === 'view' ? column.view(employee) : employee[column.key]}
-                        </td>
-                      ))}
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </Table>
-          )}
+              ))}
+              {state.employees.length === 0 && (
+                <tr>
+                  <td colSpan={state.employeesTableColumns.length} className='text-center'>
+                    {translate('no_data')}
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </Table>
         </Col>
       </Row>
 
       <Modal
         size='lg'
-        returnFocusAfterClose={false}
-        isOpen={state.newEmployeeFormModalState.isOpen}
-        toggle={state.newEmployeeFormModalState.closeModal}
-      >
-        <ModalHeader toggle={state.newEmployeeFormModalState.closeModal}>
-          {translate('admin.create_new_employee')}
-        </ModalHeader>
-
-        <ModalBody>
-          <EmployeeForm
-            onSubmit={
-              state.employeeBeingEdited?.id
-                ? state.handleSubmitEditedEmployee
-                : state.handleSubmitNewEmployee
-            }
-            isSubmitting={state.isLoadingEmployeesForm}
-            employee={state.employeeBeingEdited}
-          />
-        </ModalBody>
-
-        <ModalFooter>
-          <Button
-            type='submit'
-            color='primary'
-            form='newEmployeeForm'
-            disabled={state.isSubmittingNewEmployee || state.isUpdatingEmployee}
-          >
-            <FontAwesomeIcon icon={faSave} className='me-2' />
-            {translate('create')}
-          </Button>
-
-          <Button color='secondary' onClick={state.newEmployeeFormModalState.closeModal}>
-            {translate('cancel')}
-          </Button>
-        </ModalFooter>
-      </Modal>
-
-      <Modal
-        size='lg'
-        returnFocusAfterClose={false}
         isOpen={state.employeeFormModalState.isOpen}
         toggle={state.employeeFormModalState.closeModal}
+        returnFocusAfterClose={false}
       >
         <ModalHeader toggle={state.employeeFormModalState.closeModal}>
-          {translate('admin.edit_employee', {
-            firstName: state.employeeBeingEdited?.firstName ?? '',
-            lastName: state.employeeBeingEdited?.lastName ?? '',
-          })}
+          {state.employeeBeingEdited
+            ? translate('admin.edit_employee', {
+                firstName: state.employeeBeingEdited.firstName,
+                lastName: state.employeeBeingEdited.lastName,
+              })
+            : translate('admin.create_new_employee')}
         </ModalHeader>
 
         <ModalBody>
           <EmployeeForm
             employee={state.employeeBeingEdited}
-            onSubmit={state.handleSubmitEditedEmployee}
+            onSubmit={
+              state.employeeBeingEdited ? 
+              state.handleSubmitEditedEmployee : 
+              state.handleSubmitNewEmployee
+            }
+            isSubmitting={state.isLoadingEmployeesForm}
           />
         </ModalBody>
 
@@ -174,13 +139,12 @@ const AdminEmployeesPage = () => {
           <Button
             type='submit'
             color='primary'
-            form='newEmployeeForm'
+            form='employeeForm'
             disabled={state.isLoadingEmployeesForm}
           >
             <FontAwesomeIcon icon={faSave} className='me-2' />
-            {translate('save')}
+            {state.employeeBeingEdited ? translate('save') : translate('create')}
           </Button>
-
           <Button color='secondary' onClick={state.employeeFormModalState.closeModal}>
             {translate('cancel')}
           </Button>
