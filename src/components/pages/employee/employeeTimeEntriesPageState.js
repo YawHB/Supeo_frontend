@@ -111,7 +111,7 @@ export const useTimeEntriesPageState = () => {
       type: 'view',
       view: (timeEntry) => (
         <Button
-          color='primary'
+          color='danger'
           outline
           onClick={() => {
             setEntryToDelete(timeEntry)
