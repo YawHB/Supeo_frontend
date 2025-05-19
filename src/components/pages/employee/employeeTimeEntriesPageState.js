@@ -5,8 +5,9 @@ import { useModalState } from '../../../hooks/useModalState.js'
 import { useApolloClient, useMutation, useQuery } from '@apollo/client'
 import { CREATE_TIME_ENTRY, DELETE_TIME_ENTRY } from '../../../services/time-entry/mutations.js'
 import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from '../../../services/employee/queries.js'
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { faTrashCan, faPencil } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 export const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
@@ -24,6 +25,8 @@ export const useTimeEntriesPageState = () => {
 
   const [deleteModalOpen, setDeleteModalOpen] = useState(false)
   const [entryToDelete, setEntryToDelete] = useState(null)
+
+  const [timeEntryBeingEdited, setTimeEntryBeingEdited] = useState(null)
 
   const statusClassMap = {
     AFVENTER: 'status-select--pending',
@@ -110,16 +113,29 @@ export const useTimeEntriesPageState = () => {
       alwaysEnabled: true,
       type: 'view',
       view: (timeEntry) => (
-        <Button
-          color='danger'
-          outline
-          onClick={() => {
-            setEntryToDelete(timeEntry)
-            setDeleteModalOpen(true)
-          }}
-        >
-          <FontAwesomeIcon icon={faTrashCan} />
-        </Button>
+        <div className='d-flex justify-content-between'>
+          <Button
+            color='primary'
+            outline
+            onClick={() => {
+              setTimeEntryBeingEdited(timeEntry)
+              timeEntryFormModalState.openModal(timeEntry)
+            }}
+          >
+            <FontAwesomeIcon icon={faPencil} />
+          </Button>
+
+          <Button
+            color='danger'
+            outline
+            onClick={() => {
+              setEntryToDelete(timeEntry)
+              setDeleteModalOpen(true)
+            }}
+          >
+            <FontAwesomeIcon icon={faTrashCan} />
+          </Button>
+        </div>
       ),
     },
   ]
@@ -202,5 +218,7 @@ export const useTimeEntriesPageState = () => {
     setDeleteModalOpen,
     entryToDelete,
     setEntryToDelete,
+    timeEntryBeingEdited,
+    setTimeEntryBeingEdited,
   }
 }
