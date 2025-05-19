@@ -3,8 +3,10 @@ import { Button } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
 import { useModalState } from '../../../hooks/useModalState.js'
 import { useApolloClient, useMutation, useQuery } from '@apollo/client'
-import { CREATE_TIME_ENTRY } from '../../../services/time-entry/mutations.js'
+import { CREATE_TIME_ENTRY, DELETE_TIME_ENTRY } from '../../../services/time-entry/mutations.js'
 import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from '../../../services/employee/queries.js'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
@@ -19,6 +21,9 @@ export const useTimeEntriesPageState = () => {
   const [timeEntriesData, setTimeEntriesData] = useState([])
   const [openNotification, setOpenNotification] = useState(null)
   const [isLoadingTimeEntriesForm, setIsLoadingTimeEntriesForm] = useState(false)
+
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+  const [entryToDelete, setEntryToDelete] = useState(null)
 
   const statusClassMap = {
     AFVENTER: 'status-select--pending',
@@ -81,7 +86,6 @@ export const useTimeEntriesPageState = () => {
       key: 'status',
       label: translate('status'),
       type: 'view',
-
       alwaysEnabled: true,
       view: (timeEntry) => {
         const status = timeEntry.notification?.status || timeEntry.status
@@ -101,9 +105,22 @@ export const useTimeEntriesPageState = () => {
       },
     },
     {
-      key: '',
+      key: 'actions',
       label: ``,
       alwaysEnabled: true,
+      type: 'view',
+      view: (timeEntry) => (
+        <Button
+          color='primary'
+          outline
+          onClick={() => {
+            setEntryToDelete(timeEntry)
+            setDeleteModalOpen(true)
+          }}
+        >
+          <FontAwesomeIcon icon={faTrashCan} />
+        </Button>
+      ),
     },
   ]
 
@@ -123,6 +140,18 @@ export const useTimeEntriesPageState = () => {
         ...prev,
         timeEntries: [...prev.timeEntries, data],
       }))
+    },
+  })
+
+  const [deleteTimeEntry] = useMutation(DELETE_TIME_ENTRY, {
+    onCompleted: ({ deleteTimeEntry }) => {
+      setTimeEntriesData((prev) => ({
+        ...prev,
+        timeEntries: prev.timeEntries.filter((timeEntry) => timeEntry.id !== deleteTimeEntry),
+      }))
+    },
+    onError: (err) => {
+      console.error('Failed to delete entry:', err)
     },
   })
 
@@ -168,5 +197,10 @@ export const useTimeEntriesPageState = () => {
     handleSubmitNewTimeEntry,
     notificationInfoModalState,
     setIsLoadingTimeEntriesForm,
+    deleteTimeEntry,
+    deleteModalOpen,
+    setDeleteModalOpen,
+    entryToDelete,
+    setEntryToDelete,
   }
 }
