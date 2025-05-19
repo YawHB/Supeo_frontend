@@ -49,21 +49,25 @@ h1 {
 
 .status-select--pending {
   background-color: #f0a500 !important;
+  border: 1px solid #374c45 !important;
   color: #34363c !important;
 }
 
 .status-select--approve {
   background-color: #4c9a4c !important;
+  border: 1px solid #374c45 !important;
   color: #ffffff !important;
 }
 
 .status-select--reject {
   background-color: #c0392b !important;
+  border: 1px solid #374c45 !important;
   color: #ffffff !important;
 }
 
 .status-select--underway {
   background-color: #7f8c8d !important;
+  border: 1px solid #374c45 !important;
   color: #ffffff !important;
 }
 
@@ -74,10 +78,9 @@ h1 {
 }
 
 select.form-select {
-  border-radius: 1rem !important;
+  width: 100%;
   padding: 0.375rem 0.75rem !important;
-  border: 1px solid #374c45 !important;
-  max-width: 115px;
+  border-radius: 1rem !important;
 }
 
 .bg-sidebar {

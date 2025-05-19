@@ -6,7 +6,8 @@ export const CREATE_EMPLOYEE = gql`
       id
       firstName
       lastName
-      role
+      roleName
+      permissionLevel
       email
       phoneNumber
     }
@@ -20,7 +21,8 @@ export const UPDATE_EMPLOYEE = gql`
       firstName
       lastName
       email
-      role
+      roleName
+      permissionLevel
       phoneNumber
     }
   }

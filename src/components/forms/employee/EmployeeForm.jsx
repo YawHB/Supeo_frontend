@@ -1,25 +1,20 @@
-import Select from 'react-select'
 import { useTranslation } from 'react-i18next'
 import useEmployeeFormState from './EmployeeFormState'
 import { Form, Row, Col, Input, Label, FormGroup } from 'reactstrap'
-import useEmployeesPageState from '../../pages/admin/adminEmployeesPageState'
+import useEmployeesPageState from '../../../components/pages/admin/adminEmployeesPageState.js'
 
 const EmployeeForm = ({ onSubmit, employee = null }) => {
-  const [translate] = useTranslation('global')
   const state = useEmployeesPageState()
-  const {
-    input,
-    employeePermissionOptions,
-    isLoadingPermissions,
-  } = useEmployeeFormState(employee)
+  const [translate] = useTranslation('global')
+  const { input } = useEmployeeFormState(employee)
 
   const handleSubmit = (e) => {
     e.preventDefault()
     onSubmit({
       firstName: input.firstName.value,
       lastName: input.lastName.value,
-      employeeRoleId: input.employeeRoleId.value,
-      employeePermissionId: input.employeePermissionId.value,
+      roleName: input.employeeRoleName.value,
+      permissionLevel: input.employeePermissionLevel.value,
       email: input.email.value,
       phoneNumber: input.phoneNumber.value,
     })
@@ -106,8 +101,18 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
       <Row>
         <Col md={6}>
           <FormGroup>
-            <Label for='employeeRole'>Brugergruppe</Label>
-            <Input id='employeeRole' name='employeeRole' type='select'>
+            <Label for='employeeRole'>{translate('user_group')}</Label>
+            <span className='text-danger'>*</span>
+            <Input
+              id='employeeRole'
+              name='employeeRole'
+              className='form-control'
+              onChange={input.employeeRoleName.onChange}
+              type='select'
+            >
+              <option value='' disabled selected>
+                {translate('user_group_placeholder')}
+              </option>
               {state.roles.map((role) => {
                 return <option key={role.id}>{role.roleName}</option>
               })}
@@ -121,18 +126,20 @@ const EmployeeForm = ({ onSubmit, employee = null }) => {
               {translate('permission')}
               <span className='text-danger'>*</span>
             </Label>
-            <Select
+            <Input
               id='employeePermission'
               name='employeePermission'
-              options={employeePermissionOptions}
-              // value={selectedPermissionOption}
-              isLoading={isLoadingPermissions}
-              onChange={(opt) =>
-                input.employeePermissionId.onChange({
-                  target: { value: opt.value },
-                })
-              }
-            />
+              type='select'
+              className='form-control'
+              onChange={input.employeePermissionLevel.onChange}
+            >
+              <option value='' disabled selected>
+                {translate('permission_placeholder')}
+              </option>
+              {state.permissions.map((permission) => {
+                return <option key={permission.id}>{permission.permissionLevel}</option>
+              })}
+            </Input>
           </FormGroup>
         </Col>
       </Row>
