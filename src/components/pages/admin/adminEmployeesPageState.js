@@ -17,8 +17,10 @@ const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
 
+  const resetErrorMessages = () => setErrorMessages(null)
   const employeeFormModalState = useModalState()
 
+  const [errorMessages, setErrorMessages] = useState()
   const [roles, setRoles] = useState([])
   const [employees, setEmployees] = useState([])
   const [permissions, setPermissions] = useState([])
@@ -94,13 +96,14 @@ const useEmployeesPageState = () => {
         setIsLoadingEmployeesForm(false)
         employeeFormModalState.closeModal()
       },
-      onError: () => {
-        const errorMsg = translate('notification.employee.create.error', {
-          firstName: employee.firstName,
-          lastName: employee.lastName,
-        })
-        showToast(translate(errorMsg), 'error')
+      onError: (errors) => {
         setIsLoadingEmployeesForm(false)
+        if (errors?.graphQLErrors?.length) {
+          const messages = errors.graphQLErrors.map((e) => e.message)
+          setErrorMessages(messages)
+        } else {
+          setErrorMessages(['Noget gik galt. Prøv igen'])
+        }
       },
     })
   }
@@ -183,6 +186,8 @@ const useEmployeesPageState = () => {
     translate,
     permissions,
     setEmployees,
+    errorMessages,
+    resetErrorMessages,
     apolloClient,
     createEmployee,
     updateEmployee,

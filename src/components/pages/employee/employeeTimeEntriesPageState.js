@@ -136,7 +136,7 @@ export const useTimeEntriesPageState = () => {
           const messages = errors.graphQLErrors.map((e) => e.message)
           setErrorMessages(messages)
         } else {
-          setErrorMessages('Noget gik galt. Prøv igen.')
+          setErrorMessages(['Noget gik galt. Prøv igen.'])
         }
       },
     })
