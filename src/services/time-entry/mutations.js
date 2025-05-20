@@ -21,14 +21,8 @@ export const CREATE_TIME_ENTRY = gql`
   }
 `
 
-export const DELETE_TIME_ENTRY = gql`
-  mutation DeleteTimeEntry($id: ID!) {
-    deleteTimeEntry(id: $id)
-  }
-`
-
 export const UPDATE_TIME_ENTRY = gql`
-  mutation UpdateTimeEntry($updateTimeEntryId: ID!, $updatedTimeEntry: UpdateTimeEntryInput!) {
+  mutation UpdateTimeEntry($updateTimeEntryId: ID!, $updatedTimeEntry: TimeEntryInput!) {
     updateTimeEntry(id: $updateTimeEntryId, updatedTimeEntry: $updatedTimeEntry) {
       id
       startDate
@@ -47,5 +41,11 @@ export const UPDATE_TIME_ENTRY = gql`
         timestamp
       }
     }
+  }
+`
+
+export const DELETE_TIME_ENTRY = gql`
+  mutation DeleteTimeEntry($id: ID!) {
+    deleteTimeEntry(id: $id)
   }
 `
