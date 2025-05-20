@@ -1,7 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import SideBar from '../../sidebar/SideBar.jsx'
 import { Row, Col, Table, Button } from 'reactstrap'
-import useSideBarState from '../../sidebar/SideBarState.js'
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import useTimeEntriesPageState from './adminTimeEntriesPageState.js'
@@ -15,7 +13,6 @@ const statusClassMap = {
 
 const AdminTimeEntriesPage = () => {
   const state = useTimeEntriesPageState()
-  const sideBarState = useSideBarState()
   const [translate] = useTranslation('global')
 
   document.title = translate('page_title.administration_time_entries')
@@ -23,14 +20,6 @@ const AdminTimeEntriesPage = () => {
   return (
     <>
       <Row>
-        <Col xs='auto' style={{ minWidth: '130px', maxWidth: '270px' }}>
-          <SideBar
-            sideBarItems={sideBarState.sideBarItems}
-            isSideBarCollapsed={sideBarState.isSideBarCollapsed}
-            toggleSideBarCollapse={sideBarState.toggleSideBarCollapse}
-          />
-        </Col>
-
         <Col>
           <Col xs={12} className='d-flex justify-content-between gap-4'>
             <h1>{translate('nav_bar.admin_time_entries')}</h1>

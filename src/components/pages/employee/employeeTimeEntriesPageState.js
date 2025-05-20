@@ -7,6 +7,12 @@ import { CREATE_TIME_ENTRY, DELETE_TIME_ENTRY } from '../../../services/time-ent
 import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from '../../../services/employee/queries.js'
 import { faTrashCan, faPencil } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+  faHourglassHalf,
+  faCheckCircle,
+  faTimesCircle,
+  faClock,
+} from '@fortawesome/free-solid-svg-icons'
 
 
 export const useTimeEntriesPageState = () => {
@@ -35,12 +41,13 @@ export const useTimeEntriesPageState = () => {
     IGANG: 'status-select--underway',
   }
 
-  const statusTranslationKeyMap = {
-    AFVENTER: 'pending',
-    GODKENDT: 'approve',
-    AFVIST: 'reject',
-    IGANG: 'underway',
+  const statusIconMap = {
+    AFVENTER: faClock,
+    GODKENDT: faCheckCircle,
+    AFVIST: faTimesCircle,
+    IGANG: faHourglassHalf,
   }
+  
 
   const timeEntriesColumns = [
     {
@@ -92,7 +99,7 @@ export const useTimeEntriesPageState = () => {
       alwaysEnabled: true,
       view: (timeEntry) => {
         const status = timeEntry.notification?.status || timeEntry.status
-        const translationKey = statusTranslationKeyMap[status] || 'underway'
+        const icon = statusIconMap[status] || faHourglassHalf
 
         return (
           <Button
@@ -102,7 +109,7 @@ export const useTimeEntriesPageState = () => {
               notificationInfoModalState.openModal()
             }}
           >
-            {translate(translationKey)}
+            <FontAwesomeIcon icon={icon}/>
           </Button>
         )
       },
@@ -113,7 +120,7 @@ export const useTimeEntriesPageState = () => {
       alwaysEnabled: true,
       type: 'view',
       view: (timeEntry) => (
-        <div className='d-flex justify-content-between'>
+        <div className='d-flex justify-content-end gap-2'>
           <Button
             color='primary'
             outline
