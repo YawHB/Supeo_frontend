@@ -78,7 +78,7 @@
   },
   "time_entry": {
     "create_time_entry": "Opret tidsregistrering",
-    "update_time_entry": "Opdater tidsregistrering",
+    "edit_time_entry": "Opdater tidsregistrering",
     "delete_time_entry": "Slet tidsregistrering",
     "delete_time_entry_text": "Er du sikker på, at du vil slette tidsregistreringen?"
   },
