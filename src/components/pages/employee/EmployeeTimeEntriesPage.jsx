@@ -3,6 +3,8 @@ import TimeEntryForm from '../../forms/time-entry/TimeEntryForm.jsx'
 import { useTimeEntriesPageState } from './employeeTimeEntriesPageState.js'
 import NotificationForm from '../../forms/notification/NotificationForm.jsx'
 import { Row, Col, Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSave } from '@fortawesome/free-solid-svg-icons'
 
 export const EmployeeTimeEntriesPage = () => {
   const state = useTimeEntriesPageState()
@@ -68,28 +70,37 @@ export const EmployeeTimeEntriesPage = () => {
       </Row>
 
       <Modal
+        size='lg'
         isOpen={state.timeEntryFormModalState.isOpen}
         toggle={() => {
           state.resetErrorMessages()
+          //state.timeEntryBeingEdited ? state.setTimeEntryBeingEdited(null) : null
           state.timeEntryFormModalState.closeModal()
         }}
         returnFocusAfterClose={false}
-        size='lg'
       >
         <ModalHeader
           toggle={() => {
             state.resetErrorMessages()
+            //state.setTimeEntryBeingEdited(null)
             state.timeEntryFormModalState.closeModal()
           }}
         >
-          {translate('time_entry.create_time_entry')}
+          {state.timeEntryBeingEdited
+            ? translate('time_entry.edit_time_entry')
+            : translate('time_entry.create_time_entry')}
         </ModalHeader>
 
         <ModalBody>
           <TimeEntryForm
-            onSubmit={state.handleSubmitNewTimeEntry}
-            isSubmitting={state.isSubmittingNewTimeEntry}
+            timeEntry={state.timeEntryBeingEdited}
+            onSubmit={
+              state.timeEntryBeingEdited
+                ? state.handleSubmitEditedTimeEntry
+                : state.handleSubmitNewTimeEntry
+            }
             errorMessages={state.errorMessages}
+            isSubmitting={state.isLoadingTimeEntriesForm}
           />
         </ModalBody>
 
@@ -97,17 +108,18 @@ export const EmployeeTimeEntriesPage = () => {
           <Button
             type='submit'
             color='primary'
-            form='newTimeEntryForm'
-            disabled={state.isSubmittingNewTimeEntry}
+            form='timeEntryForm'
+            disabled={state.isLoadingTimeEntriesForm}
           >
-            {translate('create')}
+            <FontAwesomeIcon icon={faSave} className='me-2' />
+            {state.timeEntryBeingEdited ? translate('save') : translate('create')}
           </Button>
-
           <Button
             color='secondary'
             onClick={() => {
-              state.resetErrorMessages()
               state.timeEntryFormModalState.closeModal()
+              state.resetErrorMessages()
+              //state.setTimeEntryBeingEdited(null)
             }}
           >
             {translate('cancel')}
