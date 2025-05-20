@@ -120,7 +120,6 @@ export const useTimeEntriesPageState = () => {
             color='primary'
             outline
             onClick={() => {
-              console.log('Opening edit modal for timeEntry.id =', timeEntry)
               setTimeEntryBeingEdited(timeEntry)
               timeEntryFormModalState.openModal()
             }}
