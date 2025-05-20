@@ -3,16 +3,11 @@ import { Button } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
 import { useModalState } from '../../../hooks/useModalState.js'
 import { useApolloClient, useMutation, useQuery } from '@apollo/client'
-import { CREATE_TIME_ENTRY, DELETE_TIME_ENTRY } from '../../../services/time-entry/mutations.js'
+import { CREATE_TIME_ENTRY, DELETE_TIME_ENTRY, UPDATE_TIME_ENTRY } from '../../../services/time-entry/mutations.js'
 import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from '../../../services/employee/queries.js'
 import { faTrashCan, faPencil } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faHourglassHalf,
-  faCheckCircle,
-  faTimesCircle,
-  faClock,
-} from '@fortawesome/free-solid-svg-icons'
+import { faHourglassHalf, faCheckCircle, faTimesCircle, faClock } from '@fortawesome/free-solid-svg-icons'
 
 
 export const useTimeEntriesPageState = () => {
@@ -208,6 +203,48 @@ export const useTimeEntriesPageState = () => {
     })
   }
 
+  const [updateTimeEntry, { loading: isSubmittingEditTimeEntry }] = useMutation(UPDATE_TIME_ENTRY, {
+    onCompleted: ({ updateTimeEntry: updated }) => {
+      setTimeEntriesData((prev) => ({
+        ...prev,
+        timeEntries: prev.timeEntries.map((te) => (te.id === updated.id ? updated : te)),
+      }))
+      setIsLoadingTimeEntriesForm(false)
+      timeEntryFormModalState.closeModal()
+      setTimeEntryBeingEdited(null)
+    },
+    onError: (errors) => {
+      setIsLoadingTimeEntriesForm(false)
+      const messages = errors.graphQLErrors
+        ? errors.graphQLErrors.map((e) => e.message)
+        : ['Noget gik galt. Prøv igen.']
+      setErrorMessages(messages)
+    },
+  })
+
+  const handleSubmitEditedTimeEntry = (updatedTimeEntry) => {
+    setIsLoadingTimeEntriesForm(true)
+    setErrorMessages(null)
+    updateTimeEntry({
+      variables: {
+        updateTimeEntryId: timeEntryBeingEdited.id,
+        updatedTimeEntry,
+      },
+      onCompleted: () => {
+        setIsLoadingTimeEntriesForm(false)
+        timeEntryFormModalState.closeModal()
+        setTimeEntryBeingEdited(null)
+      },
+      onError: (errors) => {
+        setIsLoadingTimeEntriesForm(false)
+        const messages = errors.graphQLErrors
+          ? errors.graphQLErrors.map((e) => e.message)
+          : ['Noget gik galt. Prøv igen.']
+        setErrorMessages(messages)
+      },
+    })
+  }
+
   return {
     translate,
     apolloClient,
@@ -232,5 +269,8 @@ export const useTimeEntriesPageState = () => {
     setEntryToDelete,
     timeEntryBeingEdited,
     setTimeEntryBeingEdited,
+    isSubmittingEditTimeEntry,
+    updateTimeEntry,
+    handleSubmitEditedTimeEntry,
   }
 }
