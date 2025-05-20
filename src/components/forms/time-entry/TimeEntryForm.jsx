@@ -45,7 +45,7 @@ const TimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
           </ul>
         </Alert>
       )}
-      <Form id='newTimeEntryForm' onSubmit={handleSubmit}>
+      <Form id='timeEntryForm' onSubmit={handleSubmit}>
         {' '}
         <Row>
           <Col md={6}>
