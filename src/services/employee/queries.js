@@ -1,16 +1,5 @@
 import { gql } from '@apollo/client'
 
-export const GET_EMPLOYEES = gql`
-  query {
-    employees {
-      id
-      firstName
-      lastName
-      role
-    }
-  }
-`
-
 export const GET_TIME_ENTRIES_FOR_EMPLOYEE = gql`
   query {
     employee(id: "10") {
@@ -60,28 +49,10 @@ export const GET_ALL_EMPLOYEES = gql`
       id
       firstName
       lastName
-      roleName
-      permissionLevel
-      phoneNumber
-      roleName
-      permissionLevel
-      email
-    }
-  }
-`
-
-export const GET_EMPLOYEE = gql`
-  query Employee($employeeId: ID!) {
-    employee(id: $employeeId) {
-      id
-      lastName
-      firstName
       email
       phoneNumber
-      role
-      timeEntries {
-        id
-      }
+      roleName
+      permissionLevel
     }
   }
 `
