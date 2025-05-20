@@ -74,7 +74,7 @@ export const EmployeeTimeEntriesPage = () => {
         isOpen={state.timeEntryFormModalState.isOpen}
         toggle={() => {
           state.resetErrorMessages()
-          //state.timeEntryBeingEdited ? state.setTimeEntryBeingEdited(null) : null
+          state.timeEntryBeingEdited ? state.setTimeEntryBeingEdited(null) : null
           state.timeEntryFormModalState.closeModal()
         }}
         returnFocusAfterClose={false}
@@ -82,7 +82,7 @@ export const EmployeeTimeEntriesPage = () => {
         <ModalHeader
           toggle={() => {
             state.resetErrorMessages()
-            //state.setTimeEntryBeingEdited(null)
+            state.setTimeEntryBeingEdited(null)
             state.timeEntryFormModalState.closeModal()
           }}
         >
@@ -119,7 +119,7 @@ export const EmployeeTimeEntriesPage = () => {
             onClick={() => {
               state.timeEntryFormModalState.closeModal()
               state.resetErrorMessages()
-              //state.setTimeEntryBeingEdited(null)
+              state.setTimeEntryBeingEdited(null)
             }}
           >
             {translate('cancel')}
