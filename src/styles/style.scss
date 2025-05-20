@@ -105,7 +105,7 @@ h1 {
 .status-button {
   border: 1px solid #374c45 !important;
   font-weight: 400 !important;
-  min-width: 95px !important;
+  border-radius: 2rem !important;
 }
 
 select.form-select {
@@ -180,6 +180,7 @@ select.form-select {
 
 body {
   background-color: #e8e8e3 !important;
+  overscroll-behavior: none; 
 }
 
 .bg-sidebar a,
