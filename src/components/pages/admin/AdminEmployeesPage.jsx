@@ -1,6 +1,4 @@
 import { useTranslation } from 'react-i18next'
-import SideBar from '../../sidebar/SideBar.jsx'
-import useSideBarState from '../../sidebar/SideBarState.js'
 import EmployeeForm from '../../forms/employee/EmployeeForm.jsx'
 import useEmployeesPageState from './adminEmployeesPageState.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,7 +18,6 @@ import Select from 'react-select'
 
 const AdminEmployeesPage = () => {
   const state = useEmployeesPageState()
-  const sideBarState = useSideBarState()
   const [translate] = useTranslation(`global`)
 
   document.title = translate('page_title.administration_employees')
@@ -28,13 +25,6 @@ const AdminEmployeesPage = () => {
   return (
     <>
       <Row>
-        <Col xs='auto' style={{ minWidth: '130px', maxWidth: '270px' }}>
-          <SideBar
-            sideBarItems={sideBarState.sideBarItems}
-            isSideBarCollapsed={sideBarState.isSideBarCollapsed}
-            toggleSideBarCollapse={sideBarState.toggleSideBarCollapse}
-          />
-        </Col>
 
         <Col>
           <Col xs={12} className='d-flex justify-content-between gap-4'>

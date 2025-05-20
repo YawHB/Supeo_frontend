@@ -12,7 +12,7 @@ function App() {
     <ErrorBoundary>
       <Routes>
         <Route element={<PageLayout />}>
-          <Route index element={<AdminEmployeesPage />} />
+          <Route index element={<AdminHomePage />} />
           <Route path='*' element={<AdminEmployeesPage />} />
           <Route path='/' element={<AdminEmployeesPage />} />
           <Route path='admin' element={<AdminHomePage />} />
