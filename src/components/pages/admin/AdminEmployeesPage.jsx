@@ -101,10 +101,18 @@ const AdminEmployeesPage = () => {
       <Modal
         size='lg'
         isOpen={state.employeeFormModalState.isOpen}
-        toggle={state.employeeFormModalState.closeModal}
+        toggle={() => {
+          state.resetErrorMessages()
+          state.employeeFormModalState.closeModal()
+        }}
         returnFocusAfterClose={false}
       >
-        <ModalHeader toggle={state.employeeFormModalState.closeModal}>
+        <ModalHeader
+          toggle={() => {
+            state.resetErrorMessages()
+            state.employeeFormModalState.closeModal()
+          }}
+        >
           {state.employeeBeingEdited
             ? translate('admin.edit_employee', {
                 firstName: state.employeeBeingEdited.firstName,
@@ -117,10 +125,11 @@ const AdminEmployeesPage = () => {
           <EmployeeForm
             employee={state.employeeBeingEdited}
             onSubmit={
-              state.employeeBeingEdited ? 
-              state.handleSubmitEditedEmployee : 
-              state.handleSubmitNewEmployee
+              state.employeeBeingEdited
+                ? state.handleSubmitEditedEmployee
+                : state.handleSubmitNewEmployee
             }
+            errorMessages={state.errorMessages}
             isSubmitting={state.isLoadingEmployeesForm}
           />
         </ModalBody>
@@ -135,7 +144,13 @@ const AdminEmployeesPage = () => {
             <FontAwesomeIcon icon={faSave} className='me-2' />
             {state.employeeBeingEdited ? translate('save') : translate('create')}
           </Button>
-          <Button color='secondary' onClick={state.employeeFormModalState.closeModal}>
+          <Button
+            color='secondary'
+            onClick={() => {
+              state.employeeFormModalState.closeModal()
+              state.resetErrorMessages()
+            }}
+          >
             {translate('cancel')}
           </Button>
         </ModalFooter>
