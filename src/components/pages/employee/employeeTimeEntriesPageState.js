@@ -120,8 +120,9 @@ export const useTimeEntriesPageState = () => {
             color='primary'
             outline
             onClick={() => {
+              console.log('Opening edit modal for timeEntry.id =', timeEntry)
               setTimeEntryBeingEdited(timeEntry)
-              timeEntryFormModalState.openModal(timeEntry)
+              timeEntryFormModalState.openModal()
             }}
           >
             <FontAwesomeIcon icon={faPencil} />
@@ -222,13 +223,13 @@ export const useTimeEntriesPageState = () => {
     },
   })
 
-  const handleSubmitEditedTimeEntry = (updatedTimeEntry) => {
+  const handleSubmitEditedTimeEntry = (timeEntryInput) => {
     setIsLoadingTimeEntriesForm(true)
     setErrorMessages(null)
     updateTimeEntry({
       variables: {
         updateTimeEntryId: timeEntryBeingEdited.id,
-        updatedTimeEntry,
+        updatedTimeEntry: timeEntryInput,
       },
       onCompleted: () => {
         setIsLoadingTimeEntriesForm(false)
