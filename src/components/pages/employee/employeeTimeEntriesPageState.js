@@ -118,7 +118,12 @@ export const useTimeEntriesPageState = () => {
   })
 
   const [createTimeEntry, { loading: isSubmittingNewTimeEntry }] = useMutation(CREATE_TIME_ENTRY, {
-    refetchQueries: [GET_TIME_ENTRIES_FOR_EMPLOYEE],
+    onCompleted: (data) => {
+      setTimeEntriesData((prev) => ({
+        ...prev,
+        timeEntries: [...prev.timeEntries, data],
+      }))
+    },
   })
 
   const handleSubmitNewTimeEntry = (timeEntry) => {
@@ -126,7 +131,11 @@ export const useTimeEntriesPageState = () => {
     setErrorMessages(null)
     createTimeEntry({
       variables: { newTimeEntry: timeEntry },
-      onCompleted: () => {
+      onCompleted: (data) => {
+        setTimeEntriesData((prev) => ({
+          ...prev,
+          timeEntries: [...prev.timeEntries, data.createTimeEntry],
+        }))
         setIsLoadingTimeEntriesForm(false)
         timeEntryFormModalState.closeModal()
       },
