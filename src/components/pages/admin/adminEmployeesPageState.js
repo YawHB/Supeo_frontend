@@ -128,13 +128,14 @@ const useEmployeesPageState = () => {
         setEmployeeBeingEdited(null)
         employeeFormModalState.closeModal()
       },
-      onError: () => {
-        const errorMsg = translate('notification.employee.update.error', {
-          firstName: updatedEmployee.firstName,
-          lastName: updatedEmployee.lastName,
-        })
-        showToast(errorMsg, 'error')
+      onError: (errors) => {
         setIsLoadingEmployeesForm(false)
+        if (errors?.graphQLErrors?.length) {
+          const messages = errors.graphQLErrors.map((e) => e.message)
+          setErrorMessages(messages)
+        } else {
+          setErrorMessages(['Noget gik galt. Prøv igen'])
+        }
       },
     })
   }
