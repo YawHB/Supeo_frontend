@@ -141,6 +141,31 @@ export const EmployeeTimeEntriesPage = () => {
           </Button>
         </ModalFooter>
       </Modal>
+
+      <Modal
+        isOpen={state.deleteModalOpen}
+        toggle={() => state.setDeleteModalOpen(false)}
+        returnFocusAfterClose={false}
+      >
+        <ModalHeader toggle={() => state.setDeleteModalOpen(false)}>
+          {translate('time_entry.delete_time_entry')}
+        </ModalHeader>
+        <ModalBody>{translate('time_entry.delete_time_entry_text')}</ModalBody>
+        <ModalFooter>
+          <Button color='secondary' onClick={() => state.setDeleteModalOpen(false)}>
+            {translate('cancel')}
+          </Button>
+          <Button
+            color='danger'
+            onClick={() => {
+              state.deleteTimeEntry({ variables: { id: state.entryToDelete.id } })
+              state.setDeleteModalOpen(false)
+            }}
+          >
+            {translate('delete')}
+          </Button>
+        </ModalFooter>
+      </Modal>
     </>
   )
 }

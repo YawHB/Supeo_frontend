@@ -47,6 +47,37 @@ h1 {
   font-weight: 600 !important;
 }
 
+.btn-danger {
+  background-color: #c0392b !important;
+  border: 1px solid #c0392b !important;
+  color: #e8e8e3 !important;
+  border-radius: 1rem !important;
+  font-weight: 600 !important;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #c0392b, 10%!important;
+    border-color: #c0392b, 10%!important;
+    color: #e8e8e3 !important;
+  }
+}
+
+.btn-outline-danger {
+  background-color: transparent !important;
+  border: 1px solid #c0392b !important;
+  color: #c0392b !important;
+  border-radius: 2rem !important;
+  font-weight: 600 !important;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #c0392b !important;
+    color: #e8e8e3 !important;
+  }
+}
+
 .status-select--pending {
   background-color: #f0a500 !important;
   border: 1px solid #374c45 !important;

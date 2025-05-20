@@ -78,12 +78,15 @@
   },
   "time_entry": {
     "create_time_entry": "Opret tidsregistrering",
-    "update_time_entry": "Opdater tidsregistrering"
+    "update_time_entry": "Opdater tidsregistrering",
+    "delete_time_entry": "Slet tidsregistrering",
+    "delete_time_entry_text": "Er du sikker på, at du vil slette tidsregistreringen?"
   },
   "no_data": "Ingen data",
   "minimize": "Minimer",
   "create": "Opret",
   "update": "Opdater",
+  "delete": "Slet",
   "cancel": "Annuller",
   "submit": "Indsend",
   "loading": "Indlæser",

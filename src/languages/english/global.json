@@ -78,12 +78,15 @@
   },
   "time_entry": {
     "create_time_entry": "Create time entry",
-    "update_time_entry": "Update time entry"
+    "update_time_entry": "Update time entry",
+    "delete_time_entry": "Delete time entry",
+    "delete_time_entry_text": "Are you sure you want to delete this time entry?"
   },
   "no_data": "No data",
   "minimize": "Minimize",
   "create": "Create",
   "update": "Update",
+  "delete": "Delete",
   "cancel": "Cancel",
   "submit": "Submit",
   "loading": "Loading",
