@@ -12,7 +12,7 @@ export const EmployeeTimeEntriesPage = () => {
 
   document.title = translate('nav_bar.admin_employees')
 
-  const { firstName, lastName, role } = state.timeEntriesData
+  const { firstName, lastName } = state.timeEntriesData
 
   return (
     <>
@@ -20,7 +20,7 @@ export const EmployeeTimeEntriesPage = () => {
         <Col>
           <Col xs={12} className='d-flex justify-content-between gap-4'>
             <h1>
-              {firstName} {lastName} - {role}
+              {firstName} {lastName}
             </h1>
             <div className='d-flex align-items-center gap-4'>
               <Button
@@ -48,7 +48,11 @@ export const EmployeeTimeEntriesPage = () => {
               <tbody key={'time-entries-table-body'}>
                 {state.timeEntriesData.length === 0 ? (
                   <tr key='no-data'>
-                    <td key='no-data-here' colSpan={state.timeEntriesColumns.length} className='text-center'>
+                    <td
+                      key='no-data-here'
+                      colSpan={state.timeEntriesColumns.length}
+                      className='text-center'
+                    >
                       {translate('no_data')}
                     </td>
                   </tr>

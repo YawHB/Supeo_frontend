@@ -1,13 +1,10 @@
 import { useTranslation } from 'react-i18next'
 import useTimeEntryFormState from './timeEntryFormState'
 import { Form, Row, Col, Input, Label, FormGroup, Alert } from 'reactstrap'
-//import { reverseString } from '../../../utils/reverseDateString.js'
-//import { useTimeEntriesPageState } from '../../pages/employee/employeeTimeEntriesPageState.js'
 
 const TimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
   const [translate] = useTranslation('global')
   const input = useTimeEntryFormState(timeEntry)
-  //const state = useTimeEntriesPageState()
 
   const handleSubmit = (e) => {
     const { startDate, startTime, endDate, endTime, duration, comment, employeeID, notification } =
@@ -62,7 +59,6 @@ const TimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
                 name='startDate'
                 type='date'
                 value={input.startDate.value}
-                //value={state.timeEntryBeingEdited ? reverseString(input.startDate.value) : (input.startDate.value)}
                 onChange={input.startDate.onChange}
                 required
               />
