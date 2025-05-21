@@ -3,12 +3,20 @@ import { Button } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
 import { useModalState } from '../../../hooks/useModalState.js'
 import { useApolloClient, useMutation, useQuery } from '@apollo/client'
-import { CREATE_TIME_ENTRY, DELETE_TIME_ENTRY, UPDATE_TIME_ENTRY } from '../../../services/time-entry/mutations.js'
+import {
+  CREATE_TIME_ENTRY,
+  DELETE_TIME_ENTRY,
+  UPDATE_TIME_ENTRY,
+} from '../../../services/time-entry/mutations.js'
 import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from '../../../services/employee/queries.js'
 import { faTrashCan, faPencil } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHourglassHalf, faCheckCircle, faTimesCircle, faClock } from '@fortawesome/free-solid-svg-icons'
-
+import {
+  faHourglassHalf,
+  faCheckCircle,
+  faTimesCircle,
+  faClock,
+} from '@fortawesome/free-solid-svg-icons'
 
 export const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
@@ -42,7 +50,6 @@ export const useTimeEntriesPageState = () => {
     AFVIST: faTimesCircle,
     IGANG: faHourglassHalf,
   }
-  
 
   const timeEntriesColumns = [
     {
@@ -104,7 +111,7 @@ export const useTimeEntriesPageState = () => {
               notificationInfoModalState.openModal()
             }}
           >
-            <FontAwesomeIcon icon={icon}/>
+            <FontAwesomeIcon icon={icon} />
           </Button>
         )
       },
@@ -205,6 +212,7 @@ export const useTimeEntriesPageState = () => {
 
   const [updateTimeEntry, { loading: isSubmittingEditTimeEntry }] = useMutation(UPDATE_TIME_ENTRY, {
     onCompleted: ({ updateTimeEntry: updated }) => {
+      console.log('updated timeEntry: ', updated)
       setTimeEntriesData((prev) => ({
         ...prev,
         timeEntries: prev.timeEntries.map((te) => (te.id === updated.id ? updated : te)),
