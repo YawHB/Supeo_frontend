@@ -1,11 +1,12 @@
 import { useEffect } from 'react'
 import { useInput } from '../../../hooks/useInput.js'
 import { calculateWorkHours } from '../../../utils/calculateWorkHours.js'
+import { reverseString } from '../../../utils/reverseDateString.js'
 
 const useTimeEntryFormState = (timeEntry) => {
-  const startDate = useInput(timeEntry?.startDate ?? '')
+  const startDate = useInput(timeEntry?.startDate ? reverseString(timeEntry.startDate) : '')
   const startTime = useInput(timeEntry?.startTime ?? '')
-  const endDate = useInput(timeEntry?.endDate ?? '')
+  const endDate = useInput(timeEntry?.endDate ? reverseString(timeEntry.endDate) : '')
   const endTime = useInput(timeEntry?.endTime ?? '')
   const duration = useInput('')
   const notificationStatus = useInput(timeEntry?.notification?.status ?? 'AFVENTER')
