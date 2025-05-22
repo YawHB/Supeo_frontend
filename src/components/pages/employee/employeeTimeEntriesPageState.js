@@ -126,7 +126,7 @@ export const useTimeEntriesPageState = () => {
         return (
           <div className='d-flex justify-content-end gap-2'>
             <Button
-              key={`${timeEntriesColumns[8]['key']}-edit-btn`}
+              key={`actions-edit-btn`}
               disabled={isDisabled}
               color='primary'
               outline
@@ -139,7 +139,7 @@ export const useTimeEntriesPageState = () => {
             </Button>
 
             <Button
-              key={`${timeEntriesColumns[8]['key']}-delete-btn`}
+              key={`actions-delete-btn`}
               color='danger'
               outline
               onClick={() => {
@@ -174,23 +174,6 @@ export const useTimeEntriesPageState = () => {
     },
   })
 
-  const [deleteTimeEntry] = useMutation(DELETE_TIME_ENTRY, {
-    onCompleted: ({ deleteTimeEntry }) => {
-      setTimeEntriesData((prev) => ({
-        ...prev,
-        timeEntries: prev.timeEntries.filter((timeEntry) => timeEntry.id !== deleteTimeEntry),
-      }))
-
-      if (openNotification?.id === deleteTimeEntry) {
-        setOpenNotification(null)
-        notificationInfoModalState.closeModal()
-      }
-    },
-    onError: (err) => {
-      console.error('Failed to delete entry:', err)
-    },
-  })
-
   const handleSubmitNewTimeEntry = (timeEntry) => {
     setIsLoadingTimeEntriesForm(true)
     setErrorMessages(null)
@@ -217,12 +200,16 @@ export const useTimeEntriesPageState = () => {
   }
 
   const [updateTimeEntry, { loading: isSubmittingEditTimeEntry }] = useMutation(UPDATE_TIME_ENTRY, {
-    onCompleted: ({ updateTimeEntry: updated }) => {
-      console.log('updated timeEntry: ', updated)
-      setTimeEntriesData((prev) => ({
-        ...prev,
-        timeEntries: prev.timeEntries.map((te) => (te.id === updated.id ? updated : te)),
+    onCompleted: (data) => {
+      const updated = data.updateTimeEntry
+
+      setTimeEntriesData((prevData) => ({
+        ...prevData,
+        timeEntries: prevData.timeEntries.map((entry) =>
+          entry.id === updated.id ? updated : entry,
+        ),
       }))
+
       setIsLoadingTimeEntriesForm(false)
       timeEntryFormModalState.closeModal()
       setTimeEntryBeingEdited(null)
@@ -236,28 +223,34 @@ export const useTimeEntriesPageState = () => {
     },
   })
 
-  const handleSubmitEditedTimeEntry = (timeEntryInput) => {
+  const handleSubmitEditedTimeEntry = (updatedTimeEntry) => {
     setIsLoadingTimeEntriesForm(true)
     setErrorMessages(null)
+
     updateTimeEntry({
       variables: {
         updateTimeEntryId: timeEntryBeingEdited.id,
-        updatedTimeEntry: timeEntryInput,
-      },
-      onCompleted: () => {
-        setIsLoadingTimeEntriesForm(false)
-        timeEntryFormModalState.closeModal()
-        setTimeEntryBeingEdited(null)
-      },
-      onError: (errors) => {
-        setIsLoadingTimeEntriesForm(false)
-        const messages = errors.graphQLErrors
-          ? errors.graphQLErrors.map((e) => e.message)
-          : ['Noget gik galt. Prøv igen.']
-        setErrorMessages(messages)
+        updatedTimeEntry: updatedTimeEntry,
       },
     })
   }
+
+  const [deleteTimeEntry] = useMutation(DELETE_TIME_ENTRY, {
+    onCompleted: ({ deleteTimeEntry }) => {
+      setTimeEntriesData((prev) => ({
+        ...prev,
+        timeEntries: prev.timeEntries.filter((timeEntry) => timeEntry.id !== deleteTimeEntry),
+      }))
+
+      if (openNotification?.id === deleteTimeEntry) {
+        setOpenNotification(null)
+        notificationInfoModalState.closeModal()
+      }
+    },
+    onError: (err) => {
+      console.error('Failed to delete entry:', err)
+    },
+  })
 
   return {
     translate,
