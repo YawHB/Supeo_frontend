@@ -45,6 +45,7 @@ const useTimeEntriesPageState = () => {
         { label: translate('pending'), value: 'AFVENTER' },
         { label: translate('approve'), value: 'GODKENDT' },
         { label: translate('reject'), value: 'AFVIST' },
+        { label: translate('underway'), value: 'IGANG' },
       ],
     },
   ]

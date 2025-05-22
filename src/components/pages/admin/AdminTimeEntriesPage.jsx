@@ -72,6 +72,7 @@ const AdminTimeEntriesPage = () => {
                       </td>
                       <td>
                         <select
+                          disabled={timeEntry.notification.status === 'IGANG'}
                           className={` form-select ${
                             statusClassMap[timeEntry.notification.status]
                           } `}
