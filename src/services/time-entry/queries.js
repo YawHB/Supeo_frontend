@@ -8,6 +8,7 @@ export const GET_ALL_TIME_ENTRIES = gql`
       endTime
       duration
       comment
+      break
       startDate
       endDate
       employee {

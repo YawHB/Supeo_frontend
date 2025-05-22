@@ -8,6 +8,7 @@ export const CREATE_TIME_ENTRY = gql`
       endTime
       duration
       comment
+      break
       startDate
       endDate
       employee {

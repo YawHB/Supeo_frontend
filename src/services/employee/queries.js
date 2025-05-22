@@ -12,6 +12,7 @@ export const GET_TIME_ENTRIES_FOR_EMPLOYEE = gql`
         endDate
         endTime
         duration
+        break
         comment
         id
         notification {
