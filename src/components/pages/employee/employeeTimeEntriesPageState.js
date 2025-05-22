@@ -100,8 +100,8 @@ export const useTimeEntriesPageState = () => {
       type: 'view',
       alwaysEnabled: true,
       view: (timeEntry) => {
-        const status = timeEntry.notification?.status || timeEntry.status
-        const icon = statusIconMap[status] || faHourglassHalf
+        const status = timeEntry.notification?.status
+        const icon = statusIconMap[status]
 
         return (
           <Button
@@ -121,31 +121,37 @@ export const useTimeEntriesPageState = () => {
       label: ``,
       alwaysEnabled: true,
       type: 'view',
-      view: (timeEntry) => (
-        <div className='d-flex justify-content-end gap-2'>
-          <Button
-            color='primary'
-            outline
-            onClick={() => {
-              setTimeEntryBeingEdited(timeEntry)
-              timeEntryFormModalState.openModal()
-            }}
-          >
-            <FontAwesomeIcon icon={faPencil} />
-          </Button>
+      view: (timeEntry) => {
+        const isDisabled = timeEntry.notification.status === 'GODKENDT'
+        return (
+          <div className='d-flex justify-content-end gap-2'>
+            <Button
+              key={`${timeEntriesColumns[8]['key']}-edit-btn`}
+              disabled={isDisabled}
+              color='primary'
+              outline
+              onClick={() => {
+                setTimeEntryBeingEdited(timeEntry)
+                timeEntryFormModalState.openModal()
+              }}
+            >
+              <FontAwesomeIcon icon={faPencil} />
+            </Button>
 
-          <Button
-            color='danger'
-            outline
-            onClick={() => {
-              setEntryToDelete(timeEntry)
-              setDeleteModalOpen(true)
-            }}
-          >
-            <FontAwesomeIcon icon={faTrashCan} />
-          </Button>
-        </div>
-      ),
+            <Button
+              key={`${timeEntriesColumns[8]['key']}-delete-btn`}
+              color='danger'
+              outline
+              onClick={() => {
+                setEntryToDelete(timeEntry)
+                setDeleteModalOpen(true)
+              }}
+            >
+              <FontAwesomeIcon icon={faTrashCan} />
+            </Button>
+          </div>
+        )
+      },
     },
   ]
 
