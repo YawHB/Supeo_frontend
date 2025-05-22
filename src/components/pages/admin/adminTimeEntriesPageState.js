@@ -11,6 +11,7 @@ const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
   const [timeEntries, setTimeEntries] = useState([])
+  const [editingRowIndex, setEditingRowIndex] = useState(null)
 
   const timeEntriesTableColumns = [
     { key: 'id', label: translate('id'), type: 'text', sort: true },
@@ -83,6 +84,10 @@ const useTimeEntriesPageState = () => {
     })
   }
 
+  const handleInputFieldClick = (i) => {
+    setEditingRowIndex(i)
+  }
+
   const handleCommentChange = (newComment, i) => {
     setTimeEntries((prev) => {
       const newTimeEntries = [...prev]
@@ -99,6 +104,7 @@ const useTimeEntriesPageState = () => {
 
   const handleUpdateComment = (key, i, notificationID) => {
     if (key === 'Enter') {
+      setEditingRowIndex(null)
       updateTimeEntryStatus({
         variables: {
           notification: {
@@ -151,10 +157,12 @@ const useTimeEntriesPageState = () => {
     apolloClient,
     handleExportTable,
     handleStatusChange,
+    handleInputFieldClick,
     handleCommentChange,
     handleUpdateComment,
     isLoadingTimeEntries,
     timeEntriesTableColumns,
+    editingRowIndex,
   }
 }
 

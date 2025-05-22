@@ -103,10 +103,30 @@ h1 {
   color: #ffffff !important;
 }
 
+.input-default {
+  background-color: #d5d2d2;
+  transition: background-color 0.2s;
+  border: 1px solid #374c45 !important;
+  border-radius: 2rem !important;
+}
+
+.input-active {
+  background-color: #ffffff;
+  transition: background-color 0.2s;
+  border: 1px solid #374c45 !important;
+  border-radius: 1rem !important;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px #6c6d6e;
+  border: 1px solid #c8cfd5;
+}
+
 .status-button {
   border: 1px solid #374c45 !important;
   font-weight: 400 !important;
-  border-radius: 2rem !important;
+  border-radius: 1rem !important;
 }
 
 select.form-select {

@@ -62,9 +62,11 @@ const AdminTimeEntriesPage = () => {
                       <td>{timeEntry.comment}</td>
                       <td>
                         <input
+                          className={state.editingRowIndex === i ? 'input-active' : 'input-default'}
                           type='text'
                           value={timeEntry.notification.comment}
                           onChange={(e) => state.handleCommentChange(e.target.value, i)}
+                          onClick={() => state.handleInputFieldClick(i)}
                           onKeyUp={(e) =>
                             state.handleUpdateComment(e.key, i, timeEntry.notification.id)
                           }
