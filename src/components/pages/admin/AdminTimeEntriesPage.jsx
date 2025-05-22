@@ -63,6 +63,7 @@ const AdminTimeEntriesPage = () => {
                       <td>
                         <input
                           className={state.editingRowIndex === i ? 'input-active' : 'input-default'}
+                          disabled={timeEntry.notification.status === 'IGANG'}
                           type='text'
                           value={timeEntry.notification.comment}
                           onChange={(e) => state.handleCommentChange(e.target.value, i)}
