@@ -81,11 +81,17 @@ const AdminTimeEntriesPage = () => {
                             state.handleStatusChange(e.target.value, i, timeEntry.notification.id)
                           }
                         >
-                          {state.timeEntriesTableColumns[10].options.map((option) => (
-                            <option key={option.label} value={option.value}>
-                              {option.label}
-                            </option>
-                          ))}
+                          {state.timeEntriesTableColumns[10].options
+                            .filter((option) =>
+                              timeEntry.notification.status === 'IGANG'
+                                ? option.value === 'IGANG'
+                                : option.value !== 'IGANG',
+                            )
+                            .map((option) => (
+                              <option key={option.label} value={option.value}>
+                                {option.label}
+                              </option>
+                            ))}
                         </select>
                       </td>
 
