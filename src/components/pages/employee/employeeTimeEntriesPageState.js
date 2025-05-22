@@ -167,10 +167,22 @@ export const useTimeEntriesPageState = () => {
 
   const [createTimeEntry, { loading: isSubmittingNewTimeEntry }] = useMutation(CREATE_TIME_ENTRY, {
     onCompleted: (data) => {
+      const createdTimeEntry = data.createTimeEntry
       setTimeEntriesData((prev) => ({
         ...prev,
-        timeEntries: [...prev.timeEntries, data],
+        timeEntries: [...prev.timeEntries, createdTimeEntry],
       }))
+      setIsLoadingTimeEntriesForm(false)
+      timeEntryFormModalState.closeModal()
+    },
+    onError: (errors) => {
+      setIsLoadingTimeEntriesForm(false)
+      if (errors.graphQLErrors && errors.graphQLErrors.length > 0) {
+        const messages = errors.graphQLErrors.map((e) => e.message)
+        setErrorMessages(messages)
+      } else {
+        setErrorMessages(['Noget gik galt. Prøv igen.'])
+      }
     },
   })
 
@@ -179,34 +191,17 @@ export const useTimeEntriesPageState = () => {
     setErrorMessages(null)
     createTimeEntry({
       variables: { newTimeEntry: timeEntry },
-      onCompleted: (data) => {
-        setTimeEntriesData((prev) => ({
-          ...prev,
-          timeEntries: [...prev.timeEntries, data.createTimeEntry],
-        }))
-        setIsLoadingTimeEntriesForm(false)
-        timeEntryFormModalState.closeModal()
-      },
-      onError: (errors) => {
-        setIsLoadingTimeEntriesForm(false)
-        if (errors.graphQLErrors && errors.graphQLErrors.length > 0) {
-          const messages = errors.graphQLErrors.map((e) => e.message)
-          setErrorMessages(messages)
-        } else {
-          setErrorMessages(['Noget gik galt. Prøv igen.'])
-        }
-      },
     })
   }
 
   const [updateTimeEntry, { loading: isSubmittingEditTimeEntry }] = useMutation(UPDATE_TIME_ENTRY, {
     onCompleted: (data) => {
-      const updated = data.updateTimeEntry
+      const updatedTimeEntry = data.updateTimeEntry
 
       setTimeEntriesData((prevData) => ({
         ...prevData,
         timeEntries: prevData.timeEntries.map((entry) =>
-          entry.id === updated.id ? updated : entry,
+          entry.id === updatedTimeEntry.id ? updatedTimeEntry : entry,
         ),
       }))
 
