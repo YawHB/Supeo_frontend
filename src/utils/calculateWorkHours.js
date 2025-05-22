@@ -11,8 +11,8 @@ export function calculateWorkHours(startDate, startTime, endDate, endTime) {
   const msTimeB = getMsTimeFromDateTime(yearB, monthB, dayB, hourB, minutesB)
   const B = new Date(yearB, monthB, dayB)
   const minutes2 = hourB * 60 + minutesB
-  const dayDiffInMs = (calculateDaysWorked(yearB, monthB, dayB) - calculateDaysWorked(yearA, monthA, dayA)) / dayInMs
-  console.log('dayDiffInMs: ', dayDiffInMs)
+  const dayDiffInMs =
+    (calculateDaysWorked(yearB, monthB, dayB) - calculateDaysWorked(yearA, monthA, dayA)) / dayInMs
 
   //find arbejdstid
   const timeDif = msTimeB - msTimeA
@@ -55,12 +55,10 @@ function getMsTimeFromDateTime(year, month, day, hour, minutes) {
 function hoursToMin(startTime, endTime) {
   const [startHour, startMin] = startTime.split(':').map(Number)
   const [endHour, endMin] = endTime.split(':').map(Number)
-  console.log(startHour, startMin)
 
   const startTimeInMinutes = Math.floor(startHour * 60) + startMin
   const endTimeInMinutes = Math.floor(endHour * 60) + endMin
-  console.log(startTimeInMinutes)
-  console.log(endTimeInMinutes)
+
   const diffInMinutes = endTimeInMinutes - startTimeInMinutes //udregner arbejdstid i minutter
   const hours = Math.floor(diffInMinutes / 60) //omregner det til timer
   const minutes = diffInMinutes % 60 //Finder antal minutter remaining efter timer (fx  510 minuter = 8,5 timer = 30 min )
