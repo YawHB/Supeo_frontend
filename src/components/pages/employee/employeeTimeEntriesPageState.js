@@ -140,6 +140,7 @@ export const useTimeEntriesPageState = () => {
 
             <Button
               key={`actions-delete-btn`}
+              disabled={isDisabled}
               color='danger'
               outline
               onClick={() => {
