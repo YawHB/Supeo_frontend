@@ -45,30 +45,7 @@ export const EmployeeTimeEntriesPage = () => {
                 </tr>
               </thead>
 
-              <tbody key={'time-entries-table-body'}>
-                {state.timeEntriesData.length === 0 ? (
-                  <tr key='no-data'>
-                    <td
-                      key='no-data-here'
-                      colSpan={state.timeEntriesColumns.length}
-                      className='text-center'
-                    >
-                      {translate('no_data')}
-                    </td>
-                  </tr>
-                ) : (
-                  state.timeEntriesData.timeEntries.map((timeEntry) => (
-                    <tr key={timeEntry.id}>
-                      {state.timeEntriesColumns.map((column) => (
-                        <td key={`${timeEntry.id}-${column.key}`}>
-                          {column.type === 'view' ? column.view(timeEntry) : timeEntry[column.key]}
-                        </td>
-                      ))}
-                    </tr>
-                  ))
-                )}
-              </tbody>
-              {/* <tbody>
+              <tbody>
                 {state.timeEntriesData.length === 0 ? (
                   <tr>
                     <td colSpan={state.timeEntriesColumns.length} className='text-center'>
@@ -86,7 +63,7 @@ export const EmployeeTimeEntriesPage = () => {
                     </tr>
                   ))
                 )}
-              </tbody> */}
+              </tbody>
             </Table>
           )}
         </Col>
