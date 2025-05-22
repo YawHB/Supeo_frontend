@@ -53,15 +53,20 @@ export const EmployeeTimeEntriesPage = () => {
                     </td>
                   </tr>
                 ) : (
-                  state.timeEntriesData.timeEntries.map((timeEntry) => (
-                    <tr key={timeEntry.id}>
-                      {state.timeEntriesColumns.map((column) => (
-                        <td key={`${timeEntry.id}-${column.key}`}>
-                          {column.type === 'view' ? column.view(timeEntry) : timeEntry[column.key]}
-                        </td>
-                      ))}
-                    </tr>
-                  ))
+                  state.timeEntriesData.timeEntries.map((timeEntry) => {
+                    console.log('timeEntry :', timeEntry)
+                    return (
+                      <tr key={timeEntry.id}>
+                        {state.timeEntriesColumns.map((column) => (
+                          <td key={`${timeEntry.id}-${column.key}`}>
+                            {column.type === 'view'
+                              ? column.view(timeEntry)
+                              : timeEntry[column.key]}
+                          </td>
+                        ))}
+                      </tr>
+                    )
+                  })
                 )}
               </tbody>
             </Table>
