@@ -1,19 +1,39 @@
-$table-cell-padding-x: 1rem;
-$table-cell-padding-y: 0.5rem;
-
 @use 'sass:color';
 @use 'variables' as *;
 
-$navbar-sidebar-bg: $color-soft-black;
-$table-bg: $color-sand-beige;
-$table-header-row-bg: #f3f3f1;
-$table-row-bg-1: #f1f1ef;
-$table-row-bg-2: #f3f3f1;
-
-$table-border-radius: 1rem;
-
 h1 {
   color: $color-soft-black !important;
+}
+
+body {
+  background-color: #e8e8e3 !important;
+  overscroll-behavior: none;
+  //font-size: 14px !important;
+}
+
+html {
+  font-size: 14px !important;
+}
+
+.page-frame {
+  display: flex;
+}
+
+.page-content {
+  position: relative;
+  flex-grow: 1;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: $table-bg;
+  border-radius: 1rem;
+}
+
+.app-background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: #34363c;
 }
 
 .btn-primary {
@@ -126,7 +146,7 @@ input:focus {
 .status-button {
   border: 1px solid #374c45 !important;
   font-weight: 400 !important;
-  border-radius: 1rem !important;
+  border-radius: 2rem !important;
 }
 
 select.form-select {
@@ -157,6 +177,8 @@ select.form-select {
       background-color: $table-header-row-bg !important;
       color: #34363c !important;
       font-weight: 600;
+      user-select: none;
+      cursor: pointer;
 
       &:first-child {
         border-top-left-radius: $table-border-radius !important;
@@ -199,11 +221,6 @@ select.form-select {
   }
 }
 
-body {
-  background-color: #e8e8e3 !important;
-  overscroll-behavior: none;
-}
-
 .bg-sidebar a,
 .bg-sidebar .nav-link {
   text-decoration: none !important;
@@ -236,4 +253,220 @@ body {
 input.form-control.disabled-field {
   background-color: #bfbcbe !important;
   cursor: not-allowed;
+}
+
+th svg {
+  max-width: 10px;
+}
+
+th svg.asc {
+  transform: rotate(0deg);
+}
+
+th svg.desc {
+  transform: rotate(180deg);
+}
+
+.employee-role-select {
+  &__control {
+    border-radius: 2rem !important;
+    border: 1px solid #ccc !important;
+    min-height: 38px;
+    font-weight: 500;
+    box-shadow: none !important;
+
+    &:hover {
+      border-color: #374c45 !important;
+    }
+  }
+
+  &__value-container {
+    color: #34363c !important;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  &__multi-value {
+    background-color: #374c45 !important;
+    border-radius: 1rem !important;
+    padding: 2px 6px !important;
+  }
+
+  &__multi-value__label {
+    color: #e8e8e3 !important;
+    font-weight: 600 !important;
+  }
+
+  &__multi-value__remove {
+    color: #e8e8e3 !important;
+    //margin-left: 4px;   skal ikke bruge
+
+    &:hover {
+      background-color: #c0392b !important;
+      color: #fff !important;
+      border-radius: 50%;
+    }
+  }
+
+  &__placeholder {
+    color: #999 !important;
+  }
+
+  &__single-value {
+    color: #34363c;
+  }
+
+  &__menu {
+    background-color: #f3f3f1 !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    z-index: 20;
+  }
+
+  &__option {
+    color: #34363c !important;
+    padding: 0.5rem 1rem !important;
+    font-weight: 400;
+
+    &--is-selected {
+      background-color: #374c45 !important;
+      color: #e8e8e3 !important;
+    }
+
+    &--is-focused {
+      background-color: #e0e0dd !important;
+    }
+  }
+
+  // dette er til at fjerne den grå streg mellem dropdown og select
+  // &__indicator-separator {
+  //   display: none;
+  // }
+
+  &__dropdown-indicator {
+    color: #374c45 !important;
+  }
+
+  &__clear-indicator {
+    color: #c0392b !important;
+
+    &:hover {
+      color: #a83232 !important;
+    }
+  }
+}
+
+.search-input {
+  width: 200px !important;
+  max-width: 300px;
+  border-radius: 2rem !important;
+  border: 1px solid #ccc !important;
+  color: #34363c !important;
+  font-weight: 500;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: #999 !important;
+  }
+
+  &:hover,
+  &:focus {
+    border-color: #374c45 !important;
+    outline: none !important;
+    background-color: #ffffff !important;
+  }
+
+  &.is-invalid {
+    border-color: #c0392b !important;
+    background-color: #fbeae9 !important;
+  }
+
+  &.disabled,
+  &:disabled {
+    background-color: #e0dfde !important;
+    cursor: not-allowed;
+  }
+}
+
+.no-wrap {
+  white-space: nowrap;
+}
+
+.employee-role-select__control {
+  white-space: nowrap !important;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.employee-role-select__value-container {
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.employee-role-select__single-value {
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.employee-role-select__multi-value {
+  white-space: nowrap !important;
+}
+
+.employee-role-select__multi-value__label {
+  white-space: nowrap !important;
+}
+
+.employee-role-select__menu {
+  border: 1px solid #374c45 !important;
+  border-radius: 1rem !important;
+  background-color: #f3f3f1 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  z-index: 20 !important;
+  overflow: hidden !important; // NEW
+  border-radius: 1rem !important;
+}
+
+.employee-role-select__option {
+  border-radius: 0;
+
+  &:first-child.employee-role-select__option--is-focused {
+    border-top-left-radius: 1rem !important;
+    border-top-right-radius: 1rem !important;
+  }
+
+  &:last-child.employee-role-select__option--is-focused {
+    border-bottom-left-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important;
+  }
+}
+
+.clickable-cell {
+  cursor: pointer !important;
+}
+
+$placeholder-gray: #868e96 !default;
+
+.placeholder-muted {
+  color: $placeholder-gray !important;
+}
+
+.comment-text {
+  display: block;
+  max-width: 20ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer !important;
+}
+
+.employee-comment-text {
+  display: block;
+  max-width: 20ch;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
