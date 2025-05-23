@@ -10,6 +10,7 @@ import { useQuery, useMutation, useApolloClient } from '@apollo/client'
 import { GET_ALL_EMPLOYEES } from '../../../services/employee/queries.js'
 import { GET_ROLES, GET_PERMISSIONS } from '../../../services/employee/queries.js'
 import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mutations.js'
+import useInput from '../../../hooks/useInput.js'
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
@@ -24,6 +25,43 @@ const useEmployeesPageState = () => {
   const [permissions, setPermissions] = useState([])
   const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null)
   const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false)
+
+  const employeeRolesFilterInput = useInput([]) // hook til håndtering af vores roller, start med tomt array
+  const employeePermissionsFilterInput = useInput([])
+
+  const [orderBy, setOrderBy] = useState('id')
+  const [orderDirection, setOrderDirection] = useState('ASC')
+
+  // mapper vores roller til options-format til dropdown, med label og value
+  const employeeRoleOptions = roles.map((role) => ({
+    label: role.roleName || role.name, // det som der vises i vores dropdowns
+    value: role.roleName || role.id,
+  }))
+
+  const employeePermissionOptions = permissions.map((permission) => ({
+    label: permission.permissionLevel || permission.permissionLevel,
+    value: permission.permissionLevel || permission.id,
+  }))
+
+  // tager kun værdier fra vores valgte roller, eller en tom liste hvis der ikke er valgt nboget
+  const selectedRoles = employeeRolesFilterInput.value?.length
+    ? employeeRolesFilterInput.value.map((r) => r.value)
+    : []
+
+  const selectedPermissions = employeePermissionsFilterInput.value?.length
+    ? employeePermissionsFilterInput.value.map((p) => p.value)
+    : []
+
+  // filtrerer vores employees baseret på valgte roller og tilladelser
+  const filteredEmployees = employees.filter((employee) => {
+    const roleMatch =
+      selectedRoles.length === 0 || selectedRoles.includes(employee.roleName || employee.roleId) // tjekker om den valgte rolle er i vores employee rolle
+    const permissionMatch =
+      selectedPermissions.length === 0 ||
+      selectedPermissions.includes(employee.permissionLevel || employee.permissionId)
+
+    return roleMatch && permissionMatch
+  })
 
   const employeesTableColumns = [
     { key: 'id', label: translate('id'), type: 'text', sort: true },
