@@ -89,7 +89,7 @@ const AdminTimeEntriesPage = () => {
                       <td>
                         <select
                           disabled={timeEntry.notification.status === 'IGANG'}
-                          className={` form-select ${
+                          className={`form-select clickable-cell ${
                             statusClassMap[timeEntry.notification.status]
                           } `}
                           value={timeEntry.notification.status}
