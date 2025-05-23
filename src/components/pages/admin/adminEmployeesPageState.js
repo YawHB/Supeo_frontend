@@ -29,9 +29,6 @@ const useEmployeesPageState = () => {
   const employeeRolesFilterInput = useInput([]) // hook til håndtering af vores roller, start med tomt array
   const employeePermissionsFilterInput = useInput([])
 
-  const [orderBy, setOrderBy] = useState('id')
-  const [orderDirection, setOrderDirection] = useState('ASC')
-
   // mapper vores roller til options-format til dropdown, med label og value
   const employeeRoleOptions = roles.map((role) => ({
     label: role.roleName || role.name, // det som der vises i vores dropdowns
