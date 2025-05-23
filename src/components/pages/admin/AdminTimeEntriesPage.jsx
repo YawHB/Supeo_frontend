@@ -59,7 +59,14 @@ const AdminTimeEntriesPage = () => {
                       <td>{timeEntry.endDate}</td>
                       <td>{timeEntry.endTime}</td>
                       <td>{timeEntry.duration}</td>
-                      <td>{timeEntry.comment}</td>
+                      <td>
+                        {timeEntry.comment && (
+                          // title giver hover over text
+                          <span className='employee-comment-text' title={timeEntry.comment}>
+                            {timeEntry.comment}
+                          </span>
+                        )}
+                      </td>
                       <td>
                         <input
                           className={state.editingRowIndex === i ? 'input-active' : 'input-default'}
