@@ -8,7 +8,10 @@ const SideBar = ({ sideBarItems, isSideBarCollapsed, toggleSideBarCollapse }) =>
   const [translate] = useTranslation('global')
 
   return (
-    <div className='d-flex flex-column bg-sidebar justify-content-between px-4 sticky-top vh-100 top-0'>
+    <div
+      className='d-flex flex-column bg-sidebar justify-content-between px-4 sticky-top vh-100 top-0'
+      style={{ paddingTop: '1.5rem' }}
+    >
       <Nav vertical className='d-flex flex-column'>
         {sideBarItems.map((item, index) => (
           <NavItem key={index}>
