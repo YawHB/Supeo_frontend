@@ -200,7 +200,7 @@ const useEmployeesPageState = () => {
 
   return {
     roles,
-    employees,
+    employees: filteredEmployees,
     translate,
     permissions,
     setEmployees,
@@ -223,6 +223,11 @@ const useEmployeesPageState = () => {
     isSubmittingNewEmployee,
     setIsLoadingEmployeesForm,
     handleSubmitEditedEmployee,
+
+    employeeRoleOptions,
+    employeePermissionOptions,
+    employeeRolesFilterInput,
+    employeePermissionsFilterInput,
   }
 }
 
