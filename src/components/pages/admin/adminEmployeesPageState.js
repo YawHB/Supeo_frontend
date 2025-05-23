@@ -10,7 +10,7 @@ import { useQuery, useMutation, useApolloClient } from '@apollo/client'
 import { GET_ALL_EMPLOYEES } from '../../../services/employee/queries.js'
 import { GET_ROLES, GET_PERMISSIONS } from '../../../services/employee/queries.js'
 import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mutations.js'
-import useInput from '../../../hooks/useInput.js'
+import { useInput } from '../../../hooks/useInput.js'
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
