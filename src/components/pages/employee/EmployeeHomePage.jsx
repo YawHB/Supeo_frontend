@@ -7,9 +7,7 @@ const EmployeeHomePage = () => {
 
   return (
     <div className='d-flex'>
-      <div className='flex-grow-1 p-4'>
-        <h1>Employee Homepage</h1>
-      </div>
+      <h1>Employee Homepage</h1>
     </div>
   )
 }
