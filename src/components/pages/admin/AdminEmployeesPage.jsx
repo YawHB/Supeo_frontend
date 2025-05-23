@@ -30,19 +30,19 @@ const AdminEmployeesPage = () => {
             <h1>{translate('employees')}</h1>
             <div className='d-flex align-items-center gap-4'>
               <Select
+                isSearchable={false}
                 isMulti //tillader at man kan vælge flere værdier samtidigt
                 options={state.employeeRoleOptions ?? []} // valgmulighederne i inputtet og den falder så tilbage tl et tomt array
                 value={state.employeeRolesFilterInput.value} // de vallgte værdier i inputtet
-                isLoading={state.isLoadingEmployeeRoleOptions} // loader når vi henter data
                 onChange={state.employeeRolesFilterInput.onChange} // når vi ændrer værdien i inputtet
                 classNamePrefix='employee-role-select' //css klasse til styling
                 placeholder={translate('admin.select_employee_role')}
               />
               <Select
+                isSearchable={false}
                 isMulti
                 options={state.employeePermissionOptions ?? []}
                 value={state.employeePermissionsFilterInput.value}
-                isLoading={state.isLoadingEmployeePermissionOptions}
                 onChange={state.employeePermissionsFilterInput.setValue}
                 classNamePrefix='employee-role-select'
                 placeholder={translate('admin.select_employee_permission')}
