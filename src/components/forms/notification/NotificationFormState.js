@@ -7,5 +7,3 @@ const useNotificationFormState = (notification = {}) => ({
 })
 
 export default useNotificationFormState
-
-//console.log
