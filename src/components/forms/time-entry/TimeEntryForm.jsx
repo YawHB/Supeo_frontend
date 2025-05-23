@@ -152,7 +152,7 @@ const TimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
                 id='comment'
                 name='comment'
                 type='textarea'
-                placeholder={translate('comment')}
+                placeholder={translate('write_comment')}
                 value={input.comment.value}
                 onChange={input.comment.onChange}
               />
