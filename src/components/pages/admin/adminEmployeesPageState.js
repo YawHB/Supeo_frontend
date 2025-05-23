@@ -10,8 +10,6 @@ import { useQuery, useMutation, useApolloClient } from '@apollo/client'
 import { GET_ALL_EMPLOYEES } from '../../../services/employee/queries.js'
 import { GET_ROLES, GET_PERMISSIONS } from '../../../services/employee/queries.js'
 import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mutations.js'
-//import { useInput } from "../../../hooks/useInput.js";
-//import usePagination from "../../../../hooks/usePagination.js";
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
@@ -26,12 +24,6 @@ const useEmployeesPageState = () => {
   const [permissions, setPermissions] = useState([])
   const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null)
   const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false)
-
-  //const searchInput = useDebouncedInput(" ");
-  //const [orderBy, setOrderBy] = useState("id");
-  //const employeeRolesFilterInput = useInput([]);
-  //const [orderDirection, setOrderDirection] = useState('ASC')
-  //const pagination = usePagination({ page: 1, perPage: 25 }, [10, 25, 50, 100, 250, 500])
 
   const employeesTableColumns = [
     { key: 'id', label: translate('id'), type: 'text', sort: true },
@@ -168,19 +160,6 @@ const useEmployeesPageState = () => {
       )
   }
 
-  // const { loading: isLoadingEmployees, data: employeesData, variables: employeesVariables} = useQuery(GET_ALL_EMPLOYEES, {
-  //   variables: {
-  //     pagination: pagination.requestArgs,
-  //   },
-  // });
-
-  // const { loading: isLoadingEmployeeRoleOptions, data: employeeRolesData } = useQuery(EMPLOYEE_ROLES);
-  // const employeeRoleOptions = useQueryData(employeeRolesData, data => {
-  //   return data?.employeeRoles.map(
-  //     employeeRoles => ({label: employeeRoles.name, value: employeeRoles.id}),
-  //   );
-  // });
-
   return {
     roles,
     employees,
@@ -188,12 +167,12 @@ const useEmployeesPageState = () => {
     permissions,
     setEmployees,
     errorMessages,
-    resetErrorMessages,
     apolloClient,
     createEmployee,
     updateEmployee,
     isLoadingRoles,
     handleExportTable,
+    resetErrorMessages,
     isUpdatingEmployee,
     isLoadingEmployees,
     employeeBeingEdited,
@@ -204,17 +183,8 @@ const useEmployeesPageState = () => {
     isLoadingEmployeesForm,
     handleSubmitNewEmployee,
     isSubmittingNewEmployee,
-    handleSubmitEditedEmployee,
     setIsLoadingEmployeesForm,
-
-    //orderBy,
-    //pagination,
-    //setOrderBy,
-    //orderDirection,
-    //setOrderDirection,
-    //employeeRoleOptions,
-    //employeeRolesFilterInput,
-    //isLoadingEmployeeRoleOptions,
+    handleSubmitEditedEmployee,
   }
 }
 
