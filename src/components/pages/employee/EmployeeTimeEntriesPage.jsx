@@ -4,7 +4,7 @@ import { useTimeEntriesPageState } from './employeeTimeEntriesPageState.js'
 import NotificationForm from '../../forms/notification/NotificationForm.jsx'
 import { Row, Col, Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSave } from '@fortawesome/free-solid-svg-icons'
+import { faSave, faClock } from '@fortawesome/free-solid-svg-icons'
 
 export const EmployeeTimeEntriesPage = () => {
   const state = useTimeEntriesPageState()
@@ -30,6 +30,7 @@ export const EmployeeTimeEntriesPage = () => {
                 className='no-wrap'
                 style={{ minWidth: '200px' }}
               >
+                <FontAwesomeIcon icon={faClock} className='me-2' />
                 <span>{translate('time_entry.create_time_entry')}</span>{' '}
               </Button>
             </div>
