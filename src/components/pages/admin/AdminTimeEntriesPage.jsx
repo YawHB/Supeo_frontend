@@ -67,31 +67,48 @@ const AdminTimeEntriesPage = () => {
                           </span>
                         )}
                       </td>
-                      <td>
-                        <input
-                          autoFocus // Det gør så musepilen står klar på input-feltet
-                          className={state.editingRowIndex === i ? 'input-active' : 'input-default'}
-                          disabled={timeEntry.notification.status === 'IGANG'}
-                          type='text'
-                          value={timeEntry.notification.comment}
-                          onChange={(e) => state.handleCommentChange(e.target.value, i)}
-                          onClick={() => state.handleInputFieldClick(i)}
-                          onKeyUp={(e) => {
-                            if (e.key === 'Enter') {
-                              state.handleUpdateComment(e.key, i, timeEntry.notification.id)
-                              state.setEditingRowIndex(null) // Når Enter trykkes, opdater kommentaren og afslut redigering
-                            } else if (e.key === 'Escape') {
-                              state.setEditingRowIndex(null) // Når Escape trykkes, annuller redigering uden at gemme og afslut redigering
+                      <td
+                        onClick={() => {
+                          if (timeEntry.notification.status !== 'IGANG') {
+                            state.setEditingRowIndex(i)
+                          }
+                        }}
+                      >
+                        {state.editingRowIndex === i ? (
+                          <input
+                            autoFocus
+                            className={
+                              state.editingRowIndex === i ? 'input-active' : 'input-default'
                             }
-                          }}
-                        />
+                            disabled={timeEntry.notification.status === 'IGANG'}
+                            type='text'
+                            value={timeEntry.notification.comment}
+                            onBlur={() => state.setEditingRowIndex(null)}
+                            onChange={(e) => state.handleCommentChange(e.target.value, i)}
+                            onClick={() => state.handleInputFieldClick(i)}
+                            onKeyUp={(e) => {
+                              if (e.key === 'Enter') {
+                                state.handleUpdateComment(e.key, i, timeEntry.notification.id)
+                                state.setEditingRowIndex(null)
+                              } else if (e.key === 'Escape') {
+                                state.setEditingRowIndex(null)
+                              }
+                            }}
+                          />
+                        ) : timeEntry.notification.comment ? (
+                          <span className='comment-text' title={timeEntry.notification.comment}>
+                            {timeEntry.notification.comment}
+                          </span>
+                        ) : timeEntry.notification.status !== 'IGANG' ? (
+                          <span className='placeholder-muted clickable-cell'>Tilføj kommentar</span>
+                        ) : null}
                       </td>
                       <td>
                         <select
                           disabled={timeEntry.notification.status === 'IGANG'}
-                          className={`form-select clickable-cell ${
-                            statusClassMap[timeEntry.notification.status]
-                          } `}
+                          className={`form-select ${
+                            timeEntry.notification.status !== 'IGANG' ? 'clickable-cell' : ''
+                          } ${statusClassMap[timeEntry.notification.status]}`}
                           value={timeEntry.notification.status}
                           onChange={(e) =>
                             state.handleStatusChange(e.target.value, i, timeEntry.notification.id)
