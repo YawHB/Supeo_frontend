@@ -69,6 +69,7 @@ const AdminTimeEntriesPage = () => {
                       </td>
                       <td>
                         <input
+                          autoFocus // Det gør så musepilen står klar på input-feltet
                           className={state.editingRowIndex === i ? 'input-active' : 'input-default'}
                           disabled={timeEntry.notification.status === 'IGANG'}
                           type='text'
