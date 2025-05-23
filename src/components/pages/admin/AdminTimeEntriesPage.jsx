@@ -75,9 +75,14 @@ const AdminTimeEntriesPage = () => {
                           value={timeEntry.notification.comment}
                           onChange={(e) => state.handleCommentChange(e.target.value, i)}
                           onClick={() => state.handleInputFieldClick(i)}
-                          onKeyUp={(e) =>
-                            state.handleUpdateComment(e.key, i, timeEntry.notification.id)
-                          }
+                          onKeyUp={(e) => {
+                            if (e.key === 'Enter') {
+                              state.handleUpdateComment(e.key, i, timeEntry.notification.id)
+                              state.setEditingRowIndex(null) // Når Enter trykkes, opdater kommentaren og afslut redigering
+                            } else if (e.key === 'Escape') {
+                              state.setEditingRowIndex(null) // Når Escape trykkes, annuller redigering uden at gemme og afslut redigering
+                            }
+                          }}
                         />
                       </td>
                       <td>

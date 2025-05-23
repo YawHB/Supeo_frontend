@@ -163,6 +163,7 @@ const useTimeEntriesPageState = () => {
     isLoadingTimeEntries,
     timeEntriesTableColumns,
     editingRowIndex,
+    setEditingRowIndex,
   }
 }
 
