@@ -25,24 +25,10 @@ const AdminEmployeesPage = () => {
   return (
     <>
       <Row>
-
         <Col>
           <Col xs={12} className='d-flex justify-content-between gap-4'>
             <h1>{translate('employees')}</h1>
             <div className='d-flex align-items-center gap-4'>
-              {/* <Select
-                isinline="true"
-                styles={{ minWidth: "200px" }}
-                state={state.employeeRolesFilterInput}
-                options={state.employeeRoleOptions ?? []}
-                placeholder={translate("admin.select_employee_role")}
-              />
-              <Input
-                isinline="true"
-                styles={{ minWidth: "200px" }}
-                state={state.searchInput}
-                placeholder={translate("admin.search_employee")}
-              /> */}
               <Button outline color='primary' onClick={state.handleExportTable}>
                 <FontAwesomeIcon icon={faFileExcel} className='me-2' />
                 <span>{translate('export')}</span>
@@ -61,11 +47,6 @@ const AdminEmployeesPage = () => {
                 <span>{translate(`admin.create_employee`)}</span>
               </Button>
             </div>
-            {/* <div>
-              <Paginator
-                paginationState={state.pagination.state}
-              />
-            </div> */}
           </Col>
 
           <Table responsive>
