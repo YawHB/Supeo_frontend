@@ -59,7 +59,6 @@ const AdminEmployeesPage = () => {
                   state.employeeFormModalState.openModal()
                 }}
                 className='no-wrap'
-                style={{ minWidth: '200px' }}
               >
                 <FontAwesomeIcon icon={faUserPlus} className='me-2' />
                 <span>{translate(`admin.create_employee`)}</span>
