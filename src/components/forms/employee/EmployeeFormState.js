@@ -12,8 +12,6 @@ const useEmployeeFormState = (employee) => {
     phoneNumber: useInput(employee?.phoneNumber ?? ''),
   }
 
-  //console
-
   useEffect(() => {
     if (employee) {
       input.id.setValue(employee.id)
