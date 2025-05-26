@@ -3,17 +3,7 @@ import EmployeeForm from '../../forms/employee/EmployeeForm.jsx'
 import useEmployeesPageState from './adminEmployeesPageState.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faFileExcel, faSave } from '@fortawesome/free-solid-svg-icons'
-import {
-  Row,
-  Col,
-  Input,
-  Modal,
-  Table,
-  Button,
-  ModalBody,
-  ModalHeader,
-  ModalFooter,
-} from 'reactstrap'
+import { Row, Col, Input, Modal, Table, Button, ModalBody, ModalHeader, ModalFooter } from 'reactstrap'
 import Select from 'react-select'
 
 const AdminEmployeesPage = () => {
@@ -31,11 +21,21 @@ const AdminEmployeesPage = () => {
             <div className='d-flex align-items-center gap-4'>
               <Select
                 isSearchable={false}
-                isMulti //tillader at man kan vælge flere værdier samtidigt
-                options={state.employeeRoleOptions ?? []} // valgmulighederne i inputtet og den falder så tilbage tl et tomt array
+                isMulti
+                options={state.employeeRoleOptions ?? []}
                 value={state.employeeRolesFilterInput.value} // de vallgte værdier i inputtet
-                onChange={state.employeeRolesFilterInput.onChange} // når vi ændrer værdien i inputtet
-                classNamePrefix='employee-role-select' //css klasse til styling
+                onChange={(newValue) => {
+                  state.employeeRolesFilterInput.onChange(newValue)
+                  state.filteredEmployees({
+                    variables: {
+                      filter: {
+                        roleNames: newValue.map((r) => r.value),
+                        permissionLevels: state.selectedPermissions,
+                      },
+                    },
+                  })
+                }}
+                classNamePrefix='employee-role-select'
                 placeholder={translate('admin.select_employee_role')}
               />
               <Select
@@ -43,7 +43,17 @@ const AdminEmployeesPage = () => {
                 isMulti
                 options={state.employeePermissionOptions ?? []}
                 value={state.employeePermissionsFilterInput.value}
-                onChange={state.employeePermissionsFilterInput.setValue}
+                onChange={(newValue) => {
+                  state.employeePermissionsFilterInput.onChange(newValue)
+                  state.filteredEmployees({
+                    variables: {
+                      filter: {
+                        roleNames: state.selectedRoles,
+                        permissionLevels: newValue.map((p) => p.value),
+                      },
+                    },
+                  })
+                }}
                 classNamePrefix='employee-role-select'
                 placeholder={translate('admin.select_employee_permission')}
               />
