@@ -6,9 +6,13 @@ import { faPencil } from '@fortawesome/free-solid-svg-icons'
 import exportTableData from '../../../utils/exportTableData.js'
 import { useModalState } from '../../../hooks/useModalState.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useQuery, useMutation, useApolloClient } from '@apollo/client'
-import { GET_ALL_EMPLOYEES } from '../../../services/employee/queries.js'
-import { GET_ROLES, GET_PERMISSIONS } from '../../../services/employee/queries.js'
+import { useQuery, useMutation, useApolloClient, useLazyQuery } from '@apollo/client'
+import {
+  GET_ROLES,
+  GET_PERMISSIONS,
+  GET_ALL_EMPLOYEES,
+  GET_ALL_FILTERED_EMPLOYEES,
+} from '../../../services/employee/queries.js'
 import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mutations.js'
 import { useInput } from '../../../hooks/useInput.js'
 
@@ -30,17 +34,21 @@ const useEmployeesPageState = () => {
   const employeePermissionsFilterInput = useInput([])
 
   // mapper vores roller til options-format til dropdown, med label og value
-  const employeeRoleOptions = roles.map((role) => ({
-    label: role.roleName || role.name, // det som der vises i vores dropdowns
-    value: role.roleName || role.id,
-  }))
+  const employeeRoleOptions = roles.map((role) => {
+    const modifiedRole = {
+      label: role.roleName || role.name, // det som der vises i vores dropdowns
+      value: role.roleName || role.id,
+    }
+    //console.log('modifiedRole', modifiedRole)
+    return modifiedRole
+  })
 
   const employeePermissionOptions = permissions.map((permission) => ({
     label: permission.permissionLevel || permission.permissionLevel,
     value: permission.permissionLevel || permission.id,
   }))
 
-  // tager kun værdier fra vores valgte roller, eller en tom liste hvis der ikke er valgt nboget
+  //tager kun værdier fra vores valgte roller, eller en tom liste hvis der ikke er valgt nboget
   const selectedRoles = employeeRolesFilterInput.value?.length
     ? employeeRolesFilterInput.value.map((r) => r.value)
     : []
@@ -48,17 +56,6 @@ const useEmployeesPageState = () => {
   const selectedPermissions = employeePermissionsFilterInput.value?.length
     ? employeePermissionsFilterInput.value.map((p) => p.value)
     : []
-
-  // filtrerer vores employees baseret på valgte roller og tilladelser
-  const filteredEmployees = employees.filter((employee) => {
-    const roleMatch =
-      selectedRoles.length === 0 || selectedRoles.includes(employee.roleName || employee.roleId) // tjekker om den valgte rolle er i vores employee rolle
-    const permissionMatch =
-      selectedPermissions.length === 0 ||
-      selectedPermissions.includes(employee.permissionLevel || employee.permissionId)
-
-    return roleMatch && permissionMatch
-  })
 
   const employeesTableColumns = [
     { key: 'id', label: translate('id'), type: 'text', sort: true },
@@ -90,7 +87,9 @@ const useEmployeesPageState = () => {
 
   const { loading: isLoadingRoles } = useQuery(GET_ROLES, {
     fetchPolicy: 'cache-and-network',
-    onCompleted: (data) => setRoles(data.roles),
+    onCompleted: (data) => {
+      setRoles(data.roles)
+    },
   })
 
   const { loading: isLoadingPermissions } = useQuery(GET_PERMISSIONS, {
@@ -100,8 +99,21 @@ const useEmployeesPageState = () => {
 
   const { loading: isLoadingEmployees, refetch } = useQuery(GET_ALL_EMPLOYEES, {
     fetchPolicy: 'cache-and-network',
-    onCompleted: (data) => setEmployees(data.employees),
+    onCompleted: (data) => {
+      setEmployees(data.employees)
+    },
   })
+
+  const [filteredEmployees, { loading: isLoadingFilteredEmployees }] = useLazyQuery(
+    GET_ALL_FILTERED_EMPLOYEES,
+    {
+      fetchPolicy: 'cache-and-network',
+      onCompleted: (data) => {
+        setEmployees(data.filteredEmployees)
+        console.log('DATA FRA BACKEND', data)
+      },
+    },
+  )
 
   const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(CREATE_EMPLOYEE, {
     refetchQueries: [GET_ALL_EMPLOYEES],
@@ -197,7 +209,7 @@ const useEmployeesPageState = () => {
 
   return {
     roles,
-    employees: filteredEmployees,
+    employees,
     translate,
     permissions,
     setEmployees,
@@ -220,11 +232,14 @@ const useEmployeesPageState = () => {
     isSubmittingNewEmployee,
     setIsLoadingEmployeesForm,
     handleSubmitEditedEmployee,
-
+    isLoadingFilteredEmployees,
     employeeRoleOptions,
     employeePermissionOptions,
     employeeRolesFilterInput,
     employeePermissionsFilterInput,
+    filteredEmployees,
+    selectedRoles,
+    selectedPermissions,
   }
 }
 
