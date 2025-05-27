@@ -40,6 +40,7 @@ export function calculateWorkHours(startDate, startTime, endDate, endTime) {
 function calculateDaysWorked(year, month, day) {
   return Date.UTC(year, month - 1, day)
 }
+
 function splitDateToNumbers(date) {
   return date.split('-').map(Number)
 }
@@ -50,6 +51,12 @@ function splitTimeToNumbers(time) {
 
 function getMsTimeFromDateTime(year, month, day, hour, minutes) {
   return Date.UTC(year, month - 1, day, hour, minutes)
+}
+
+function splitDateToNumbersForExport(date) {
+  // antager datoen er i formatet "DD-MM-YYYY"
+  const [day, month, year] = date.split('-').map(Number)
+  return [year, month, day]
 }
 
 function hoursToMin(startTime, endTime) {
@@ -69,8 +76,8 @@ function hoursToMin(startTime, endTime) {
 export function calculateWorkDurationInMinutes(startDate, startTime, endDate, endTime) {
   const [startHour, startMin] = splitTimeToNumbers(startTime)
   const [endHour, endMin] = splitTimeToNumbers(endTime)
-  const [startYear, startMonth, startDay] = splitDateToNumbers(startDate)
-  const [endYear, endMonth, endDay] = splitDateToNumbers(endDate)
+  const [startYear, startMonth, startDay] = splitDateToNumbersForExport(startDate)
+  const [endYear, endMonth, endDay] = splitDateToNumbersForExport(endDate)
 
   const start = new Date(startYear, startMonth - 1, startDay, startHour, startMin)
   const end = new Date(endYear, endMonth - 1, endDay, endHour, endMin)
