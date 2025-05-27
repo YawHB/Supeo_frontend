@@ -5,7 +5,7 @@ export const useInput = (initialValue = '', delay = 300) => {
   // const onChange = (e) => {setValue(e.target.value)}
 
   const [value, setValue] = useState(initialValue)
-  const [debounced, setDebounced] = useState(value)
+  const [debouncedValue, setDebouncedValue] = useState(initialValue)
   const onChange = (eOrValue) => {
     // håndterer både react-select og native inputs.
     if (eOrValue && eOrValue.target !== undefined) {
@@ -14,16 +14,19 @@ export const useInput = (initialValue = '', delay = 300) => {
       setValue(eOrValue)
     }
   }
-  
-    useEffect(() => {
-      const handler = setTimeout(() => setDebounced(value), delay)
-      return () => clearTimeout(handler)
-    }, [value, delay])
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value)
+    }, delay)
+
+    return () => clearTimeout(handler)
+  }, [value, delay])
 
   return {
     value,
     onChange,
     setValue,
-    debounced,
+    debouncedValue,
   }
 }
