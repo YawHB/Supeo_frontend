@@ -122,7 +122,6 @@ const useEmployeesPageState = () => {
     },
   )
   
-
   const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(CREATE_EMPLOYEE, {
     refetchQueries: [GET_ALL_EMPLOYEES],
   })
