@@ -33,7 +33,7 @@ const useEmployeesPageState = () => {
 
   const employeeRolesFilterInput = useInput([]) // hook til håndtering af vores roller, start med tomt array
   const employeePermissionsFilterInput = useInput([])
-  const debouncedSearch = useDebouncedInput('', 300)
+  const searchInput = useDebouncedInput('', 300)
 
   // mapper vores roller til options-format til dropdown, med label og value
   const employeeRoleOptions = roles.map((role) => {
@@ -110,7 +110,7 @@ const useEmployeesPageState = () => {
     GET_ALL_FILTERED_EMPLOYEES,
     {
       variables: {
-        search: debouncedSearch || null,
+        search: searchInput || null,
       },
       fetchPolicy: 'cache-and-network',
       onCompleted: (data) => {
@@ -246,7 +246,7 @@ const useEmployeesPageState = () => {
     filteredEmployees,
     selectedRoles,
     selectedPermissions,
-    debouncedSearch,
+    searchInput,
   }
 }
 
