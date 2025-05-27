@@ -57,6 +57,12 @@ const AdminEmployeesPage = () => {
                 classNamePrefix='employee-role-select'
                 placeholder={translate('admin.select_employee_permission')}
               />
+              <Input
+                className='search-input'
+                value={state.searchInput.value}
+                onChange={state.searchInput.onChange}
+                placeholder={translate('admin.search_employee')}
+              />
               <Button outline color='primary' onClick={state.handleExportTable}>
                 <FontAwesomeIcon icon={faFileExcel} className='me-2' />
                 <span>{translate('export')}</span>
