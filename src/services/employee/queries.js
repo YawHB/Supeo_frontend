@@ -58,8 +58,8 @@ export const GET_ALL_EMPLOYEES = gql`
   }
 `
 export const GET_ALL_FILTERED_EMPLOYEES = gql`
-  query GetAllEmployees($filter: EmployeeFilterInput) {
-    filteredEmployees(filter: $filter) {
+  query GetAllEmployees($filter: EmployeeFilterInput, $search: SearchInput) {
+    filteredEmployees(filter: $filter, search: $search) {
       id
       firstName
       lastName
