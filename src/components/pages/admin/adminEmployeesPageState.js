@@ -34,6 +34,7 @@ const useEmployeesPageState = () => {
   const employeeRolesFilterInput = useInput([]) // hook til håndtering af vores roller, start med tomt array
   const employeePermissionsFilterInput = useInput([])
   const searchInput = useDebouncedInput('', 300)
+  //const searchInput = useInput('', 300)
 
   // mapper vores roller til options-format til dropdown, med label og value
   const employeeRoleOptions = roles.map((role) => {
