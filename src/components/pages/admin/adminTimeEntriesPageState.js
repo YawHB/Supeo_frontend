@@ -6,6 +6,7 @@ import exportTableData from '../../../utils/exportTableData.js'
 import { useQuery, useApolloClient, useMutation } from '@apollo/client'
 import { GET_ALL_TIME_ENTRIES } from '../../../services/time-entry/queries.js'
 import { UPDATE_TIME_ENTRY_STATUS } from '../../../services/notification/mutations.js'
+import { calculateWorkDurationInMinutes } from '../../../utils/calculateWorkHours.js'
 
 const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
@@ -123,20 +124,27 @@ const useTimeEntriesPageState = () => {
     apolloClient
       .query({ query: GET_ALL_TIME_ENTRIES, fetchPolicy: 'network-only' })
       .then((result) => {
-        const columns = result.data?.timeEntries ?? []
-        const data = columns.map((timeEntry) => ({
-          id: timeEntry.id,
-          firstName: timeEntry.employee?.firstName ?? '',
-          lastName: timeEntry.employee?.lastName ?? '',
-          startDate: timeEntry.startDate,
-          startTime: timeEntry.startTime,
-          endDate: timeEntry.endDate,
-          endTime: timeEntry.endTime,
-          duration: timeEntry.duration,
-          comment: timeEntry.comment,
-          adminComment: timeEntry.notification?.comment ?? '',
-          status: timeEntry.notification?.status ?? '',
-        }))
+        const data = (result.data?.timeEntries ?? [])
+          .filter((timeEntry) => timeEntry.notification?.status === 'GODKENDT')
+          .map((timeEntry) => ({
+            id: timeEntry.id,
+            firstName: timeEntry.employee?.firstName,
+            lastName: timeEntry.employee?.lastName,
+            startDate: timeEntry.startDate,
+            startTime: timeEntry.startTime,
+            endDate: timeEntry.endDate,
+            endTime: timeEntry.endTime,
+            duration: calculateWorkDurationInMinutes(
+              timeEntry.startDate,
+              timeEntry.startTime,
+              timeEntry.endDate,
+              timeEntry.endTime,
+            ),
+            comment: timeEntry.comment,
+            adminComment: timeEntry.notification?.comment ?? '',
+            status: timeEntry.notification?.status ?? '',
+          }))
+
         const today = new Date().toISOString().split('T')[0]
         return exportTableData({
           data,
