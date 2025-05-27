@@ -180,8 +180,7 @@ const useEmployeesPageState = () => {
   }
 
   const handleExportTable = () => {
-    const startMsg = translate('export_table.start')
-    showToast(startMsg, 'info')
+    showToast(translate('export_table.start'), 'info')
     apolloClient
       .query({ query: GET_ALL_EMPLOYEES, fetchPolicy: 'network-only' })
       .then((result) => {
@@ -191,19 +190,11 @@ const useEmployeesPageState = () => {
           data,
           filename: `${translate(`export_table.employees_overview`)} ${today}`,
           columns: employeesTableColumns.filter((col) => col.key !== 'id' && col.key !== ''),
-          //columns: employeesTableColumns,
-          strategy: 'xlsx',
         })
       })
       .then(
-        () => {
-          const successMsg = translate('export_table.success')
-          showToast(successMsg, 'success')
-        },
-        () => {
-          const errorMsg = translate('export_table.error')
-          showToast(errorMsg, 'error')
-        },
+        () => showToast(translate('export_table.success'), 'success'),
+        () => showToast(translate('export_table.error'), 'error'),
       )
   }
 
