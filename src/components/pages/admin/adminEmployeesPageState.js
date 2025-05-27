@@ -101,6 +101,10 @@ const useEmployeesPageState = () => {
   })
 
   const { loading: isLoadingEmployees, refetch } = useQuery(GET_ALL_EMPLOYEES, {
+    variables: {
+      search: searchInput.debouncedValue || null,
+      //search: searchInput || null,
+    },
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => {
       setEmployees(data.employees)
@@ -110,10 +114,10 @@ const useEmployeesPageState = () => {
   const [filteredEmployees, { loading: isLoadingFilteredEmployees }] = useLazyQuery(
     GET_ALL_FILTERED_EMPLOYEES,
     {
-      variables: {
-        search: searchInput.debouncedValue || null,
-        //search: searchInput || null,
-      },
+      // variables: {
+      //   search: searchInput.debouncedValue || null,
+      //   //search: searchInput || null,
+      // },
       fetchPolicy: 'cache-and-network',
       onCompleted: (data) => {
         setEmployees(data.filteredEmployees)
