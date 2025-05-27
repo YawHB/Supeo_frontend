@@ -54,7 +54,6 @@ function getMsTimeFromDateTime(year, month, day, hour, minutes) {
 }
 
 function splitDateToNumbersForExport(date) {
-  // antager datoen er i formatet "DD-MM-YYYY"
   const [day, month, year] = date.split('-').map(Number)
   return [year, month, day]
 }
@@ -85,5 +84,5 @@ export function calculateWorkDurationInMinutes(startDate, startTime, endDate, en
   const diffInMs = end - start
   const diffInMinutes = Math.floor(diffInMs / (1000 * 60))
 
-  return diffInMinutes
+  return `${diffInMinutes} minutter`
 }

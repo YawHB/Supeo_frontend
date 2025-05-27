@@ -125,7 +125,6 @@ const useTimeEntriesPageState = () => {
       .query({ query: GET_ALL_TIME_ENTRIES, fetchPolicy: 'network-only' })
       .then((result) => {
         const data = (result.data?.timeEntries ?? [])
-          .filter((timeEntry) => timeEntry.notification?.status === 'GODKENDT')
           .map((timeEntry) => ({
             id: timeEntry.id,
             firstName: timeEntry.employee?.firstName,
