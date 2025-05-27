@@ -15,7 +15,7 @@ import {
 } from '../../../services/employee/queries.js'
 import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mutations.js'
 import { useInput } from '../../../hooks/useInput.js'
-//import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
+import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
@@ -33,8 +33,8 @@ const useEmployeesPageState = () => {
 
   const employeeRolesFilterInput = useInput([]) // hook til håndtering af vores roller, start med tomt array
   const employeePermissionsFilterInput = useInput([])
-  //const searchInput = useDebouncedInput('', 300)
-  const searchInput = useInput('', 300)
+  const searchInput = useDebouncedInput('', 300)
+  //const searchInput = useInput('', 300)
 
   // mapper vores roller til options-format til dropdown, med label og value
   const employeeRoleOptions = roles.map((role) => {
@@ -103,7 +103,6 @@ const useEmployeesPageState = () => {
   const { loading: isLoadingEmployees, refetch } = useQuery(GET_ALL_EMPLOYEES, {
     variables: {
       search: searchInput.debouncedValue || null,
-      //search: searchInput || null,
     },
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => {
@@ -114,10 +113,6 @@ const useEmployeesPageState = () => {
   const [filteredEmployees, { loading: isLoadingFilteredEmployees }] = useLazyQuery(
     GET_ALL_FILTERED_EMPLOYEES,
     {
-      // variables: {
-      //   search: searchInput.debouncedValue || null,
-      //   //search: searchInput || null,
-      // },
       fetchPolicy: 'cache-and-network',
       onCompleted: (data) => {
         setEmployees(data.filteredEmployees)
@@ -252,6 +247,7 @@ const useEmployeesPageState = () => {
     selectedRoles,
     selectedPermissions,
     searchInput,
+    
   }
 }
 

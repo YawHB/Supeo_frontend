@@ -45,15 +45,15 @@ export const GET_PERMISSIONS = gql`
 `
 
 export const GET_ALL_EMPLOYEES = gql`
-  query {
-    employees {
+  query Employees($search: String) {
+    employees(search: $search) {
       id
       firstName
       lastName
+      email
+      phoneNumber
       roleName
       permissionLevel
-      phoneNumber
-      email
     }
   }
 `
