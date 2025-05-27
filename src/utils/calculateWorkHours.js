@@ -65,3 +65,18 @@ function hoursToMin(startTime, endTime) {
 
   return [hours, minutes]
 }
+
+export function calculateWorkDurationInMinutes(startDate, startTime, endDate, endTime) {
+  const [startHour, startMin] = splitTimeToNumbers(startTime)
+  const [endHour, endMin] = splitTimeToNumbers(endTime)
+  const [startYear, startMonth, startDay] = splitDateToNumbers(startDate)
+  const [endYear, endMonth, endDay] = splitDateToNumbers(endDate)
+
+  const start = new Date(startYear, startMonth - 1, startDay, startHour, startMin)
+  const end = new Date(endYear, endMonth - 1, endDay, endHour, endMin)
+
+  const diffInMs = end - start
+  const diffInMinutes = Math.floor(diffInMs / (1000 * 60))
+
+  return diffInMinutes
+}
