@@ -84,5 +84,5 @@ export function calculateWorkDurationInMinutes(startDate, startTime, endDate, en
   const diffInMs = end - start // Beregn forskellen i millisekunder mellem slut og start
   const diffInMinutes = Math.floor(diffInMs / (1000 * 60)) // konverter millisekunder til hele minutter
 
-  return `${diffInMinutes} minutter`
+  return `${diffInMinutes}`
 }
