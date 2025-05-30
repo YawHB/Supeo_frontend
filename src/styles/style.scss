@@ -472,10 +472,7 @@ $placeholder-gray: #868e96 !default;
 }
 
 .custom-paginator {
-  display: flex;
-
   .pagination {
-    display: flex !important;
     margin: 0;
     padding: 0;
   }
