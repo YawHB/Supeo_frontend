@@ -64,18 +64,22 @@ const AdminEmployeesPage = () => {
                 onChange={state.searchInput.onChange}
                 placeholder={translate('admin.search_employee')}
               />
-              <Button outline color='primary' onClick={state.handleExportTable}>
+              <Button
+                outline
+                color='primary'
+                className='no-wrap'
+                onClick={state.handleExportTable}>
                 <FontAwesomeIcon icon={faFileExcel} className='me-2' />
                 <span>{translate('export')}</span>
               </Button>
               <Button
-                color='primary'
                 outline
+                color='primary'
+                className='no-wrap'
                 onClick={() => {
                   state.setEmployeeBeingEdited(null)
                   state.employeeFormModalState.openModal()
                 }}
-                className='no-wrap'
               >
                 <FontAwesomeIcon icon={faUserPlus} className='me-2' />
                 <span>{translate(`admin.create_employee`)}</span>

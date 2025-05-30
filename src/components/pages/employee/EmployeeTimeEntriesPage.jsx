@@ -24,11 +24,10 @@ export const EmployeeTimeEntriesPage = () => {
             </h1>
             <div className='d-flex align-items-center gap-4'>
               <Button
-                color='primary'
                 outline
-                onClick={() => state.timeEntryFormModalState.openModal({})}
+                color='primary'
                 className='no-wrap'
-                style={{ minWidth: '200px' }}
+                onClick={() => state.timeEntryFormModalState.openModal({})}
               >
                 <FontAwesomeIcon icon={faClock} className='me-2' />
                 <span>{translate('time_entry.create_time_entry')}</span>{' '}
