@@ -193,21 +193,25 @@ select.form-select {
     tr:nth-child(odd) {
       background-color: $table-row-bg-1 !important;
     }
-
+  
     tr:nth-child(even) {
       background-color: $table-row-bg-2 !important;
     }
-
+  
     td {
       color: #34363c !important;
     }
-
+  
+    tr:last-child td {
+      border-bottom: none;
+    }
+  
     tr:last-child {
       td {
         &:first-child {
           border-bottom-left-radius: $table-border-radius !important;
         }
-
+  
         &:last-child {
           border-bottom-right-radius: $table-border-radius !important;
         }
@@ -551,7 +555,6 @@ select.per-page-select {
 
   &:hover,
   &:focus {
-    border-color: #374c45 !important;
     outline: none !important;
     background-color: #ffffff !important;
   }
