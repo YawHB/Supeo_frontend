@@ -338,6 +338,13 @@ th svg.desc {
     z-index: 20;
   }
 
+  &__menu-list {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
   &__option {
     color: #34363c !important;
     padding: 0.5rem 1rem !important;
