@@ -5,10 +5,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import useTimeEntriesPageState from './adminTimeEntriesPageState.js'
 
 const statusClassMap = {
-  AFVENTER: 'status-select--pending',
-  GODKENDT: 'status-select--approve',
-  AFVIST: 'status-select--reject',
-  IGANG: 'status-select--underway',
+  AFVENTER: 'admin-status-select--pending',
+  GODKENDT: 'admin-status-select--approve',
+  AFVIST: 'admin-status-select--reject',
+  IGANG: 'admin-status-select--underway',
 }
 
 const AdminTimeEntriesPage = () => {
