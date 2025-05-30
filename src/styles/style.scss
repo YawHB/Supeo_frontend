@@ -217,6 +217,9 @@ select.form-select {
         }
       }
     }
+    tr:hover td {
+      background-color: #e8e8e3 !important; // Hover over tabel rows med farve
+    }
   }
 
   td,
