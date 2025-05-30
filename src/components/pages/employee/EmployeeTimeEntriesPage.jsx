@@ -54,18 +54,14 @@ export const EmployeeTimeEntriesPage = () => {
                   </tr>
                 ) : (
                   state.timeEntriesData.timeEntries.map((timeEntry) => {
+                    console.log('timeEntry :', timeEntry)
                     return (
-                      <tr
-                        key={timeEntry.id}
-                        onClick={() => {
-                          state.setOpenNotification(timeEntry)
-                          state.notificationInfoModalState.openModal()
-                        }}
-                        style={{ cursor: 'pointer' }}
-                      >
+                      <tr key={timeEntry.id}>
                         {state.timeEntriesColumns.map((column) => (
                           <td key={`${timeEntry.id}-${column.key}`}>
-                            {column.type === 'view' ? column.view(timeEntry) : timeEntry[column.key]}
+                            {column.type === 'view'
+                              ? column.view(timeEntry)
+                              : timeEntry[column.key]}
                           </td>
                         ))}
                       </tr>
@@ -140,7 +136,7 @@ export const EmployeeTimeEntriesPage = () => {
         isOpen={state.notificationInfoModalState.isOpen}
         toggle={state.notificationInfoModalState.closeModal}
         returnFocusAfterClose={false}
-        size='lg'
+        size='md'
       >
         <ModalHeader toggle={state.notificationInfoModalState.closeModal}>
           {translate('notification_status', {
