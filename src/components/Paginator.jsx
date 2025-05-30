@@ -12,8 +12,7 @@ const Paginator = ({ page, perPage, totalCount, perPageOptions, onPageChange, on
   const handleLast = () => onPageChange(totalPages)
 
   return (
-    <div className='d-flex align-items-center justify-content-end gap-2'>
-      <div className='d-flex align-items-center'>
+    <div className='d-flex justify-content-end gap-2'>
         <label className='me-2 mb-0'>{translate('per_page')}</label>
         <select
           className='form-select'
@@ -27,7 +26,6 @@ const Paginator = ({ page, perPage, totalCount, perPageOptions, onPageChange, on
             </option>
           ))}
         </select>
-      </div>
 
         <Pagination aria-label='Page navigation' className='custom-paginator'>
           <PaginationItem disabled={page === 1}>
