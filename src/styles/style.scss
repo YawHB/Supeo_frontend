@@ -131,16 +131,14 @@ html {
 }
 
 .input-active {
-  background-color: #ffffff;
-  transition: background-color 0.2s;
-  border: 1px solid #374c45 !important;
-  border-radius: 1rem !important;
+  background-color: #fff;
+  border-radius: 1rem;
 }
 
 input:focus {
   outline: none;
-  box-shadow: 0 0 0 1px #6c6d6e;
-  border: 1px solid #c8cfd5;
+  box-shadow: 0 0 0 1px #015FCC;  
+  border: 1px solid #015FCC;
 }
 
 .status-button {
