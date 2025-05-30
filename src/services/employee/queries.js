@@ -59,8 +59,8 @@ export const GET_ALL_EMPLOYEES = gql`
 `
 
 export const GET_ALL_FILTERED_EMPLOYEES = gql`
-  query GetAllEmployees($filter: EmployeeFilterInput, $search: String) {
-    filteredEmployees(filter: $filter, search: $search) {
+  query GetAllEmployees($filter: EmployeeFilterInput) {
+    filteredEmployees(filter: $filter) {
       id
       firstName
       lastName
@@ -71,22 +71,3 @@ export const GET_ALL_FILTERED_EMPLOYEES = gql`
     }
   }
 `
-
-// export const GET_ALL_EMPLOYEES = gql`
-//   query GET_ALL_EMPLOYEES($page: Int!, $perPage: Int!) {
-//     employees(pagination: { page: $page, perPage: $perPage }) {
-//       pagination {
-//         page
-//         perPage
-//         totalCount
-//       }
-//       employees {
-//         id
-//         firstName
-//         lastName
-//         phoneNumber
-//         email
-//       }
-//     }
-//   }
-// `;
