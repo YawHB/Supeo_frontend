@@ -9,13 +9,7 @@ const NotificationForm = ({ notification = {} }) => {
   return (
     <Form id='notificationForm'>
       <Row>
-        <Col md={6}>
-          <FormGroup>
-            <Label for='comment'>{translate('admin_comment')}</Label>
-            <Input id='comment' name='comment' type='text' value={comment.value} disabled />
-          </FormGroup>
-        </Col>
-        <Col md={6}>
+        <Col md={12}>
           <FormGroup>
             <Label for='status'>{translate('status')}</Label>
             <Input id='status' name='status' type='text' value={status.value} disabled />
@@ -23,13 +17,21 @@ const NotificationForm = ({ notification = {} }) => {
         </Col>
       </Row>
       <Row>
-        <Col md={6}>
+        <Col md={12}>
+          <FormGroup>
+            <Label for='comment'>{translate('admin_comment')}</Label>
+            <Input id='comment' name='comment' type='text' value={comment.value} disabled />
+          </FormGroup>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={12}>
           <FormGroup>
             <Label for='timestamp'>{translate('last_updated')}</Label>
             <Input
               id='timestamp'
               name='timestamp'
-              //type="datetime-local"
+              // type="datetime-local"
               value={timestamp.value}
               disabled
             />

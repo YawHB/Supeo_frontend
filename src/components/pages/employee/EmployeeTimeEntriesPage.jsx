@@ -75,7 +75,7 @@ export const EmployeeTimeEntriesPage = () => {
       </Row>
 
       <Modal
-        size='lg'
+        size='md'
         isOpen={state.timeEntryFormModalState.isOpen}
         toggle={() => {
           state.resetErrorMessages()
