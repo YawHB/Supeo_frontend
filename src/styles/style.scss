@@ -283,9 +283,7 @@ th svg.desc {
 
   &__value-container {
     color: #34363c !important;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.25rem;
+    flex-wrap: nowrap !important;       // prevent wrapping of placeholder & pills
   }
 
   &__multi-value {
@@ -399,6 +397,8 @@ th svg.desc {
   display: flex;
   align-items: center;
   overflow: hidden;
+  min-height: 34px !important;  // reduce from 38px to 32px
+  height: 34px !important;      // force exact height
 }
 
 .employee-role-select__value-container {
