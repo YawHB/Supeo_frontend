@@ -360,7 +360,8 @@ th svg.desc {
 
   &__clear-indicator {
     color: #c0392b !important;
-    
+    margin-left: -13px !important; // default margin is ~8px; reduce as needed
+
     &:hover {
       color: #a83232 !important;
     }
