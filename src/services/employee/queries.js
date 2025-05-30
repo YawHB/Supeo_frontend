@@ -71,3 +71,24 @@ export const GET_ALL_FILTERED_EMPLOYEES = gql`
     }
   }
 `
+
+export const GET_PAGINATED_EMPLOYEES = gql`
+  query GetPaginatedEmployees($page: Int!, $perPage: Int!) {
+    paginatedEmployees(pagination: { page: $page, perPage: $perPage }) {
+      pagination {
+        page
+        perPage
+        totalCount
+      }
+      employees {
+        id
+        firstName
+        lastName
+        email
+        roleName
+        permissionLevel
+        phoneNumber
+      }
+    }
+  }
+`
