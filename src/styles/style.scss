@@ -475,6 +475,7 @@ $placeholder-gray: #868e96 !default;
   .pagination {
     margin: 0;
     padding: 0;
+    display: flex;
   }
 
   .pagination li a {
@@ -483,6 +484,18 @@ $placeholder-gray: #868e96 !default;
     color: #374c45 !important;
     padding: 0.375rem 0.75rem !important;
     font-size: 1rem !important;
+    border-radius: 0 !important;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .pagination li:first-child a {
+    border-top-left-radius: 2rem !important;
+    border-bottom-left-radius: 2rem !important;
+  }
+
+  .pagination li:last-child a {
+    border-top-right-radius: 2rem !important;
+    border-bottom-right-radius: 2rem !important;
   }
 
   .pagination li:not(.active) a:hover,
