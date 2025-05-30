@@ -126,6 +126,7 @@ const useEmployeesPageState = () => {
     variables: {
       page: pagination.state.page,
       perPage: pagination.state.perPage,
+      totalCount: pagination.state.totalCount,
     },
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => {
