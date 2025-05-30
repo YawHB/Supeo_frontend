@@ -126,7 +126,7 @@ const AdminEmployeesPage = () => {
       </div>
 
       <Modal
-        size='lg'
+        size='md'
         isOpen={state.employeeFormModalState.isOpen}
         toggle={() => {
           state.resetErrorMessages()
