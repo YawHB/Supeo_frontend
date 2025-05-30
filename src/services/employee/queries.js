@@ -45,18 +45,19 @@ export const GET_PERMISSIONS = gql`
 `
 
 export const GET_ALL_EMPLOYEES = gql`
-  query {
-    employees {
+  query Employees($search: String) {
+    employees(search: $search) {
       id
       firstName
       lastName
+      email
+      phoneNumber
       roleName
       permissionLevel
-      phoneNumber
-      email
     }
   }
 `
+
 export const GET_ALL_FILTERED_EMPLOYEES = gql`
   query GetAllEmployees($filter: EmployeeFilterInput) {
     filteredEmployees(filter: $filter) {
@@ -70,22 +71,3 @@ export const GET_ALL_FILTERED_EMPLOYEES = gql`
     }
   }
 `
-
-// export const GET_ALL_EMPLOYEES = gql`
-//   query GET_ALL_EMPLOYEES($page: Int!, $perPage: Int!) {
-//     employees(pagination: { page: $page, perPage: $perPage }) {
-//       pagination {
-//         page
-//         perPage
-//         totalCount
-//       }
-//       employees {
-//         id
-//         firstName
-//         lastName
-//         phoneNumber
-//         email
-//       }
-//     }
-//   }
-// `;

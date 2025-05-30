@@ -15,6 +15,7 @@ import {
 } from '../../../services/employee/queries.js'
 import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mutations.js'
 import { useInput } from '../../../hooks/useInput.js'
+import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
@@ -32,6 +33,8 @@ const useEmployeesPageState = () => {
 
   const employeeRolesFilterInput = useInput([]) // hook til håndtering af vores roller, start med tomt array
   const employeePermissionsFilterInput = useInput([])
+  const searchInput = useDebouncedInput('', 300)
+  //const searchInput = useInput('', 300)
 
   // mapper vores roller til options-format til dropdown, med label og value
   const employeeRoleOptions = roles.map((role) => {
@@ -98,6 +101,9 @@ const useEmployeesPageState = () => {
   })
 
   const { loading: isLoadingEmployees, refetch } = useQuery(GET_ALL_EMPLOYEES, {
+    variables: {
+      search: searchInput.debouncedValue || null,
+    },
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => {
       setEmployees(data.employees)
@@ -114,7 +120,7 @@ const useEmployeesPageState = () => {
       },
     },
   )
-
+  
   const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(CREATE_EMPLOYEE, {
     refetchQueries: [GET_ALL_EMPLOYEES],
   })
@@ -231,6 +237,8 @@ const useEmployeesPageState = () => {
     filteredEmployees,
     selectedRoles,
     selectedPermissions,
+    searchInput,
+    
   }
 }
 
