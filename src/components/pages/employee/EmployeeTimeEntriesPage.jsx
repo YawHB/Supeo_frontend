@@ -54,7 +54,6 @@ export const EmployeeTimeEntriesPage = () => {
                   </tr>
                 ) : (
                   state.timeEntriesData.timeEntries.map((timeEntry) => {
-                    console.log('timeEntry :', timeEntry)
                     return (
                       <tr key={timeEntry.id}>
                         {state.timeEntriesColumns.map((column) => (
