@@ -16,6 +16,7 @@ import {
 import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mutations.js'
 import { useInput } from '../../../hooks/useInput.js'
 import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
+import usePagination from '../../../hooks/usePagination.js'
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
@@ -34,6 +35,7 @@ const useEmployeesPageState = () => {
   const employeeRolesFilterInput = useInput([]) // hook til håndtering af vores roller, start med tomt array
   const employeePermissionsFilterInput = useInput([])
   const searchInput = useDebouncedInput('', 300)
+  const pagination = usePagination({ page: 1, perPage: 25 }, [10, 25, 50, 100, 250, 500])
   //const searchInput = useInput('', 300)
 
   // mapper vores roller til options-format til dropdown, med label og value
@@ -238,7 +240,7 @@ const useEmployeesPageState = () => {
     selectedRoles,
     selectedPermissions,
     searchInput,
-    
+    pagination,
   }
 }
 
