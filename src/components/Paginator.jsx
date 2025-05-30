@@ -1,8 +1,6 @@
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap'
-import { useTranslation } from 'react-i18next'
 
 const Paginator = ({ page, perPage, totalCount, perPageOptions, onPageChange, onPerPageChange }) => {
-  const [translate] = useTranslation('global')
   const totalPages = Math.ceil(totalCount / perPage) || 1
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1)
 
@@ -12,11 +10,10 @@ const Paginator = ({ page, perPage, totalCount, perPageOptions, onPageChange, on
   const handleLast = () => onPageChange(totalPages)
 
   return (
-    <div className='d-flex justify-content-end gap-2'>
-        <label className='me-2 mb-0'>{translate('per_page')}</label>
+    <div className='custom-paginator d-flex justify-content-center'>
+      <div className='d-flex align-items-center gap-2'>
         <select
-          className='form-select'
-          style={{ width: '60px' }}
+          className='per-page-select'
           value={perPage}
           onChange={(e) => onPerPageChange(Number(e.target.value))}
         >
@@ -27,61 +24,64 @@ const Paginator = ({ page, perPage, totalCount, perPageOptions, onPageChange, on
           ))}
         </select>
 
-        <Pagination aria-label='Page navigation' className='custom-paginator'>
-          <PaginationItem disabled={page === 1}>
-            <PaginationLink
-              first
-              href='#'
-              onClick={(e) => {
-                e.preventDefault()
-                handleFirst()
-              }}
-            />
-          </PaginationItem>
-          <PaginationItem disabled={page === 1}>
-            <PaginationLink
-              previous
-              href='#'
-              onClick={(e) => {
-                e.preventDefault()
-                handlePrev()
-              }}
-            />
-          </PaginationItem>
-          {pages.map((p) => (
-            <PaginationItem active={p === page} key={p}>
+        <div className='pagination-wrapper'>
+          <Pagination aria-label='Page navigation'>
+            <PaginationItem disabled={page === 1}>
               <PaginationLink
+                first
                 href='#'
                 onClick={(e) => {
                   e.preventDefault()
-                  onPageChange(p)
+                  handleFirst()
                 }}
-              >
-                {p}
-              </PaginationLink>
+              />
             </PaginationItem>
-          ))}
-          <PaginationItem disabled={page === totalPages}>
-            <PaginationLink
-              next
-              href='#'
-              onClick={(e) => {
-                e.preventDefault()
-                handleNext()
-              }}
-            />
-          </PaginationItem>
-          <PaginationItem disabled={page === totalPages}>
-            <PaginationLink
-              last
-              href='#'
-              onClick={(e) => {
-                e.preventDefault()
-                handleLast()
-              }}
-            />
-          </PaginationItem>
-        </Pagination>
+            <PaginationItem disabled={page === 1}>
+              <PaginationLink
+                previous
+                href='#'
+                onClick={(e) => {
+                  e.preventDefault()
+                  handlePrev()
+                }}
+              />
+            </PaginationItem>
+            {pages.map((p) => (
+              <PaginationItem active={p === page} key={p}>
+                <PaginationLink
+                  href='#'
+                  onClick={(e) => {
+                    e.preventDefault()
+                    onPageChange(p)
+                  }}
+                >
+                  {p}
+                </PaginationLink>
+              </PaginationItem>
+            ))}
+            <PaginationItem disabled={page === totalPages}>
+              <PaginationLink
+                next
+                href='#'
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleNext()
+                }}
+              />
+            </PaginationItem>
+            <PaginationItem disabled={page === totalPages}>
+              <PaginationLink
+                last
+                href='#'
+                onClick={(e) => {
+                  e.preventDefault()
+                  handleLast()
+                }}
+              />
+            </PaginationItem>
+          </Pagination>
+        </div>
+      </div>
     </div>
   )
 }
