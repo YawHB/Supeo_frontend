@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faFileExcel, faSave } from '@fortawesome/free-solid-svg-icons'
 import { Row, Col, Input, Modal, Table, Button, ModalBody, ModalHeader, ModalFooter } from 'reactstrap'
 import Select from 'react-select'
+import Paginator from '../../Paginator.jsx'
 
 const AdminEmployeesPage = () => {
   const state = useEmployeesPageState()
@@ -111,6 +112,14 @@ const AdminEmployeesPage = () => {
           </Table>
         </Col>
       </Row>
+      <div className='d-flex justify-content-end'>
+        <Paginator
+          paginationState={state.pagination.state}
+          onPageChange={state.pagination.setPage}
+          onPerPageChange={state.pagination.setPerPage}
+          perPageOptions={state.pagination.perPageOptions}
+        />
+      </div>
 
       <Modal
         size='lg'
