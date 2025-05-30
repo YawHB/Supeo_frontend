@@ -274,6 +274,7 @@ th svg.desc {
     min-height: 38px;
     font-weight: 400;
     box-shadow: none !important;
+    flex-wrap: nowrap !important; 
 
     &:hover {
       border-color: #374c45 !important;
