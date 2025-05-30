@@ -12,6 +12,7 @@ import {
   GET_PERMISSIONS,
   GET_ALL_EMPLOYEES,
   GET_ALL_FILTERED_EMPLOYEES,
+  GET_PAGINATED_EMPLOYEES,
 } from '../../../services/employee/queries.js'
 import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mutations.js'
 import { useInput } from '../../../hooks/useInput.js'
@@ -44,7 +45,6 @@ const useEmployeesPageState = () => {
       label: role.roleName || role.name, // det som der vises i vores dropdowns
       value: role.roleName || role.id,
     }
-    //console.log('modifiedRole', modifiedRole)
     return modifiedRole
   })
 
@@ -102,15 +102,15 @@ const useEmployeesPageState = () => {
     onCompleted: (data) => setPermissions(data.permissions),
   })
 
-  const { loading: isLoadingEmployees, refetch } = useQuery(GET_ALL_EMPLOYEES, {
-    variables: {
-      search: searchInput.debouncedValue || null,
-    },
-    fetchPolicy: 'cache-and-network',
-    onCompleted: (data) => {
-      setEmployees(data.employees)
-    },
-  })
+  // const { loading: isLoadingEmployees, refetch } = useQuery(GET_ALL_EMPLOYEES, {
+  //   variables: {
+  //     search: searchInput.debouncedValue || null,
+  //   },
+  //   fetchPolicy: 'cache-and-network',
+  //   onCompleted: (data) => {
+  //     setEmployees(data.employees)
+  //   },
+  // })
 
   const [filteredEmployees, { loading: isLoadingFilteredEmployees }] = useLazyQuery(
     GET_ALL_FILTERED_EMPLOYEES,
@@ -118,10 +118,21 @@ const useEmployeesPageState = () => {
       fetchPolicy: 'cache-and-network',
       onCompleted: (data) => {
         setEmployees(data.filteredEmployees)
-        console.log('DATA FRA BACKEND', data)
       },
     },
   )
+
+  const { loading: isLoadingEmployees, refetch } = useQuery(GET_PAGINATED_EMPLOYEES, {
+    variables: {
+      page: pagination.state.page,
+      perPage: pagination.state.perPage,
+    },
+    fetchPolicy: 'cache-and-network',
+    onCompleted: (data) => {
+      setEmployees(data.paginatedEmployees.employees)
+      pagination.setTotalCount?.(data.paginatedEmployees.pagination.totalCount)
+    },
+  })
   
   const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(CREATE_EMPLOYEE, {
     refetchQueries: [GET_ALL_EMPLOYEES],
