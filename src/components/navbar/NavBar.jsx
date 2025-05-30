@@ -4,21 +4,21 @@ import {
   Navbar,
   NavItem,
   Collapse,
-  //Button,
-  //NavLink,
+  Button,
+  NavLink,
   NavbarBrand,
   NavbarToggler,
 } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import useNavBarState from './NavBarState'
 import { Fragment } from 'react/jsx-runtime'
-//import { faSignOut } from '@fortawesome/free-solid-svg-icons'
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSignOut } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const NavBar = () => {
   const {
-    //logOff,
-    //userFullName,
+    logOff,
+    userFullName,
     navItems,
     isBurgerCollapsed,
     toggleBurgerCollapsed,
@@ -44,20 +44,20 @@ const NavBar = () => {
               {navItems.map((item) => (
                 <Fragment key={item.label}>
                   <NavItem>
-                    {/* <NavLink tag={Link} to={item.link} className='text-light'>
+                    <NavLink tag={Link} to={item.link} className='text-light'>
                       <FontAwesomeIcon icon={item.icon} size='xl' />
-                    </NavLink> */}
+                    </NavLink>
                   </NavItem>
                 </Fragment>
               ))}
-              {/* <NavItem
+              <NavItem
                 className='d-none d-md-block mx-2 bg-light'
                 style={{ width: '1px', height: '24px' }}
               />
               <Button onClick={logOff} color='default' className='text-light'>
                 <FontAwesomeIcon size='xl' className='icon pe-2' icon={faSignOut} />
                 <span>{userFullName}</span>
-              </Button> */}
+              </Button>
             </Nav>
           </div>
         </Collapse>
