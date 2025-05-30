@@ -39,6 +39,11 @@
   "export": "Eksporter",
   "edit": "Rediger",
   "save": "Gem",
+  "first": "Første",
+  "previous": "Forrige",
+  "next": "Næste",
+  "last": "Sidste",
+  "per_page": "Per side",
   "page_title": {
     "administration_time_entries": "Administration - Tidsregistreringer",
     "administration_employees": "Administration - Medarbejdere",
