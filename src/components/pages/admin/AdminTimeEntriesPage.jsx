@@ -24,11 +24,7 @@ const AdminTimeEntriesPage = () => {
           <Col xs={12} className='d-flex justify-content-between gap-4'>
             <h1>{translate('nav_bar.admin_time_entries')}</h1>
             <div className='d-flex align-items-center gap-4'>
-              <Button
-                outline
-                color='primary'
-                className='no-wrap'
-                onClick={state.handleExportTable}>
+              <Button outline color='primary' className='no-wrap' onClick={state.handleExportTable}>
                 <FontAwesomeIcon icon={faFileExcel} className='me-2' />
                 <span>{translate('export')}</span>
               </Button>
@@ -81,9 +77,7 @@ const AdminTimeEntriesPage = () => {
                         {state.editingRowIndex === i ? (
                           <input
                             autoFocus
-                            className={
-                              state.editingRowIndex === i ? 'input-active' : 'input-default'
-                            }
+                            className={state.editingRowIndex === i ? 'input-active' : 'input-default'}
                             disabled={timeEntry.notification.status === 'IGANG'}
                             type='text'
                             value={timeEntry.notification.comment}
@@ -110,7 +104,7 @@ const AdminTimeEntriesPage = () => {
                       <td>
                         <select
                           disabled={timeEntry.notification.status === 'IGANG'}
-                          className={`form-select ${
+                          className={`form-select admin-status-fixed-width ${
                             timeEntry.notification.status !== 'IGANG' ? 'clickable-cell' : ''
                           } ${statusClassMap[timeEntry.notification.status]}`}
                           value={timeEntry.notification.status}
