@@ -27,3 +27,13 @@ export const UPDATE_EMPLOYEE = gql`
     }
   }
 `
+
+export const LOGIN_USER = gql`
+  mutation login($loginInput: LoginInput!) {
+    handleEmployeeLogin(loginInput: $loginInput) {
+      email
+      firstName
+      token
+    }
+  }
+`
