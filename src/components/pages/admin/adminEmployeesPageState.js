@@ -19,6 +19,7 @@ import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mut
 import { useInput } from '../../../hooks/useInput.js'
 import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
 import usePagination from '../../../hooks/usePagination.js'
+import useSort from '../../../hooks/useSort.js'
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
@@ -39,6 +40,7 @@ const useEmployeesPageState = () => {
 
   const searchInput = useDebouncedInput('', 300)
   const pagination = usePagination({ page: 1, perPage: 10 }, [10, 25, 50, 100, 250, 500])
+  const { orderBy, orderDirection, sort, sortIcon } = useSort('id', 'ASC')
 
   const employeeRoleOptions = roles.map((role) => {
     const modifiedRole = {
@@ -255,6 +257,11 @@ const useEmployeesPageState = () => {
     searchInput,
     pagination,
     isLoadingPaginatedEmployees,
+
+    orderBy,
+    orderDirection,
+    sort,
+    sortIcon,
   }
 }
 
