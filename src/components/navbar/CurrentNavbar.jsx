@@ -6,20 +6,20 @@ export default function NavBar() {
     <div>
       <Row>
         <Col>
-          <NavLink className='NavLink' to='/admin'>
+          <NavLink className='NavLink' to='/admin/home'>
             Admin - Homepage
           </NavLink>
         </Col>
-        <NavLink className='NavLink' to='/employees'>
+        <NavLink className='NavLink' to='/admin/employees'>
           Admin - Employees Page
         </NavLink>
-        <NavLink className='NavLink' to='/timeentries'>
+        <NavLink className='NavLink' to='/admin/timeentries'>
           Admin - Time Entries Page
         </NavLink>
       </Row>
       <Row>
         <Col>
-          <NavLink className='NavLink' to='/employee'>
+          <NavLink className='NavLink' to='/employee/home'>
             Employee - Homepage
           </NavLink>
         </Col>
