@@ -44,7 +44,7 @@ const useEmployeesPageState = () => {
 
   const employeeRoleOptions = roles.map((role) => {
     const modifiedRole = {
-      label: role.roleName || role.name, // det som der vises i vores dropdowns
+      label: role.roleName || role.name,
       value: role.roleName || role.id,
     }
     return modifiedRole
@@ -62,6 +62,16 @@ const useEmployeesPageState = () => {
   const selectedPermissions = employeePermissionsFilterInput.value?.length
     ? employeePermissionsFilterInput.value.map((p) => p.value)
     : []
+
+  const employeeSortMapping = {
+    id: 'id',
+    firstName: 'first_name',
+    lastName: 'last_name',
+    roleName: 'role_name',
+    permissionLevel: 'permission_level',
+    phoneNumber: 'phone_number',
+    email: 'email',
+  }
 
   const employeesTableColumns = [
     { key: 'id', label: translate('id'), type: 'text', sort: true },
@@ -131,7 +141,7 @@ const useEmployeesPageState = () => {
       roles: selectedRoles,
       permissions: selectedPermissions,
       sort: {
-        orderBy: orderBy,
+        orderBy: employeeSortMapping[orderBy],
         orderDirection: orderDirection,
       },
     },
