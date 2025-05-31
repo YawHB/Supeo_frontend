@@ -131,8 +131,8 @@ const useEmployeesPageState = () => {
       roles: selectedRoles,
       permissions: selectedPermissions,
       sort: {
-        orderBy: sort.orderBy,
-        orderDirection: sort.orderDirection,
+        orderBy: orderBy,
+        orderDirection: orderDirection,
       },
     },
     fetchPolicy: 'cache-and-network',
