@@ -14,6 +14,7 @@ import { store, persistor } from './store/store.js'
 import { PersistGate } from 'redux-persist/integration/react'
 import { ApolloClient, createHttpLink, InMemoryCache, ApolloProvider } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
+import { AuthProvider } from './components/context/AuthProvider.jsx'
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000/graphql',
@@ -41,7 +42,9 @@ createRoot(document.getElementById('root')).render(
         <I18nextProvider i18n={i18next}>
           <PersistGate loading={null} persistor={persistor}>
             <BrowserRouter>
-              <App />
+              <AuthProvider>
+                <App />
+              </AuthProvider>
               <ToastContainer />
             </BrowserRouter>
           </PersistGate>
