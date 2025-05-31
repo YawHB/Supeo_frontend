@@ -73,8 +73,19 @@ export const GET_ALL_FILTERED_EMPLOYEES = gql`
 `
 
 export const GET_PAGINATED_EMPLOYEES = gql`
-  query GetPaginatedEmployees($page: Int!, $perPage: Int!) {
-    paginatedEmployees(pagination: { page: $page, perPage: $perPage }) {
+  query GetPaginatedEmployees(
+    $page: Int!
+    $perPage: Int!
+    $search: String
+    $roles: [String!]
+    $permissions: [String!]
+  ) {
+    paginatedEmployees(
+      pagination: { page: $page, perPage: $perPage }
+      search: $search
+      roles: $roles
+      permissions: $permissions
+    ) {
       pagination {
         page
         perPage
