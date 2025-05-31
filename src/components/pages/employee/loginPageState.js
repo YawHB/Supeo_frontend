@@ -14,16 +14,30 @@ export const useLoginPageState = () => {
   const [errors, setErrors] = useState([])
 
   function handleLoginSubmitCallBack() {
-    console.log('values, ', values)
+    // console.log('values, ', values)
     handleEmployeeLogin({
       variables: {
         loginInput: values,
       },
       onCompleted: (data) => {
-        console.log(data)
-        const userData = data.loginUser
+        // console.log('data: ', data)
+        // console.log('data handleEmployeeLogin: ', data.handleEmployeeLogin)
+        const userData = data.handleEmployeeLogin
         context.login(userData)
-        navigate('/')
+
+        const role = context.user.permissionLevel
+
+        console.log('userData', userData)
+
+        if (role === 'Member') {
+          navigate('/employee/time-entries')
+        } else if (role === 'Admin' || role === 'Manager') {
+          navigate('/admin/time-entries')
+        } else {
+          navigate('/')
+        }
+
+        console.log('context.user :', context.user)
       },
       onError: ({ graphQLErrors }) => {
         console.log('inside GQL error')
