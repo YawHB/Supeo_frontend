@@ -102,15 +102,15 @@ const useEmployeesPageState = () => {
     onCompleted: (data) => setPermissions(data.permissions),
   })
 
-  // const { loading: isLoadingEmployees, refetch } = useQuery(GET_ALL_EMPLOYEES, {
-  //   variables: {
-  //     search: searchInput.debouncedValue || null,
-  //   },
-  //   fetchPolicy: 'cache-and-network',
-  //   onCompleted: (data) => {
-  //     setEmployees(data.employees)
-  //   },
-  // })
+  const { loading: isLoadingEmployees, refetch } = useQuery(GET_ALL_EMPLOYEES, {
+    variables: {
+      search: searchInput.debouncedValue || null,
+    },
+    fetchPolicy: 'cache-and-network',
+    onCompleted: (data) => {
+      setEmployees(data.employees)
+    },
+  })
 
   const [filteredEmployees, { loading: isLoadingFilteredEmployees }] = useLazyQuery(
     GET_ALL_FILTERED_EMPLOYEES,
@@ -122,7 +122,7 @@ const useEmployeesPageState = () => {
     },
   )
 
-  const { loading: isLoadingEmployees, refetch } = useQuery(GET_PAGINATED_EMPLOYEES, {
+  const { loading: isLoadingPaginatedEmployees } = useQuery(GET_PAGINATED_EMPLOYEES, {
     variables: {
       page: pagination.state.page,
       perPage: pagination.state.perPage,
@@ -253,7 +253,29 @@ const useEmployeesPageState = () => {
     selectedPermissions,
     searchInput,
     pagination,
+    isLoadingPaginatedEmployees,
   }
 }
 
 export default useEmployeesPageState
+
+  // const { loading: isLoadingEmployees, data: employeesData, variables: employeesVariables } = useQuery(GET_ALL_EMPLOYEES, {
+  //   variables: {
+  //     search: searchInput.debouncedValue || null,
+  //     pagination: pagination.requestArgs,
+  //     employeeRole: employeeRolesFilterInput.value?.map(option => option.value),
+  //     employeePermission: employeePermissionsFilterInput.value?.map(option => option.value),
+  //   },
+  // })
+
+  // const employees = useQueryData(employeesData, data => {
+  //   pagination.state.setTotalItems(data?.employees.pagination.totalCount);
+  //   return data?.employees.employees || [];
+  // })
+
+  // const { loading: isLoadingEmployeeRoleOptions, data: employeeRolesData } = useQuery(GET_ROLES);
+  // const employeeRoleOptions = useQueryData(employeeRolesData, data => {
+  //   return data?.employeeRoles.map(
+  //     employeeRoles => ({ label: employeeRoles.name, value: employeeRoles.id }),
+  //   );
+  // });

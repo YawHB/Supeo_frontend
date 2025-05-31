@@ -64,11 +64,7 @@ const AdminEmployeesPage = () => {
                 onChange={state.searchInput.onChange}
                 placeholder={translate('admin.search_employee')}
               />
-              <Button
-                outline
-                color='primary'
-                className='no-wrap'
-                onClick={state.handleExportTable}>
+              <Button outline color='primary' className='no-wrap' onClick={state.handleExportTable}>
                 <FontAwesomeIcon icon={faFileExcel} className='me-2' />
                 <span>{translate('export')}</span>
               </Button>

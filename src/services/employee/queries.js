@@ -92,3 +92,48 @@ export const GET_PAGINATED_EMPLOYEES = gql`
     }
   }
 `
+
+// WIP QUERIES MED DET HELE
+
+// export const GET_ALL_EMPLOYEES = gql`
+//   query Employees(
+//     $search: String
+//     $order: String
+//     $orderBy: String
+//     $pagination: PaginationInput
+//     $employeeRole: [Int!]
+//     $employeePermission: [Int!]
+//   ) {
+//     employees(
+//       search: $search
+//       order: $order
+//       orderBy: $orderBy
+//       pagination: $pagination
+//       employeeRole: $employeeRole
+//       employeePermission: $employeePermission
+//     ) {
+//       pagination {
+//         page
+//         perPage
+//         totalCount
+//       }
+//       employees {
+//         id
+//         firstName
+//         lastName
+//         email
+//         phoneNumber
+//         roleName
+//         permissionLevel
+//         employeeRole {
+//           id
+//           roleName
+//         }
+//         employeePermission {
+//           id
+//           permissionLevel
+//         }
+//       }
+//     }
+//   }
+// `
