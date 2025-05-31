@@ -130,6 +130,10 @@ const useEmployeesPageState = () => {
       search: searchInput.debouncedValue || null,
       roles: selectedRoles,
       permissions: selectedPermissions,
+      sort: {
+        orderBy: sort.orderBy,
+        orderDirection: sort.orderDirection,
+      },
     },
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => {
