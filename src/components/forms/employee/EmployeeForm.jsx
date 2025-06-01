@@ -17,6 +17,7 @@ const EmployeeForm = ({ onSubmit, employee = null, errorMessages = null }) => {
       permissionLevel: input.employeePermissionLevel.value,
       email: input.email.value,
       phoneNumber: input.phoneNumber.value,
+      password: input.password.value,
     })
   }
 
@@ -158,6 +159,23 @@ const EmployeeForm = ({ onSubmit, employee = null, errorMessages = null }) => {
                   </option>
                 ))}
               </Input>
+            </FormGroup>
+          </Col>
+          <Col md={6}>
+            <FormGroup>
+              <Label for='Kodeord'>
+                {translate('Password')}
+                <span className='text-danger'>*</span>
+              </Label>
+              <Input
+                id='password'
+                name='password'
+                placeholder={translate('password_placeholder')}
+                type='text'
+                value={input.password.value}
+                onChange={input.password.onChange}
+                required
+              />
             </FormGroup>
           </Col>
         </Row>
