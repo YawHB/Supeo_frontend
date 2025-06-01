@@ -2,10 +2,10 @@ import { LOGIN_USER } from '../../../services/employee/mutations'
 import { useMutation } from '@apollo/client'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../context/authContext'
+import { AuthContext } from '../../context/authContext.js'
 import { useContext } from 'react'
 import { useForm } from '../../../hooks/useForm.js'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export const useLoginPageState = () => {
   const context = useContext(AuthContext)
@@ -13,31 +13,22 @@ export const useLoginPageState = () => {
   let navigate = useNavigate()
   const [errors, setErrors] = useState([])
 
+  const { onChange, onSubmit, values } = useForm(handleLoginSubmitCallBack, {
+    email: '',
+    password: '',
+  })
+
+  const [handleEmployeeLogin] = useMutation(LOGIN_USER)
+
   function handleLoginSubmitCallBack() {
-    // console.log('values, ', values)
     handleEmployeeLogin({
       variables: {
         loginInput: values,
       },
       onCompleted: (data) => {
-        // console.log('data: ', data)
-        // console.log('data handleEmployeeLogin: ', data.handleEmployeeLogin)
         const userData = data.handleEmployeeLogin
-        context.login(userData)
-
-        const role = context.user.permissionLevel
-
-        console.log('userData', userData)
-
-        if (role === 'Member') {
-          navigate('/employee/time-entries')
-        } else if (role === 'Admin' || role === 'Manager') {
-          navigate('/admin/time-entries')
-        } else {
-          navigate('/')
-        }
-
-        console.log('context.user :', context.user)
+        console.log('userData: ', userData.token)
+        context.login(userData.token)
       },
       onError: ({ graphQLErrors }) => {
         console.log('inside GQL error')
@@ -46,12 +37,21 @@ export const useLoginPageState = () => {
     })
   }
 
-  const { onChange, onSubmit, values } = useForm(handleLoginSubmitCallBack, {
-    email: '',
-    password: '',
-  })
+  useEffect(() => {
+    if (context.user) {
+      const role = context.user.permissionLevel
 
-  const [handleEmployeeLogin] = useMutation(LOGIN_USER)
+      if (role === 'Member') {
+        navigate('/employee/time-entries')
+      } else if (role === 'Admin' || role === 'Manager') {
+        navigate('/admin/time-entries')
+      } else {
+        navigate('/')
+      }
+
+      console.log('context.user:', context.user)
+    }
+  }, [context.user])
 
   return {
     translate,
