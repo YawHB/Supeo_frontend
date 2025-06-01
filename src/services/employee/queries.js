@@ -59,8 +59,8 @@ export const GET_ALL_EMPLOYEES = gql`
 `
 
 export const GET_ALL_FILTERED_EMPLOYEES = gql`
-  query GetAllEmployees($filter: EmployeeFilterInput) {
-    filteredEmployees(filter: $filter) {
+  query GetAllEmployees($filter: EmployeeFilterInput, $sort: SortInput) {
+    filteredEmployees(filter: $filter, sort: $sort) {
       id
       firstName
       lastName
@@ -79,12 +79,14 @@ export const GET_PAGINATED_EMPLOYEES = gql`
     $search: String
     $roles: [String!]
     $permissions: [String!]
+    $sort: SortInput
   ) {
     paginatedEmployees(
       pagination: { page: $page, perPage: $perPage }
       search: $search
       roles: $roles
       permissions: $permissions
+      sort: $sort
     ) {
       pagination {
         page
@@ -96,9 +98,9 @@ export const GET_PAGINATED_EMPLOYEES = gql`
         firstName
         lastName
         email
+        phoneNumber
         roleName
         permissionLevel
-        phoneNumber
       }
     }
   }

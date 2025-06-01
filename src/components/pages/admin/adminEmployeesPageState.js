@@ -19,6 +19,7 @@ import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mut
 import { useInput } from '../../../hooks/useInput.js'
 import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
 import usePagination from '../../../hooks/usePagination.js'
+import useSort from '../../../hooks/useSort.js'
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
@@ -39,10 +40,11 @@ const useEmployeesPageState = () => {
 
   const searchInput = useDebouncedInput('', 300)
   const pagination = usePagination({ page: 1, perPage: 10 }, [10, 25, 50, 100, 250, 500])
+  const { orderBy, orderDirection, sort, sortIcon } = useSort('id', 'ASC')
 
   const employeeRoleOptions = roles.map((role) => {
     const modifiedRole = {
-      label: role.roleName || role.name, // det som der vises i vores dropdowns
+      label: role.roleName || role.name,
       value: role.roleName || role.id,
     }
     return modifiedRole
@@ -60,6 +62,16 @@ const useEmployeesPageState = () => {
   const selectedPermissions = employeePermissionsFilterInput.value?.length
     ? employeePermissionsFilterInput.value.map((p) => p.value)
     : []
+
+  const employeeSortMapping = {
+    id: 'id',
+    firstName: 'first_name',
+    lastName: 'last_name',
+    roleName: 'role_name',
+    permissionLevel: 'permission_level',
+    phoneNumber: 'phone_number',
+    email: 'email',
+  }
 
   const employeesTableColumns = [
     { key: 'id', label: translate('id'), type: 'text', sort: true },
@@ -128,6 +140,10 @@ const useEmployeesPageState = () => {
       search: searchInput.debouncedValue || null,
       roles: selectedRoles,
       permissions: selectedPermissions,
+      sort: {
+        orderBy: employeeSortMapping[orderBy],
+        orderDirection: orderDirection,
+      },
     },
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => {
@@ -202,22 +218,22 @@ const useEmployeesPageState = () => {
 
   const handleExportTable = () => {
     showToast(translate('export_table.start'), 'info')
-    apolloClient
-      .query({ query: GET_ALL_EMPLOYEES, fetchPolicy: 'network-only' })
-      .then((result) => {
-        const data = result.data?.employees ?? []
-        const today = new Date().toISOString().split('T')[0]
-        return exportTableData({
-          data,
-          filename: `${translate(`export_table.employees_overview`)} ${today}`,
-          columns: employeesTableColumns.filter((col) => col.key !== 'id' && col.key !== ''),
-        })
+
+    const tableToExport = employees
+    const today = new Date().toISOString().split('T')[0]
+
+    try {
+      exportTableData({
+        data: tableToExport,
+        filename: `${translate('export_table.employees_overview')} ${today}`,
+        columns: employeesTableColumns.filter((col) => col.key !== 'id' && col.key !== ''),
       })
-      .then(
-        () => showToast(translate('export_table.success'), 'success'),
-        () => showToast(translate('export_table.error'), 'error'),
-      )
+      showToast(translate('export_table.success'), 'success')
+    } catch {
+      showToast(translate('export_table.error'), 'error')
+    }
   }
+  
 
   return {
     roles,
@@ -255,6 +271,11 @@ const useEmployeesPageState = () => {
     searchInput,
     pagination,
     isLoadingPaginatedEmployees,
+
+    orderBy,
+    orderDirection,
+    sort,
+    sortIcon,
   }
 }
 
