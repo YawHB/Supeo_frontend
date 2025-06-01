@@ -24,11 +24,10 @@ export const EmployeeTimeEntriesPage = () => {
             </h1>
             <div className='d-flex align-items-center gap-4'>
               <Button
-                color='primary'
                 outline
-                onClick={() => state.timeEntryFormModalState.openModal({})}
+                color='primary'
                 className='no-wrap'
-                style={{ minWidth: '200px' }}
+                onClick={() => state.timeEntryFormModalState.openModal({})}
               >
                 <FontAwesomeIcon icon={faClock} className='me-2' />
                 <span>{translate('time_entry.create_time_entry')}</span>{' '}
@@ -55,7 +54,6 @@ export const EmployeeTimeEntriesPage = () => {
                   </tr>
                 ) : (
                   state.timeEntriesData.timeEntries.map((timeEntry) => {
-                    console.log('timeEntry :', timeEntry)
                     return (
                       <tr key={timeEntry.id}>
                         {state.timeEntriesColumns.map((column) => (
@@ -76,7 +74,7 @@ export const EmployeeTimeEntriesPage = () => {
       </Row>
 
       <Modal
-        size='lg'
+        size='md'
         isOpen={state.timeEntryFormModalState.isOpen}
         toggle={() => {
           state.resetErrorMessages()
@@ -137,7 +135,7 @@ export const EmployeeTimeEntriesPage = () => {
         isOpen={state.notificationInfoModalState.isOpen}
         toggle={state.notificationInfoModalState.closeModal}
         returnFocusAfterClose={false}
-        size='lg'
+        size='md'
       >
         <ModalHeader toggle={state.notificationInfoModalState.closeModal}>
           {translate('notification_status', {

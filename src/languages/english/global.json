@@ -39,6 +39,11 @@
   "export": "Export",
   "edit": "Edit",
   "save": "Save",
+  "first": "First",
+  "previous": "Previous",
+  "next": "Next",
+  "last": "Last",
+  "per_page": "Per Page",
   "page_title": {
     "administration_time_entries": "Administration - Time Entries",
     "administration_employees": "Administration - Employees",

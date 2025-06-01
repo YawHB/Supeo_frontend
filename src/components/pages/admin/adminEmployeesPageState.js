@@ -6,16 +6,19 @@ import { faPencil } from '@fortawesome/free-solid-svg-icons'
 import exportTableData from '../../../utils/exportTableData.js'
 import { useModalState } from '../../../hooks/useModalState.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useQuery, useMutation, useApolloClient, useLazyQuery } from '@apollo/client'
+import { useQuery, useMutation, useApolloClient } from '@apollo/client'
+import { useLazyQuery } from '@apollo/client'
 import {
   GET_ROLES,
   GET_PERMISSIONS,
   GET_ALL_EMPLOYEES,
   GET_ALL_FILTERED_EMPLOYEES,
+  GET_PAGINATED_EMPLOYEES,
 } from '../../../services/employee/queries.js'
 import { CREATE_EMPLOYEE, UPDATE_EMPLOYEE } from '../../../services/employee/mutations.js'
 import { useInput } from '../../../hooks/useInput.js'
 import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
+import usePagination from '../../../hooks/usePagination.js'
 
 const useEmployeesPageState = () => {
   const apolloClient = useApolloClient()
@@ -31,18 +34,17 @@ const useEmployeesPageState = () => {
   const [employeeBeingEdited, setEmployeeBeingEdited] = useState(null)
   const [isLoadingEmployeesForm, setIsLoadingEmployeesForm] = useState(false)
 
-  const employeeRolesFilterInput = useInput([]) // hook til håndtering af vores roller, start med tomt array
+  const employeeRolesFilterInput = useInput([])
   const employeePermissionsFilterInput = useInput([])
-  const searchInput = useDebouncedInput('', 300)
-  //const searchInput = useInput('', 300)
 
-  // mapper vores roller til options-format til dropdown, med label og value
+  const searchInput = useDebouncedInput('', 300)
+  const pagination = usePagination({ page: 1, perPage: 10 }, [10, 25, 50, 100, 250, 500])
+
   const employeeRoleOptions = roles.map((role) => {
     const modifiedRole = {
       label: role.roleName || role.name, // det som der vises i vores dropdowns
       value: role.roleName || role.id,
     }
-    //console.log('modifiedRole', modifiedRole)
     return modifiedRole
   })
 
@@ -51,7 +53,6 @@ const useEmployeesPageState = () => {
     value: permission.permissionLevel || permission.id,
   }))
 
-  //tager kun værdier fra vores valgte roller, eller en tom liste hvis der ikke er valgt nboget
   const selectedRoles = employeeRolesFilterInput.value?.length
     ? employeeRolesFilterInput.value.map((r) => r.value)
     : []
@@ -116,11 +117,25 @@ const useEmployeesPageState = () => {
       fetchPolicy: 'cache-and-network',
       onCompleted: (data) => {
         setEmployees(data.filteredEmployees)
-        console.log('DATA FRA BACKEND', data)
       },
     },
   )
-  
+
+  const { loading: isLoadingPaginatedEmployees } = useQuery(GET_PAGINATED_EMPLOYEES, {
+    variables: {
+      page: pagination.state.page,
+      perPage: pagination.state.perPage,
+      search: searchInput.debouncedValue || null,
+      roles: selectedRoles,
+      permissions: selectedPermissions,
+    },
+    fetchPolicy: 'cache-and-network',
+    onCompleted: (data) => {
+      setEmployees(data.paginatedEmployees.employees)
+      pagination.setTotalCount?.(data.paginatedEmployees.pagination.totalCount)
+    },
+  })
+
   const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(CREATE_EMPLOYEE, {
     refetchQueries: [GET_ALL_EMPLOYEES],
   })
@@ -238,8 +253,30 @@ const useEmployeesPageState = () => {
     selectedRoles,
     selectedPermissions,
     searchInput,
-    
+    pagination,
+    isLoadingPaginatedEmployees,
   }
 }
 
 export default useEmployeesPageState
+
+// const { loading: isLoadingEmployees, data: employeesData, variables: employeesVariables } = useQuery(GET_ALL_EMPLOYEES, {
+//   variables: {
+//     search: searchInput.debouncedValue || null,
+//     pagination: pagination.requestArgs,
+//     employeeRole: employeeRolesFilterInput.value?.map(option => option.value),
+//     employeePermission: employeePermissionsFilterInput.value?.map(option => option.value),
+//   },
+// })
+
+// const employees = useQueryData(employeesData, data => {
+//   pagination.state.setTotalItems(data?.employees.pagination.totalCount);
+//   return data?.employees.employees || [];
+// })
+
+// const { loading: isLoadingEmployeeRoleOptions, data: employeeRolesData } = useQuery(GET_ROLES);
+// const employeeRoleOptions = useQueryData(employeeRolesData, data => {
+//   return data?.employeeRoles.map(
+//     employeeRoles => ({ label: employeeRoles.name, value: employeeRoles.id }),
+//   );
+// });

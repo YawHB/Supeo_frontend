@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus, faFileExcel, faSave } from '@fortawesome/free-solid-svg-icons'
 import { Row, Col, Input, Modal, Table, Button, ModalBody, ModalHeader, ModalFooter } from 'reactstrap'
 import Select from 'react-select'
+import Paginator from '../../Paginator.jsx'
 
 const AdminEmployeesPage = () => {
   const state = useEmployeesPageState()
@@ -63,18 +64,18 @@ const AdminEmployeesPage = () => {
                 onChange={state.searchInput.onChange}
                 placeholder={translate('admin.search_employee')}
               />
-              <Button outline color='primary' onClick={state.handleExportTable}>
+              <Button outline color='primary' className='no-wrap' onClick={state.handleExportTable}>
                 <FontAwesomeIcon icon={faFileExcel} className='me-2' />
                 <span>{translate('export')}</span>
               </Button>
               <Button
-                color='primary'
                 outline
+                color='primary'
+                className='no-wrap'
                 onClick={() => {
                   state.setEmployeeBeingEdited(null)
                   state.employeeFormModalState.openModal()
                 }}
-                className='no-wrap'
               >
                 <FontAwesomeIcon icon={faUserPlus} className='me-2' />
                 <span>{translate(`admin.create_employee`)}</span>
@@ -111,9 +112,17 @@ const AdminEmployeesPage = () => {
           </Table>
         </Col>
       </Row>
+      <div className='d-flex justify-content-end'>
+        <Paginator
+          paginationState={state.pagination.state}
+          onPageChange={state.pagination.setPage}
+          onPerPageChange={state.pagination.setPerPage}
+          perPageOptions={state.pagination.perPageOptions}
+        />
+      </div>
 
       <Modal
-        size='lg'
+        size='md'
         isOpen={state.employeeFormModalState.isOpen}
         toggle={() => {
           state.resetErrorMessages()
