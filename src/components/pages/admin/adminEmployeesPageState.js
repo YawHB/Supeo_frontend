@@ -218,22 +218,22 @@ const useEmployeesPageState = () => {
 
   const handleExportTable = () => {
     showToast(translate('export_table.start'), 'info')
-    apolloClient
-      .query({ query: GET_ALL_EMPLOYEES, fetchPolicy: 'network-only' })
-      .then((result) => {
-        const data = result.data?.employees ?? []
-        const today = new Date().toISOString().split('T')[0]
-        return exportTableData({
-          data,
-          filename: `${translate(`export_table.employees_overview`)} ${today}`,
-          columns: employeesTableColumns.filter((col) => col.key !== 'id' && col.key !== ''),
-        })
+
+    const tableToExport = employees
+    const today = new Date().toISOString().split('T')[0]
+
+    try {
+      exportTableData({
+        data: tableToExport,
+        filename: `${translate('export_table.employees_overview')} ${today}`,
+        columns: employeesTableColumns.filter((col) => col.key !== 'id' && col.key !== ''),
       })
-      .then(
-        () => showToast(translate('export_table.success'), 'success'),
-        () => showToast(translate('export_table.error'), 'error'),
-      )
+      showToast(translate('export_table.success'), 'success')
+    } catch {
+      showToast(translate('export_table.error'), 'error')
+    }
   }
+  
 
   return {
     roles,
