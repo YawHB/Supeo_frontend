@@ -167,7 +167,8 @@ export const useTimeEntriesPageState = () => {
     onError: (error) => {
       console.error('Error fetching timeEntries:', error)
     },
-    variables: { id: user.employee_id },
+    variables: { id: user?.employee_id },
+    skip: !user,
   })
 
   const [createTimeEntry, { loading: isSubmittingNewTimeEntry }] = useMutation(CREATE_TIME_ENTRY, {

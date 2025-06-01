@@ -1,6 +1,7 @@
 import { AuthContext } from './authContext.js'
 import { useState } from 'react'
 import { jwtDecode } from 'jwt-decode'
+import { useNavigate } from 'react-router-dom'
 
 /*Eksempel på decoded token
   {
@@ -27,6 +28,8 @@ function decodeToken(token) {
 }
 
 export function AuthProvider({ children }) {
+  const navigate = useNavigate()
+
   const [user, setUser] = useState(() => {
     const token = localStorage.getItem('token')
     return decodeToken(token)
@@ -35,13 +38,14 @@ export function AuthProvider({ children }) {
   console.log('Initial user:', user)
 
   function login(userData) {
-    localStorage.setItem('token', userData.token)
-    const decodedUser = decodeToken(userData.token)
+    localStorage.setItem('token', userData)
+    const decodedUser = decodeToken(userData)
     setUser(decodedUser)
   }
 
   function logout() {
     localStorage.removeItem('token')
+    navigate('/')
     setUser(null)
   }
 

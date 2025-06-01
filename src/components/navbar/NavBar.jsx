@@ -7,7 +7,7 @@ import { faSignOut } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const NavBar = () => {
-  const { logOff, userFullName, navItems, isBurgerCollapsed, toggleBurgerCollapsed } = useNavBarState()
+  const { logOff, navItems, isBurgerCollapsed, toggleBurgerCollapsed } = useNavBarState()
 
   return (
     <>
@@ -41,7 +41,7 @@ const NavBar = () => {
               />
               <Button onClick={logOff} color='default' className='text-light'>
                 <FontAwesomeIcon size='xl' className='icon pe-2' icon={faSignOut} />
-                <span>{userFullName}</span>
+                <span>Log af</span>
               </Button>
             </Nav>
           </div>
