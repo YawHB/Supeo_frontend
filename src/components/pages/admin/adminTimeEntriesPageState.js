@@ -79,7 +79,7 @@ const useTimeEntriesPageState = () => {
         orderDirection: orderDirection,
       },
     },
-    fetchPolicy: 'cache-and-network',
+    fetchPolicy: 'cache-first',
     onCompleted: (data) => setTimeEntries(data.timeEntries),
   })
 
