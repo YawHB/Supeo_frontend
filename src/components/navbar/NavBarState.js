@@ -1,10 +1,12 @@
 import { useSelector } from 'react-redux'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/authContext.js'
 
 const useNavBarState = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const context = useContext(AuthContext)
   const [userFullName, setUserFullName] = useState('')
   const navItems = useSelector(({ user }) => user.topNavItems)
   const [isBurgerCollapsed, setIsBurgerCollapsed] = useState(true)
@@ -31,7 +33,8 @@ const useNavBarState = () => {
   )
 
   const logOff = () => {
-    navigate('logging-out')
+    console.log('log out clicked')
+    context.logout()
   }
 
   const outsideClickFunction = () => {

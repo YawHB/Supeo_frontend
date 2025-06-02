@@ -10,6 +10,7 @@ const useEmployeeFormState = (employee) => {
     employeePermissionLevel: useInput(employee?.permissionLevel ?? ''),
     email: useInput(employee?.email ?? ''),
     phoneNumber: useInput(employee?.phoneNumber ?? ''),
+    password: useInput(employee?.password ?? ''),
   }
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const useEmployeeFormState = (employee) => {
       input.employeePermissionLevel.setValue(employee.permissionLevel)
       input.email.setValue(employee.email)
       input.phoneNumber.setValue(employee.phoneNumber)
+      input.password.setValue(employee.password)
     }
   }, [employee])
 

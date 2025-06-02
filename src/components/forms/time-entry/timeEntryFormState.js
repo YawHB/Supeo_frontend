@@ -13,12 +13,7 @@ const useTimeEntryFormState = (timeEntry) => {
 
   useEffect(() => {
     if (isTimeRangeComplete(startDate.value, startTime.value, endDate.value, endTime.value)) {
-      const result = calculateWorkHours(
-        startDate.value,
-        startTime.value,
-        endDate.value,
-        endTime.value,
-      )
+      const result = calculateWorkHours(startDate.value, startTime.value, endDate.value, endTime.value)
       duration.onChange({ target: { value: result } })
     }
   }, [startDate.value, startTime.value, endDate.value, endTime.value])
@@ -40,7 +35,7 @@ const useTimeEntryFormState = (timeEntry) => {
     break: useInput(timeEntry?.break ?? ''),
     comment: useInput(timeEntry?.comment ?? ''),
     adminComment: useInput(timeEntry?.adminComment ?? ''),
-    employeeID: useInput(timeEntry?.employeeID ?? '10'),
+    employeeID: useInput(timeEntry?.employeeID ?? ''),
     notification: {
       comment: useInput(timeEntry?.notification?.comment ?? ''),
       timestamp: useInput(Date.now()),

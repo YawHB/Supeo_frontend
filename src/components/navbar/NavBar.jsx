@@ -1,14 +1,5 @@
 import Logo from '../../assets/Logo.jsx'
-import {
-  Nav,
-  Navbar,
-  NavItem,
-  Collapse,
-  Button,
-  NavLink,
-  NavbarBrand,
-  NavbarToggler,
-} from 'reactstrap'
+import { Nav, Navbar, NavItem, Collapse, Button, NavLink, NavbarBrand, NavbarToggler } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import useNavBarState from './NavBarState'
 import { Fragment } from 'react/jsx-runtime'
@@ -16,13 +7,7 @@ import { faSignOut } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const NavBar = () => {
-  const {
-    logOff,
-    userFullName,
-    navItems,
-    isBurgerCollapsed,
-    toggleBurgerCollapsed,
-  } = useNavBarState()
+  const { logOff, navItems, isBurgerCollapsed, toggleBurgerCollapsed } = useNavBarState()
 
   return (
     <>
@@ -56,7 +41,7 @@ const NavBar = () => {
               />
               <Button onClick={logOff} color='default' className='text-light'>
                 <FontAwesomeIcon size='xl' className='icon pe-2' icon={faSignOut} />
-                <span>{userFullName}</span>
+                <span>Log af</span>
               </Button>
             </Nav>
           </div>

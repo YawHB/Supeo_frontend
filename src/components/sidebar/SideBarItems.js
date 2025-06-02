@@ -5,28 +5,28 @@ export const sideBarItemsMap = new Map()
 sideBarItemsMap.set('admin', {
   icon: faUserTie,
   label: 'side_bar.admin_home',
-  link: '/admin',
+  link: '/admin/home',
   activeLocation: '/admin',
 })
 
 sideBarItemsMap.set('employee', {
   icon: faUser,
   label: 'side_bar.employee_home',
-  link: '/employee',
+  link: '/employee/home',
   activeLocation: '/employee',
 })
 
 sideBarItemsMap.set('employees', {
   icon: faUsers,
   label: 'side_bar.employees',
-  link: '/employees',
-  activeLocation: '/employees',
+  link: '/admin/employees',
+  activeLocation: '/admin/employees',
 })
 
 sideBarItemsMap.set('timeentries', {
   icon: faClock,
   label: 'side_bar.time_entries',
-  link: '/timeentries',
+  link: '/admin/time-entries',
   activeLocation: '/timeentries',
 })
 

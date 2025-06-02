@@ -17,10 +17,13 @@ import {
   faTimesCircle,
   faClock,
 } from '@fortawesome/free-solid-svg-icons'
+import { AuthContext } from '../../context/authContext.js'
+import { useContext } from 'react'
 
 export const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
+  const { user } = useContext(AuthContext)
 
   const timeEntryFormModalState = useModalState()
   const notificationInfoModalState = useModalState()
@@ -164,6 +167,8 @@ export const useTimeEntriesPageState = () => {
     onError: (error) => {
       console.error('Error fetching timeEntries:', error)
     },
+    variables: { id: user?.employee_id },
+    skip: !user,
   })
 
   const [createTimeEntry, { loading: isSubmittingNewTimeEntry }] = useMutation(CREATE_TIME_ENTRY, {

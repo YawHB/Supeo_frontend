@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 export const GET_TIME_ENTRIES_FOR_EMPLOYEE = gql`
-  query {
-    employee(id: "10") {
+  query employee($id: ID!) {
+    employee(id: $id) {
       id
       firstName
       lastName
