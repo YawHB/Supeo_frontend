@@ -8,12 +8,14 @@ import { GET_ALL_TIME_ENTRIES } from '../../../services/time-entry/queries.js'
 import { UPDATE_TIME_ENTRY_STATUS } from '../../../services/notification/mutations.js'
 import { calculateWorkDurationInMinutes } from '../../../utils/calculateWorkHours.js'
 import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
+import useSort from '../../../hooks/useSort.js'
 
 const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
   const [timeEntries, setTimeEntries] = useState([])
   const [editingRowIndex, setEditingRowIndex] = useState(null)
+  const { orderBy, orderDirection, sort, sortIcon } = useSort('id', 'ASC')
 
   const searchInput = useDebouncedInput('', 300)
 
@@ -58,6 +60,10 @@ const useTimeEntriesPageState = () => {
   const { loading: isLoadingTimeEntries } = useQuery(GET_ALL_TIME_ENTRIES, {
     variables: {
       search: searchInput.debouncedValue || null,
+      sort: {
+        orderBy: orderBy,
+        orderDirection: orderDirection,
+      },
     },
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => setTimeEntries(data.timeEntries),
@@ -179,6 +185,10 @@ const useTimeEntriesPageState = () => {
     editingRowIndex,
     setEditingRowIndex,
     searchInput,
+    orderBy,
+    orderDirection,
+    sort,
+    sortIcon,
   }
 }
 

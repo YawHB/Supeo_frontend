@@ -42,7 +42,14 @@ const AdminTimeEntriesPage = () => {
               <thead>
                 <tr>
                   {state.timeEntriesTableColumns.map((column) => (
-                    <th key={column.key}>{column.label}</th>
+                    <th
+                      key={column.key}
+                      onClick={() => column.sort && state.sort(column.key)}
+                      className={column.sort ? 'sortable' : ''}
+                    >
+                      {column.label}
+                      {column.sort && state.sortIcon(column.key)}
+                    </th>
                   ))}
                 </tr>
               </thead>
