@@ -24,6 +24,12 @@ const AdminTimeEntriesPage = () => {
           <Col xs={12} className='d-flex justify-content-between gap-4'>
             <h1>{translate('nav_bar.admin_time_entries')}</h1>
             <div className='d-flex align-items-center gap-4'>
+              <Input
+                className='time-entry-search-input'
+                value={state.searchInput.value}
+                onChange={state.searchInput.onChange}
+                placeholder={translate('admin.search_time_entry')}
+              />
               <Button outline color='primary' className='no-wrap' onClick={state.handleExportTable}>
                 <FontAwesomeIcon icon={faFileExcel} className='me-2' />
                 <span>{translate('export')}</span>
