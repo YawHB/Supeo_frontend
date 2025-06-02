@@ -46,11 +46,17 @@ export const EmployeeTimeEntriesPage = () => {
               <thead>
                 <tr>
                   {state.timeEntriesColumns.map((column) => (
-                    <th key={column.key}>{column.label}</th>
+                    <th
+                      key={column.key}
+                      onClick={() => column.sort && state.sort(column.key)}
+                      className={column.sort ? 'sortable' : ''}
+                    >
+                      {column.label}
+                      {column.sort && state.sortIcon(column.key)}
+                    </th>
                   ))}
                 </tr>
               </thead>
-
               <tbody>
                 {state.timeEntriesData.length === 0 ? (
                   <tr>
