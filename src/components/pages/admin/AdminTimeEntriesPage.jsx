@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { Row, Col, Table, Button } from 'reactstrap'
+import { Row, Col, Table, Input, Button } from 'reactstrap'
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import useTimeEntriesPageState from './adminTimeEntriesPageState.js'

@@ -7,7 +7,7 @@ import { useQuery, useApolloClient, useMutation } from '@apollo/client'
 import { GET_ALL_TIME_ENTRIES } from '../../../services/time-entry/queries.js'
 import { UPDATE_TIME_ENTRY_STATUS } from '../../../services/notification/mutations.js'
 import { calculateWorkDurationInMinutes } from '../../../utils/calculateWorkHours.js'
-import useDebouncedInput from '../../../hooks/useDebouncedInput.js'
+import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
 
 const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
