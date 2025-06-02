@@ -56,6 +56,9 @@ const useTimeEntriesPageState = () => {
   ]
 
   const { loading: isLoadingTimeEntries } = useQuery(GET_ALL_TIME_ENTRIES, {
+    variables: {
+      search: searchInput.debouncedValue || null,
+    },
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => setTimeEntries(data.timeEntries),
   })
