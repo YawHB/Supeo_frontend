@@ -7,12 +7,15 @@ import { useQuery, useApolloClient, useMutation } from '@apollo/client'
 import { GET_ALL_TIME_ENTRIES } from '../../../services/time-entry/queries.js'
 import { UPDATE_TIME_ENTRY_STATUS } from '../../../services/notification/mutations.js'
 import { calculateWorkDurationInMinutes } from '../../../utils/calculateWorkHours.js'
+import useDebouncedInput from '../../../hooks/useDebouncedInput.js'
 
 const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
   const [timeEntries, setTimeEntries] = useState([])
   const [editingRowIndex, setEditingRowIndex] = useState(null)
+
+  const searchInput = useDebouncedInput('', 300)
 
   const timeEntriesTableColumns = [
     { key: 'id', label: translate('id'), type: 'text', sort: true },
@@ -173,6 +176,7 @@ const useTimeEntriesPageState = () => {
     timeEntriesTableColumns,
     editingRowIndex,
     setEditingRowIndex,
+    searchInput,
   }
 }
 
