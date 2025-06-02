@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import { Input } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
 import showToast from '../../../utils/toast.js'
@@ -8,8 +10,11 @@ import { GET_ALL_TIME_ENTRIES } from '../../../services/time-entry/queries.js'
 import { UPDATE_TIME_ENTRY_STATUS } from '../../../services/notification/mutations.js'
 import { calculateWorkDurationInMinutes } from '../../../utils/calculateWorkHours.js'
 import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
+import { handleMemberAuthError } from '../../../utils/errorHandling.js'
 
 const useTimeEntriesPageState = () => {
+  const navigate = useNavigate()
+
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
   const [timeEntries, setTimeEntries] = useState([])
@@ -61,6 +66,7 @@ const useTimeEntriesPageState = () => {
     },
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => setTimeEntries(data.timeEntries),
+    onError: (errors) => handleMemberAuthError(errors, navigate),
   })
 
   const [updateTimeEntryStatus] = useMutation(UPDATE_TIME_ENTRY_STATUS)
@@ -163,7 +169,6 @@ const useTimeEntriesPageState = () => {
       showToast(translate('export_table.error'), 'error')
     }
   }
-  
 
   return {
     translate,
