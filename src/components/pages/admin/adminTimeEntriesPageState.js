@@ -34,6 +34,7 @@ const useTimeEntriesPageState = () => {
       label: translate('admin_comment'),
       type: `textarea`,
       alwaysEnabled: true,
+      sort: true,
       view: (input) => (
         <Input
           id='comment'
