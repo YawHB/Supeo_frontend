@@ -19,6 +19,20 @@ const useTimeEntriesPageState = () => {
 
   const searchInput = useDebouncedInput('', 300)
 
+  const timeEntrySortMapping = {
+    id: 'id',
+    firstName: 'first_name',
+    lastName: 'last_name',
+    startDate: 'start_date',
+    startTime: 'start_time',
+    endDate: 'end_date',
+    endTime: 'end_time',
+    duration: 'duration',
+    break: 'break',
+    comment: 'comment',
+    adminComment: 'notification.admin_comment',
+  }
+
   const timeEntriesTableColumns = [
     { key: 'id', label: translate('id'), type: 'text', sort: true },
     { key: 'firstName', label: translate('first_name'), type: 'text', sort: true },
@@ -62,7 +76,7 @@ const useTimeEntriesPageState = () => {
     variables: {
       search: searchInput.debouncedValue || null,
       sort: {
-        orderBy: orderBy,
+        orderBy: timeEntrySortMapping[orderBy],
         orderDirection: orderDirection,
       },
     },
