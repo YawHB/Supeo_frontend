@@ -24,11 +24,10 @@ const useTimeEntriesPageState = () => {
     firstName: 'first_name',
     lastName: 'last_name',
     startDate: 'start_date',
-    startTime: 'start_time',
     endDate: 'end_date',
+    startTime: 'start_time',
     endTime: 'end_time',
     duration: 'duration',
-    break: 'break',
     comment: 'comment',
     adminComment: 'notification.admin_comment',
   }
