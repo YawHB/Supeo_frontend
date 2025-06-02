@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
 export const GET_ALL_TIME_ENTRIES = gql`
-  query {
-    timeEntries {
+  query GetAllTimeEntries($search: String) {
+    timeEntries(search: $search) {
       id
       startTime
       endTime
