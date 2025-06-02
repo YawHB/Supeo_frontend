@@ -24,7 +24,7 @@ export const EmployeeTimeEntriesPage = () => {
             </h1>
             <div className='d-flex align-items-center gap-4'>
               <Input
-                className='search-input'
+                className='time-entry-search-input'
                 value={state.searchInput.value}
                 onChange={state.searchInput.onChange}
                 placeholder={translate('admin.search_time_entry')}
