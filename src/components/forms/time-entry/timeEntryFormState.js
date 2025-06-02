@@ -2,8 +2,11 @@ import { useEffect } from 'react'
 import { useInput } from '../../../hooks/useInput.js'
 import { calculateWorkHours } from '../../../utils/calculateWorkHours.js'
 import { reverseString } from '../../../utils/reverseDateString.js'
+import { AuthContext } from '../../context/authContext.js'
+import { useContext } from 'react'
 
 const useTimeEntryFormState = (timeEntry) => {
+  const { user } = useContext(AuthContext)
   const startDate = useInput(timeEntry?.startDate ? reverseString(timeEntry.startDate) : '')
   const startTime = useInput(timeEntry?.startTime ?? '')
   const endDate = useInput(timeEntry?.endDate ? reverseString(timeEntry.endDate) : '')
@@ -35,7 +38,7 @@ const useTimeEntryFormState = (timeEntry) => {
     break: useInput(timeEntry?.break ?? ''),
     comment: useInput(timeEntry?.comment ?? ''),
     adminComment: useInput(timeEntry?.adminComment ?? ''),
-    employeeID: useInput(timeEntry?.employeeID ?? ''),
+    employeeID: useInput(user?.employee_id ?? ''),
     notification: {
       comment: useInput(timeEntry?.notification?.comment ?? ''),
       timestamp: useInput(Date.now()),
