@@ -107,8 +107,8 @@ export const GET_PAGINATED_EMPLOYEES = gql`
 `
 
 export const SEARCH_TIME_ENTRIES_FOR_EMPLOYEE = gql`
-  query TimeEntriesForEmployee($employeeId: ID!, $search: String) {
-    timeEntriesForEmployee(employeeId: $employeeId, search: $search) {
+  query SearchTimeEntriesForEmployee($employeeId: ID!, $search: String, $sort: SortInput) {
+    timeEntriesForEmployee(employeeId: $employeeId, search: $search, sort: $sort) {
       id
       startDate
       startTime

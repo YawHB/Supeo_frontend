@@ -23,6 +23,7 @@ import {
 import { AuthContext } from '../../context/authContext.js'
 import { useContext } from 'react'
 import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
+import useSort from '../../../hooks/useSort.js'
 
 export const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
@@ -45,6 +46,7 @@ export const useTimeEntriesPageState = () => {
   const [timeEntryBeingEdited, setTimeEntryBeingEdited] = useState(null)
   const searchInput = useDebouncedInput('', 300)
   const employeeId = user?.employee_id
+  const { orderBy, orderDirection, sort, sortIcon } = useSort('id', 'ASC')
 
   const statusClassMap = {
     AFVENTER: 'status-select--pending',
@@ -181,6 +183,10 @@ export const useTimeEntriesPageState = () => {
     variables: {
       employeeId,
       search: searchInput.debouncedValue || null,
+      sort: {
+        orderBy: orderBy,
+        orderDirection: orderDirection,
+      },
     },
     fetchPolicy: 'cache-and-network',
     skip: !employeeId,
@@ -303,5 +309,9 @@ export const useTimeEntriesPageState = () => {
     handleSubmitEditedTimeEntry,
     searchInput,
     isLoadingTimeEntriesForEmployee,
+    sort,
+    orderBy,
+    orderDirection,
+    sortIcon,
   }
 }
