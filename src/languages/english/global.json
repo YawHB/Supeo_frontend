@@ -78,6 +78,7 @@
     "update_employee": "Update employee",
     "edit_employee": "Edit '{{firstName}} {{lastName}}'",
     "search_employee": "Search for employee",
+    "search_time_entry": "Search for time entry",
     "select_employee_role": "Select usergroups",
     "select_employee_permission": "Select permissions",
     "create_new_employee": "Create new employee",

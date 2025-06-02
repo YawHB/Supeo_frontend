@@ -78,6 +78,7 @@
     "update_employee": "Opdater medarbejder",
     "edit_employee": "Rediger '{{firstName}} {{lastName}}'",
     "search_employee": "Søg efter medarbejder",
+    "search_time_entry": "Søg efter tidsregistrering",
     "select_employee_role": "Vælg brugergrupper",
     "select_employee_permission": "Vælg rettigheder",
     "create_new_employee": "Opret ny medarbejder",
