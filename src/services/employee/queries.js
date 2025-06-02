@@ -106,47 +106,23 @@ export const GET_PAGINATED_EMPLOYEES = gql`
   }
 `
 
-// WIP QUERIES MED DET HELE
-
-// export const GET_ALL_EMPLOYEES = gql`
-//   query Employees(
-//     $search: String
-//     $order: String
-//     $orderBy: String
-//     $pagination: PaginationInput
-//     $employeeRole: [Int!]
-//     $employeePermission: [Int!]
-//   ) {
-//     employees(
-//       search: $search
-//       order: $order
-//       orderBy: $orderBy
-//       pagination: $pagination
-//       employeeRole: $employeeRole
-//       employeePermission: $employeePermission
-//     ) {
-//       pagination {
-//         page
-//         perPage
-//         totalCount
-//       }
-//       employees {
-//         id
-//         firstName
-//         lastName
-//         email
-//         phoneNumber
-//         roleName
-//         permissionLevel
-//         employeeRole {
-//           id
-//           roleName
-//         }
-//         employeePermission {
-//           id
-//           permissionLevel
-//         }
-//       }
-//     }
-//   }
-// `
+export const SEARCH_TIME_ENTRIES_FOR_EMPLOYEE = gql`
+  query TimeEntriesForEmployee($employeeId: ID!, $search: String) {
+    timeEntriesForEmployee(employeeId: $employeeId, search: $search) {
+      id
+      startDate
+      startTime
+      endDate
+      endTime
+      duration
+      break
+      comment
+      notification {
+        id
+        status
+        comment
+        timestamp
+      }
+    }
+  }
+`

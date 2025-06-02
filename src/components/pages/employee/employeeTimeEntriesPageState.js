@@ -8,7 +8,10 @@ import {
   DELETE_TIME_ENTRY,
   UPDATE_TIME_ENTRY,
 } from '../../../services/time-entry/mutations.js'
-import { GET_TIME_ENTRIES_FOR_EMPLOYEE } from '../../../services/employee/queries.js'
+import {
+  GET_TIME_ENTRIES_FOR_EMPLOYEE,
+  SEARCH_TIME_ENTRIES_FOR_EMPLOYEE,
+} from '../../../services/employee/queries.js'
 import { faTrashCan, faPencil } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -19,6 +22,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { AuthContext } from '../../context/authContext.js'
 import { useContext } from 'react'
+import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
 
 export const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
@@ -39,6 +43,8 @@ export const useTimeEntriesPageState = () => {
   const [entryToDelete, setEntryToDelete] = useState(null)
 
   const [timeEntryBeingEdited, setTimeEntryBeingEdited] = useState(null)
+  const searchInput = useDebouncedInput('', 300)
+  const employeeId = user?.employee_id
 
   const statusClassMap = {
     AFVENTER: 'status-select--pending',
@@ -171,6 +177,21 @@ export const useTimeEntriesPageState = () => {
     skip: !user,
   })
 
+  const { loading: isLoadingTimeEntriesForEmployee } = useQuery(SEARCH_TIME_ENTRIES_FOR_EMPLOYEE, {
+    variables: {
+      employeeId,
+      search: searchInput.debouncedValue || null,
+    },
+    fetchPolicy: 'cache-and-network',
+    skip: !employeeId,
+    onCompleted: (data) => {
+      setTimeEntriesData((prev) => ({
+        ...prev,
+        timeEntries: data.timeEntriesForEmployee || [],
+      }))
+    },
+  })
+
   const [createTimeEntry, { loading: isSubmittingNewTimeEntry }] = useMutation(CREATE_TIME_ENTRY, {
     onCompleted: (data) => {
       const createdTimeEntry = data.createTimeEntry
@@ -280,5 +301,7 @@ export const useTimeEntriesPageState = () => {
     isSubmittingEditTimeEntry,
     updateTimeEntry,
     handleSubmitEditedTimeEntry,
+    searchInput,
+    isLoadingTimeEntriesForEmployee,
   }
 }

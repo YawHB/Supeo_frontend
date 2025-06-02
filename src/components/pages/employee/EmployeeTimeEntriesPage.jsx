@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next'
 import TimeEntryForm from '../../forms/time-entry/TimeEntryForm.jsx'
 import { useTimeEntriesPageState } from './employeeTimeEntriesPageState.js'
 import NotificationForm from '../../forms/notification/NotificationForm.jsx'
-import { Row, Col, Table, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
+import { Row, Col, Table, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faClock } from '@fortawesome/free-solid-svg-icons'
 
@@ -23,6 +23,12 @@ export const EmployeeTimeEntriesPage = () => {
               {firstName} {lastName}
             </h1>
             <div className='d-flex align-items-center gap-4'>
+              <Input
+                className='search-input'
+                value={state.searchInput.value}
+                onChange={state.searchInput.onChange}
+                placeholder={translate('admin.search_time_entry')}
+              />
               <Button
                 outline
                 color='primary'
@@ -58,9 +64,7 @@ export const EmployeeTimeEntriesPage = () => {
                       <tr key={timeEntry.id}>
                         {state.timeEntriesColumns.map((column) => (
                           <td key={`${timeEntry.id}-${column.key}`}>
-                            {column.type === 'view'
-                              ? column.view(timeEntry)
-                              : timeEntry[column.key]}
+                            {column.type === 'view' ? column.view(timeEntry) : timeEntry[column.key]}
                           </td>
                         ))}
                       </tr>
