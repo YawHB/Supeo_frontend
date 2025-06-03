@@ -81,6 +81,8 @@
     "search_time_entry": "Search for time entry",
     "select_employee_role": "Select usergroups",
     "select_employee_permission": "Select permissions",
+    "select_start_date": "Select start date",
+    "select_end_date": "Select end date",
     "create_new_employee": "Create new employee",
     "export": "Export"
   },

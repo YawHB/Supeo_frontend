@@ -24,3 +24,27 @@ export const GET_ALL_TIME_ENTRIES = gql`
     }
   }
 `
+
+export const GET_ALL_FILTERED_TIME_ENTRIES = gql`
+  query FilteredTimeEntries($filter: TimeEntryFilterInput!) {
+    filteredTimeEntries(filter: $filter) {
+      id
+      startTime
+      endTime
+      duration
+      comment
+      startDate
+      endDate
+      employee {
+        id
+        firstName
+        lastName
+      }
+      notification {
+        id
+        comment
+        status
+      }
+    }
+  }
+`

@@ -81,6 +81,8 @@
     "search_time_entry": "Søg efter tidsregistrering",
     "select_employee_role": "Vælg brugergrupper",
     "select_employee_permission": "Vælg rettigheder",
+    "select_start_date": "Vælg startdato",
+    "select_end_date": "Vælg slutdato",
     "create_new_employee": "Opret ny medarbejder",
     "export": "Eksporter"
   },

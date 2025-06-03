@@ -25,6 +25,18 @@ const AdminTimeEntriesPage = () => {
             <h1>{translate('nav_bar.admin_time_entries')}</h1>
             <div className='d-flex align-items-center gap-4'>
               <Input
+                id='startDate'
+                name='startDate'
+                type='date'
+                placeholder={translate('admin.start_date')}
+                />
+              <Input
+                id='endDate'
+                name='endDate'
+                type='date'
+                placeholder={translate('admin.end_date')}
+                />
+              <Input
                 className='time-entry-search-input'
                 value={state.searchInput.value}
                 onChange={state.searchInput.onChange}
