@@ -32,7 +32,7 @@ export function LoginPage() {
               textStyle={{ fontSize: '2rem', fontWeight: '600' }}
             />
           </div>
-          <div style={{ marginTop: '1rem' }}>
+          <div style={{ marginTop: '-1rem' }}>
             <Row>
               <Col md={6} className='mt-2 mx-auto'>
                 <h1 className='text-left mb-4'>{state.translate('login.login')}</h1>
@@ -106,12 +106,22 @@ export function LoginPage() {
             </Row>
             <div className='text-center mt-3'>
               <Row>
-                <Col md={6} className='mt-3 mx-auto'>
+                <Col md={6} className='mx-auto' style={{ marginTop: '-0.5rem' }}>
                   <Button type='submit' className='login-button'>
                     {state.translate('login.login')}
                   </Button>
                 </Col>
               </Row>
+              <div style={{ marginTop: '1rem', color: '#374c45', fontWeight: '500' }}>
+                <span>{state.translate('sign_up.or')} </span>
+                <span
+                  style={{ cursor: 'pointer'}}
+                  onClick={() => {
+                  }}
+                >
+                  {state.translate('sign_up.sign_up')}
+                </span>
+              </div>
             </div>
           </div>
         </Form>

@@ -127,7 +127,11 @@
     "login_button": "Log ind",
     "forgot_password": "Glemt adgangskode?",
     "remember_me": "Husk mig",
-    "login_error": "Login mislykkedes, tjek venligst dine loginoplysninger",
     "login_title": "Log ind på dit tidsregistreringssystem"
+  },
+  "sign_up": {
+    "sign_up": "tilmeld dig",
+    "or_sign_up": "eller tilmeld dig",
+    "or": "eller"
   }
 }

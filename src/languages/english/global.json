@@ -129,5 +129,10 @@
     "remember_me": "Remember me",
     "login_error": "Login failed, please check your credentials",
     "page_title": "Login to my Time Tracker"
+  },
+  "sign_up": {
+    "sign_up": "sign up",
+    "or_sign_up": "or sign up",
+    "or": "or"
   }
 }
