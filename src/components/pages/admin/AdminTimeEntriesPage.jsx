@@ -3,6 +3,7 @@ import { Row, Col, Table, Input, Button } from 'reactstrap'
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import useTimeEntriesPageState from './adminTimeEntriesPageState.js'
+import { faX } from '@fortawesome/free-solid-svg-icons'
 
 const statusClassMap = {
   AFVENTER: 'admin-status-select--pending',
@@ -28,9 +29,10 @@ const AdminTimeEntriesPage = () => {
                 <button
                   type='button'
                   onClick={() => state.setFilters({ startDate: '', endDate: '' })}
-                  className='btn btn-outline-secondary'
+                  className='reset-filters-button'
+                  aria-label='Clear date filters'
                 >
-                  &times;
+                  <FontAwesomeIcon icon={faX} />
                 </button>
               )}
 
@@ -57,6 +59,11 @@ const AdminTimeEntriesPage = () => {
                 value={state.searchInput.value}
                 onChange={state.searchInput.onChange}
                 placeholder={translate('admin.search_time_entry')}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape' || e.key === 'Esc') {
+                    state.searchInput.onChange({ target: { value: '' } })
+                  }
+                }}
               />
 
               <Button outline color='primary' className='no-wrap' onClick={state.handleExportTable}>

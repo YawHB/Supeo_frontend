@@ -59,10 +59,15 @@ const AdminEmployeesPage = () => {
                 placeholder={translate('admin.select_employee_permission')}
               />
               <Input
-                className='search-input'
+                className='time-entry-search-input'
                 value={state.searchInput.value}
                 onChange={state.searchInput.onChange}
-                placeholder={translate('admin.search_employee')}
+                placeholder={translate('admin.search_time_entry')}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape' || e.key === 'Esc') {
+                    state.searchInput.onChange({ target: { value: '' } })
+                  }
+                }}
               />
               <Button outline color='primary' className='no-wrap' onClick={state.handleExportTable}>
                 <FontAwesomeIcon icon={faFileExcel} className='me-2' />
