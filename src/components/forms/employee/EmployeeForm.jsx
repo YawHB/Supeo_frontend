@@ -2,8 +2,11 @@ import { useTranslation } from 'react-i18next'
 import useEmployeeFormState from './EmployeeFormState'
 import { Form, Row, Col, Input, Label, FormGroup, Alert, Fade } from 'reactstrap'
 import useEmployeesPageState from '../../../components/pages/admin/adminEmployeesPageState.js'
+import { useContext } from 'react'
+import { AuthContext } from '../../context/authContext.js'
 
 const EmployeeForm = ({ onSubmit, employee = null, errorMessages = null }) => {
+  const context = useContext(AuthContext)
   const state = useEmployeesPageState()
   const [translate] = useTranslation('global')
   const { input } = useEmployeeFormState(employee)
@@ -21,6 +24,10 @@ const EmployeeForm = ({ onSubmit, employee = null, errorMessages = null }) => {
       confirmPassword: input.confirmPassword.value,
     })
   }
+
+  const shouldShowPasswordFields =
+    context.user?.permissionLevel === 'Member' ||
+    (context.user?.permissionLevel === 'Admin' && employee === null)
 
   return (
     <>
@@ -135,7 +142,6 @@ const EmployeeForm = ({ onSubmit, employee = null, errorMessages = null }) => {
               </Input>
             </FormGroup>
           </Col>
-
           <Col md={6}>
             <FormGroup>
               <Label for='employeePermission'>
@@ -162,40 +168,44 @@ const EmployeeForm = ({ onSubmit, employee = null, errorMessages = null }) => {
               </Input>
             </FormGroup>
           </Col>
-          <Col md={6}>
-            <FormGroup>
-              <Label for='Kodeord'>
-                {translate('Password')}
-                <span className='text-danger'>*</span>
-              </Label>
-              <Input
-                id='password'
-                name='password'
-                placeholder={translate('password_placeholder')}
-                type='text'
-                value={input.password.value}
-                onChange={input.password.onChange}
-                required
-              />
-            </FormGroup>
-          </Col>
-          <Col md={6}>
-            <FormGroup>
-              <Label for='Kodeord'>
-                {translate('Password')}
-                <span className='text-danger'>*</span>
-              </Label>
-              <Input
-                id='confirmPassword'
-                name='confirmPassword'
-                placeholder={translate('password_placeholder')}
-                type='text'
-                value={input.confirmPassword.value}
-                onChange={input.confirmPassword.onChange}
-                required
-              />
-            </FormGroup>
-          </Col>
+          {shouldShowPasswordFields && (
+            <>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for='Kodeord'>
+                    {translate('Password')}
+                    <span className='text-danger'>*</span>
+                  </Label>
+                  <Input
+                    id='password'
+                    name='password'
+                    placeholder={translate('password_placeholder')}
+                    type='text'
+                    value={input.password.value}
+                    onChange={input.password.onChange}
+                    required
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for='Kodeord'>
+                    {translate('Password')}
+                    <span className='text-danger'>*</span>
+                  </Label>
+                  <Input
+                    id='confirmPassword'
+                    name='confirmPassword'
+                    placeholder={translate('password_placeholder')}
+                    type='text'
+                    value={input.confirmPassword.value}
+                    onChange={input.confirmPassword.onChange}
+                    required
+                  />
+                </FormGroup>
+              </Col>
+            </>
+          )}
         </Row>
       </Form>
     </>
