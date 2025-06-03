@@ -26,16 +26,20 @@ const AdminTimeEntriesPage = () => {
             <div className='d-flex align-items-center gap-4'>
               <Input
                 id='startDate'
-                name='startDate'
                 type='date'
-                placeholder={translate('admin.start_date')}
-                />
+                className='date-filter-input'
+                value={state.filters.startDate}
+                placeholder={translate('admin.select_start_date')}
+                onChange={(e) => state.setFilters({ ...state.filters, startDate: e.target.value })}
+              />
               <Input
                 id='endDate'
-                name='endDate'
                 type='date'
-                placeholder={translate('admin.end_date')}
-                />
+                className='date-filter-input'
+                value={state.filters.endDate}
+                placeholder={translate('admin.select_end_date')}
+                onChange={(e) => state.setFilters({ ...state.filters, endDate: e.target.value })}
+              />
               <Input
                 className='time-entry-search-input'
                 value={state.searchInput.value}

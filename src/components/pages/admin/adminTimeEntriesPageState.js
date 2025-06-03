@@ -22,6 +22,10 @@ const useTimeEntriesPageState = () => {
   const [timeEntries, setTimeEntries] = useState([])
   const [editingRowIndex, setEditingRowIndex] = useState(null)
   const { orderBy, orderDirection, sort, sortIcon } = useSort('id', 'ASC')
+  const [filters, setFilters] = useState({
+    startDate: '',
+    endDate: '',
+  })
 
   const searchInput = useDebouncedInput('', 300)
 
@@ -93,8 +97,8 @@ const useTimeEntriesPageState = () => {
   const { loading: isLoadingFilteredTimeEntries } = useQuery(GET_ALL_FILTERED_TIME_ENTRIES, {
     variables: {
       filter: {
-        // startDate,
-        // endDate,
+        startDate: filters.startDate,
+        endDate: filters.endDate,
       },
     },
     fetchPolicy: 'cache-first',
@@ -221,6 +225,8 @@ const useTimeEntriesPageState = () => {
     sort,
     sortIcon,
     isLoadingFilteredTimeEntries,
+    filters,
+    setFilters,
   }
 }
 
