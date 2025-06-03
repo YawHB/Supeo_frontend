@@ -260,7 +260,7 @@ select.form-select {
       font-weight: 600;
       user-select: none;
       cursor: pointer;
-
+      white-space: nowrap;
       &:first-child {
         border-top-left-radius: $table-border-radius !important;
       }
