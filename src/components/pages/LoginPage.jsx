@@ -87,7 +87,11 @@ export function LoginPage() {
               </Col>
             </Row>
             <Row>
-              <Col md={6} className='mx-auto d-flex align-items-center mb-3' style={{ gap: '0.5rem' }}>
+              <Col
+                md={6}
+                className='mx-auto d-flex align-items-center mb-3'
+                style={{ gap: '0.5rem', justifyContent: 'flex-start' }}
+              >
                 <Input
                   type='checkbox'
                   id='rememberMe'
@@ -98,12 +102,26 @@ export function LoginPage() {
                 <Label
                   for='rememberMe'
                   className='mb-0'
-                  style={{ userSelect: 'none', cursor: 'pointer' }}
+                  style={{ userSelect: 'none', cursor: 'pointer', color: '#374c45', fontWeight: '500' }}
                 >
                   {state.translate('login.remember_me')}
                 </Label>
+                <span
+                  onClick={() => {}}
+                  style={{
+                    marginLeft: 'auto',
+                    cursor: 'pointer',
+                    color: '#374c45',
+                    fontWeight: '500',
+                    alignSelf: 'flex-end',
+                    userSelect: 'none',
+                  }}
+                >
+                  {state.translate('login.forgot_password')}
+                </span>
               </Col>
             </Row>
+
             <div className='text-center mt-3'>
               <Row>
                 <Col md={6} className='mx-auto' style={{ marginTop: '-0.5rem' }}>
@@ -114,11 +132,7 @@ export function LoginPage() {
               </Row>
               <div style={{ marginTop: '1rem', color: '#374c45', fontWeight: '500' }}>
                 <span>{state.translate('sign_up.or')} </span>
-                <span
-                  style={{ cursor: 'pointer'}}
-                  onClick={() => {
-                  }}
-                >
+                <span style={{ cursor: 'pointer' }} onClick={() => {}}>
                   {state.translate('sign_up.sign_up')}
                 </span>
               </div>
