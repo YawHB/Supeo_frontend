@@ -18,6 +18,7 @@ const EmployeeForm = ({ onSubmit, employee = null, errorMessages = null }) => {
       email: input.email.value,
       phoneNumber: input.phoneNumber.value,
       password: input.password.value,
+      confirmPassword: input.confirmPassword.value,
     })
   }
 
@@ -174,6 +175,23 @@ const EmployeeForm = ({ onSubmit, employee = null, errorMessages = null }) => {
                 type='text'
                 value={input.password.value}
                 onChange={input.password.onChange}
+                required
+              />
+            </FormGroup>
+          </Col>
+          <Col md={6}>
+            <FormGroup>
+              <Label for='Kodeord'>
+                {translate('Password')}
+                <span className='text-danger'>*</span>
+              </Label>
+              <Input
+                id='confirmPassword'
+                name='confirmPassword'
+                placeholder={translate('password_placeholder')}
+                type='text'
+                value={input.confirmPassword.value}
+                onChange={input.confirmPassword.onChange}
                 required
               />
             </FormGroup>

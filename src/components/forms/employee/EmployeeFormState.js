@@ -11,6 +11,7 @@ const useEmployeeFormState = (employee) => {
     email: useInput(employee?.email ?? ''),
     phoneNumber: useInput(employee?.phoneNumber ?? ''),
     password: useInput(employee?.password ?? ''),
+    confirmPassword: useInput(employee?.password ?? ''),
   }
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const useEmployeeFormState = (employee) => {
       input.email.setValue(employee.email)
       input.phoneNumber.setValue(employee.phoneNumber)
       input.password.setValue(employee.password)
+      input.confirmPassword.setValue(employee.password)
     }
   }, [employee])
 
