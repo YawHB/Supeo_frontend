@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Button } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
 import showToast from '../../../utils/toast.js'
@@ -20,8 +21,10 @@ import { useInput } from '../../../hooks/useInput.js'
 import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
 import usePagination from '../../../hooks/usePagination.js'
 import useSort from '../../../hooks/useSort.js'
+import { handleMemberAuthError } from '../../../utils/errorHandling.js'
 
 const useEmployeesPageState = () => {
+  const navigate = useNavigate()
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
 
@@ -106,11 +109,13 @@ const useEmployeesPageState = () => {
     onCompleted: (data) => {
       setRoles(data.roles)
     },
+    onError: (errors) => handleMemberAuthError(errors, navigate),
   })
 
   const { loading: isLoadingPermissions } = useQuery(GET_PERMISSIONS, {
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => setPermissions(data.permissions),
+    onError: (errors) => handleMemberAuthError(errors, navigate),
   })
 
   const { loading: isLoadingEmployees, refetch } = useQuery(GET_ALL_EMPLOYEES, {
@@ -120,6 +125,15 @@ const useEmployeesPageState = () => {
     fetchPolicy: 'cache-and-network',
     onCompleted: (data) => {
       setEmployees(data.employees)
+    },
+    onError: (errors) => {
+      handleMemberAuthError(errors, navigate)
+      if (errors.graphQLErrors && errors.graphQLErrors.length > 0) {
+        const messages = errors.graphQLErrors.map((e) => e.message)
+        setErrorMessages(messages)
+      } else {
+        setErrorMessages(['Noget gik galt. Prøv igen.'])
+      }
     },
   })
 
@@ -150,6 +164,7 @@ const useEmployeesPageState = () => {
       setEmployees(data.paginatedEmployees.employees)
       pagination.setTotalCount?.(data.paginatedEmployees.pagination.totalCount)
     },
+    onError: (errors) => handleMemberAuthError(errors, navigate),
   })
 
   const [createEmployee, { loading: isSubmittingNewEmployee }] = useMutation(CREATE_EMPLOYEE, {
@@ -233,7 +248,6 @@ const useEmployeesPageState = () => {
       showToast(translate('export_table.error'), 'error')
     }
   }
-  
 
   return {
     roles,

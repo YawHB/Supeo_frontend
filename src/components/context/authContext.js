@@ -5,4 +5,5 @@ export const AuthContext = createContext({
   // eslint-disable-next-line no-unused-vars
   login: (userData) => {},
   logout: () => {},
+  isAuthenticated: () => {},
 })

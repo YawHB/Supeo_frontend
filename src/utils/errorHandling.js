@@ -20,3 +20,12 @@ export const standardApolloError = (query, error, translate) => {
     )
   }
 }
+
+export const handleMemberAuthError = (error, navigate) => {
+  const isForbidden = error?.graphQLErrors?.find((err) => err.extensions?.code === 'IKKE_AUTENTIFICERET')
+  if (isForbidden) navigate('/employee/time-entries')
+}
+export const handleAdminManagerAuthError = (error, navigate) => {
+  const isForbidden = error?.graphQLErrors?.find((err) => err.extensions?.code === 'IKKE_AUTENTIFICERET')
+  if (isForbidden) navigate('/admin/time-entries')
+}
