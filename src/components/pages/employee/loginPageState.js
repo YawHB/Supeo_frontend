@@ -10,6 +10,10 @@ import { useState, useEffect } from 'react'
 export const useLoginPageState = () => {
   const context = useContext(AuthContext)
   const [translate] = useTranslation('global')
+  const [emailPlaceholder, setEmailPlaceholder] = useState(translate('login.username'))
+  const [passwordPlaceholder, setPasswordPlaceholder] = useState(translate('login.password'))
+  const [showPassword, setShowPassword] = useState(false)
+
   let navigate = useNavigate()
   const [errors, setErrors] = useState([])
 
@@ -62,5 +66,11 @@ export const useLoginPageState = () => {
     onSubmit,
     errors,
     setErrors,
+    emailPlaceholder,
+    setEmailPlaceholder,
+    passwordPlaceholder,
+    setPasswordPlaceholder,
+    showPassword,
+    setShowPassword,
   }
 }

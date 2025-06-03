@@ -118,5 +118,14 @@
     "error": "Eksportering mislykkedes",
     "employees_overview": "Medarbejderoversigt",
     "time_entries_overview": "Tidsregistreringsoversigt"
+  },
+  "login": {
+    "login": "Log ind",
+    "username": "Brugernavn",
+    "password": "Adgangskode",
+    "login_button": "Log ind",
+    "forgot_password": "Glemt adgangskode?",
+    "remember_me": "Husk mig",
+    "login_error": "Login mislykkedes, tjek venligst dine loginoplysninger"
   }
 }
