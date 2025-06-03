@@ -122,6 +122,7 @@
   "login": {
     "login": "Log ind",
     "username": "Brugernavn",
+    "email": "Email",
     "password": "Adgangskode",
     "login_button": "Log ind",
     "forgot_password": "Glemt adgangskode?",

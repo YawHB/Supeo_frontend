@@ -122,6 +122,7 @@
   "login": {
     "login": "Login",
     "username": "Username",
+    "email": "Email",
     "password": "Password",
     "login_button": "Login",
     "forgot_password": "Forgot password?",

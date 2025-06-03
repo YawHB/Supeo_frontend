@@ -44,7 +44,7 @@ export function LoginPage() {
                     value={state.values.email}
                     onChange={state.onChange}
                     onFocus={() => state.setEmailPlaceholder('')}
-                    onBlur={() => state.setEmailPlaceholder(state.translate('login.username'))}
+                    onBlur={() => state.setEmailPlaceholder(state.translate('login.email'))}
                     onKeyDown={(e) => {
                       if (e.key === 'Escape') {
                         state.onChange({ target: { name: 'email', value: '' } })
@@ -82,6 +82,24 @@ export function LoginPage() {
                     }}
                   />
                 </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={6} className='mx-auto d-flex align-items-center mb-3' style={{ gap: '0.5rem' }}>
+                <Input
+                  type='checkbox'
+                  id='rememberMe'
+                  checked={state.rememberMe}
+                  onChange={() => state.setRememberMe(!state.rememberMe)}
+                  style={{ width: '1.25rem', height: '1.25rem' }}
+                />
+                <Label
+                  for='rememberMe'
+                  className='mb-0'
+                  style={{ userSelect: 'none', cursor: 'pointer' }}
+                >
+                  {state.translate('login.remember_me')}
+                </Label>
               </Col>
             </Row>
             <div className='text-center mt-3'>

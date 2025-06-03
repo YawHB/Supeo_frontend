@@ -10,19 +10,30 @@ import { useState, useEffect } from 'react'
 export const useLoginPageState = () => {
   const context = useContext(AuthContext)
   const [translate] = useTranslation('global')
-  const [emailPlaceholder, setEmailPlaceholder] = useState(translate('login.username'))
+  const [emailPlaceholder, setEmailPlaceholder] = useState(translate('login.email'))
   const [passwordPlaceholder, setPasswordPlaceholder] = useState(translate('login.password'))
   const [showPassword, setShowPassword] = useState(false)
+
+  const [rememberMe, setRememberMe] = useState(false)
 
   let navigate = useNavigate()
   const [errors, setErrors] = useState([])
 
-  const { onChange, onSubmit, values } = useForm(handleLoginSubmitCallBack, {
+  const { onChange, values, setValues } = useForm(handleLoginSubmitCallBack, {
     email: '',
     password: '',
   })
 
   const [handleEmployeeLogin] = useMutation(LOGIN_USER)
+
+  // Load saved email from localStorage on mount
+  useEffect(() => {
+    const savedEmail = localStorage.getItem('rememberedEmail')
+    if (savedEmail) {
+      setValues((vals) => ({ ...vals, email: savedEmail }))
+      setRememberMe(true)
+    }
+  }, [setValues])
 
   function handleLoginSubmitCallBack() {
     handleEmployeeLogin({
@@ -41,6 +52,16 @@ export const useLoginPageState = () => {
     })
   }
 
+  const onSubmit = (e) => {
+    e.preventDefault()
+    if (rememberMe) {
+      localStorage.setItem('rememberedEmail', values.email)
+    } else {
+      localStorage.removeItem('rememberedEmail')
+    }
+    handleLoginSubmitCallBack()
+  }
+
   useEffect(() => {
     if (context.user) {
       const role = context.user.permissionLevel
@@ -55,7 +76,7 @@ export const useLoginPageState = () => {
 
       console.log('context.user:', context.user)
     }
-  }, [context.user])
+  }, [context.user, navigate])
 
   return {
     translate,
