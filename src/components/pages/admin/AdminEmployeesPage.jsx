@@ -6,8 +6,10 @@ import { faUserPlus, faFileExcel, faSave } from '@fortawesome/free-solid-svg-ico
 import { Row, Col, Input, Modal, Table, Button, ModalBody, ModalHeader, ModalFooter } from 'reactstrap'
 import Select from 'react-select'
 import Paginator from '../../Paginator.jsx'
-
+import { useContext } from 'react'
+import { AuthContext } from '../../context/authContext.js'
 const AdminEmployeesPage = () => {
+  const context = useContext(AuthContext)
   const state = useEmployeesPageState()
   const [translate] = useTranslation(`global`)
 
@@ -24,7 +26,7 @@ const AdminEmployeesPage = () => {
                 isSearchable={false}
                 isMulti
                 options={state.employeeRoleOptions ?? []}
-                value={state.employeeRolesFilterInput.value} // de vallgte værdier i inputtet
+                value={state.employeeRolesFilterInput.value}
                 onChange={(newValue) => {
                   state.employeeRolesFilterInput.onChange(newValue)
                   state.filteredEmployees({
@@ -68,18 +70,20 @@ const AdminEmployeesPage = () => {
                 <FontAwesomeIcon icon={faFileExcel} className='me-2' />
                 <span>{translate('export')}</span>
               </Button>
-              <Button
-                outline
-                color='primary'
-                className='no-wrap'
-                onClick={() => {
-                  state.setEmployeeBeingEdited(null)
-                  state.employeeFormModalState.openModal()
-                }}
-              >
-                <FontAwesomeIcon icon={faUserPlus} className='me-2' />
-                <span>{translate(`admin.create_employee`)}</span>
-              </Button>
+              {context.user?.permissionLevel === 'Admin' && (
+                <Button
+                  outline
+                  color='primary'
+                  className='no-wrap'
+                  onClick={() => {
+                    state.setEmployeeBeingEdited(null)
+                    state.employeeFormModalState.openModal()
+                  }}
+                >
+                  <FontAwesomeIcon icon={faUserPlus} className='me-2' />
+                  <span>{translate(`admin.create_employee`)}</span>
+                </Button>
+              )}
             </div>
           </Col>
 
