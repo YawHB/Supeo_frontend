@@ -49,5 +49,15 @@ export function AuthProvider({ children }) {
     setUser(null)
   }
 
-  return <AuthContext.Provider value={{ user, login, logout }}>{children}</AuthContext.Provider>
+  function isAuthenticated() {
+    const token = localStorage.getItem('token')
+    const decoded = decodeToken(token)
+    return !!decoded
+  }
+
+  return (
+    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
