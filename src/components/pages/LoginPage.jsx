@@ -69,6 +69,11 @@ export function LoginPage() {
                     onChange={state.onChange}
                     onFocus={() => state.setPasswordPlaceholder('')}
                     onBlur={() => state.setPasswordPlaceholder(state.translate('login.password'))}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Escape') {
+                        state.onChange({ target: { name: 'password', value: '' } })
+                      }
+                    }}
                   />
                   <FontAwesomeIcon
                     icon={state.showPassword ? faEye : faEyeSlash}
