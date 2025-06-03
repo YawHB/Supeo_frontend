@@ -13,8 +13,11 @@ export const useLoginPageState = () => {
   const [emailPlaceholder, setEmailPlaceholder] = useState(translate('login.email'))
   const [passwordPlaceholder, setPasswordPlaceholder] = useState(translate('login.password'))
   const [showPassword, setShowPassword] = useState(false)
-
-  const [rememberMe, setRememberMe] = useState(false)
+  
+  const [rememberMe, setRememberMe] = useState(() => {
+    const saved = localStorage.getItem('rememberMe')
+    return saved === 'true' ? true : false
+  })
 
   let navigate = useNavigate()
   const [errors, setErrors] = useState([])

@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export function LoginPage() {
   const state = useLoginPageState()
 
+  document.title = state.translate('login.login_title')
+
   return (
     <>
       {state.errors.length > 0 && (

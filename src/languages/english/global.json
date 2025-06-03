@@ -127,6 +127,7 @@
     "login_button": "Login",
     "forgot_password": "Forgot password?",
     "remember_me": "Remember me",
-    "login_error": "Login failed, please check your credentials"
+    "login_error": "Login failed, please check your credentials",
+    "page_title": "Login to my Time Tracker"
   }
 }
