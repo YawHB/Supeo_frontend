@@ -25,23 +25,16 @@ h1 {
 
 .page-frame {
   display: flex;
+  align-items: flex-start; // gør så at data på siden tilpasser sig til selve tabellen
 }
 
 .page-content {
-  position: relative;
-  flex-grow: 1;
   margin-right: 1rem;
   margin-bottom: 1rem;
   padding: 1rem;
   background-color: $table-bg;
   border-radius: 1rem;
-}
-
-.app-background {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  background-color: #34363c;
+  width: 100%; // breddden af tabellen er nu fixet når man kigger på sidebaren
 }
 
 .no-wrap {
