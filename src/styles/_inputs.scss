@@ -1,0 +1,123 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+.input-default {
+  background-color: #d5d2d2;
+  transition: background-color 0.2s;
+  border: 1px solid #374c45 !important;
+  border-radius: 2rem !important;
+}
+
+.input-active {
+  background-color: #fff;
+  border-radius: 1rem;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px #015fcc;
+  border: 1px solid #015fcc;
+}
+
+.search-input {
+  width: 170px !important;
+  max-width: 300px;
+  border-radius: 2rem !important;
+  border: 1px solid #ccc !important;
+  color: #34363c !important;
+  font-weight: 500;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: #999 !important;
+  }
+
+  &:hover,
+  &:focus {
+    border-color: #374c45 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+  }
+
+  &.is-invalid {
+    border-color: #c0392b !important;
+    background-color: #fbeae9 !important;
+  }
+
+  &.disabled,
+  &:disabled {
+    background-color: #e0dfde !important;
+    cursor: not-allowed;
+  }
+}
+
+.time-entry-search-input {
+  width: 185px !important;
+  max-width: 300px;
+  border-radius: 2rem !important;
+  border: 1px solid #ccc !important;
+  color: #34363c !important;
+  font-weight: 500;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: #999 !important;
+  }
+
+  &:hover,
+  &:focus {
+    border-color: #374c45 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+  }
+
+  &.is-invalid {
+    border-color: #c0392b !important;
+    background-color: #fbeae9 !important;
+  }
+
+  &.disabled,
+  &:disabled {
+    background-color: #e0dfde !important;
+    cursor: not-allowed;
+  }
+}
+
+.date-filter-input {
+  width: 150px !important;
+  max-width: 300px;
+  border-radius: 2rem !important;
+  border: 1px solid #ccc !important;
+  color: #34363c !important;
+  font-weight: 500;
+  transition: border-color 0.2s ease;
+
+  &::placeholder {
+    color: #999 !important;
+  }
+
+  &:hover,
+  &:focus {
+    border-color: #374c45 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+  }
+
+  &.is-invalid {
+    border-color: #c0392b !important;
+    background-color: #fbeae9 !important;
+  }
+
+  &.disabled,
+  &:disabled {
+    background-color: #e0dfde !important;
+    cursor: not-allowed;
+  }
+}
+
+.input-filled {
+  border: 1px solid #2d3f38 !important;
+}
