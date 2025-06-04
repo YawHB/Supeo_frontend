@@ -60,7 +60,7 @@ const AdminTimeEntriesPage = () => {
                 onChange={state.searchInput.onChange}
                 placeholder={translate('admin.search_time_entry')}
                 onKeyDown={(e) => {
-                  if (e.key === 'Escape' || e.key === 'Esc') {
+                  if (e.key === 'Escape') {
                     state.searchInput.onChange({ target: { value: '' } })
                   }
                 }}

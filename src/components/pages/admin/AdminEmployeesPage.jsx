@@ -38,6 +38,11 @@ const AdminEmployeesPage = () => {
                 }}
                 classNamePrefix='employee-role-select'
                 placeholder={translate('admin.select_employee_role')}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape' || e.key === 'Esc') {
+                    state.searchInput.onChange({ target: { value: '' } })
+                  }
+                }}
               />
               <Select
                 isSearchable={false}
@@ -64,7 +69,7 @@ const AdminEmployeesPage = () => {
                 onChange={state.searchInput.onChange}
                 placeholder={translate('admin.search_time_entry')}
                 onKeyDown={(e) => {
-                  if (e.key === 'Escape' || e.key === 'Esc') {
+                  if (e.key === 'Escape') {
                     state.searchInput.onChange({ target: { value: '' } })
                   }
                 }}
