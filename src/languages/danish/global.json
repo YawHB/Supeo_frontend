@@ -136,5 +136,8 @@
   },
   "paginator": {
     "per_page": "per side"
+  },
+  "logout": {
+    "logout": "Log ud"
   }
 }

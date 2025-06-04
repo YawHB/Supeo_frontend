@@ -5,9 +5,14 @@ import useNavBarState from './NavBarState'
 import { Fragment } from 'react/jsx-runtime'
 import { faSignOut, faHouse } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useContext } from 'react'
+import { AuthContext } from '../context/authContext.js'
+import { useTranslation } from 'react-i18next'
 
 const NavBar = () => {
   const { logOff, navItems, isBurgerCollapsed, toggleBurgerCollapsed } = useNavBarState()
+  const { user } = useContext(AuthContext)
+  const [translate] = useTranslation('global')
 
   return (
     <>
@@ -48,7 +53,8 @@ const NavBar = () => {
               />
               <Button onClick={logOff} color='default' className='text-light'>
                 <FontAwesomeIcon size='xl' className='icon pe-2' icon={faSignOut} />
-                <span>Log af</span>
+                {translate('logout.logout')}
+                {user?.email ? ` (${user.email})` : ''}
               </Button>
             </Nav>
           </div>
