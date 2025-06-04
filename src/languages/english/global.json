@@ -84,7 +84,8 @@
     "select_start_date": "Select start date",
     "select_end_date": "Select end date",
     "create_new_employee": "Create new employee",
-    "export": "Export"
+    "export": "Export",
+    "clear_filters": "Clear filters"
   },
   "time_entry": {
     "create_time_entry": "Create time entry",

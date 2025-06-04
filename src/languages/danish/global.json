@@ -84,7 +84,8 @@
     "select_start_date": "Vælg startdato",
     "select_end_date": "Vælg slutdato",
     "create_new_employee": "Opret ny medarbejder",
-    "export": "Eksporter"
+    "export": "Eksporter",
+    "clear_filters": "Ryd filtre"
   },
   "time_entry": {
     "create_time_entry": "Opret tidsregistrering",

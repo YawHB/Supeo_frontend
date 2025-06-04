@@ -231,6 +231,25 @@
   }
 }
 
+.reset-filters-text-button {
+  background-color: #c0392b;
+  color: #e8e8e3;
+  border: 1px solid #c0392b;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  font-weight: 600 !important;
+  line-height: 1;
+  border-radius: 2rem !important;
+
+  &:hover,
+  &:focus-visible {
+    background: transparent;
+    color: #c0392b;
+    border-color: #c0392b;
+  }
+}
+
 .status-icon--pending {
   color: #f0a500 !important;
 }
