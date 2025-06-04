@@ -129,7 +129,8 @@
     "forgot_password": "Forgot password?",
     "remember_me": "Remember me",
     "login_error": "Login failed, please check your credentials",
-    "page_title": "Login to my Time Tracker"
+    "page_title": "Login to my Time Tracker",
+    "welcome": "Welcome"
   },
   "sign_up": {
     "sign_up": "sign up",

@@ -128,7 +128,8 @@
     "login_button": "Log ind",
     "forgot_password": "Glemt adgangskode?",
     "remember_me": "Husk mig",
-    "login_title": "Log ind på dit tidsregistreringssystem"
+    "login_title": "Log ind på dit tidsregistreringssystem",
+    "welcome": "Velkommen"
   },
   "sign_up": {
     "sign_up": "tilmeld dig",
