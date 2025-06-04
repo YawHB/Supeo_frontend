@@ -131,29 +131,7 @@ select.form-select {
   text-decoration: none !important;
 }
 
-.modal-content {
-  background-color: #e8e8e3 !important;
-  border-radius: $table-border-radius !important;
-  overflow: hidden; // Klip evt. overskydende
-  color: #34363c !important;
-}
 
-.modal-content .form-control,
-.modal-content .form-select {
-  background-color: #f3f3f1 !important;
-  border-radius: 1rem !important;
-  border: 1px solid (#f3f3f1, 10%) !important;
-}
-
-.modal-header {
-  border-top-left-radius: $table-border-radius !important;
-  border-top-right-radius: $table-border-radius !important;
-}
-
-.modal-footer {
-  border-bottom-left-radius: $table-border-radius !important;
-  border-bottom-right-radius: $table-border-radius !important;
-}
 
 input.form-control.disabled-field {
   background-color: #bfbcbe !important;
