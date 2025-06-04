@@ -7,19 +7,19 @@
 @use 'table' as *;
 @use 'modal' as *;
 @use 'select' as *;
+@use 'sidebar' as *;
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-size: 14px !important;
+  background-color: $navbar-sidebar-bg !important;
+  overscroll-behavior: none;
+  //font-size: 14px !important; - kontrollerer font size i hele appen
+}
 
 h1 {
   color: $color-soft-black !important;
-}
-
-body {
-  background-color: #e8e8e3 !important;
-  overscroll-behavior: none;
-  //font-size: 14px !important;
-}
-
-html {
-  font-size: 14px !important;
 }
 
 .page-frame {
@@ -43,50 +43,15 @@ html {
   background-color: #34363c;
 }
 
-.bg-sidebar {
-  background-color: $navbar-sidebar-bg !important;
-  color: contrast($navbar-sidebar-bg) !important;
-}
-
-.topnav,
-.navbar.bg-sidebar {
-  background-color: $navbar-sidebar-bg !important;
-  color: contrast($navbar-sidebar-bg) !important;
-}
-
-.bg-sidebar a,
-.bg-sidebar .nav-link {
-  text-decoration: none !important;
-}
-
-input.form-control.disabled-field {
-  background-color: #bfbcbe !important;
-  cursor: not-allowed;
-}
-
 .no-wrap {
   white-space: nowrap;
 }
-
-.clickable-cell {
-  cursor: pointer !important;
-}
-
-$placeholder-gray: #868e96 !default;
 
 .placeholder-muted {
   color: $placeholder-gray !important;
 }
 
-.comment-text {
-  display: block;
-  max-width: 20ch;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer !important;
-}
-
+.comment-text,
 .employee-comment-text {
   display: block;
   max-width: 20ch;
@@ -95,9 +60,6 @@ $placeholder-gray: #868e96 !default;
   text-overflow: ellipsis;
 }
 
-body,
-html {
-  height: 100%;
-  margin: 0;
-  background-color: $navbar-sidebar-bg !important;
+.comment-text {
+  cursor: pointer !important;
 }
