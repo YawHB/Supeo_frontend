@@ -29,7 +29,6 @@ const NotificationForm = ({ notification = {} }) => {
                 value={status.value}
                 className='notification-status'
                 disabled
-                style={{ width: 'fit-content'}}
               />
               {icon && (
                 <FontAwesomeIcon icon={icon} className={iconClass} style={{ fontSize: '1.2rem' }} />
@@ -40,19 +39,26 @@ const NotificationForm = ({ notification = {} }) => {
       </Row>
 
       <Row>
-        <Col md={12}>
+        <Col md={3}>
           <FormGroup>
-            <Label for='comment'>{translate('admin_comment')}</Label>
-            <Input id='comment' name='comment' type='text' value={comment.value} disabled />
+            <Label for='timestamp'>{translate('last_updated')}</Label>
+            <Input id='timestamp' name='timestamp' value={timestamp.value} disabled />
           </FormGroup>
         </Col>
       </Row>
 
       <Row>
-        <Col md={3}>
+        <Col md={12}>
           <FormGroup>
-            <Label for='timestamp'>{translate('last_updated')}</Label>
-            <Input id='timestamp' name='timestamp' value={timestamp.value} disabled />
+            <Label for='comment'>{translate('admin_comment')}</Label>
+            <Input
+              id='comment'
+              name='comment'
+              type='textarea'
+              value={comment.value}
+              disabled
+              style={{ resize: 'none' }}
+            />
           </FormGroup>
         </Col>
       </Row>

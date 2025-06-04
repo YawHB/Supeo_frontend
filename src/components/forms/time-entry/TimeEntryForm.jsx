@@ -155,6 +155,7 @@ const TimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
                 placeholder={translate('write_comment')}
                 value={input.comment.value}
                 onChange={input.comment.onChange}
+                style={{ resize: 'none' }}
               />
             </FormGroup>
           </Col>
