@@ -9,7 +9,8 @@
 @use 'select' as *;
 @use 'sidebar' as *;
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   font-size: 14px !important;
