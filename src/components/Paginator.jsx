@@ -5,11 +5,9 @@ import {
   faAngleDoubleLeft,
   faAngleDoubleRight,
 } from '@fortawesome/free-solid-svg-icons'
-import { useTranslation } from 'react-i18next'
 
 const Paginator = ({ paginationState, onPageChange, onPerPageChange, perPageOptions, totalPages }) => {
   const { page, perPage } = paginationState
-  const [translate] = useTranslation('global')
 
   // Generate an array of page numbers [1, 2, ..., totalPages]
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1)
@@ -20,10 +18,13 @@ const Paginator = ({ paginationState, onPageChange, onPerPageChange, perPageOpti
         className='per-page-select'
         value={perPage}
         onChange={(e) => onPerPageChange(Number(e.target.value))}
+        style={{
+          width: perPage >= 100 ? '69px' : '60px',
+        }}
       >
         {perPageOptions.map((opt) => (
           <option key={opt} value={opt}>
-            {opt} {translate('paginator.per_page')}
+            {opt}
           </option>
         ))}
       </select>
