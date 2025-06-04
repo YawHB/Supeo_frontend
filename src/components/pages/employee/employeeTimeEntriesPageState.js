@@ -25,6 +25,27 @@ import { useContext } from 'react'
 import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
 import useSort from '../../../hooks/useSort.js'
 
+export const statusClassMap = {
+  AFVENTER: 'status-select--pending',
+  GODKENDT: 'status-select--approve',
+  AFVIST: 'status-select--reject',
+  IGANG: 'status-select--underway',
+}
+
+export const statusIconMap = {
+  AFVENTER: faClock,
+  GODKENDT: faCheckCircle,
+  AFVIST: faTimesCircle,
+  IGANG: faHourglassHalf,
+}
+
+export const statusIconColorClassMap = {
+  AFVENTER: 'status-icon--pending',
+  GODKENDT: 'status-icon--approve',
+  AFVIST: 'status-icon--reject',
+  IGANG: 'status-icon--underway',
+}
+
 export const useTimeEntriesPageState = () => {
   const apolloClient = useApolloClient()
   const [translate] = useTranslation('global')
@@ -47,20 +68,6 @@ export const useTimeEntriesPageState = () => {
   const searchInput = useDebouncedInput('', 300)
   const employeeId = user?.employee_id
   const { orderBy, orderDirection, sort, sortIcon } = useSort('id', 'ASC')
-
-  const statusClassMap = {
-    AFVENTER: 'status-select--pending',
-    GODKENDT: 'status-select--approve',
-    AFVIST: 'status-select--reject',
-    IGANG: 'status-select--underway',
-  }
-
-  const statusIconMap = {
-    AFVENTER: faClock,
-    GODKENDT: faCheckCircle,
-    AFVIST: faTimesCircle,
-    IGANG: faHourglassHalf,
-  }
 
   const timeEntriesColumns = [
     {
@@ -313,5 +320,7 @@ export const useTimeEntriesPageState = () => {
     orderBy,
     orderDirection,
     sortIcon,
+    statusClassMap,
+    statusIconMap,
   }
 }
