@@ -11,6 +11,11 @@ const Paginator = ({ paginationState, onPageChange, onPerPageChange, perPageOpti
   const { page, perPage } = paginationState
   const [translate] = useTranslation('global')
 
+  const clampPage = (newPage) => {
+    if (!totalPages || totalPages < 1) return 1
+    return Math.min(Math.max(newPage, 1), totalPages)
+  }
+
   return (
     <div className='paginator d-flex align-items-center gap-1'>
       <select
@@ -36,7 +41,7 @@ const Paginator = ({ paginationState, onPageChange, onPerPageChange, perPageOpti
 
       <button
         className='btn-paginator'
-        onClick={() => onPageChange(page - 1)}
+        onClick={() => onPageChange(clampPage(page - 1))}
         disabled={page === 1}
         aria-label='Previous page'
       >
@@ -47,7 +52,7 @@ const Paginator = ({ paginationState, onPageChange, onPerPageChange, perPageOpti
 
       <button
         className='btn-paginator'
-        onClick={() => onPageChange(page + 1)}
+        onClick={() => onPageChange(clampPage(page + 1))}
         disabled={page === totalPages}
         aria-label='Next page'
       >
