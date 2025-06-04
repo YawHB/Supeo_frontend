@@ -762,14 +762,26 @@ body, html {
     border-radius: 2rem;
     padding: 0.25rem 0.75rem;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+  }
 
+  .page-number {
+    background-color: #a0c3a0; /* same green as btn-paginator */
+    color: #000000;
+    border: none;  /* remove border for inactive pages */
+  
     &:hover,
     &:focus {
       background-color: #374c45;
       color: #ffffff;
       outline: none;
     }
+  }
+  
+  .page-number.active {
+    background-color: #374c45; /* dark green */
+    color: #ffffff;
+    border: 1px solid #374c45; /* keep border on active page */
+    cursor: default;
   }
 
   .per-page-select {
@@ -779,7 +791,7 @@ body, html {
     background-color: #ffffff;
     border-radius: 2rem;
     cursor: pointer;
-  
+
     &:hover,
     &:focus {
       background-color: #f0f0f0;
@@ -787,26 +799,20 @@ body, html {
       outline: none;
     }
   }
+
+  .btn-paginator {
+    background-color: #a0c3a0;
+    border: none;
   
-
- .btn-paginator {
-  background-color: #a0c3a0;
-  border: none;
-
-  &:focus {
-    background-color: lighten(#a0c3a0, 0%);
-    color: #000;
-  }
-
-  &:hover {
-    background-color: #374c45;
-    color: #fff;
+    &:focus {
+      background-color: #a0c3a0;
+      color: #000;
+    }
+  
+    &:hover {
+      background-color: #374c45;
+      color: #fff;
+    }
   }
 }
 
-  .page-number {
-    border: 1px solid #374c45;
-    background-color: #374c45;
-    color: #ffffff;
-  }
-}

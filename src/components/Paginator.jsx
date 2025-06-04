@@ -11,10 +11,8 @@ const Paginator = ({ paginationState, onPageChange, onPerPageChange, perPageOpti
   const { page, perPage } = paginationState
   const [translate] = useTranslation('global')
 
-  const clampPage = (newPage) => {
-    if (!totalPages || totalPages < 1) return 1
-    return Math.min(Math.max(newPage, 1), totalPages)
-  }
+  // Generate an array of page numbers [1, 2, ..., totalPages]
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1)
 
   return (
     <div className='paginator d-flex align-items-center gap-1'>
@@ -41,18 +39,28 @@ const Paginator = ({ paginationState, onPageChange, onPerPageChange, perPageOpti
 
       <button
         className='btn-paginator'
-        onClick={() => onPageChange(clampPage(page - 1))}
+        onClick={() => onPageChange(Math.max(1, page - 1))}
         disabled={page === 1}
         aria-label='Previous page'
       >
         <FontAwesomeIcon icon={faAngleLeft} />
       </button>
 
-      <button className='page-number'>{page}</button>
+      {/* Page number buttons */}
+      {pageNumbers.map((pageNumber) => (
+        <button
+          key={pageNumber}
+          className={`page-number ${pageNumber === page ? 'active' : ''}`}
+          onClick={() => onPageChange(pageNumber)}
+          aria-current={pageNumber === page ? 'page' : undefined}
+        >
+          {pageNumber}
+        </button>
+      ))}
 
       <button
         className='btn-paginator'
-        onClick={() => onPageChange(clampPage(page + 1))}
+        onClick={() => onPageChange(Math.min(totalPages, page + 1))}
         disabled={page === totalPages}
         aria-label='Next page'
       >
