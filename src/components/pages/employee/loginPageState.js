@@ -13,7 +13,9 @@ export const useLoginPageState = () => {
   const [emailPlaceholder, setEmailPlaceholder] = useState(translate('login.email'))
   const [passwordPlaceholder, setPasswordPlaceholder] = useState(translate('login.password'))
   const [showPassword, setShowPassword] = useState(false)
-  
+  const [emailEscapePressedOnce, setEmailEscapePressedOnce] = useState(false)
+  const [passwordEscapePressedOnce, setPasswordEscapePressedOnce] = useState(false)
+
   const [rememberMe, setRememberMe] = useState(false)
 
   let navigate = useNavigate()
@@ -52,6 +54,7 @@ export const useLoginPageState = () => {
     })
   }
 
+  // håndterer remember me knappen og putter det i localstorage
   const onSubmit = (e) => {
     e.preventDefault()
     if (rememberMe) {
@@ -93,5 +96,11 @@ export const useLoginPageState = () => {
     setPasswordPlaceholder,
     showPassword,
     setShowPassword,
+    rememberMe,
+    setRememberMe,
+    emailEscapePressedOnce,
+    setEmailEscapePressedOnce,
+    passwordEscapePressedOnce,
+    setPasswordEscapePressedOnce,
   }
 }

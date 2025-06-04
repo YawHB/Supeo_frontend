@@ -45,11 +45,19 @@ export function LoginPage() {
                     placeholder={state.emailPlaceholder}
                     value={state.values.email}
                     onChange={state.onChange}
-                    onFocus={() => state.setEmailPlaceholder('')}
+                    onFocus={() => {
+                      state.setEmailPlaceholder('')
+                      state.setEmailEscapePressedOnce(false)
+                    }}
                     onBlur={() => state.setEmailPlaceholder(state.translate('login.email'))}
                     onKeyDown={(e) => {
                       if (e.key === 'Escape') {
-                        state.onChange({ target: { name: 'email', value: '' } })
+                        if (!state.emailEscapePressedOnce) {
+                          state.onChange({ target: { name: 'email', value: '' } })
+                          state.setEmailEscapePressedOnce(true)
+                        } else {
+                          e.target.blur()
+                        }
                       }
                     }}
                   />
@@ -67,14 +75,23 @@ export function LoginPage() {
                     placeholder={state.passwordPlaceholder}
                     value={state.values.password}
                     onChange={state.onChange}
-                    onFocus={() => state.setPasswordPlaceholder('')}
+                    onFocus={() => {
+                      state.setPasswordPlaceholder('')
+                      state.setPasswordEscapePressedOnce(false)
+                    }}
                     onBlur={() => state.setPasswordPlaceholder(state.translate('login.password'))}
                     onKeyDown={(e) => {
                       if (e.key === 'Escape') {
-                        state.onChange({ target: { name: 'password', value: '' } })
+                        if (!state.passwordEscapePressedOnce) {
+                          state.onChange({ target: { name: 'password', value: '' } })
+                          state.setPasswordEscapePressedOnce(true)
+                        } else {
+                          e.target.blur()
+                        }
                       }
                     }}
                   />
+
                   <FontAwesomeIcon
                     icon={state.showPassword ? faEye : faEyeSlash}
                     onClick={() => state.setShowPassword(!state.showPassword)}

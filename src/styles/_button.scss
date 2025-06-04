@@ -183,17 +183,23 @@
 .username-button,
 .password-button {
   width: 100%;
-  border: 1px solid transparent !important; // No visible border by default
+  border: 1px solid transparent !important;
   border-radius: 1rem !important;
   padding: 0.5rem;
   transition: border-color 0.3s ease;
+  cursor: pointer;
 
   &:hover,
   &:active,
   &:focus {
     border-color: #2d3f38 !important;
   }
+
+  &:focus {
+    cursor: text; // 👈 This removes the pointer on focus and shows text cursor
+  }
 }
+
 
 .login-button {
   width: 100%;
