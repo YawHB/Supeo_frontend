@@ -170,3 +170,10 @@ select.form-select {
     max-width: 100px;
   }
 }
+
+.employee-role-select__control,
+.employee-role-select__multi-value,
+.employee-role-select__multi-value__remove,
+.employee-role-select__dropdown-indicator {
+  cursor: pointer !important;
+}

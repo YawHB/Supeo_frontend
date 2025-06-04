@@ -32,17 +32,25 @@ input.form-control.disabled-field {
   color: #34363c !important;
   font-weight: 500;
   transition: border-color 0.2s ease;
+  cursor: pointer;
 
   &::placeholder {
     color: #999 !important;
   }
 
-  &:hover,
+  &:hover {
+    border-color: #374c45 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+  }
+
   &:focus {
     border-color: #374c45 !important;
     outline: none !important;
     box-shadow: none !important;
     background-color: #ffffff !important;
+    cursor: text; // Normal text cursor on focus
   }
 
   &.is-invalid {
@@ -65,17 +73,25 @@ input.form-control.disabled-field {
   color: #34363c !important;
   font-weight: 500;
   transition: border-color 0.2s ease;
+  cursor: pointer;
 
   &::placeholder {
     color: #999 !important;
   }
 
-  &:hover,
+  &:hover {
+    border-color: #374c45 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+  }
+
   &:focus {
     border-color: #374c45 !important;
     outline: none !important;
     box-shadow: none !important;
     background-color: #ffffff !important;
+    cursor: text; // Normal text cursor on focus
   }
 
   &.is-invalid {
@@ -98,17 +114,25 @@ input.form-control.disabled-field {
   color: #34363c !important;
   font-weight: 500;
   transition: border-color 0.2s ease;
+  cursor: pointer;
 
   &::placeholder {
     color: #999 !important;
   }
 
-  &:hover,
+  &:hover {
+    border-color: #374c45 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #ffffff !important;
+  }
+
   &:focus {
     border-color: #374c45 !important;
     outline: none !important;
     box-shadow: none !important;
     background-color: #ffffff !important;
+    cursor: text; // Normal text cursor on focus
   }
 
   &.is-invalid {
