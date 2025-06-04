@@ -3,6 +3,7 @@
 @use 'buttons' as *;
 @use 'inputs' as *;
 @use 'login' as *;
+@use 'paginator' as *;
 
 h1 {
   color: $color-soft-black !important;
@@ -130,8 +131,6 @@ select.form-select {
 .bg-sidebar .nav-link {
   text-decoration: none !important;
 }
-
-
 
 input.form-control.disabled-field {
   background-color: #bfbcbe !important;
@@ -366,6 +365,3 @@ html {
   margin: 0;
   background-color: $navbar-sidebar-bg !important;
 }
-
-
-
