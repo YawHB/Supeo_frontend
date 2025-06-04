@@ -5,6 +5,7 @@ import {
   faAngleDoubleLeft,
   faAngleDoubleRight,
 } from '@fortawesome/free-solid-svg-icons'
+import Select from 'react-select'
 
 const Paginator = ({ paginationState, onPageChange, onPerPageChange, perPageOptions, totalPages }) => {
   const { page, perPage } = paginationState
@@ -28,6 +29,23 @@ const Paginator = ({ paginationState, onPageChange, onPerPageChange, perPageOpti
           </option>
         ))}
       </select>
+      {/* <Select
+        isSearchable={false}
+        value={perPage}
+        classNamePrefix='per-page-select'
+        placeholder=''
+        options={perPageOptions.map((opt) => ({ value: opt, label: opt }))}
+        onChange={(e) => onPerPageChange(Number(e.target.value))}
+        style={{
+          width: perPage >= 100 ? '69px' : '60px',
+        }}
+      >
+        {perPageOptions.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt}
+          </option>
+        ))}
+      </Select> */}
 
       <button
         className='btn-paginator'
