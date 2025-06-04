@@ -130,6 +130,7 @@ const AdminEmployeesPage = () => {
           onPageChange={state.pagination.setPage}
           onPerPageChange={state.pagination.setPerPage}
           perPageOptions={state.pagination.perPageOptions}
+          totalPages={state.pagination.totalPages}
         />
       </div>
 

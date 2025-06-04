@@ -133,5 +133,8 @@
     "sign_up": "tilmeld dig",
     "or_sign_up": "eller tilmeld dig",
     "or": "eller"
+  },
+  "paginator": {
+    "per_page": "per side"
   }
 }

@@ -134,5 +134,8 @@
     "sign_up": "sign up",
     "or_sign_up": "or sign up",
     "or": "or"
+  },
+  "paginator": {
+    "per_page": "per side"
   }
 }
