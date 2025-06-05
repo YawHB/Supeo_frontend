@@ -21,20 +21,21 @@ export function calculateWorkHours(startDate, startTime, endDate, endTime) {
 
   if (B > A && minutes2 < minutes1) {
     console.log('NatteArbejde')
-    return `${hours + 24} timer, ${minutes === 0 ? minutes : minutes + 60} minutter`
+    const adjustedMinutes = minutes === 0 ? 0 : minutes + 60
+    return `${hours + 24} timer, ${formatMinutes(adjustedMinutes)}`
   }
 
   if (timeDif > 0 && dayDiffInMs > 0) {
     console.log('Flere dages arbejde')
-    return `${dayDiffInMs} dage, ${hours} timer, ${minutes} minutter`
+    return `${dayDiffInMs} dage, ${hours} timer, ${formatMinutes(minutes)}`
   }
 
   if (timeDif < 0 && Math.abs(timeDif) > dayInMs) {
     console.log('Negativt flerdages arbejde (brugerfejl)')
-    return `-${Math.abs(dayDiffInMs)} dage, ${hours} timer, ${minutes} minutter`
+    return `-${Math.abs(dayDiffInMs)} dage, ${hours} timer, ${formatMinutes(minutes)}`
   }
 
-  return `${hours} timer, ${minutes} minutter`
+  return `${hours} timer, ${formatMinutes(minutes)}`
 }
 
 function calculateDaysWorked(year, month, day) {
@@ -85,4 +86,10 @@ export function calculateWorkDurationInMinutes(startDate, startTime, endDate, en
   const diffInMinutes = Math.floor(diffInMs / (1000 * 60)) // konverter millisekunder til hele minutter
 
   return `${diffInMinutes}`
+}
+
+ // Helper function to format minutes properly (singular/plural)
+ function formatMinutes(m) {
+  if (m === 1) return '1 minut' // singular
+  return `${m} minutter` // plural
 }

@@ -28,6 +28,11 @@ export const EmployeeTimeEntriesPage = () => {
                 value={state.searchInput.value}
                 onChange={state.searchInput.onChange}
                 placeholder={translate('admin.search_time_entry')}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') {
+                    state.searchInput.onChange({ target: { value: '' } })
+                  }
+                }}
               />
               <Button
                 outline

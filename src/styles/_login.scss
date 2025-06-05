@@ -1,0 +1,21 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  background-color: transparent;
+}
+
+.login-container form {
+  width: 100%;
+  max-width: 600px;
+  height: 400px; /* <-- Add or modify this line */
+  background: #e8e8e3;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+}

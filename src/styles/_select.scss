@@ -1,0 +1,177 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+.employee-role-select {
+  &__control {
+    border-radius: 2rem !important;
+    border: 1px solid #ccc !important;
+    min-height: 38px;
+    font-weight: 400;
+    box-shadow: none !important;
+    flex-wrap: nowrap !important;
+
+    &:hover {
+      border-color: #374c45 !important;
+    }
+  }
+
+  &__value-container {
+    color: #34363c !important;
+    flex-wrap: nowrap !important; // prevent wrapping of placeholder & pills
+  }
+
+  &__multi-value {
+    background-color: #374c45 !important;
+    border-radius: 1rem !important;
+    margin-left: 0 !important;
+
+    &:first-of-type {
+      margin-left: -4px !important;
+    }
+    margin-left: 0 !important;
+    padding: 1px 4px !important;
+
+    & + & {
+      margin-left: 2px !important;
+    }
+  }
+
+  &__multi-value__label {
+    color: #e8e8e3 !important;
+    font-weight: 600 !important;
+  }
+
+  &__multi-value__remove {
+    color: #e8e8e3 !important;
+    //margin-left: 4px;   skal ikke bruge
+
+    &:hover {
+      background-color: #c0392b !important;
+      color: #fff !important;
+      border-radius: 50%;
+    }
+  }
+
+  &__placeholder {
+    color: #999 !important;
+  }
+
+  &__single-value {
+    color: #34363c;
+  }
+
+  &__menu {
+    background-color: #f3f3f1 !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    z-index: 20;
+  }
+
+  &__menu-list {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  &__option {
+    color: #34363c !important;
+    padding: 0.5rem 1rem !important;
+    font-weight: 400;
+
+    &--is-selected {
+      background-color: #374c45 !important;
+      color: #e8e8e3 !important;
+    }
+
+    &--is-focused {
+      background-color: #e0e0dd !important;
+    }
+  }
+
+  // dette er til at fjerne den grå streg mellem dropdown og select
+  // &__indicator-separator {
+  //   display: none;
+  // }
+
+  &__dropdown-indicator {
+    color: #374c45 !important;
+  }
+
+  &__clear-indicator {
+    color: #c0392b !important;
+    margin-left: -13px !important; // default margin is 8px
+
+    &:hover {
+      color: #a83232 !important;
+    }
+  }
+}
+
+.employee-role-select__control {
+  white-space: nowrap !important;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  min-height: 34px !important; // reduce from 38px to 32px
+  height: 34px !important; // force exact height
+}
+
+.employee-role-select__value-container {
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.employee-role-select__single-value {
+  white-space: nowrap !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.employee-role-select__multi-value {
+  white-space: nowrap !important;
+}
+
+.employee-role-select__multi-value__label {
+  white-space: nowrap !important;
+}
+
+.employee-role-select__menu {
+  border: 1px solid #374c45 !important;
+  border-radius: 1rem !important;
+  background-color: #f3f3f1 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+  z-index: 20 !important;
+  overflow: hidden !important;
+}
+
+.employee-role-select__option {
+  border-radius: 0;
+
+  &:first-child.employee-role-select__option--is-focused {
+    border-top-left-radius: 1rem !important;
+  }
+
+  &:last-child.employee-role-select__option--is-focused {
+    border-bottom-left-radius: 1rem !important;
+  }
+}
+
+select.form-select {
+  width: 100%;
+  padding: 0.375rem 0.75rem !important;
+  border-radius: 2rem !important;
+
+  &.admin-status-fixed-width {
+    min-width: 100px;
+    max-width: 100px;
+  }
+}
+
+.employee-role-select__control,
+.employee-role-select__multi-value,
+.employee-role-select__multi-value__remove,
+.employee-role-select__dropdown-indicator {
+  cursor: pointer !important;
+}

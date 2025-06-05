@@ -3,6 +3,8 @@ import { Row, Col, Table, Input, Button } from 'reactstrap'
 import { faFileExcel } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import useTimeEntriesPageState from './adminTimeEntriesPageState.js'
+import { faX } from '@fortawesome/free-solid-svg-icons'
+import { faFilter } from '@fortawesome/free-solid-svg-icons'
 
 const statusClassMap = {
   AFVENTER: 'admin-status-select--pending',
@@ -24,12 +26,59 @@ const AdminTimeEntriesPage = () => {
           <Col xs={12} className='d-flex justify-content-between gap-4'>
             <h1>{translate('nav_bar.admin_time_entries')}</h1>
             <div className='d-flex align-items-center gap-4'>
+              {(state.filters.startDate || state.filters.endDate) && (
+                // <Button
+                //   color='danger'
+                //   type='button'
+                //   outline
+                //   onClick={() => state.setFilters({ startDate: '', endDate: '' })}
+                //   className='reset-filters-button'
+                // >
+                //   {translate('admin.clear_filters')}
+                //   <FontAwesomeIcon icon={faX} className='me-2' />
+                // </Button>
+                <Button
+                  color='danger'
+                  type='button'
+                  onClick={() => state.setFilters({ startDate: '', endDate: '' })}
+                  className='reset-filters-text-button'
+                >
+                  {/* {translate('admin.clear_filters')} */}
+                  <FontAwesomeIcon icon={faFilter} />
+                  <FontAwesomeIcon icon={faX} className='ms-2' />
+                </Button>
+              )}
+
+              <Input
+                id='startDate'
+                type='date'
+                className='date-filter-input'
+                value={state.filters.startDate}
+                placeholder={translate('admin.select_start_date')}
+                onChange={(e) => state.setFilters({ ...state.filters, startDate: e.target.value })}
+              />
+
+              <Input
+                id='endDate'
+                type='date'
+                className='date-filter-input'
+                value={state.filters.endDate}
+                placeholder={translate('admin.select_end_date')}
+                onChange={(e) => state.setFilters({ ...state.filters, endDate: e.target.value })}
+              />
+
               <Input
                 className='time-entry-search-input'
                 value={state.searchInput.value}
                 onChange={state.searchInput.onChange}
                 placeholder={translate('admin.search_time_entry')}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') {
+                    state.searchInput.onChange({ target: { value: '' } })
+                  }
+                }}
               />
+
               <Button outline color='primary' className='no-wrap' onClick={state.handleExportTable}>
                 <FontAwesomeIcon icon={faFileExcel} className='me-2' />
                 <span>{translate('export')}</span>

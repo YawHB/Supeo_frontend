@@ -81,8 +81,11 @@
     "search_time_entry": "Søg efter tidsregistrering",
     "select_employee_role": "Vælg brugergrupper",
     "select_employee_permission": "Vælg rettigheder",
+    "select_start_date": "Vælg startdato",
+    "select_end_date": "Vælg slutdato",
     "create_new_employee": "Opret ny medarbejder",
-    "export": "Eksporter"
+    "export": "Eksporter",
+    "clear_filters": "Ryd filtre"
   },
   "time_entry": {
     "create_time_entry": "Opret tidsregistrering",
@@ -116,5 +119,27 @@
     "error": "Eksportering mislykkedes",
     "employees_overview": "Medarbejderoversigt",
     "time_entries_overview": "Tidsregistreringsoversigt"
+  },
+  "login": {
+    "login": "Log ind",
+    "username": "Brugernavn",
+    "email": "Email",
+    "password": "Adgangskode",
+    "login_button": "Log ind",
+    "forgot_password": "Glemt adgangskode?",
+    "remember_me": "Husk mig",
+    "login_title": "Log ind på dit tidsregistreringssystem",
+    "welcome": "Velkommen"
+  },
+  "sign_up": {
+    "sign_up": "tilmeld dig",
+    "or_sign_up": "eller tilmeld dig",
+    "or": "eller"
+  },
+  "paginator": {
+    "per_page": "per side"
+  },
+  "logout": {
+    "logout": "Log ud"
   }
 }

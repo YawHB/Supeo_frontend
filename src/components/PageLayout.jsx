@@ -12,7 +12,6 @@ const PageLayout = () => {
 
   return (
     <>
-      <div className='app-background'></div>
       <NavBar />
       <div className='page-frame'>
         {/* <SideBar

@@ -7,7 +7,9 @@ const AdminHomePage = () => {
 
   return (
     <div className='d-flex'>
-      <h1>Admin Homepage</h1>
+      <h1>
+        Admin homepage
+      </h1>
     </div>
   )
 }

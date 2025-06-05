@@ -1,0 +1,83 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+.table {
+  background-color: $table-bg !important;
+}
+
+.table {
+  thead {
+    background-color: $table-header-row-bg !important;
+    th {
+      background-color: $table-header-row-bg !important;
+      color: #34363c !important;
+      font-weight: 600;
+      user-select: none;
+      cursor: pointer;
+      white-space: nowrap;
+      &:first-child {
+        border-top-left-radius: $table-border-radius !important;
+      }
+      &:last-child {
+        border-top-right-radius: $table-border-radius !important;
+      }
+    }
+  }
+
+  tbody {
+    tr:nth-child(odd) {
+      background-color: $table-row-bg-1 !important;
+    }
+
+    tr:nth-child(even) {
+      background-color: $table-row-bg-2 !important;
+    }
+
+    td {
+      color: #34363c !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:last-child {
+      td {
+        &:first-child {
+          border-bottom-left-radius: $table-border-radius !important;
+        }
+
+        &:last-child {
+          border-bottom-right-radius: $table-border-radius !important;
+        }
+      }
+    }
+    tr:hover td {
+      background-color: #f3f3f1 !important; // Hover over tabel rows med farve
+    }
+  }
+
+  td,
+  th {
+    vertical-align: middle !important;
+  }
+}
+
+th svg {
+  max-width: 10px;
+}
+
+th svg.asc {
+  transform: rotate(0deg);
+}
+
+th svg.desc {
+  transform: rotate(180deg);
+}
+
+.clickable-cell {
+  cursor: pointer !important;
+}

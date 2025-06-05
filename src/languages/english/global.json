@@ -81,8 +81,11 @@
     "search_time_entry": "Search for time entry",
     "select_employee_role": "Select usergroups",
     "select_employee_permission": "Select permissions",
+    "select_start_date": "Select start date",
+    "select_end_date": "Select end date",
     "create_new_employee": "Create new employee",
-    "export": "Export"
+    "export": "Export",
+    "clear_filters": "Clear filters"
   },
   "time_entry": {
     "create_time_entry": "Create time entry",
@@ -116,5 +119,28 @@
     "error": "Error exporting",
     "employees_overview": "Employees Overview",
     "time_entries_overview": "Time Entries Overview"
+  },
+  "login": {
+    "login": "Login",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "login_button": "Login",
+    "forgot_password": "Forgot password?",
+    "remember_me": "Remember me",
+    "login_error": "Login failed, please check your credentials",
+    "page_title": "Login to my Time Tracker",
+    "welcome": "Welcome"
+  },
+  "sign_up": {
+    "sign_up": "sign up",
+    "or_sign_up": "or sign up",
+    "or": "or"
+  },
+  "paginator": {
+    "per_page": "per side"
+  },
+  "logout": {
+    "logout": "Log ud"
   }
 }

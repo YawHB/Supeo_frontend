@@ -40,6 +40,11 @@ const AdminEmployeesPage = () => {
                 }}
                 classNamePrefix='employee-role-select'
                 placeholder={translate('admin.select_employee_role')}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape' || e.key === 'Esc') {
+                    state.searchInput.onChange({ target: { value: '' } })
+                  }
+                }}
               />
               <Select
                 isSearchable={false}
@@ -61,10 +66,15 @@ const AdminEmployeesPage = () => {
                 placeholder={translate('admin.select_employee_permission')}
               />
               <Input
-                className='search-input'
+                className='time-entry-search-input'
                 value={state.searchInput.value}
                 onChange={state.searchInput.onChange}
-                placeholder={translate('admin.search_employee')}
+                placeholder={translate('admin.search_time_entry')}
+                onKeyDown={(e) => {
+                  if (e.key === 'Escape') {
+                    state.searchInput.onChange({ target: { value: '' } })
+                  }
+                }}
               />
               <Button outline color='primary' className='no-wrap' onClick={state.handleExportTable}>
                 <FontAwesomeIcon icon={faFileExcel} className='me-2' />
@@ -129,6 +139,7 @@ const AdminEmployeesPage = () => {
           onPageChange={state.pagination.setPage}
           onPerPageChange={state.pagination.setPerPage}
           perPageOptions={state.pagination.perPageOptions}
+          totalPages={state.pagination.totalPages}
         />
       </div>
 

@@ -12,6 +12,7 @@ import { calculateWorkDurationInMinutes } from '../../../utils/calculateWorkHour
 import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
 import { handleMemberAuthError } from '../../../utils/errorHandling.js'
 import useSort from '../../../hooks/useSort.js'
+import { GET_ALL_FILTERED_TIME_ENTRIES } from '../../../services/time-entry/queries.js'
 
 const useTimeEntriesPageState = () => {
   const navigate = useNavigate()
@@ -21,6 +22,10 @@ const useTimeEntriesPageState = () => {
   const [timeEntries, setTimeEntries] = useState([])
   const [editingRowIndex, setEditingRowIndex] = useState(null)
   const { orderBy, orderDirection, sort, sortIcon } = useSort('id', 'ASC')
+  const [filters, setFilters] = useState({
+    startDate: '',
+    endDate: '',
+  })
 
   const searchInput = useDebouncedInput('', 300)
 
@@ -87,6 +92,19 @@ const useTimeEntriesPageState = () => {
     fetchPolicy: 'cache-first',
     onCompleted: (data) => setTimeEntries(data.timeEntries),
     onError: (errors) => handleMemberAuthError(errors, navigate),
+    skip: filters.startDate || filters.endDate, // Skip this query when filters are active
+  })
+
+  const { loading: isLoadingFilteredTimeEntries } = useQuery(GET_ALL_FILTERED_TIME_ENTRIES, {
+    variables: {
+      filter: {
+        startDate: filters.startDate,
+        endDate: filters.endDate,
+      },
+    },
+    fetchPolicy: 'cache-first',
+    onCompleted: (data) => setTimeEntries(data.filteredTimeEntries),
+    skip: !(filters.startDate || filters.endDate), // Skip this when no filters
   })
 
   const [updateTimeEntryStatus] = useMutation(UPDATE_TIME_ENTRY_STATUS)
@@ -208,6 +226,9 @@ const useTimeEntriesPageState = () => {
     orderDirection,
     sort,
     sortIcon,
+    isLoadingFilteredTimeEntries,
+    filters,
+    setFilters,
   }
 }
 

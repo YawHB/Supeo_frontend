@@ -1,0 +1,273 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+.btn-primary {
+  background-color: #374c45 !important;
+  border: 1px solid #374c45 !important;
+  color: #e8e8e3 !important;
+  border-radius: 1rem !important;
+  font-weight: 600 !important;
+}
+
+.btn-outline-primary {
+  background-color: transparent !important;
+  border: 1px solid #374c45 !important;
+  color: #374c45 !important;
+  border-radius: 2rem !important;
+  font-weight: 600 !important;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #374c45 !important;
+    color: #e8e8e3 !important;
+  }
+}
+
+.btn-secondary {
+  background-color: #6c757d !important;
+  border: 1px solid #6c757d !important;
+  color: #e8e8e3 !important;
+  border-radius: 1rem !important;
+  font-weight: 600 !important;
+}
+
+.btn-danger {
+  background-color: #c0392b !important;
+  border: 1px solid #c0392b !important;
+  color: #e8e8e3 !important;
+  border-radius: 1rem !important;
+  font-weight: 600 !important;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #c0392b, 10% !important;
+    border-color: #c0392b, 10% !important;
+    color: #e8e8e3 !important;
+  }
+}
+
+.btn-outline-danger {
+  background-color: transparent !important;
+  border: 1px solid #c0392b !important;
+  color: #c0392b !important;
+  border-radius: 2rem !important;
+  font-weight: 600 !important;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #c0392b !important;
+    color: #e8e8e3 !important;
+  }
+}
+
+.status-button {
+  border: 1px solid #374c45 !important;
+  font-weight: 400 !important;
+  border-radius: 2rem !important;
+  min-width: 37px; // hourglass simple tweaking of width
+}
+
+.status-select--pending {
+  border: 1px solid #f0a500 !important;
+  color: #f0a500 !important;
+  background-color: transparent !important;
+
+  &:hover,
+  &:focus {
+    background-color: #f0a500 !important;
+    color: #34363c !important;
+  }
+}
+
+.status-select--approve {
+  border: 1px solid #4c9a4c !important;
+  color: #4c9a4c !important;
+  background-color: transparent !important;
+
+  &:hover,
+  &:focus {
+    background-color: #4c9a4c !important;
+    color: #ffffff !important;
+  }
+}
+
+.status-select--reject {
+  border: 1px solid #c0392b !important;
+  color: #c0392b !important;
+  background-color: transparent !important;
+
+  &:hover,
+  &:focus {
+    background-color: #c0392b !important;
+    color: #ffffff !important;
+  }
+}
+
+.status-select--underway {
+  border: 1px solid #7f8c8d !important;
+  color: #7f8c8d !important;
+  background-color: transparent !important;
+  cursor: not-allowed;
+
+  &:hover,
+  &:focus {
+    background-color: #7f8c8d !important;
+    color: #ffffff !important;
+  }
+}
+
+.admin-status-select--pending {
+  background-color: #f0a500 !important;
+  color: #34363c !important;
+  border: 1px solid #374c45 !important;
+
+  &:hover,
+  &:focus {
+    background-color: transparent !important;
+    color: #f0a500 !important;
+    border-color: #f0a500 !important;
+  }
+}
+
+.admin-status-select--approve {
+  background-color: #4c9a4c !important;
+  color: #ffffff !important;
+  border: 1px solid #374c45 !important;
+
+  &:hover,
+  &:focus {
+    background-color: transparent !important;
+    color: #4c9a4c !important;
+    border-color: #4c9a4c !important;
+  }
+}
+
+.admin-status-select--reject {
+  background-color: #c0392b !important;
+  color: #ffffff !important;
+  border: 1px solid #374c45 !important;
+
+  &:hover,
+  &:focus {
+    background-color: transparent !important;
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+  }
+}
+
+.admin-status-select--underway {
+  background-color: #7f8c8d !important;
+  color: #ffffff !important;
+  border: 1px solid #374c45 !important;
+  cursor: not-allowed;
+
+  &:hover,
+  &:focus {
+    background-color: transparent !important;
+    color: #7f8c8d !important;
+    border-color: #7f8c8d !important;
+  }
+}
+
+.admin-status-select--pending:focus,
+.admin-status-select--approve:focus,
+.admin-status-select--reject:focus,
+.admin-status-select--underway:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.username-button,
+.password-button {
+  width: 100%;
+  border: 1px solid transparent !important;
+  border-radius: 1rem !important;
+  padding: 0.5rem;
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+
+  &:hover,
+  &:active,
+  &:focus {
+    border-color: #2d3f38 !important;
+  }
+
+  &:focus {
+    cursor: text; // 👈 This removes the pointer on focus and shows text cursor
+  }
+}
+
+
+.login-button {
+  width: 100%;
+  background-color: #374c45 !important; /* same as input border */
+  border: 1px solid #374c45 !important;
+  color: #e8e8e3 !important;
+  border-radius: 1rem !important;
+  font-weight: 600 !important;
+  padding: 0.5rem;
+
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: #2d3f38 !important;
+    border-color: #2d3f38 !important;
+    color: #e8e8e3 !important;
+  }
+}
+
+.reset-filters-button {
+  background: transparent;
+  border: 1px solid #c0392b;
+  color: #c0392b;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  line-height: 1;
+  border-radius: 2rem !important;
+
+  &:hover,
+  &:focus-visible {
+    background-color: #c0392b;
+    color: #e8e8e3;
+    border-color: #c0392b;
+  }
+}
+
+.reset-filters-text-button {
+  background-color: #c0392b;
+  color: #e8e8e3;
+  border: 1px solid #c0392b;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  font-weight: 600 !important;
+  line-height: 1;
+  border-radius: 2rem !important;
+
+  &:hover,
+  &:focus-visible {
+    background: transparent;
+    color: #c0392b;
+    border-color: #c0392b;
+  }
+}
+
+.status-icon--pending {
+  color: #f0a500 !important;
+}
+
+.status-icon--approve {
+  color: #4c9a4c !important;
+}
+
+.status-icon--reject {
+  color: #c0392b !important;
+}
+
+.status-icon--underway {
+  color: #7f8c8d !important;
+}

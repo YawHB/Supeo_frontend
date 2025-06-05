@@ -3,11 +3,13 @@ import { Nav, Navbar, NavItem, Collapse, Button, NavLink, NavbarBrand, NavbarTog
 import { Link } from 'react-router-dom'
 import useNavBarState from './NavBarState'
 import { Fragment } from 'react/jsx-runtime'
-import { faSignOut } from '@fortawesome/free-solid-svg-icons'
+import { faSignOut, faHouse } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useTranslation } from 'react-i18next'
 
 const NavBar = () => {
   const { logOff, navItems, isBurgerCollapsed, toggleBurgerCollapsed } = useNavBarState()
+  const [translate] = useTranslation('global')
 
   return (
     <>
@@ -26,6 +28,12 @@ const NavBar = () => {
         <Collapse isOpen={!isBurgerCollapsed} navbar>
           <div className='w-100 d-flex justify-content-md-end justify-content-center'>
             <Nav navbar className='flex-column align-items-center flex-md-row gap-3'>
+              <NavItem>
+                <NavLink tag={Link} to='/' className='text-light'>
+                  <FontAwesomeIcon icon={faHouse} size='xl' />
+                </NavLink>
+              </NavItem>
+
               {navItems.map((item) => (
                 <Fragment key={item.label}>
                   <NavItem>
@@ -35,13 +43,14 @@ const NavBar = () => {
                   </NavItem>
                 </Fragment>
               ))}
+
               <NavItem
                 className='d-none d-md-block mx-2 bg-light'
                 style={{ width: '1px', height: '24px' }}
               />
               <Button onClick={logOff} color='default' className='text-light'>
                 <FontAwesomeIcon size='xl' className='icon pe-2' icon={faSignOut} />
-                <span>Log af</span>
+                {translate('logout.logout')}
               </Button>
             </Nav>
           </div>

@@ -1,0 +1,18 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+.bg-sidebar a,
+.bg-sidebar .nav-link {
+  text-decoration: none !important;
+}
+
+.bg-sidebar {
+  background-color: $navbar-sidebar-bg !important;
+  color: contrast($navbar-sidebar-bg) !important;
+}
+
+.topnav,
+.navbar.bg-sidebar {
+  background-color: $navbar-sidebar-bg !important;
+  color: contrast($navbar-sidebar-bg) !important;
+}
