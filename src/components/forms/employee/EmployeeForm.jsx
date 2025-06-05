@@ -25,6 +25,8 @@ const EmployeeForm = ({ onSubmit, employee = null, errorMessages = null }) => {
     })
   }
 
+  const hideRoleAndPermissionFields = context.user?.permissionLevel !== 'Member'
+
   const shouldShowPasswordFields =
     context.user?.permissionLevel === 'Member' ||
     (context.user?.permissionLevel === 'Admin' && employee === null)
@@ -118,69 +120,73 @@ const EmployeeForm = ({ onSubmit, employee = null, errorMessages = null }) => {
         </Row>
 
         <Row>
-          <Col md={6}>
-            <FormGroup>
-              <Label for='employeeRole'>{translate('user_group')}</Label>
-              <span className='text-danger'>*</span>
-              <Input
-                id='employeeRole'
-                name='employeeRole'
-                className='form-control'
-                type='select'
-                value={input.employeeRoleName.value}
-                onChange={input.employeeRoleName.onChange}
-                required
-              >
-                <option value='' disabled>
-                  {translate('user_group_placeholder')}
-                </option>
-                {state.roles.map((role) => (
-                  <option key={role.id} value={role.roleName}>
-                    {role.roleName}
-                  </option>
-                ))}
-              </Input>
-            </FormGroup>
-          </Col>
-          <Col md={6}>
-            <FormGroup>
-              <Label for='employeePermission'>
-                {translate('permission')}
-                <span className='text-danger'>*</span>
-              </Label>
-              <Input
-                id='employeePermission'
-                name='employeePermission'
-                type='select'
-                className='form-control'
-                value={input.employeePermissionLevel.value}
-                onChange={input.employeePermissionLevel.onChange}
-                required
-              >
-                <option value='' disabled>
-                  {translate('permission_placeholder')}
-                </option>
-                {state.permissions.map((permission) => (
-                  <option key={permission.id} value={permission.permissionLevel}>
-                    {permission.permissionLevel}
-                  </option>
-                ))}
-              </Input>
-            </FormGroup>
-          </Col>
+          {hideRoleAndPermissionFields && (
+            <>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for='employeeRole'>{translate('user_group')}</Label>
+                  <span className='text-danger'>*</span>
+                  <Input
+                    id='employeeRole'
+                    name='employeeRole'
+                    className='form-control'
+                    type='select'
+                    value={input.employeeRoleName.value}
+                    onChange={input.employeeRoleName.onChange}
+                    required
+                  >
+                    <option value='' disabled>
+                      {translate('user_group_placeholder')}
+                    </option>
+                    {state.roles.map((role) => (
+                      <option key={role.id} value={role.roleName}>
+                        {role.roleName}
+                      </option>
+                    ))}
+                  </Input>
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for='employeePermission'>
+                    {translate('permission')}
+                    <span className='text-danger'>*</span>
+                  </Label>
+                  <Input
+                    id='employeePermission'
+                    name='employeePermission'
+                    type='select'
+                    className='form-control'
+                    value={input.employeePermissionLevel.value}
+                    onChange={input.employeePermissionLevel.onChange}
+                    required
+                  >
+                    <option value='' disabled>
+                      {translate('permission_placeholder')}
+                    </option>
+                    {state.permissions.map((permission) => (
+                      <option key={permission.id} value={permission.permissionLevel}>
+                        {permission.permissionLevel}
+                      </option>
+                    ))}
+                  </Input>
+                </FormGroup>
+              </Col>
+            </>
+          )}
           {shouldShowPasswordFields && (
             <>
               <Col md={6}>
                 <FormGroup>
                   <Label for='Kodeord'>
-                    {translate('Password')}
+                    {translate('password')}
                     <span className='text-danger'>*</span>
                   </Label>
                   <Input
                     id='password'
                     name='password'
                     placeholder={translate('password_placeholder')}
-                    type='text'
+                    type='password'
                     value={input.password.value}
                     onChange={input.password.onChange}
                     required
@@ -190,14 +196,14 @@ const EmployeeForm = ({ onSubmit, employee = null, errorMessages = null }) => {
               <Col md={6}>
                 <FormGroup>
                   <Label for='Kodeord'>
-                    {translate('Password')}
+                    {translate('password')}
                     <span className='text-danger'>*</span>
                   </Label>
                   <Input
                     id='confirmPassword'
                     name='confirmPassword'
                     placeholder={translate('password_placeholder')}
-                    type='text'
+                    type='password'
                     value={input.confirmPassword.value}
                     onChange={input.confirmPassword.onChange}
                     required
