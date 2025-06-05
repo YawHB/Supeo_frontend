@@ -48,8 +48,6 @@ export const useLoginPageState = () => {
         context.login(userData.token)
       },
       onError: ({ graphQLErrors }) => {
-        console.log('inside GQL error')
-        console.error('hvad sker der: ', graphQLErrors)
         setErrors(graphQLErrors)
       },
     })

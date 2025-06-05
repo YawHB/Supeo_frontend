@@ -14,6 +14,8 @@
   "email_placeholder": "email@eksempel.com",
   "phone": "Telefon",
   "phone_placeholder": "11223344",
+  "password": "Kodeord",
+  "password_placeholder": "kodeord",
   "employees": "Medarbejdere",
   "company_id": "Firma ID",
   "company": "Firma",
@@ -86,6 +88,9 @@
     "create_new_employee": "Opret ny medarbejder",
     "export": "Eksporter",
     "clear_filters": "Ryd filtre"
+  },
+  "employee": {
+    "update_my_profile": "Opdater min profil"
   },
   "time_entry": {
     "create_time_entry": "Opret tidsregistrering",
