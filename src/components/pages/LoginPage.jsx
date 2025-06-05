@@ -152,11 +152,7 @@ export function LoginPage() {
                   </Button>
                 </Col>
               </Row>
-              <div style={{ marginTop: '1rem', color: '#374c45', fontWeight: '500' }}>
-                <span>{state.translate('sign_up.or')} </span>
-                <span style={{ cursor: 'pointer' }} onClick={() => {}}>
-                  {state.translate('sign_up.sign_up')}
-                </span>
+              <div style={{ marginTop: '1rem', color: '#374c45', fontWeight: '500' }}>                
               </div>
             </div>
           </div>
