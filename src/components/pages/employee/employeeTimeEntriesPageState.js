@@ -2,15 +2,18 @@ import { useState } from 'react'
 import { Button } from 'reactstrap'
 import { useTranslation } from 'react-i18next'
 import { useModalState } from '../../../hooks/useModalState.js'
-import { useApolloClient, useMutation, useQuery } from '@apollo/client'
+import { useApolloClient, useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import {
   CREATE_TIME_ENTRY,
   DELETE_TIME_ENTRY,
   UPDATE_TIME_ENTRY,
 } from '../../../services/time-entry/mutations.js'
+
+import { UPDATE_EMPLOYEE } from '../../../services/employee/mutations.js'
 import {
   GET_TIME_ENTRIES_FOR_EMPLOYEE,
   SEARCH_TIME_ENTRIES_FOR_EMPLOYEE,
+  GET_EMPLOYEE_BY_ID,
 } from '../../../services/employee/queries.js'
 import { faTrashCan, faPencil } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -53,10 +56,12 @@ export const useTimeEntriesPageState = () => {
 
   const timeEntryFormModalState = useModalState()
   const notificationInfoModalState = useModalState()
+  const employeeFormModalState = useModalState()
 
   const resetErrorMessages = () => setErrorMessages(null)
 
   const [errorMessages, setErrorMessages] = useState(null)
+  const [employeeToUpdate, setEmployeeToUpdate] = useState(null)
   const [timeEntriesData, setTimeEntriesData] = useState([])
   const [openNotification, setOpenNotification] = useState(null)
   const [isLoadingTimeEntriesForm, setIsLoadingTimeEntriesForm] = useState(false)
@@ -185,6 +190,52 @@ export const useTimeEntriesPageState = () => {
     variables: { id: user?.employee_id },
     skip: !user,
   })
+
+  const [getEmployeeById] = useLazyQuery(GET_EMPLOYEE_BY_ID, {
+    onCompleted: (data) => {
+      console.log(data)
+
+      setEmployeeToUpdate(data.employeeByID)
+      employeeFormModalState.openModal()
+    },
+    onError: (error) => {
+      console.error('Fejl D: ', error.message)
+    },
+  })
+
+  const [updateEmployee] = useMutation(UPDATE_EMPLOYEE, {
+    onCompleted: (data) => {
+      console.log('Employee updated:', data.updateEmployee)
+      employeeFormModalState.closeModal()
+      setEmployeeToUpdate(null)
+    },
+    onError: (error) => {
+      console.error('Fejl ved opdatering af medarbejder:', error.message)
+      setErrorMessages([error.message])
+    },
+  })
+
+  const handleSubmitEmployeeUpdate = (updatedEmployeeInput) => {
+    if (!user?.employee_id) return
+
+    console.log(user.employee_id)
+    console.log(updatedEmployeeInput)
+    console.log('inside handleSubmitEmployeeUpdate')
+    updateEmployee({
+      variables: {
+        updateEmployeeId: user.employee_id,
+        updatedEmployee: updatedEmployeeInput,
+      },
+    })
+  }
+
+  const handleClickUpdateEmployee = () => {
+    if (!employeeId) {
+      console.error('Ingen employee id fundet')
+      return
+    }
+    getEmployeeById({ variables: { id: employeeId } })
+  }
 
   const { loading: isLoadingTimeEntriesForEmployee } = useQuery(SEARCH_TIME_ENTRIES_FOR_EMPLOYEE, {
     variables: {
@@ -322,5 +373,9 @@ export const useTimeEntriesPageState = () => {
     sortIcon,
     statusClassMap,
     statusIconMap,
+    handleClickUpdateEmployee,
+    employeeToUpdate,
+    employeeFormModalState,
+    handleSubmitEmployeeUpdate,
   }
 }

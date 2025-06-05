@@ -4,10 +4,15 @@ import { useTimeEntriesPageState } from './employeeTimeEntriesPageState.js'
 import NotificationForm from '../../forms/notification/NotificationForm.jsx'
 import { Row, Col, Table, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSave, faClock } from '@fortawesome/free-solid-svg-icons'
+import { faSave, faClock, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { useContext } from 'react'
+import { AuthContext } from '../../context/authContext.js'
+import EmployeeForm from '../../forms/employee/EmployeeForm.jsx'
 
 export const EmployeeTimeEntriesPage = () => {
   const state = useTimeEntriesPageState()
+  const context = useContext(AuthContext)
+
   const [translate] = useTranslation('global')
 
   document.title = translate('nav_bar.admin_employees')
@@ -42,6 +47,21 @@ export const EmployeeTimeEntriesPage = () => {
               >
                 <FontAwesomeIcon icon={faClock} className='me-2' />
                 <span>{translate('time_entry.create_time_entry')}</span>{' '}
+              </Button>
+              <Button
+                outline
+                color='primary'
+                className='no-wrap'
+                onClick={() => {
+                  console.log('clicked', context.user?.employee_id)
+                  {
+                    state.handleClickUpdateEmployee()
+                  }
+                }}
+              >
+                <FontAwesomeIcon icon={faUserPlus} className='me-2' />
+
+                <span>{translate(`employee.update_my_profile`)}</span>
               </Button>
             </div>
           </Col>
@@ -160,10 +180,7 @@ export const EmployeeTimeEntriesPage = () => {
         </ModalHeader>
 
         <ModalBody>
-          <NotificationForm
-            notification={state.openNotification?.notification}
-            //readOnly={true}
-          />
+          <NotificationForm notification={state.openNotification?.notification} />
         </ModalBody>
 
         <ModalFooter>
@@ -194,6 +211,35 @@ export const EmployeeTimeEntriesPage = () => {
             }}
           >
             {translate('delete')}
+          </Button>
+        </ModalFooter>
+      </Modal>
+      <Modal
+        isOpen={state.employeeFormModalState.isOpen}
+        toggle={state.employeeFormModalState.closeModal}
+        returnFocusAfterClose={false}
+        size='md'
+      >
+        <ModalHeader toggle={state.employeeFormModalState.closeModal}>
+          {translate('employee.update_my_profile')}
+        </ModalHeader>
+
+        <ModalBody>
+          <EmployeeForm
+            employee={state.employeeToUpdate}
+            onSubmit={(updatedEmployee) => {
+              state.handleSubmitEmployeeUpdate(updatedEmployee)
+            }}
+            errorMessages={state.errorMessages}
+          />
+        </ModalBody>
+
+        <ModalFooter>
+          <Button color='secondary' onClick={state.employeeFormModalState.closeModal}>
+            {translate('cancel')}
+          </Button>
+          <Button type='submit' color='primary' form='employeeForm'>
+            {translate('save')}
           </Button>
         </ModalFooter>
       </Modal>
