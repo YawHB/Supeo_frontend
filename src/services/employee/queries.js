@@ -25,6 +25,16 @@ export const GET_TIME_ENTRIES_FOR_EMPLOYEE = gql`
     }
   }
 `
+export const GET_EMPLOYEE_BY_ID = gql`
+  query employeeByID($id: ID!) {
+    employeeByID(id: $id) {
+      firstName
+      lastName
+      email
+      phoneNumber
+    }
+  }
+`
 
 export const GET_ROLES = gql`
   query Roles {
