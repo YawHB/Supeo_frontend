@@ -11,11 +11,11 @@ export function LoginPage() {
 
   return (
     <>
-      {state.errors.length > 0 && (
+      {state.errors && (
         <Alert color='danger' className='mb-4' timeout={{ enter: 150, exit: 150 }}>
           <ul className='mb-0 list-unstyled'>
             {state.errors.map((message, i) => (
-              <li key={i}>{message}</li>
+              <li key={i}>{message.message}</li>
             ))}
           </ul>
         </Alert>
@@ -152,8 +152,7 @@ export function LoginPage() {
                   </Button>
                 </Col>
               </Row>
-              <div style={{ marginTop: '1rem', color: '#374c45', fontWeight: '500' }}>                
-              </div>
+              <div style={{ marginTop: '1rem', color: '#374c45', fontWeight: '500' }}></div>
             </div>
           </div>
         </Form>

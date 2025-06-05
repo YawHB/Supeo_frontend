@@ -19,7 +19,7 @@ export const useLoginPageState = () => {
   const [rememberMe, setRememberMe] = useState(false)
 
   let navigate = useNavigate()
-  const [errors, setErrors] = useState([])
+  const [errors, setErrors] = useState(null)
 
   const { onChange, values, setValues } = useForm(handleLoginSubmitCallBack, {
     email: '',
@@ -49,6 +49,7 @@ export const useLoginPageState = () => {
       },
       onError: ({ graphQLErrors }) => {
         console.log('inside GQL error')
+        console.error('hvad sker der: ', graphQLErrors)
         setErrors(graphQLErrors)
       },
     })
