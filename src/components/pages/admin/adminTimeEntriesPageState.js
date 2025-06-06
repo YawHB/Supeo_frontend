@@ -171,9 +171,7 @@ const useTimeEntriesPageState = () => {
 
   const handleExportTable = () => {
     showToast(translate('export_table.start'), 'info')
-
     const tableToExport = timeEntries
-      .filter((timeEntry) => timeEntry.notification?.status === 'GODKENDT')
       .map((timeEntry) => ({
         id: timeEntry.id,
         firstName: timeEntry.employee?.firstName,
