@@ -11,9 +11,7 @@ const useSort = (initialOrderBy = 'id', initialOrderDirection = 'ASC') => {
   const descendingSortIcon = () => <FontAwesomeIcon icon={faCaretDown} className='ms-1' />
 
   const sortIcon = (columnKey) => {
-    //hvis kolonnen ikke er sorteret, returner neutralt ikon.
     if (columnKey !== orderBy) return neutralSortIcon()
-    // hvis kolonnen er sorteret, returner ikon baseret på retningen
     return orderDirection === 'ASC' ? ascendingSortIcon() : descendingSortIcon()
   }
 

@@ -27,23 +27,12 @@ const AdminTimeEntriesPage = () => {
             <h1>{translate('nav_bar.admin_time_entries')}</h1>
             <div className='d-flex align-items-center gap-4'>
               {(state.filters.startDate || state.filters.endDate) && (
-                // <Button
-                //   color='danger'
-                //   type='button'
-                //   outline
-                //   onClick={() => state.setFilters({ startDate: '', endDate: '' })}
-                //   className='reset-filters-button'
-                // >
-                //   {translate('admin.clear_filters')}
-                //   <FontAwesomeIcon icon={faX} className='me-2' />
-                // </Button>
                 <Button
                   color='danger'
                   type='button'
                   onClick={() => state.setFilters({ startDate: '', endDate: '' })}
                   className='reset-filters-text-button'
                 >
-                  {/* {translate('admin.clear_filters')} */}
                   <FontAwesomeIcon icon={faFilter} />
                   <FontAwesomeIcon icon={faX} className='ms-2' />
                 </Button>
@@ -123,7 +112,6 @@ const AdminTimeEntriesPage = () => {
                       <td>{timeEntry.duration}</td>
                       <td>
                         {timeEntry.comment && (
-                          // title giver hover over text
                           <span className='employee-comment-text' title={timeEntry.comment}>
                             {timeEntry.comment}
                           </span>

@@ -162,7 +162,6 @@ export const EmployeeTimeEntriesPage = () => {
         <ModalBody>
           <NotificationForm
             notification={state.openNotification?.notification}
-            //readOnly={true}
           />
         </ModalBody>
 

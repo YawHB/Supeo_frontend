@@ -16,7 +16,6 @@ body {
   font-size: 14px !important;
   background-color: $navbar-sidebar-bg !important;
   overscroll-behavior: none;
-  //font-size: 14px !important; - kontrollerer font size i hele appen
 }
 
 h1 {
@@ -25,7 +24,7 @@ h1 {
 
 .page-frame {
   display: flex;
-  align-items: flex-start; // gør så at data på siden tilpasser sig til selve tabellen
+  align-items: flex-start;
 }
 
 .page-content {
@@ -34,7 +33,7 @@ h1 {
   padding: 1rem;
   background-color: $table-bg;
   border-radius: 1rem;
-  width: 100%; // breddden af tabellen er nu fixet når man kigger på sidebaren
+  width: 100%;
 }
 
 .no-wrap {

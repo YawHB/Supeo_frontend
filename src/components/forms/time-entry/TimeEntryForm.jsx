@@ -91,7 +91,6 @@ const TimeEntryForm = ({ onSubmit, timeEntry, errorMessages = null }) => {
                 name='endDate'
                 type='date'
                 value={input.endDate.value}
-                //value={state.timeEntryBeingEdited ? reverseString(input.endDate.value) : (input.endDate.value)}
                 onChange={input.endDate.onChange}
               />
             </FormGroup>

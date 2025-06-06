@@ -74,7 +74,6 @@
   }
 }
 
-// react select for per-page select
 
 .per-page-select {
   &__control {
@@ -92,7 +91,7 @@
 
   &__value-container {
     color: #34363c !important;
-    flex-wrap: nowrap !important; // prevent wrapping of placeholder & pills
+    flex-wrap: nowrap !important;
   }
 
   &__multi-value {
@@ -118,7 +117,6 @@
 
   &__multi-value__remove {
     color: #e8e8e3 !important;
-    //margin-left: 4px;   skal ikke bruge
 
     &:hover {
       background-color: #c0392b !important;
@@ -164,18 +162,13 @@
     }
   }
 
-  // dette er til at fjerne den grå streg mellem dropdown og select
-  // &__indicator-separator {
-  //   display: none;
-  // }
-
   &__dropdown-indicator {
     color: #374c45 !important;
   }
 
   &__clear-indicator {
     color: #c0392b !important;
-    margin-left: -13px !important; // default margin is 8px
+    margin-left: -13px !important;
 
     &:hover {
       color: #a83232 !important;
@@ -188,8 +181,8 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  min-height: 34px !important; // reduce from 38px to 32px
-  height: 34px !important; // force exact height
+  min-height: 34px !important; 
+  height: 34px !important;
 }
 
 .per-page-select__value-container {
