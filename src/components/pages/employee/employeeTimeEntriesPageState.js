@@ -27,6 +27,7 @@ import { AuthContext } from '../../context/authContext.js'
 import { useContext } from 'react'
 import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
 import useSort from '../../../hooks/useSort.js'
+import showToast from '../../../utils/toast.js'
 
 export const statusClassMap = {
   AFVENTER: 'status-select--pending',
@@ -263,6 +264,7 @@ export const useTimeEntriesPageState = () => {
         ...prev,
         timeEntries: [...prev.timeEntries, createdTimeEntry],
       }))
+      showToast(translate('notification.time_entry.create.success'), 'success')
       setIsLoadingTimeEntriesForm(false)
       timeEntryFormModalState.closeModal()
     },
