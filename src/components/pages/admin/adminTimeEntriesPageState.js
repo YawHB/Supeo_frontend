@@ -172,6 +172,7 @@ const useTimeEntriesPageState = () => {
   const handleExportTable = () => {
     showToast(translate('export_table.start'), 'info')
     const tableToExport = timeEntries
+      .filter((timeEntry) => timeEntry.notification?.status !== 'IGANG')
       .map((timeEntry) => ({
         id: timeEntry.id,
         firstName: timeEntry.employee?.firstName,
@@ -190,8 +191,10 @@ const useTimeEntriesPageState = () => {
         adminComment: timeEntry.notification?.comment ?? '',
         status: timeEntry.notification?.status ?? '',
       }))
+      console.log(tableToExport)
 
     const today = new Date().toISOString().split('T')[0]
+
 
     try {
       exportTableData({
