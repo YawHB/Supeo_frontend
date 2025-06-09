@@ -8,7 +8,7 @@ import exportTableData from '../../../utils/exportTableData.js'
 import { useQuery, useApolloClient, useMutation } from '@apollo/client'
 import { GET_ALL_TIME_ENTRIES } from '../../../services/time-entry/queries.js'
 import { UPDATE_TIME_ENTRY_STATUS } from '../../../services/notification/mutations.js'
-import { calculateWorkDurationInMinutes } from '../../../utils/calculateWorkHours.js'
+import { calculateDurationMinutes } from '../../../utils/calculateWorkHours.js'
 import { useDebouncedInput } from '../../../hooks/useDebouncedInput.js'
 import { handleMemberAuthError } from '../../../utils/errorHandling.js'
 import useSort from '../../../hooks/useSort.js'
@@ -203,7 +203,7 @@ const useTimeEntriesPageState = () => {
         startTime: timeEntry.startTime,
         endDate: timeEntry.endDate,
         endTime: timeEntry.endTime,
-        duration: calculateWorkDurationInMinutes(
+        duration: calculateDurationMinutes(
           timeEntry.startDate,
           timeEntry.startTime,
           timeEntry.endDate,
