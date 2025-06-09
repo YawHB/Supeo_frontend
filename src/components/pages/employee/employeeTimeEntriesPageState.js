@@ -297,7 +297,7 @@ export const useTimeEntriesPageState = () => {
           entry.id === updatedTimeEntry.id ? updatedTimeEntry : entry,
         ),
       }))
-
+      showToast(translate('notification.time_entry.update.success'), 'success')
       setIsLoadingTimeEntriesForm(false)
       timeEntryFormModalState.closeModal()
       setTimeEntryBeingEdited(null)
@@ -334,6 +334,7 @@ export const useTimeEntriesPageState = () => {
         setOpenNotification(null)
         notificationInfoModalState.closeModal()
       }
+      showToast(translate('notification.time_entry.delete.success'), 'success')
     },
     onError: (err) => {
       console.error('Failed to delete entry:', err)
