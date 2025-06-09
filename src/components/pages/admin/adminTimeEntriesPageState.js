@@ -131,9 +131,31 @@ const useTimeEntriesPageState = () => {
           }
           return newTimeEntries
         })
+
+        const { firstName, lastName } = timeEntries[i].employee
+
+        if (newStatus === 'GODKENDT') {
+          showToast(
+            translate('notification.time_entry.approve.success', {
+              firstName,
+              lastName,
+            }),
+            'success',
+          )
+        } else if (newStatus === 'AFVIST') {
+          showToast(
+            translate('notification.time_entry.reject.success', {
+              firstName,
+              lastName,
+            }),
+            'success',
+          )
+        }
       },
     })
   }
+  
+  
 
   const handleInputFieldClick = (i) => {
     setEditingRowIndex(i)

@@ -111,6 +111,28 @@
         "success": "Employee '{{firstName}} {{lastName}}' was updated",
         "error": "Error updating employee '{{firstName}} {{lastName}}'"
       }
+    },
+    "time_entry": {
+      "create": {
+        "success": "Time entry was created",
+        "error": "Error creating time entry"
+      },
+      "update": {
+        "success": "Time entry was updated",
+        "error": "Error updating time entry"
+      },
+      "delete": {
+        "success": "Time entry was deleted",
+        "error": "Error deleting time entry"
+      },
+      "approve": {
+        "success": "Time entry for '{{firstName}} {{lastName}}' was approved",
+        "error": "Error approving time entry for '{{firstName}} {{lastName}}'"
+      },
+      "reject": {
+        "success": "Time entry for '{{firstName}} {{lastName}}' was rejected",
+        "error": "Error rejecting time entry for '{{firstName}} {{lastName}}'"
+      }
     }
   },
   "export_table": {

@@ -116,6 +116,28 @@
         "success": "Medarbejder '{{firstName}} {{lastName}}' blev opdateret",
         "error": "Fejl ved opdatering af medarbejder '{{firstName}} {{lastName}}'"
       }
+    },
+    "time_entry": {
+      "create": {
+        "success": "Tidsregistrering blev oprettet",
+        "error": "Fejl ved oprettelse af tidsregistrering"
+      },
+      "update": {
+        "success": "Tidsregistrering blev opdateret",
+        "error": "Fejl ved opdatering af tidsregistrering"
+      },
+      "delete": {
+        "success": "Tidsregistrering blev slettet",
+        "error": "Fejl ved sletning af tidsregistrering"
+      },
+      "approve": {
+        "success": "Tidsregistrering for '{{firstName}} {{lastName}}' blev godkendt",
+        "error": "Fejl ved godkendelse af tidsregistrering for '{{firstName}} {{lastName}}'"
+      },
+      "reject": {
+        "success": "Tidsregistrering for '{{firstName}} {{lastName}}' blev afvist",
+        "error": "Fejl ved afvisning af tidsregistrering for '{{firstName}} {{lastName}}'"
+      }
     }
   },
   "export_table": {
