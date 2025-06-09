@@ -66,10 +66,10 @@ const AdminEmployeesPage = () => {
                 placeholder={translate('admin.select_employee_permission')}
               />
               <Input
-                className='time-entry-search-input'
+                className='search-input'
                 value={state.searchInput.value}
                 onChange={state.searchInput.onChange}
-                placeholder={translate('admin.search_time_entry')}
+                placeholder={translate('admin.search_employee')}
                 onKeyDown={(e) => {
                   if (e.key === 'Escape') {
                     state.searchInput.onChange({ target: { value: '' } })
