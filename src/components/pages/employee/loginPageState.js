@@ -28,7 +28,6 @@ export const useLoginPageState = () => {
 
   const [handleEmployeeLogin] = useMutation(LOGIN_USER)
 
-  // Load saved email from localStorage on mount
   useEffect(() => {
     const savedEmail = localStorage.getItem('rememberedEmail')
     if (savedEmail) {
@@ -44,7 +43,6 @@ export const useLoginPageState = () => {
       },
       onCompleted: (data) => {
         const userData = data.handleEmployeeLogin
-        console.log('userData: ', userData.token)
         context.login(userData.token)
       },
       onError: ({ graphQLErrors }) => {
@@ -53,7 +51,6 @@ export const useLoginPageState = () => {
     })
   }
 
-  // håndterer remember me knappen og putter det i localstorage
   const onSubmit = (e) => {
     e.preventDefault()
     if (rememberMe) {
@@ -76,7 +73,6 @@ export const useLoginPageState = () => {
         navigate('/')
       }
 
-      console.log('context.user:', context.user)
     }
   }, [context.user, navigate])
 

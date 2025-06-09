@@ -92,7 +92,7 @@ const useTimeEntriesPageState = () => {
     fetchPolicy: 'cache-first',
     onCompleted: (data) => setTimeEntries(data.timeEntries),
     onError: (errors) => handleMemberAuthError(errors, navigate),
-    skip: filters.startDate || filters.endDate, // Skip this query when filters are active
+    skip: filters.startDate || filters.endDate,
   })
 
   const { loading: isLoadingFilteredTimeEntries } = useQuery(GET_ALL_FILTERED_TIME_ENTRIES, {
@@ -104,7 +104,7 @@ const useTimeEntriesPageState = () => {
     },
     fetchPolicy: 'cache-first',
     onCompleted: (data) => setTimeEntries(data.filteredTimeEntries),
-    skip: !(filters.startDate || filters.endDate), // Skip this when no filters
+    skip: !(filters.startDate || filters.endDate),
   })
 
   const [updateTimeEntryStatus] = useMutation(UPDATE_TIME_ENTRY_STATUS)
@@ -171,9 +171,8 @@ const useTimeEntriesPageState = () => {
 
   const handleExportTable = () => {
     showToast(translate('export_table.start'), 'info')
-
     const tableToExport = timeEntries
-      .filter((timeEntry) => timeEntry.notification?.status === 'GODKENDT')
+      .filter((timeEntry) => timeEntry.notification?.status !== 'IGANG')
       .map((timeEntry) => ({
         id: timeEntry.id,
         firstName: timeEntry.employee?.firstName,
@@ -194,6 +193,7 @@ const useTimeEntriesPageState = () => {
       }))
 
     const today = new Date().toISOString().split('T')[0]
+
 
     try {
       exportTableData({

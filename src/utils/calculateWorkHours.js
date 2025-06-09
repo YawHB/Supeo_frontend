@@ -5,7 +5,6 @@ export function calculateWorkHours(startDate, startTime, endDate, endTime) {
   const msTimeA = getMsTimeFromDateTime(yearA, monthA, dayA, hourA, minutesA)
   const A = new Date(yearA, monthA, dayA)
   const minutes1 = hourA * 60 + minutesA
-  // -********************************************
   const [yearB, monthB, dayB] = splitDateToNumbers(endDate)
   const [hourB, minutesB] = splitTimeToNumbers(endTime)
   const msTimeB = getMsTimeFromDateTime(yearB, monthB, dayB, hourB, minutesB)
@@ -14,24 +13,20 @@ export function calculateWorkHours(startDate, startTime, endDate, endTime) {
   const dayDiffInMs =
     (calculateDaysWorked(yearB, monthB, dayB) - calculateDaysWorked(yearA, monthA, dayA)) / dayInMs
 
-  //find arbejdstid
   const timeDif = msTimeB - msTimeA
 
   const [hours, minutes] = hoursToMin(startTime, endTime)
 
   if (B > A && minutes2 < minutes1) {
-    console.log('NatteArbejde')
     const adjustedMinutes = minutes === 0 ? 0 : minutes + 60
     return `${hours + 24} timer, ${formatMinutes(adjustedMinutes)}`
   }
 
   if (timeDif > 0 && dayDiffInMs > 0) {
-    console.log('Flere dages arbejde')
     return `${dayDiffInMs} dage, ${hours} timer, ${formatMinutes(minutes)}`
   }
 
   if (timeDif < 0 && Math.abs(timeDif) > dayInMs) {
-    console.log('Negativt flerdages arbejde (brugerfejl)')
     return `-${Math.abs(dayDiffInMs)} dage, ${hours} timer, ${formatMinutes(minutes)}`
   }
 
@@ -66,30 +61,29 @@ function hoursToMin(startTime, endTime) {
   const startTimeInMinutes = Math.floor(startHour * 60) + startMin
   const endTimeInMinutes = Math.floor(endHour * 60) + endMin
 
-  const diffInMinutes = endTimeInMinutes - startTimeInMinutes //udregner arbejdstid i minutter
-  const hours = Math.floor(diffInMinutes / 60) //omregner det til timer
-  const minutes = diffInMinutes % 60 //Finder antal minutter remaining efter timer (fx  510 minuter = 8,5 timer = 30 min )
+  const diffInMinutes = endTimeInMinutes - startTimeInMinutes
+  const hours = Math.floor(diffInMinutes / 60)
+  const minutes = diffInMinutes % 60
 
   return [hours, minutes]
 }
 
 export function calculateWorkDurationInMinutes(startDate, startTime, endDate, endTime) {
-  const [startHour, startMin] = splitTimeToNumbers(startTime) // Opdel starttid i timer og minutter som tal
-  const [endHour, endMin] = splitTimeToNumbers(endTime) // Opdel sluttid i timer og minutter som tal
-  const [startYear, startMonth, startDay] = splitDateToNumbersForExport(startDate) // Opdel startdato i år, måned og dag som tal
-  const [endYear, endMonth, endDay] = splitDateToNumbersForExport(endDate) // Opdel slutdato i år, måned og dag som tal
+  const [startHour, startMin] = splitTimeToNumbers(startTime)
+  const [endHour, endMin] = splitTimeToNumbers(endTime)
+  const [startYear, startMonth, startDay] = splitDateToNumbersForExport(startDate)
+  const [endYear, endMonth, endDay] = splitDateToNumbersForExport(endDate)
 
-  const start = new Date(startYear, startMonth - 1, startDay, startHour, startMin) // Opret Date-objekt for start (måneder er 0-indekseret)
-  const end = new Date(endYear, endMonth - 1, endDay, endHour, endMin) // Opret Date-objekt for slut
+  const start = new Date(startYear, startMonth - 1, startDay, startHour, startMin)
+  const end = new Date(endYear, endMonth - 1, endDay, endHour, endMin)
 
-  const diffInMs = end - start // Beregn forskellen i millisekunder mellem slut og start
-  const diffInMinutes = Math.floor(diffInMs / (1000 * 60)) // konverter millisekunder til hele minutter
+  const diffInMs = end - start
+  const diffInMinutes = Math.floor(diffInMs / (1000 * 60))
 
   return `${diffInMinutes}`
 }
 
- // Helper function to format minutes properly (singular/plural)
  function formatMinutes(m) {
-  if (m === 1) return '1 minut' // singular
-  return `${m} minutter` // plural
+  if (m === 1) return '1 minut'
+  return `${m} minutter`
 }

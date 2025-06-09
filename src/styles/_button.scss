@@ -67,7 +67,7 @@
   border: 1px solid #374c45 !important;
   font-weight: 400 !important;
   border-radius: 2rem !important;
-  min-width: 37px; // hourglass simple tweaking of width
+  min-width: 37px;
 }
 
 .status-select--pending {
@@ -196,14 +196,14 @@
   }
 
   &:focus {
-    cursor: text; // 👈 This removes the pointer on focus and shows text cursor
+    cursor: text;
   }
 }
 
 
 .login-button {
   width: 100%;
-  background-color: #374c45 !important; /* same as input border */
+  background-color: #374c45 !important;
   border: 1px solid #374c45 !important;
   color: #e8e8e3 !important;
   border-radius: 1rem !important;

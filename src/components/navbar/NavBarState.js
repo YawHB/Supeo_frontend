@@ -33,7 +33,6 @@ const useNavBarState = () => {
   )
 
   const logOff = () => {
-    console.log('log out clicked')
     context.logout()
   }
 
