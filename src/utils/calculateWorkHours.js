@@ -87,3 +87,21 @@ export function calculateWorkDurationInMinutes(startDate, startTime, endDate, en
   if (m === 1) return '1 minut'
   return `${m} minutter`
 }
+
+export function calculateDurationMinutes(startDate, startTime, endDate, endTime) {
+  const [startYear, startMonth, startDay] = splitDateToNumbersForExport(startDate)
+  const [startHour, startMin] = splitTimeToNumbers(startTime)
+  const [endYear, endMonth, endDay] = splitDateToNumbersForExport(endDate)
+  const [endHour, endMin] = splitTimeToNumbers(endTime)
+
+  const start = new Date(startYear, startMonth - 1, startDay, startHour, startMin)
+  let end = new Date(endYear, endMonth - 1, endDay, endHour, endMin)
+
+  if (end <= start) {
+    end = new Date(end.getTime() + 24 * 60 * 60 * 1000)
+  }
+
+  const diffMs = end - start
+  const diffMinutes = Math.floor(diffMs / (1000 * 60))
+  return diffMinutes
+}
