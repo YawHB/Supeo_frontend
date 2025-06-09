@@ -191,7 +191,6 @@ const useTimeEntriesPageState = () => {
         adminComment: timeEntry.notification?.comment ?? '',
         status: timeEntry.notification?.status ?? '',
       }))
-      console.log(tableToExport)
 
     const today = new Date().toISOString().split('T')[0]
 
