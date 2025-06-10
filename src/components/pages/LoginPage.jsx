@@ -26,7 +26,7 @@ export function LoginPage() {
             <Logo
               className='px-3'
               text=''
-              logoColor='#E0FDAD'
+              logoColor='#374c45'
               textColor='#FCFFFF'
               imgStyle={{ height: '3rem' }}
               textStyle={{ fontSize: '2rem', fontWeight: '600' }}
