@@ -24,9 +24,12 @@ The following tutorial will guide you through how to install and run the applica
   1. Open your terminal and navigate to the frontend directory:
 
     cd Supeo_frontend
-  3. Install dependencies:
+    
+  2. Install dependencies:
 
     npm install
+
+  The application will be running at http://localhost:5173.
 
   ### Backend
 
@@ -42,24 +45,7 @@ The following tutorial will guide you through how to install and run the applica
 
     docker compose up
 
-## How to run the application
-
-  ### Running the frontend
-
-  In the frontend directory:
-    npm run dev
-
-  The application will be running at http://localhost:5173.
-
-  ### Running the backend
-
-  In the backend directory:
-
-## First-time startup
-    docker compose up --build
-## Subsequent startups
-    docker compose up
-The API server will be available at http://localhost:4000.
+  The server will be available at http://localhost:4000.
 
 
 
