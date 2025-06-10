@@ -1,55 +1,81 @@
 # Supeo Frontend Repository
 
-Developing a time management system - A microservice for Supeos current software solution
+Developing a time management system — a microservice for Supeo’s current software solution.
 
-The following tutorial will guide you through how to install and run the application for both front- and backend.
+This tutorial will guide you through how to install and run the application for both frontend and backend.
+
+---
 
 ## Technologies
 
-* Frontend: JavaScript & React
-* Backend: Node.js and GraphQL
-* Database: PostgreSQL
+* **Frontend**: JavaScript & React
+* **Backend**: Node.js & GraphQL
+* **Database**: PostgreSQL
+
+---
 
 ## Prerequisites
 
-* Node.js
-* npm
-* Docker
-* Docker Compose
+* [Node.js](https://nodejs.org/)
+* [npm](https://www.npmjs.com/)
+* [Docker](https://www.docker.com/)
+* [Docker Compose](https://docs.docker.com/compose/)
 
-## How to install and run the application
+---
 
-  ### Frontend
+## How to Install and Run the Application
 
-  1. Open your terminal and navigate to the frontend directory
+### 🔧 Frontend
 
-    cd Supeo_frontend
-    
-  2. Install dependencies
+1. Open your terminal and navigate to the frontend directory:
 
-    npm install
+   ```bash
+   cd Supeo_frontend
+   ```
+2. Install dependencies:
 
-  3. Run the frontend
+   ```bash
+   npm install
+   ```
+3. Start the frontend:
 
-    npm run dev
+   ```bash
+   npm run dev
+   ```
 
-  The application will be running at http://localhost:5173
+The application will be running at [http://localhost:5173](http://localhost:5173)
 
-  ### Backend
+---
 
-  1. Open your terminal and navigate to the backend directory:
+### 🐳 Backend
 
-    cd Supeo_backend
+1. Open your terminal and navigate to the backend directory:
 
-  2. On first run:
+   ```bash
+   cd Supeo_backend
+   ```
+2. On first run (builds the containers):
 
-    docker compose up --build
+   ```bash
+   docker compose up --build
+   ```
+3. On subsequent runs:
 
-  3. On subsequent runs:
+   ```bash
+   docker compose up
+   ```
 
-    docker compose up
+The server will be available at [http://localhost:4000](http://localhost:4000)
 
-  The server will be available at http://localhost:4000
+---
+
+## Notes
+
+* Make sure to set up a `.env` file in the backend directory with appropriate environment variables for database access and secrets.
+* Ports can be changed in config files or environment variables if needed.
+
+---
+
 
 
 
