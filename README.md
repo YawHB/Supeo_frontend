@@ -1,8 +1,8 @@
-# Supeo backend
+# Supeo Backend Repository
 
 Developing a time management system - A microservice for Supeos current software solution
 
-The following tutorial will guide you through how to install and run the application for both the frontend and backend.
+The following tutorial will guide you through how to install and run the application for both front- and backend.
 
 ## Technologies
 
@@ -17,19 +17,23 @@ The following tutorial will guide you through how to install and run the applica
 * Docker
 * Docker Compose
 
-## Installation
+## How to install and run the application
 
   ### Frontend
 
-  1. Open your terminal and navigate to the frontend directory:
+  1. Open your terminal and navigate to the frontend directory
 
     cd Supeo_frontend
     
-  2. Install dependencies:
+  2. Install dependencies
 
     npm install
 
-  The application will be running at http://localhost:5173.
+  3. Run the frontend
+
+    npm run dev
+
+  The application will be running at http://localhost:5173
 
   ### Backend
 
@@ -45,7 +49,7 @@ The following tutorial will guide you through how to install and run the applica
 
     docker compose up
 
-  The server will be available at http://localhost:4000.
+  The server will be available at http://localhost:4000
 
 
 
