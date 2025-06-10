@@ -23,7 +23,7 @@ The following tutorial will guide you through how to install and run the applica
 
   1. Open your terminal and navigate to the frontend directory:
 
-    cd frontend
+    cd Supeo_frontend
   3. Install dependencies:
 
     npm install
@@ -32,7 +32,7 @@ The following tutorial will guide you through how to install and run the applica
 
   1. Open your terminal and navigate to the backend directory:
 
-    cd backend
+    cd Supeo_backend
 
   2. On first run:
 
