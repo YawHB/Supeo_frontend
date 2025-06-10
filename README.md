@@ -16,8 +16,8 @@ This tutorial will guide you through how to install and run the application for 
 
 ## Prerequisites
 
-* [npm](https://www.npmjs.com/)
 * [Node.js](https://nodejs.org/)
+* [npm](https://www.npmjs.com/)
 * [Docker](https://www.docker.com/)
 * [Docker Compose](https://docs.docker.com/compose/)
 
