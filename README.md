@@ -1,4 +1,4 @@
-# Supeo Backend Repository
+# Supeo Frontend Repository
 
 Developing a time management system - A microservice for Supeos current software solution
 
@@ -50,8 +50,6 @@ The following tutorial will guide you through how to install and run the applica
     docker compose up
 
   The server will be available at http://localhost:4000
-
-
 
 
 
