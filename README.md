@@ -13,7 +13,7 @@ This tutorial will guide you through how to install and run the application for 
 
 ## How to Install and Run the Application
 
-### 🔧 Frontend
+### Frontend
 
 1. Open your terminal and navigate to the frontend directory:
 
