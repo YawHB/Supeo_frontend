@@ -1,6 +1,6 @@
 # Supeo Frontend Repository
 
-Developing a time management system — a microservice for Supeo’s current software solution.
+Developing a time management system for our final project in collaboration with Supeo
 
 This tutorial will guide you through how to install and run the application for both frontend and backend.
 
